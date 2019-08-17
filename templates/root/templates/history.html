@@ -14,74 +14,8 @@
         <h2>{% trans 'History of sent SMS/Email messages' %}</h2>
     </div>
     <div class="card-main__content">
-        <div class="search-form__app">
-            <form action="">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="">{% trans 'Fullname' %}</label>
-                    <input name="fullname" type="text" class="form-control" id="" value="{{ fullname }}">
-                </div>
-                <div class="form-group">
-                    <label for="age">{% trans 'Age' %}</label>
-                    <input type="text" name="age" id="age" class="form-control" value="{{ age }}" maxlength="5">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="">{% trans 'Gender' %}</label>
-                    <select class="form-control selectpicker show-tick" name="gender" id="">
-                        <option value="">{% trans 'Select' %}</option>
-                        <option value="m" {% if gender == 'm' %}selected{% endif %}>{% trans 'Male' %}</option>
-                        <option value="f" {% if gender == 'f' %}selected{% endif %}>{% trans 'Female' %}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="">{% trans 'Language' %}</label>
-                    <select class="form-control selectpicker show-tick" name="language" id="">
-                        <option value="">{% trans 'Select' %}</option>
-                        {% for lang in languages %}
-                            <option value="{{ lang.id }}" {% if lang.id == language %}selected{% endif %}>{{ lang.name_ru }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="edu">{% trans 'Education' %}</label>
-                    <select class="form-control selectpicker show-tick" name="education" id="edu">
-                        <option value="">{% trans 'Select' %}</option>
-                        {% for edu in educations %}
-                            <option value="{{ edu.id }}" {% if edu.id == education %}selected{% endif %}>{{ edu.name_ru }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="">{% trans 'Category' %}</label>
-                    <select class="form-control selectpicker show-tick" name="category" id="edu">
-                        <option value="">{% trans 'Select' %}</option>
-                        <option value="A" {% if category == "A" %}selected{% endif %}>A</option>
-                        <option value="B" {% if category == "B" %}selected{% endif %}>B</option>
-                        <option value="C" {% if category == "C" %}selected{% endif %}>C</option>
-                        <option value="D" {% if category == "D" %}selected{% endif %}>D</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="search-buttons">
-                    <div class="form-search__button" id="">
-                        <button id="" type="submit">{% trans 'Search' %}</button>
-                        <a href="#searchPopup" class="open-popup-link searchButton"> + {% trans 'Search' %}</a>
-                    </div>
-                </div>
-                <div class="delete-buttons">
-                    <button id="deleteEmpButton" data-url="{% url 'api:admin:employee:delete' %}">{% trans 'Delete' %}</button>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-        </form>
-        </div>
         <div class="search-results__main">
-            <div class="table-main">
+            <div class="table-main" style="padding-top: 50px;">
                 <table class="table table-bordered">
                     <thead>
                         <tr class="table-row" data-href="#">

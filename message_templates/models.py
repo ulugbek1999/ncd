@@ -24,8 +24,8 @@ class Template(models.Model):
 class TemplateHistory(models.Model):
     title = models.TextField(blank=True, default='')
     text = models.TextField(blank=True)
-    employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="employee_template_history")
-    partner_id = models.ForeignKey(Partner, on_delete=models.CASCADE, related_name="partner_template_history")
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="employee_template_history")
+    partner = models.ForeignKey(Partner, on_delete=models.CASCADE, related_name="partner_template_history")
     type = models.IntegerField(default=1, choices=MESSAGE_TYPE, blank=True)
     message_type = models.CharField(max_length=20)
 

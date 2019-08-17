@@ -36,19 +36,30 @@ class Employee4Update(UpdateAPIView):
 class EmployeeDeleteView(APIView):
     def post(self, request):
         ids = request.POST.get('ids')
-        if not ids:
-            return Response(status=400)
-        ids = [int(i) for i in ids.split(',') if i.isdigit()]
-        user_ids = []
-        emp_ids = []
-        for i in Employee.objects.filter(id__in=ids):
-            if i.user is not None:
-                user_ids.append(i.user.id)
-            else:
-                i.delete()
+        emp_ids = ids.split(",")
+        employees = Employee.objects.filter(id__in=emp_ids)
+        for employee in employees:
+            try:
+                user = User.objects.get(id=employee.user.id)
+                user.delete()
+            except:
+                employee.delete()
+
+        # ids = request.POST.get('ids')
+        # if not ids:
+        #     return Response(status=400)
+        # ids = [int(i) for i in ids.split(',') if i.isdigit()]
+        # user_ids = []
+        # emp_ids = []
+        # print(Employee.objects.filter(id__in=ids))
+        # for i in Employee.objects.filter(id__in=ids):
+        #     if i.user is not None:
+        #         user_ids.append(i.user.id)
+        #     else:
+        #         i.delete()
         # user_ids = [i.user.id for i in Employee.objects.filter(id__in=ids) if i.user is not None]
 
-        User.objects.filter(id__in=user_ids).delete()
+        # User.objects.filter(id__in=user_ids).delete()
         return Response(status=200)
 
 
