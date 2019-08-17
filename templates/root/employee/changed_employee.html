@@ -1,0 +1,1028 @@
+{% extends 'root/_base.html' %}
+
+{% load static thumbnail i18n %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% blocktrans %}Employee's Personal card{% endblocktrans %}</h2>
+        <span>№: {{ employee.register_number }}</span>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{{ employee.full_name_ru }}</h2>
+        </div>
+        <div class="opView-tab__main card-main__content">
+            <div class="opView-tab__content" style="width: 100%;">
+                <ul class="nav nav-tabs nav-stacked">
+                    <li class="active"><a href="#tab1" data-toggle="tab"><img src="{% static 'operator/images/operator.svg' %}"> <span>{% trans 'Operator' %} 1</span></a></li>
+                    <li><a href="#tab2" data-toggle="tab"><img src="{% static 'operator/images/operator.svg' %}"> <span>{% trans 'Operator' %} 2</span></a></li>
+                    <li><a href="#tab3" data-toggle="tab"><img src="{% static 'operator/images/operator.svg' %}"> <span>{% trans 'Operator' %} 3</span></a></li>
+                    <li><a href="#tab4" data-toggle="tab"><img src="{% static 'operator/images/operator.svg' %}"> <span>{% trans 'Operator' %} 4</span></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade active in" id="tab1">
+                        <div class="tab-opView__main">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="opView-title">
+                                        <h2>{% trans 'Operator' %} 1</h2>
+                                    </div>
+                                    <div class="opView-content">
+                                        <ul>
+                                            <li>
+                                                <strong>{% trans 'Register number' %}:</strong>
+                                                <span>{{ employee.register_number }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Fullname ru' %}:</strong>
+                                                <span>{{ employee.full_name_ru }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Fullname en' %}:</strong>
+                                                <span>{{ employee.full_name_en }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Gender' %}:</strong>
+                                                <span>{{ employee.get_gender_display }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Passport serial' %}:</strong>
+                                                <span>{{ employee.passport_serial }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Passport given date' %}:</strong>
+                                                <span>{{ employee.passport_given_date|date:'d.m.Y' }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Passport expires' %}:</strong>
+                                                <span>{{ employee.passport_expires|date:'d.m.Y' }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Inn' %}:</strong>
+                                                <span>{{ employee.inn }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Birth date' %}:</strong>
+                                                <span>{{ employee.birth_date|date:"d.m.Y" }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Birth place' %}:</strong>
+                                                <span>{{ employee.birth_place_ru }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Living address' %}:</strong>
+                                                <span>{{ employee.living_address_ru }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Phone' %}:</strong>
+                                                <span>{{ employee.phone }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Email' %}:</strong>
+                                                <span>{{ employee.email }}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="opView-title">
+                                        <h2>{% trans 'Operator' %} 1 New</h2>
+                                    </div>
+                                    <div class="opView-content">
+                                        <ul>
+                                            <li>
+                                                <strong>{% trans 'Register number' %}:</strong>
+                                                <span>{{ employee.employeechanges.register_number }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Fullname ru' %}:</strong>
+                                                <span>{{ employee.employeechanges.full_name_ru }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Fullname en' %}:</strong>
+                                                <span>{{ employee.employeechanges.full_name_en }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Gender' %}:</strong>
+                                                <span>{{ employee.employeechanges.get_gender_display }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Passport serial' %}:</strong>
+                                                <span>{{ employee.employeechanges.passport_serial }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Passport given date' %}:</strong>
+                                                <span>{{ employee.employeechanges.passport_given_date|date:'d.m.Y' }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Passport expires' %}:</strong>
+                                                <span>{{ employee.employeechanges.passport_expires|date:'d.m.Y' }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Inn' %}:</strong>
+                                                <span>{{ employee.employeechanges.inn }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Birth date' %}:</strong>
+                                                <span>{{ employee.employeechanges.birth_date|date:"d.m.Y" }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Birth place' %}:</strong>
+                                                <span>{{ employee.employeechanges.birth_place_ru }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Living address' %}:</strong>
+                                                <span>{{ employee.employeechanges.living_address_ru }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Phone' %}:</strong>
+                                                <span>{{ employee.employeechanges.phone }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Email' %}:</strong>
+                                                <span>{{ employee.employeechanges.email }}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab2">
+                        <div class="tab-opView__main">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="opView-title">
+                                        <h2>{% trans 'Operator' %} 2</h2>
+                                    </div>
+                                    <div class="opView-content">
+                                        <ul>
+                                            <li>
+                                                <strong>{% trans 'Appearance' %}:</strong>
+                                                <span>{{ employee.appearance }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Neatness' %}:</strong>
+                                                <span>{{ employee.neatness }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Skin' %}:</strong>
+                                                <span>{{ employee.skin }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Height' %} ({% trans 'sm' %}):</strong>
+                                                <span>{{ employee.height|floatformat }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Weight' %} ({% trans 'kg' %}):</strong>
+                                                <span>{{ employee.weight|floatformat }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Fatness' %} (%):</strong>
+                                                <span>{{ employee.fatness|floatformat }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Blood group' %}:</strong>
+                                                <span>{{ employee.blood_group }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Vision left' %}:</strong>
+                                                <span>{{ employee.vision_l|floatformat }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Vision right' %}:</strong>
+                                                <span>{{ employee.vision_r|floatformat }}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="opView-title">
+                                        <h2>{% trans 'Operator' %} 2 New</h2>
+                                    </div>
+                                    <div class="opView-content">
+                                        <ul>
+                                            <li>
+                                                <strong>{% trans 'Appearance' %}:</strong>
+                                                <span>{{ employee.employeechanges.appearance }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Neatness' %}:</strong>
+                                                <span>{{ employee.employeechanges.neatness }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Skin' %}:</strong>
+                                                <span>{{ employee.employeechanges.skin }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Height' %} ({% trans 'sm' %}):</strong>
+                                                <span>{{ employee.employeechanges.height|floatformat }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Weight' %} ({% trans 'kg' %}):</strong>
+                                                <span>{{ employee.employeechanges.weight|floatformat }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Fatness' %} (%):</strong>
+                                                <span>{{ employee.employeechanges.fatness|floatformat }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Blood group' %}:</strong>
+                                                <span>{{ employee.employeechanges.blood_group }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Vision left' %}:</strong>
+                                                <span>{{ employee.employeechanges.vision_l|floatformat }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Vision right' %}:</strong>
+                                                <span>{{ employee.employeechanges.vision_r|floatformat }}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab3">
+                        <div class="tab-opView__main">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="opView-title">
+                                        <h2>{% trans 'Operator' %} 3</h2>
+                                    </div>
+                                    <div class="opView-content">
+                                        <div class="panel-group d-accordion">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#educations-view">
+                                                    <h4 class="panel-title">{% trans 'Education' %} <i class="fa fa-chevron-up pull-right"></i></h4>
+                                                </div>
+                                                <div id="educations-view" class="panel-collapse collapse in">
+                                                    <div class="panel-body">
+                                                        {% for edu in employee.education_set.all %}
+                                                            <div class="op3View-item">
+                                                                <ul>
+                                                                    <li>
+                                                                        <strong>{% trans 'Education type' %}:</strong>
+                                                                        <span>{{ edu.type.name_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Education name' %}:</strong>
+                                                                        <span>{{ edu.name_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Education address' %}:</strong>
+                                                                        <span>{{ edu.address_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Education specialization' %}:</strong>
+                                                                        <span>{{ edu.specialization_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Education date start' %}:</strong>
+                                                                        <span>{{ edu.date_started|date:"d.m.Y" }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Education date end' %}:</strong>
+                                                                        <span>{{ edu.date_finished|date:"d.m.Y" }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Education other' %}:</strong>
+                                                                        <span>{{ edu.additional_ru }}</span>
+                                                                    </li>
+                                                                    <li class="files-view">
+                                                                        {% for file in edu.file.all %}
+                                                                            <ul class="files-view__main">
+                                                                                <li>
+                                                                                    <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                    <span>{{ file.file.size|filesizeformat }}</span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        {% endfor %}
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#language-view">
+                                                    <h4 class="panel-title">{% trans 'Knowledge of languages' %} <i class="fa fa-chevron-up pull-right"></i></h4>
+                                                </div>
+                                                <div id="language-view" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        {% for lang in employee.language_set.all %}
+                                                            <div class="op3View-item">
+                                                                <ul>
+                                                                    <li>
+                                                                        <strong>{% trans 'Language name' %}:</strong>
+                                                                        <span>{{ lang.language.name_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Language level' %}:</strong>
+                                                                        <span>{{ lang.get_level_display }}</span>
+                                                                    </li>
+                                                                    <li class="files-view">
+                                                                        {% for file in lang.file.all %}
+                                                                            <ul class="files-view__main">
+                                                                                <li>
+                                                                                    <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                    <span>{{ file.file.size|filesizeformat }}</span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        {% endfor %}
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#militaryView">
+                                                    <h4 class="panel-title">{% trans 'Military service' %}<i class="fa fa-chevron-up pull-right"></i></h4>
+                                                </div>
+                                                <div id="militaryView" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        {% for army in employee.army_set.all %}
+                                                            <div class="op3View-item">
+                                                                <ul>
+                                                                    <li>
+                                                                        <strong>{% trans 'Military duty' %}:</strong>
+                                                                        <span>{% if employee.military_duty %}{% trans 'Yes' %}{% else %}{% trans 'No' %}{% endif %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Military name' %}:</strong>
+                                                                        <span>{{ army.name_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Military date start' %}:</strong>
+                                                                        <span>{{ army.date_started|date:'d.m.Y' }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Military region' %}:</strong>
+                                                                        <span>{{ army.region_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Military date end' %}:</strong>
+                                                                        <span>{{ army.date_finished|date:'d.m.Y' }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Military specialization' %}:</strong>
+                                                                        <span>{{ army.specialization_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Military rank' %}:</strong>
+                                                                        <span>{{ army.rank_ru }}</span>
+                                                                    </li>
+                                                                    <li class="files-view">
+                                                                        {% for file in army.file.all %}
+                                                                            <ul class="files-view__main">
+                                                                                <li>
+                                                                                    <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                    <span>{{ file.file.size|filesizeformat }}</span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        {% endfor %}
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#receivedView">
+                                                    <h4 class="panel-title">{% trans 'Rewards' %}<i class="fa fa-chevron-up pull-right"></i></h4>
+                                                </div>
+                                                <div id="receivedView" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        {% for reward in employee.reward_set.all %}
+                                                            <div class="op3View-item">
+                                                                <ul>
+                                                                    <li>
+                                                                        <strong>{% trans 'Reward name' %}:</strong>
+                                                                        <span>{{ reward.name_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Reward comment' %}:</strong>
+                                                                        <span>{{ reward.description_ru }}</span>
+                                                                    </li>
+                                                                    <li class="files-view">
+                                                                        {% for file in reward.file.all %}
+                                                                            <ul class="files-view__main">
+                                                                                <li>
+                                                                                    <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                    <span>{{ file.file.size|filesizeformat }}</span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        {% endfor %}
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#familyView">
+                                                    <h4 class="panel-title">{% trans 'Family status' %}<i class="fa fa-chevron-up pull-right"></i></h4>
+                                                </div>
+                                                <div id="familyView" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        {% if employee.family %}
+                                                            <div class="op3View-item">
+                                                                <ul>
+                                                                    <li>
+                                                                        <strong>{% trans 'Family status' %}:</strong>
+                                                                        <span>{{ employee.family.get_status_display }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Family children amount' %}:</strong>
+                                                                        <span>{{ employee.family.children_amount }}</span>
+                                                                    </li>
+                                                                    <li class="files-view">
+                                                                        {% for file in employee.family.file.all %}
+                                                                            <ul class="files-view__main">
+                                                                                <li>
+                                                                                    <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                    <span>{{ file.file.size|filesizeformat }}</span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        {% endfor %}
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#relativesView">
+                                                    <h4 class="panel-title">{% trans 'Relatives' %}<i class="fa fa-chevron-up pull-right"></i></h4>
+                                                </div>
+                                                <div id="relativesView" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        {% for rel in employee.relative_set.all %}
+                                                            <div class="op3View-item">
+                                                                <ul>
+                                                                    <li>
+                                                                        <strong>{% trans 'Relative level' %}:</strong>
+                                                                        <span>{{ rel.get_level_display }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Relative fullname' %}:</strong>
+                                                                        <span>{{ rel.fullname_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Relative birth date' %}:</strong>
+                                                                        <span>{{ rel.birth_date|date:'d.m.Y' }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Relative work/study place' %}:</strong>
+                                                                        <span>{{ rel.study_work_place_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Relative position' %}:</strong>
+                                                                        <span>{{ rel.position_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Relative living address' %}:</strong>
+                                                                        <span>{{ rel.living_address_ru }}</span>
+                                                                    </li>
+                                                                    <li class="files-view">
+                                                                        {% for file in rel.file.all %}
+                                                                            <ul class="files-view__main">
+                                                                                <li>
+                                                                                    <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                    <span>{{ file.file.size|filesizeformat }}</span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        {% endfor %}
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#experienceView">
+                                                    <h4 class="panel-title">{% trans 'Experiences' %}<i class="fa fa-chevron-up pull-right"></i></h4>
+                                                </div>
+                                                <div id="experienceView" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        {% for ex in employee.experience_set.all %}
+                                                            <div class="op3View-item">
+                                                                <ul>
+                                                                    <li>
+                                                                        <strong>{% trans 'Experience organization' %}:</strong>
+                                                                        <span>{{ ex.organization_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Experience date start' %}:</strong>
+                                                                        <span>{{ ex.date_started|date:'Y-mn-d' }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Experience date end' %}:</strong>
+                                                                        <span>{{ ex.date_finished|date:'d.m.Y' }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Experience position' %}:</strong>
+                                                                        <span>{{ ex.position_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Experience subdivision' %}:</strong>
+                                                                        <span>{{ ex.sub_division_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Experience address' %}:</strong>
+                                                                        <span>{{ ex.address_ru }}</span>
+                                                                    </li>
+                                                                    <li class="files-view">
+                                                                        {% for file in ex.file.all %}
+                                                                            <ul class="files-view__main">
+                                                                                <li>
+                                                                                    <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                    <span>{{ file.file.size|filesizeformat }}</span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        {% endfor %}
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="opView-title">
+                                        <h2>{% trans 'Operator' %} 3 New</h2>
+                                    </div>
+                                    <div class="opView-content">
+                                        <div class="panel-group d-accordion-new">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion-new" href="#new-educations-view">
+                                                    <h4 class="panel-title">{% trans 'Education' %} <i class="fa fa-chevron-up pull-right"></i></h4>
+                                                </div>
+                                                <div id="new-educations-view" class="panel-collapse collapse in">
+                                                    <div class="panel-body">
+                                                        {% for edu in employee.education_set.all %}
+                                                            <div class="op3View-item">
+                                                                <ul>
+                                                                    <li>
+                                                                        <strong>{% trans 'Education type' %}:</strong>
+                                                                        <span>{{ edu.educationchanges.type.name_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Education name' %}:</strong>
+                                                                        <span>{{ edu.educationchanges.name_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Education address' %}:</strong>
+                                                                        <span>{{ edu.educationchanges.address_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Education specialization' %}:</strong>
+                                                                        <span>{{ edu.educationchanges.specialization_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Education date start' %}:</strong>
+                                                                        <span>{{ edu.educationchanges.date_started|date:"d.m.Y" }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Education date end' %}:</strong>
+                                                                        <span>{{ edu.educationchanges.date_finished|date:"d.m.Y" }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Education other' %}:</strong>
+                                                                        <span>{{ edu.educationchanges.additional_ru }}</span>
+                                                                    </li>
+                                                                    <li class="files-view">
+                                                                        {% for file in edu.file.all %}
+                                                                            <ul class="files-view__main">
+                                                                                <li>
+                                                                                    <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                    <span>{{ file.file.size|filesizeformat }}</span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        {% endfor %}
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion-new" href="#new-language-view">
+                                                    <h4 class="panel-title">{% trans 'Knowledge of languages' %} <i class="fa fa-chevron-up pull-right"></i></h4>
+                                                </div>
+                                                <div id="new-language-view" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        {% for lang in employee.language_set.all %}
+                                                            <div class="op3View-item">
+                                                                <ul>
+                                                                    <li>
+                                                                        <strong>{% trans 'Language name' %}:</strong>
+                                                                        <span>{{ lang.languagechanges.language.name_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Language level' %}:</strong>
+                                                                        <span>{{ lang.languagechanges.get_level_display }}</span>
+                                                                    </li>
+                                                                    <li class="files-view">
+                                                                        {% for file in lang.file.all %}
+                                                                            <ul class="files-view__main">
+                                                                                <li>
+                                                                                    <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                    <span>{{ file.file.size|filesizeformat }}</span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        {% endfor %}
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion-new" href="#new-militaryView">
+                                                    <h4 class="panel-title">{% trans 'Military service' %}<i class="fa fa-chevron-up pull-right"></i></h4>
+                                                </div>
+                                                <div id="new-militaryView" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        {% for army in employee.army_set.all %}
+                                                            <div class="op3View-item">
+                                                                <ul>
+                                                                    <li>
+                                                                        <strong>{% trans 'Military duty' %}:</strong>
+                                                                        <span>{% if employee.military_duty %}{% trans 'Yes' %}{% else %}{% trans 'No' %}{% endif %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Military name' %}:</strong>
+                                                                        <span>{{ army.armychanges.name_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Military date start' %}:</strong>
+                                                                        <span>{{ army.armychanges.date_started|date:'d.m.Y' }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Military region' %}:</strong>
+                                                                        <span>{{ army.armychanges.region_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Military date end' %}:</strong>
+                                                                        <span>{{ army.armychanges.date_finished|date:'d.m.Y' }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Military specialization' %}:</strong>
+                                                                        <span>{{ army.armychanges.specialization_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Military rank' %}:</strong>
+                                                                        <span>{{ army.armychanges.rank_ru }}</span>
+                                                                    </li>
+                                                                    <li class="files-view">
+                                                                        {% for file in army.file.all %}
+                                                                            <ul class="files-view__main">
+                                                                                <li>
+                                                                                    <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                    <span>{{ file.file.size|filesizeformat }}</span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        {% endfor %}
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion-new" href="#new-receivedView">
+                                                    <h4 class="panel-title">{% trans 'Rewards' %}<i class="fa fa-chevron-up pull-right"></i></h4>
+                                                </div>
+                                                <div id="new-receivedView" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        {% for reward in employee.reward_set.all %}
+                                                            <div class="op3View-item">
+                                                                <ul>
+                                                                    <li>
+                                                                        <strong>{% trans 'Reward name' %}:</strong>
+                                                                        <span>{{ reward.rewardchanges.name_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Reward comment' %}:</strong>
+                                                                        <span>{{ reward.rewardchanges.description_ru }}</span>
+                                                                    </li>
+                                                                    <li class="files-view">
+                                                                        {% for file in reward.file.all %}
+                                                                            <ul class="files-view__main">
+                                                                                <li>
+                                                                                    <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                    <span>{{ file.file.size|filesizeformat }}</span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        {% endfor %}
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion-new" href="#new-familyView">
+                                                    <h4 class="panel-title">{% trans 'Family status' %}<i class="fa fa-chevron-up pull-right"></i></h4>
+                                                </div>
+                                                <div id="new-familyView" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        {% if employee.family %}
+                                                            <div class="op3View-item">
+                                                                <ul>
+                                                                    <li>
+                                                                        <strong>{% trans 'Family status' %}:</strong>
+                                                                        <span>{{ employee.family.familychanges.get_status_display }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Family children amount' %}:</strong>
+                                                                        <span>{{ employee.family.familychanges.children_amount }}</span>
+                                                                    </li>
+                                                                    <li class="files-view">
+                                                                        {% for file in employee.family.file.all %}
+                                                                            <ul class="files-view__main">
+                                                                                <li>
+                                                                                    <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                    <span>{{ file.file.size|filesizeformat }}</span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        {% endfor %}
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion-new" href="#new-relativesView">
+                                                    <h4 class="panel-title">{% trans 'Relatives' %}<i class="fa fa-chevron-up pull-right"></i></h4>
+                                                </div>
+                                                <div id="new-relativesView" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        {% for rel in employee.relative_set.all %}
+                                                            <div class="op3View-item">
+                                                                <ul>
+                                                                    <li>
+                                                                        <strong>{% trans 'Relative level' %}:</strong>
+                                                                        <span>{{ rel.relativechanges.get_level_display }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Relative fullname' %}:</strong>
+                                                                        <span>{{ rel.relativechanges.fullname_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Relative birth date' %}:</strong>
+                                                                        <span>{{ rel.relativechanges.birth_date|date:'d.m.Y' }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Relative work/study place' %}:</strong>
+                                                                        <span>{{ rel.relativechanges.study_work_place_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Relative position' %}:</strong>
+                                                                        <span>{{ rel.relativechanges.position_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Relative living address' %}:</strong>
+                                                                        <span>{{ rel.relativechanges.living_address_ru }}</span>
+                                                                    </li>
+                                                                    <li class="files-view">
+                                                                        {% for file in rel.file.all %}
+                                                                            <ul class="files-view__main">
+                                                                                <li>
+                                                                                    <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                    <span>{{ file.file.size|filesizeformat }}</span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        {% endfor %}
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion-new" href="#new-experienceView">
+                                                    <h4 class="panel-title">{% trans 'Experiences' %}<i class="fa fa-chevron-up pull-right"></i></h4>
+                                                </div>
+                                                <div id="new-experienceView" class="panel-collapse collapse">
+                                                    <div class="panel-body">
+                                                        {% for ex in employee.experience_set.all %}
+                                                            <div class="op3View-item">
+                                                                <ul>
+                                                                    <li>
+                                                                        <strong>{% trans 'Experience organization' %}:</strong>
+                                                                        <span>{{ ex.experiencechanges.organization_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Experience date start' %}:</strong>
+                                                                        <span>{{ ex.experiencechanges.date_started|date:'Y-mn-d' }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Experience date end' %}:</strong>
+                                                                        <span>{{ ex.experiencechanges.date_finished|date:'d.m.Y' }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Experience position' %}:</strong>
+                                                                        <span>{{ ex.experiencechanges.position_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Experience subdivision' %}:</strong>
+                                                                        <span>{{ ex.experiencechanges.sub_division_ru }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>{% trans 'Experience address' %}:</strong>
+                                                                        <span>{{ ex.experiencechanges.address_ru }}</span>
+                                                                    </li>
+                                                                    <li class="files-view">
+                                                                        {% for file in ex.file.all %}
+                                                                            <ul class="files-view__main">
+                                                                                <li>
+                                                                                    <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                    <span>{{ file.file.size|filesizeformat }}</span>
+                                                                                </li>
+                                                                            </ul>
+                                                                        {% endfor %}
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab4">
+                        <div class="tab-opView__main">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="opView-title">
+                                        <h2>{% trans 'Operator' %} 4</h2>
+                                    </div>
+                                    <div class="opView-content">
+                                        <ul>
+                                            <li>
+                                                <strong>{% trans 'Desired countries' %}:</strong>
+                                                <span>{{ employee.get_countries_list }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Wages' %}:</strong>
+                                                <span>{{ employee.wages }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Ready for university' %}:</strong>
+                                                <span>{{ employee.get_is_ready_for_universitet_display }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Criminal number' %}:</strong>
+                                                <span>{{ employee.criminal_number }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Criminal issue' %}:</strong>
+                                                <span>{{ employee.criminal_issue|date:'d.m.Y' }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Criminal comment' %}:</strong>
+                                                <span>{{ employee.criminal_comment_ru }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Spec. signs' %}:</strong>
+                                                <span>{{ employee.add_spec_signs_ru }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Hobby' %}:</strong>
+                                                <span>{{ employee.hobby_ru }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Other' %}:</strong>
+                                                <span>{{ employee.other_ru }}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="opView-title">
+                                        <h2>{% trans 'Operator' %} 4 New</h2>
+                                    </div>
+                                    <div class="opView-content">
+                                        <ul>
+                                            <li>
+                                                <strong>{% trans 'Desired countries' %}:</strong>
+                                                <span>{{ employee.employeechanges.get_countries_list }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Wages' %}:</strong>
+                                                <span>{{ employee.employeechanges.wages }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Ready for university' %}:</strong>
+                                                <span>{{ employee.employeechanges.get_is_ready_for_universitet_display }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Criminal number' %}:</strong>
+                                                <span>{{ employee.employeechanges.criminal_number }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Criminal issue' %}:</strong>
+                                                <span>{{ employee.employeechanges.criminal_issue|date:'d.m.Y' }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Criminal comment' %}:</strong>
+                                                <span>{{ employee.employeechanges.criminal_comment_ru }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Spec. signs' %}:</strong>
+                                                <span>{{ employee.employeechanges.add_spec_signs_ru }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Hobby' %}:</strong>
+                                                <span>{{ employee.employeechanges.hobby_ru }}</span>
+                                            </li>
+                                            <li>
+                                                <strong>{% trans 'Other' %}:</strong>
+                                                <span>{{ employee.employeechanges.other_ru }}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="opView-buttons editDecAccButtons">
+                <a href="#" id="declineEdit" class="opView-edit_button">Отказать</a>
+                <a href="#" id="acceptEdit" class="opView-edit_button">Принять</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(function () {
+            $('#acceptEdit').click(function (e) {
+               e.preventDefault();
+               formData = new FormData();
+               formData.append('id', {{ employee.id }});
+               $.ajax({
+                   url: "{% url 'api:admin:employee:apply-changes' %}",
+                   method: "POST",
+                   processData: false,
+                   contentType: false,
+                   data: formData,
+                   success: function (data) {
+                       console.log('success');
+                   },
+                   error: function (data) {
+                       console.log('error');
+                   }
+               })
+            });
+            $('#declineEdit').click(function (e) {
+                e.preventDefault();
+                formData = new FormData();
+                formData.append('id', {{ employee.id }});
+                $.ajax({
+                    url: "{% url 'api:admin:employee:delete-changes' %}",
+                    method: "POST",
+                    processData: false,
+                    contentType: false,
+                    data: formData,
+                    success: function (data) {
+                        console.log('success');
+                    },
+                    error: function (data) {
+                        console.log('error');
+                    }
+                })
+            });
+        })
+    </script>
+{% endblock %}

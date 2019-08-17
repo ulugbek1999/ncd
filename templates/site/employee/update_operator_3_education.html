@@ -1,0 +1,203 @@
+{% extends 'site/_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load thumbnail %}
+{% load get_json_value %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" />
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css">
+{% endblock %}
+{% block content %}
+    <section class="profile">
+        <div class="container">
+            <div class="row">
+                <div class="profile-main">
+                    <div class="content-title">
+                        <h2>Биометрические данные</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="profile-side">
+                                <div class="profile-side__title">
+                                    <h2>Личный кабинет</h2>
+                                </div>
+                                <nav class="nav_personal d-lnk-txt">
+                                    <ul>
+                                        <li class="">
+                                            <a href="#"><i class="fa fa-user"></i> Мой профиль</a>
+                                        </li>
+
+                                        <li class="">
+                                            <a href=""><i class="fa fa-book"></i> Курсы </a></li>
+                                        <li class="">
+
+                                    </ul>
+                                    <div class="nav_personal__footer">
+                                        <a href="#"> Выйти</a>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+
+                            <div class="profile-content">
+                                <div class="employee-detail">
+                                    <div class="row">
+                                        <form name="employee_update" style="padding: 0 15px;">
+                                            <div class="education-item">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="eduType">{% trans 'Education type' %}</label>
+                                                            <select class="form-control selectpicker show-tick" name="edu_type" id="eduType">
+                                                                <option value="">{% trans 'Select' %}</option>
+                                                                {% for education in educations %}
+                                                                    <option value="{{ education.id }}">{{ education.name_ru }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="eduName">{% trans 'Education name' %}</label>
+                                                            <input name="edu_name" type="text" class="form-control" id="eduName" placeholder="{% json_value education 'name_ru' 'current' %}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="eduAddress">{% trans 'Education address' %}</label> <!-- TODO city list -->
+                                                            <input name="edu_address" list="eduRegion_list" type="text" class="form-control" id="eduAddress" placeholder="{% json_value education 'address_ru' 'current' %}" autocomplete="off">
+                                                            <datalist class="region-list" id="eduRegion_list">
+                                                            </datalist>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="eduSpec">{% trans 'Specialization' %}</label>
+                                                            <input name="edu_spec" type="text" class="form-control" id="eduSpec" placeholder="{% json_value education 'specialization_ru' 'current' %}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="eduStartDate">{% trans 'Education date start' %}</label>
+                                                            <input name="edu_start_date" type="text" class="datepickerFrom form-control" data-date-format="yyyy-mm-dd" id="eduStartDate" placeholder="{% json_value education 'date_started' 'current' %}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="eduGradDate">{% trans 'Education date end' %}</label>
+                                                            <input name="edu_grad_date" type="text" class="datepickerFrom form-control" data-date-format="yyyy-mm-dd" id="eduGradDate1" placeholder="{% json_value education 'date_graduated' 'current' %}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="eduAddit">Прочие данные об учебе</label>
+                                                            <input name="edu_addit" type="text" class="form-control" id="eduAddit" placeholder="{% json_value education 'additional_ru' 'current' %}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                            <div class="education-file__upload op3-file__upload hidden">
+                                                                <input type="file"
+                                                                       class="filepondEducation"
+                                                                       name="filepond_education"
+                                                                       label-idle="Загрузить файл"
+                                                                       multiple
+                                                                       data-max-file-size="3MB"
+                                                                       data-max-files="4"
+                                                                >
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12" style="text-align: center;">
+                                                <button id="employeeEditButton" class="loginButton" data-api="{% url 'api:employee.update.3-employee.education' education.id %}" type="submit">
+                                                    Отправить
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+
+    <script>
+        $(function () {
+            $.fn.datepicker.dates['ru'] = {
+                days: ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"],
+                daysShort: ["Вск", "Пнд", "Втр", "Срд", "Чтв", "Птн", "Суб"],
+                daysMin: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+                months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+                monthsShort: ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
+                today: "Сегодня",
+                clear: "Очистить",
+                format: "dd.mm.yyyy",
+                weekStart: 1,
+                monthsTitle: 'Месяцы'
+            };
+        }(jQuery));
+        (function($){
+            $.fn.datepicker.dates['uz-latn'] = {
+                days: ["Yakshanba", "Dushanba", "Seshanba", "Chorshanba", "Payshanba", "Juma", "Shanba"],
+                daysShort: ["Yak", "Du", "Se", "Chor", "Pay", "Ju", "Sha"],
+                daysMin: ["Ya", "Du", "Se", "Cho", "Pa", "Ju", "Sha"],
+                months: ["Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun", "Iyul", "Avgust", "Sentabr", "Oktabr", "Noyabr", "Dekabr"],
+                monthsShort: ["Yan", "Fev", "Mar", "Apr", "May", "Iyn", "Iyl", "Avg", "Sen", "Okt", "Noy", "Dek"],
+                today: "Bugun",
+                clear: "O'chirish",
+                format: "dd.mm.yyyy",
+                weekStart: 1,
+                monthsTitle: 'Oylar'
+            };
+        }(jQuery));
+        $(function () {
+          $(".datepickerFrom").datepicker({
+              autoclose: true,
+              language: 'ru',
+              todayHighlight: true
+          });
+        });
+
+        $("#employeeEditButton").click(function(event){
+            event.preventDefault();
+
+            let formData = new FormData();
+
+            formData.append(`type`, $(`select[name='edu_type']`).val());
+            formData.append(`name_ru`, $(`input[name='edu_name']`).val());
+            formData.append(`address_ru`, $(`input[name='edu_address']`).val());
+            formData.append(`specialization_ru`, $(`input[name='edu_spec']`).val());
+            formData.append(`date_started`, $(`input[name='edu_start_date']`).val());
+            formData.append(`date_graduated`, $(`input[name='edu_grad_date']`).val());
+            formData.append(`additional_ru`, $(`input[name='edu_addit']`).val());
+
+            /*var object = {};
+            formData.forEach((value, key) => {object[key] = value});
+            var jsonData = JSON.stringify(object);
+
+            console.log(jsonData);*/
+
+            $.ajax({
+                url: $(this).data('api'),
+                data: formData,
+                processData: false,
+                contentType: false,
+                type: "PUT",
+                success: function (data) {
+                    alert('Success');
+                },
+                error: function (data) {
+                    alert('error');
+                },
+            });
+        });
+    </script>
+{% endblock %}

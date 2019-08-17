@@ -1,0 +1,298 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>site NCD</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="{% static 'site/fonts/robotocondensed/robotocondensed.css' %}">
+        <link rel="stylesheet" href="{% static 'site/fonts/lato/lato.css' %}">
+        <link rel="stylesheet" href="{% static 'site/fonts/oswald/oswald.css' %}">
+        <link rel="stylesheet" href="{% static 'site/fonts/worksans/worksans.css' %}">
+        <link rel="stylesheet" href="{% static 'site/fonts/font-awesome/css/font-awesome.css' %}">
+
+        <link rel="stylesheet" href="{% static 'site/plugins/bootstrap/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'site/plugins/magnific-popup/magnific-popup.css' %}">
+        <link rel="stylesheet" href="{% static 'site/plugins/slider-pro/css/slider-pro.css' %}">
+        <link rel="stylesheet" href="{% static 'site/plugins/OwlCarousel2-2.3.4/dist/assets/owl.carousel.css' %}">
+        <link rel="stylesheet" href="{% static 'site/plugins/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.css' %}">
+
+
+        <link href="{% static 'site/css/style.css' %}" rel="stylesheet">
+        {% block css %}
+
+        {% endblock %}
+        <link href="{% static 'site/css/media.css' %}" rel="stylesheet">
+
+
+
+        <script src="{% static 'site/js/jquery.js' %}"></script>
+        <script src="{% static 'site/plugins/bootstrap/js/bootstrap.js' %}"></script>
+        <script src="{% static 'site/plugins/magnific-popup/jquery.magnific-popup.js' %}"></script>
+        <script src="{% static 'site/plugins/slider-pro/js/jquery.sliderPro.js' %}"></script>
+        <script src="{% static 'site/plugins/OwlCarousel2-2.3.4/dist/owl.carousel.js' %}"></script>
+
+
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="ts-home">
+                <svg class="code125-title-seperator-left" preserveAspectRatio="none" viewBox="0 0 200 200" data-height="200">
+                    <polygon style="fill: #3368c6;" points="0,0 200,0 0,200 "></polygon>
+                </svg>
+            </div>
+            <section class="header-main">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="menu-main">
+                            <div class="menu-nav">
+                                <nav class="navbar navbar-static-top">
+
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar3">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        </button>
+                                        <div class="logo-main">
+                                            <a class="navbar-brand" href="#">
+                                                <img src="{% static 'site/images/logo_login.svg' %}" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div id="navbar3" class="navbar-collapse collapse">
+                                        <ul class="nav navbar-nav navbar-right">
+
+                                            <li class="active">
+                                                <a href="#">
+                                                    <span class="original">О компании</span>
+                                                    <span class="hover-menu">О компании</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="original">Услуги</span>
+                                                    <span class="hover-menu">Услуги</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="original">Документы</span>
+                                                    <span class="hover-menu">Документы</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="original">Партнеры</span>
+                                                    <span class="hover-menu">Партнеры</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="original">Образование</span>
+                                                    <span class="hover-menu">Образование</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="original">ЧАВО</span>
+                                                    <span class="hover-menu">ЧАВО</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="original">Обучение</span>
+                                                    <span class="hover-menu">Обучение</span>
+                                                </a>
+                                            </li>
+                                            <!-- <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                                                <ul class="dropdown-menu" role="menu">
+                                                <li><a href="#">О компании</a></li>
+                                                <li><a href="#">Услуги</a></li>
+                                                <li><a href="#">Документы</a></li>
+                                                <li class="divider"></li>
+                                                <li class="dropdown-header">Nav header</li>
+                                                <li><a href="#">Separated link</a></li>
+                                                <li><a href="#">One more separated link</a></li>
+                                                </ul>
+                                            </li> -->
+                                            <li><a href="#search-popup" class="open-search-link"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                                            <li><a href="#login-popup" class="open-login-link"><i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                    </div>
+                                            <!--/.nav-collapse -->
+
+                                          <!--/.container-fluid -->
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="content-main">
+                {% block content %}
+
+                {% endblock %}
+            </div>
+            <section class="footer-main">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer-top">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="footer-logo">
+                                        <a href="#">
+                                            <img src="{% static 'site/images/ncd1.svg' %}" alt="">
+                                        </a>
+                                        <p>Laboratories used for scientific research
+                                            take many forms because
+                                            of the differing. We provide complete
+                                            process piping capabilities.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="footer-menu">
+                                        <div class="footer-menu__item">
+                                            <h2>USEFULL LINKS</h2>
+                                            <ul>
+                                                <li>
+                                                    <a href="#">About Us</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Documents</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Partners</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Our Team</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Contacts</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="footer-menu__item">
+                                            <h2>OUR SERVICES</h2>
+                                            <ul>
+                                                <li>
+                                                    <a href="#">Scientific</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Chemistry</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Gemological</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Forensic science</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Immunology</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Gemological</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Forensic science</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Immunology</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="footer-contacts">
+                                        <h2>Contacts</h2>
+                                        <div class="footer-contacts__item">
+                                            <div class="footer-contacts__title">
+                                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                <span>Адрес</span>
+                                            </div>
+                                            <p>
+                                                <a href="#">Республика Узбекистан, Ташкент,
+                                                    Юнусабад-4, ул. Ахмада Дониша, 81.</a>
+                                            </p>
+                                        </div>
+                                        <div class="footer-contacts__item">
+                                            <div class="footer-contacts__title">
+                                                <i class="fa fa-phone" aria-hidden="true"></i>
+                                                <span>Телефон</span>
+                                            </div>
+                                            <p>
+                                                Телефон: <a href="tel:+998 71 200 05 77" target="_blank">+998 71 200 05 77</a>
+                                                <br>Мобильный: <a href="tel:+998 99 444 05 77" target="_blank">+998 99 444 05 77</a>
+                                                <br>Мобильный: <a href="tel:+998 99 333 05 77" target="_blank">+998 99 333 05 77</a></p>
+                                        </div>
+                                        <div class="footer-contacts__item">
+                                            <div class="footer-contacts__title">
+                                                <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                                <span>E-mail</span>
+                                            </div>
+                                            <p>
+                                                <a href="mailto:ncdxba0007@gmail.com">ncdxba0007@gmail.com</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="footer-copy">
+                            <div class="copyright">© 2019 NCD. Все права защищены</div>
+                            <div class="developer">Разработка сайта: <a href="http://www.osg.uz/">Online Service Group</a></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+        <section class="popups-section">
+            <div id="search-popup" class="white-popup mfp-hide">
+                <h2>Search content</h2>
+                <p>Some text here..</p>
+            </div>
+            <div id="login-popup" class="white-popup mfp-hide">
+                <form class="login">
+                    <fieldset>
+
+                        <legend class="legend">Логин</legend>
+
+                        <div class="input">
+                            <input type="text" id="userName" name="username" placeholder="Username" required />
+                        <span><i class="fa fa-user"></i></span>
+                        </div>
+
+                        <div class="input">
+                            <input type="password" id="password" name="password" placeholder="Password" required />
+                        <span><i class="fa fa-lock"></i></span>
+                        </div>
+                        <div class="loginError">
+                            логин или пароль введены неверно
+                        </div>
+                        <div class="login-buttons">
+                            <a href="{% url 'site:partner.register' %}">Регистрация партнеров</a>
+                            <button id="loginButton" type="submit" class="loginButton" data-url="{% url 'site:auth.signin' %}">
+                                Войти
+                            </button>
+                        </div>
+
+
+                    </fieldset>
+                </form>
+            </div>
+        </section>
+
+        <script src="{% static 'operator/js/csrf.js' %}"></script>
+        <script src="{% static 'site/js/main.js' %}"></script>
+        {% block js %}{% endblock %}
+
+    </body>
+</html>

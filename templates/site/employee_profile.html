@@ -1,0 +1,575 @@
+{% extends 'site/_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load thumbnail %}
+{% load get_json_value %}
+
+{% block css %}
+
+{% endblock %}
+{% block content %}
+    <section class="profile">
+        <div class="container">
+            <div class="row">
+                <div class="profile-main">
+                    <div class="content-title">
+                        <h2>Личный кабинет аппликанта</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="profile-side">
+                                <div class="profile-side__title">
+                                    <h2>Личный кабинет</h2>
+                                </div>
+                                <nav class="nav_personal d-lnk-txt">
+                                    <ul>
+                                        <li class="current">
+                                            <a href="#"><i class="fa fa-user"></i> Мой профиль</a>
+                                        </li>
+
+                                        <li class="">
+                                            <a href=""><i class="fa fa-book"></i> Курсы </a></li>
+                                        <li class="">
+
+                                    </ul>
+                                    <div class="nav_personal__footer">
+                                        <a href="#"> Выйти</a>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="profile-content">
+                                <div class="employee-detail">
+                                    <div class="row">
+                                        <div class="employee-images">
+                                            <div class="employee-image__row">
+                                                <div class="employee-image__item">
+                                                {% if employee.photo_1 %}
+                                                    <a href="{{ employee.photo_1.url }}">
+                                                        {% thumbnail employee.photo_1 "148x178" crop="center" as im %}
+                                                            <img src="{{ im.url }}" alt="">
+                                                        {% endthumbnail %}
+                                                    </a>
+                                                {% endif %}
+                                                </div>
+                                                <div class="employee-image__item">
+                                                {% if employee.photo_2 %}
+                                                    <a href="{{ employee.photo_2.url }}">
+                                                        {% thumbnail employee.photo_2 "148x178" crop="center" as im %}
+                                                            <img src="{{ im.url }}" alt="">
+                                                        {% endthumbnail %}
+                                                    </a>
+                                                {% endif %}
+                                                </div>
+                                                <div class="employee-image__item">
+                                                {% if employee.photo_3 %}
+                                                    <a href="{{ employee.photo_3.url }}">
+                                                        {% thumbnail employee.photo_3 "148x178" crop="center" as im %}
+                                                            <img src="{{ im.url }}" alt="">
+                                                        {% endthumbnail %}
+                                                    </a>
+                                                {% endif %}
+                                                </div>
+                                                <div class="employee-image__item">
+                                                {% if employee.photo_4 %}
+                                                    <a href="{{ employee.photo_4.url }}">
+                                                        {% thumbnail employee.photo_4 "148x178" crop="center" as im %}
+                                                            <img src="{{ im.url }}" alt="">
+                                                        {% endthumbnail %}
+                                                    </a>
+                                                {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="employee-detail__content">
+
+                                            <div class="detail-title">
+                                                <h2>{% json_value employee 'full_name_ru' 'current' %}</h2>
+                                                <span style="margin: 0;">{{ employee.register_number }}</span>
+
+                                            </div>
+                                            <div class="detail-content">
+                                                <div class="row">
+                                                    <div id="exTabProfile">
+                                                        <ul class="nav nav-tabs">
+                                                            <li class="active">
+                                                                <a  href="#1Profile" data-toggle="tab">Личные данные</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#2Profile" data-toggle="tab">Биометрические данные</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#3Profile" data-toggle="tab">Дополнительные данные </a>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="tab-content ">
+                                                            <div class="tab-pane active" id="1Profile">
+                                                                <ul>
+                                                                    <li>
+                                                                        <strong>Ф.И.О (рус):</strong>
+                                                                        <span>{% json_value employee 'full_name_ru' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Ф.И.О (англ):</strong>
+                                                                        <span>{% json_value employee 'full_name_en' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Пол:</strong>
+                                                                        <span>{{ employee.get_gender_display }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>№ Паспорта:</strong>
+                                                                        <span>{% json_value employee 'passport_serial' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Дата выдачи:</strong>
+                                                                        <span>{% json_value employee 'passport_given_date' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Срок действия:</strong>
+                                                                        <span>{% json_value employee 'passport_expires' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>ИНН:</strong>
+                                                                        <span>{% json_value employee 'inn' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Дата рождения:</strong>
+                                                                        <span>{{ employee.birth_date|date:"d.m.Y" }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Место рождения:</strong>
+                                                                        <span>{% json_value employee 'birth_place_ru' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Место проживания:</strong>
+                                                                        <span>{% json_value employee 'lives_at_ru' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Номер телефона:</strong>
+                                                                        <span>{% json_value employee 'phone' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Эл.почта:</strong>
+                                                                        <span>{% json_value employee 'email' 'current' %}</span>
+                                                                    </li>
+                                                                </ul>
+                                                                <a href="{% url 'site:employee.profile.update.1' %}" class="editButtonProfile">Редактировать</a>
+                                                            </div>
+                                                            <div class="tab-pane" id="2Profile">
+                                                                <ul>
+                                                                    <li>
+                                                                        <strong>Внешний вид:</strong>
+                                                                        <span>{% json_value employee 'appearance' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Опрятность:</strong>
+                                                                        <span>{% json_value employee 'neatness' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Состояние кожи:</strong>
+                                                                        <span>{% json_value employee 'skin' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Рост (см):</strong>
+                                                                        <span>{% json_value employee 'height' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Вес (кг):</strong>
+                                                                        <span>{% json_value employee 'weight' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Жирность (%):</strong>
+                                                                        <span>{% json_value employee 'fatness' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Группа крови:</strong>
+                                                                        <span>{% json_value employee 'blood_group' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Зрение (L):</strong>
+                                                                        <span>{% json_value employee 'vision_l' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Зрение (R):</strong>
+                                                                        <span>{% json_value employee 'vision_r' 'current' %}</span>
+                                                                    </li>
+                                                                </ul>
+                                                                <a href="{% url 'site:employee.profile.update.2' %}" class="editButtonProfile">Редактировать</a>
+                                                            </div>
+                                                            <div class="tab-pane" id="3Profile">
+                                                                <ul>
+                                                                    <li>
+                                                                        <strong>Желаемые страны:</strong>
+                                                                        <span>{{ employee.get_countries_list }}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Заработная плата:</strong>
+                                                                        <span>{% json_value employee 'wages' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Готовность поступать в ВУЗ:</strong>
+                                                                        <span>{% json_value employee 'is_ready_for_universitet' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Номер справки (Наличие или отсутствие судимости):</strong>
+                                                                        <span>{% json_value employee 'criminal_number' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Дата выдачи (Наличие или отсутствие судимости):</strong>
+                                                                        <span>{% json_value employee 'criminal_issue' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Комментарий (Наличие или отсутствие судимости):</strong>
+                                                                        <span>{% json_value employee 'criminal_comment_ru' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Особые приметы:</strong>
+                                                                        <span>{% json_value employee 'add_spec_signs_ru' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Хобби:</strong>
+                                                                        <span>{% json_value employee 'hobby_ru' 'current' %}</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Прочее:</strong>
+                                                                        <span>{% json_value employee 'other_ru' 'current' %}</span>
+                                                                    </li>
+                                                                </ul>
+                                                                <a href="{% url 'site:employee.profile.update.4' %}" class="editButtonProfile">Редактировать</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="employee-tabs">
+                                    <div class="panel-group d-accordion">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#educations-view">
+                                                <h4 class="panel-title">Образование <i class="fa fa-chevron-up pull-right"></i></h4>
+                                            </div>
+                                            <div id="educations-view" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+                                                    {% for edu in employee.education_set.all %}
+                                                        <div class="op3View-item">
+                                                            <ul>
+                                                                <li>
+                                                                    <strong>Тип учебного заведения:</strong>
+                                                                    <span>{{ edu.type.name_ru }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Наименование:</strong>
+                                                                    <span>{% json_value edu 'name_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Адрес:</strong>
+                                                                    <span>{% json_value edu 'address_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Специальность:</strong>
+                                                                    <span>{% json_value edu 'specialization_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Дата начала обучения:</strong>
+                                                                    <span>{% json_value edu 'date_started' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Дата окончания обучения:</strong>
+                                                                    <span>{% json_value edu 'date_graduated' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Прочие данные об учебе:</strong>
+                                                                    <span>{% json_value edu 'additional_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li class="files-view">
+                                                                    {% for file in edu.file.all %}
+                                                                        <ul class="files-view__main">
+                                                                            <li>
+                                                                                <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                <span>{{ file.file.size|filesizeformat }}</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    {% endfor %}
+                                                                </li>
+                                                            </ul>
+                                                            <a href="{% url 'site:employee.profile.update.3.education' edu.id %}" class="editButtonProfile">Редактировать</a>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#language-view">
+                                                <h4 class="panel-title">Знание языков <i class="fa fa-chevron-up pull-right"></i></h4>
+                                            </div>
+                                            <div id="language-view" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    {% for lang in employee.language_set.all %}
+                                                        <div class="op3View-item">
+                                                            <ul>
+                                                                <li>
+                                                                    <strong>Название языка:</strong>
+                                                                    <span>{{ lang.language.name_ru }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Уровень знания:</strong>
+                                                                    <span>{% json_value lang 'level' 'current' %}</span>
+                                                                </li>
+                                                                <li class="files-view">
+                                                                    {% for file in lang.file.all %}
+                                                                        <ul class="files-view__main">
+                                                                            <li>
+                                                                                <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                <span>{{ file.file.size|filesizeformat }}</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    {% endfor %}
+                                                                </li>
+                                                            </ul>
+                                                            <a href="{% url 'site:employee.profile.update.3.language' lang.id %}" class="editButtonProfile">Редактировать</a>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#militaryView">
+                                                <h4 class="panel-title">Служба в армии<i class="fa fa-chevron-up pull-right"></i></h4>
+                                            </div>
+                                            <div id="militaryView" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    {% for army in employee.army_set.all %}
+                                                        <div class="op3View-item">
+                                                            <ul>
+                                                                <li>
+                                                                    <strong>Военная обязанность</strong>
+                                                                    <span>{% if employee.military_duty %}Да{% else %}Нет{% endif %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Наименование военной части</strong>
+                                                                    <span>{% json_value army 'name_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Дата начала службы</strong>
+                                                                    <span>{% json_value army 'date_started' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Регион</strong>
+                                                                    <span>{% json_value army 'region_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Дата окончания службы</strong>
+                                                                    <span>{% json_value army 'date_graduated' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Специальность</strong>
+                                                                    <span>{% json_value army 'specialization_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Звание</strong>
+                                                                    <span>{% json_value army 'rank_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li class="files-view">
+                                                                    {% for file in army.file.all %}
+                                                                        <ul class="files-view__main">
+                                                                            <li>
+                                                                                <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                <span>{{ file.file.size|filesizeformat }}</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    {% endfor %}
+                                                                </li>
+                                                            </ul>
+                                                            <a href="{% url 'site:employee.profile.update.3.army' army.id %}" class="editButtonProfile">Редактировать</a>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#receivedView">
+                                                <h4 class="panel-title">Полученные награды<i class="fa fa-chevron-up pull-right"></i></h4>
+                                            </div>
+                                            <div id="receivedView" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    {% for reward in employee.reward_set.all %}
+                                                        <div class="op3View-item">
+                                                            <ul>
+                                                                <li>
+                                                                    <strong>Награда</strong>
+                                                                    <span>{% json_value reward 'name_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Комментарий</strong>
+                                                                    <span>{% json_value reward 'description_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li class="files-view">
+                                                                    {% for file in reward.file.all %}
+                                                                        <ul class="files-view__main">
+                                                                            <li>
+                                                                                <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                <span>{{ file.file.size|filesizeformat }}</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    {% endfor %}
+                                                                </li>
+                                                            </ul>
+                                                            <a href="{% url 'site:employee.profile.update.3.reward' reward.id %}" class="editButtonProfile">Редактировать</a>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#familyView">
+                                                <h4 class="panel-title">Семейное положение<i class="fa fa-chevron-up pull-right"></i></h4>
+                                            </div>
+                                            <div id="familyView" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    {% if employee.family %}
+                                                        <div class="op3View-item">
+                                                            <ul>
+                                                                <li>
+                                                                    <strong>Семейное положение</strong>
+                                                                    <span>{% json_value employee.family 'status_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Количество детей</strong>
+                                                                    <span>{% json_value employee.family 'children_amount' 'current' %}</span>
+                                                                </li>
+                                                                <li class="files-view">
+                                                                    {% for file in employee.family.file.all %}
+                                                                        <ul class="files-view__main">
+                                                                            <li>
+                                                                                <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                <span>{{ file.file.size|filesizeformat }}</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    {% endfor %}
+                                                                </li>
+                                                            </ul>
+                                                            <a href="{% url 'site:employee.profile.update.3.family' employee.family.id %}" class="editButtonProfile">Редактировать</a>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#relativesView">
+                                                <h4 class="panel-title">Близкие родственники<i class="fa fa-chevron-up pull-right"></i></h4>
+                                            </div>
+                                            <div id="relativesView" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    {% for rel in employee.relative_set.all %}
+                                                        <div class="op3View-item">
+                                                            <ul>
+                                                                <li>
+                                                                    <strong>Степень родства</strong>
+                                                                    <span>{% json_value rel 'level_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Ф.И.О. родственника</strong>
+                                                                    <span>{% json_value rel 'fullname_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Год рождения</strong>
+                                                                    <span>{% json_value rel 'birth_date' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Место учебы, работы</strong>
+                                                                    <span>{% json_value rel 'study_work_place_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Должность</strong>
+                                                                    <span>{% json_value rel 'position_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Адрес проживания</strong>
+                                                                    <span>{% json_value rel 'living_address_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li class="files-view">
+                                                                    {% for file in rel.file.all %}
+                                                                        <ul class="files-view__main">
+                                                                            <li>
+                                                                                <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                <span>{{ file.file.size|filesizeformat }}</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    {% endfor %}
+                                                                </li>
+                                                            </ul>
+                                                            <a href="{% url 'site:employee.profile.update.3.relative' rel.id %}" class="editButtonProfile">Редактировать</a>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#experienceView">
+                                                <h4 class="panel-title">Трудовой опыт<i class="fa fa-chevron-up pull-right"></i></h4>
+                                            </div>
+                                            <div id="experienceView" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    {% for ex in employee.experience_set.all %}
+                                                        <div class="op3View-item">
+                                                            <ul>
+                                                                <li>
+                                                                    <strong>Организация</strong>
+                                                                    <span>{% json_value ex 'organization_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Дата начала работы</strong>
+                                                                    <span>{% json_value ex 'date_started' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Дата окончания работы</strong>
+                                                                    <span>{% json_value ex 'date_finished' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Должность</strong>
+                                                                    <span>{% json_value ex 'position_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Подразделение</strong>
+                                                                    <span>{% json_value ex 'sub_division_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Место нахождения/адресс</strong>
+                                                                    <span>{% json_value ex 'address_ru' 'current' %}</span>
+                                                                </li>
+                                                                <li class="files-view">
+                                                                    {% for file in ex.file.all %}
+                                                                        <ul class="files-view__main">
+                                                                            <li>
+                                                                                <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                <span>{{ file.file.size|filesizeformat }}</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    {% endfor %}
+                                                                </li>
+                                                            </ul>
+                                                            <a href="{% url 'site:employee.profile.update.3.experience' ex.id %}" class="editButtonProfile">Редактировать</a>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+
+
+{% endblock %}

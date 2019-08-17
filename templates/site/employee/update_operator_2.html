@@ -1,0 +1,241 @@
+{% extends 'site/_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load thumbnail %}
+{% load get_json_value %}
+
+
+{% block css %}
+
+{% endblock %}
+{% block content %}
+    <section class="profile">
+        <div class="container">
+            <div class="row">
+                <div class="profile-main">
+                    <div class="content-title">
+                        <h2>Биометрические данные</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="profile-side">
+                                <div class="profile-side__title">
+                                    <h2>Личный кабинет</h2>
+                                </div>
+                                <nav class="nav_personal d-lnk-txt">
+                                    <ul>
+                                        <li class="">
+                                            <a href="#"><i class="fa fa-user"></i> Мой профиль</a>
+                                        </li>
+
+                                        <li class="">
+                                            <a href=""><i class="fa fa-book"></i> Курсы </a></li>
+                                        <li class="">
+
+                                    </ul>
+                                    <div class="nav_personal__footer">
+                                        <a href="#"> Выйти</a>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+
+                            <div class="profile-content">
+                                <div class="employee-detail">
+                                    <div class="row">
+                                        <form name="employee_update" id="employee_update">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="heightID">Рост (см)</label>
+                                                    <input name="height" type="text" class="form-control" id="heightID" value="{% json_value employee 'height' 'current' %}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="weightID">Вес (кг)</label>
+                                                    <input name="weight" type="text" class="form-control" id="weightID" value="{% json_value employee 'weight' 'current' %}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="fatnessID">Жирность (%)</label>
+                                                    <input name="fatness" type="text" class="form-control" id="fatnessID" value="{% json_value employee 'fatness' 'current' %}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="vision_lID">Зрение (L)</label>
+                                                    <input name="vision_l" type="text" class="form-control" id="vision_lID" value="{% json_value employee 'vision_l' 'current' %}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="vision_rID">Зрение (R)</label>
+                                                    <input name="vision_r" type="text" class="form-control" id="vision_rID" value="{% json_value employee 'vision_r' 'current' %}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group radio-form">
+                                                    <label for="">Внешний вид</label>
+                                                    {% json_value employee 'appearance' 'current' as appearance %}
+                                                    <div class="radio-group">
+                                                        <input type="radio" id="appearance4" name="appearance" value="4" {% if appearance == '4' %}checked{% endif %}>
+                                                        <label for="appearance4">
+                                                            <span>4</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio-group">
+                                                        <input type="radio" id="appearance7" name="appearance" value="7"  {% if appearance == '7' %}checked{% endif %}>
+                                                        <label for="appearance7">
+                                                            <span>7</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio-group">
+                                                        <input type="radio" id="appearance10" name="appearance" value="10" {% if appearance == '10' %}checked{% endif %}>
+                                                        <label for="appearance10">
+                                                            <span>10</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group radio-form">
+                                                    <label for="">Опрятность</label>
+                                                    {% json_value employee 'neatness' 'current' as neatness %}
+                                                    <div class="radio-group">
+                                                        <input type="radio" id="neatness4" name="neatness" value="4" {% if neatness == '4' %}checked{% endif %}>
+                                                        <label for="neatness4">
+                                                            <span>4</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio-group">
+                                                        <input type="radio" id="neatness7" name="neatness" value="7" {% if neatness == '7' %}checked{% endif %}>
+                                                        <label for="neatness7">
+                                                            <span>7</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio-group">
+                                                        <input type="radio" id="neatness10" name="neatness" value="10" {% if neatness == '10' %}checked{% endif %}>
+                                                        <label for="neatness10">
+                                                            <span>10</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group radio-form">
+                                                    <label for="">Состояние кожи, наличие шрамов  и иных особенностей</label>
+                                                    {% json_value employee 'skin' 'current' as skin %}
+                                                    <div class="radio-group">
+                                                        <input type="radio" id="skin4" name="skin" value="4" {% if skin == '4' %}checked{% endif %}>
+                                                        <label for="skin4">
+                                                            <span>4</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio-group">
+                                                        <input type="radio" id="skin7" name="skin" value="7" {% if skin == '7' %}checked{% endif %}>
+                                                        <label for="skin7">
+                                                            <span>7</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio-group">
+                                                        <input type="radio" id="skin10" name="skin" value="10" {% if skin == '10' %}checked{% endif %}>
+                                                        <label for="skin10">
+                                                            <span>10</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group radio-form">
+                                                    <label for="">Группа крови</label>
+                                                    {% json_value employee 'blood_group' 'current' as blood_group %}
+                                                    <div class="radio-group">
+                                                        <input type="radio" id="blood_group1ID" name="blood_group" value="1"  {% if blood_group == '1' %}checked{% endif %}>
+                                                        <label for="blood_group1ID">
+                                                            <span>I</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio-group">
+                                                        <input type="radio" id="blood_group2ID" name="blood_group" value="2" {% if blood_group == '2' %}checked{% endif %}>
+                                                        <label for="blood_group2ID">
+                                                            <span>II</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio-group">
+                                                        <input type="radio" id="blood_group3ID" name="blood_group" value="3" {% if blood_group == '3' %}checked{% endif %}>
+                                                        <label for="blood_group3ID">
+                                                            <span>III</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio-group">
+                                                        <input type="radio" id="blood_group4ID" name="blood_group" value="4" {% if blood_group == '4' %}checked{% endif %}>
+                                                        <label for="blood_group4ID">
+                                                            <span>IV</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group radio-form">
+                                                    <label for="">Резус-фактор</label>
+                                                    {% json_value employee 'blood_resus' 'current' as blood_resus %}
+                                                    <div class="radio-group">
+                                                        <input type="radio" id="blood_resusPlusID" name="blood_resus" value="+" {% if blood_resus == "+" %}checked{% endif %}>
+                                                        <label for="blood_resusPlusID">
+                                                            <span>(+)</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio-group">
+                                                        <input type="radio" id="blood_resusMinusID" name="blood_resus" value="-" {% if blood_resus == "-" %}checked{% endif %}>
+                                                        <label for="blood_resusMinusID">
+                                                            <span>(-)</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12" style="text-align: center;">
+                                                <button id="employeeEditButton" class="loginButton" data-api="{% url 'api:employee.update.2-employee' employee.id %}" type="submit">
+                                                    Отправить
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+    <script>
+
+        $("#employeeEditButton").click(function(event){
+            event.preventDefault();
+
+            let formData = new FormData();
+
+            formData.append("appearance", $("input[name='appearance']:checked").val());
+            formData.append("neatness", $("input[name='neatness']:checked").val());
+            formData.append("skin", $("input[name='skin']:checked").val());
+            formData.append("height", $("#heightID").val());
+            formData.append("weight", $("#weightID").val());
+            formData.append("fatness", $("#fatnessID").val());
+            formData.append("blood_group", $("input[name='blood_group']:checked").val());
+            formData.append("blood_resus", $("input[name='blood_resus']:checked").val());
+            formData.append("vision_l", $("#vision_lID").val());
+            formData.append("vision_r", $("#vision_rID").val());
+
+            /*var object = {};
+            formData.forEach((value, key) => {object[key] = value});
+            var jsonData = JSON.stringify(object);
+
+            console.log(jsonData);*/
+
+            $.ajax({
+                url: $(this).data('api'),
+                data: formData,
+                processData: false,
+                contentType: false,
+                type: "PUT",
+                success: function (data) {
+                    alert('Success');
+                },
+                error: function (data) {
+                    alert('error');
+                },
+            });
+        });
+    </script>
+{% endblock %}

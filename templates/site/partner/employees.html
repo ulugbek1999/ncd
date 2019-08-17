@@ -1,0 +1,188 @@
+{% extends 'site/_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load thumbnail %}
+{% load partner_employees %}
+{% load str %}
+
+{% block css %}
+
+{% endblock %}
+{% block content %}
+    <section class="profile">
+        <div class="container">
+            <div class="row">
+                <div class="profile-main">
+                    <div class="content-title">
+                        <h2>Список аппликантов</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="profile-side">
+                                <div class="profile-side__title">
+                                    <h2>Личный кабинет</h2>
+                                </div>
+                                <nav class="nav_personal d-lnk-txt">
+                                    <ul>
+                                        <li class="">
+                                            <a href="#"><i class="fa fa-user"></i> Мой профиль</a>
+                                        </li>
+                                        <li  class="current">
+                                            <a href="{% url 'site:partner.employees' %}"><i class="fa fa-list"></i> Список апликантов</a>
+                                        </li>
+                                        <li class="">
+                                        <a href="{% url 'site:partner.bookmarks' %}"><i class="fa fa-list"></i> Мой список <span id="bookmarkCount">{{ request.user.partner.partneremployee_set.count }}</span></a></li>
+                                        <li class="">
+                                    </ul>
+                                    <div class="nav_personal__footer">
+                                        <a href="#"> Выйти</a>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="employees-filter">
+                                <div class="employee-search">
+                                    <form action="">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="1">Возрост</label>
+                                                    <input type="text" name="age" class="form-control" id="1" value="{{ age }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="2">Пол</label>
+                                                    <select name="gender" class="form-control" id="2">
+                                                        <option {% if gender == 'm' %}selected{% endif %} value="m">Мужской</option>
+                                                        <option {% if gender == 'f' %}selected{% endif %} value="f">Женский</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="3">Рост</label>
+                                                    <input type="text" name="height" class="form-control" id="3" value="{{ height }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="4">Образование (уровен)</label>
+                                                    <select name="education" class="form-control" id="4">
+                                                        <option value="">select</option>
+                                                        {% for e in educations %}
+                                                            <option value="{{ e.id }}" {% if educations == e.id|str %}selected{% endif %}>{{ e.name_ru }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="5">Знания языков</label>
+                                                    <select class="form-control" id="5">
+                                                        <option>select</option>
+                                                        {% for l in languages %}
+                                                            <option value="{{ l.id }}" {% if language == l.id|str %}selected{% endif %}>{{ l.name_ru }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <button type="submit" class="search-button btn btn-primary">Поиск</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="profile-content">
+                                <div class="row">
+                                    {% for employee in employees %}
+                                        {% is_in_bookmark employee.id as bookmark %}
+                                        <div class="employee-col">
+                                            <div class="employee-item">
+                                                <div class="employee-avatar">
+                                                    {% thumbnail employee.photo_1 "120x140" crop="center" as im %}
+                                                        <img src="{{ im.url }}" alt="">
+                                                    {% endthumbnail %}
+                                                </div>
+                                                <div class="employee-item__content">
+                                                    <div class="employee-item__data">
+                                                        <div class="employee-item__data-row">
+                                                            <span>{{ employee.full_name_ru }}</span>
+                                                        </div>
+                                                        <div class="employee-item__data-row">
+                                                            <span>Возрост: </span> {{ employee.age }}
+                                                        </div>
+                                                        <div class="employee-item__data-row">
+                                                            <span>Рост: </span> {{ employee.height }} cм
+                                                        </div>
+                                                        <div class="employee-item__data-row">
+                                                            <span>Рейтинг: </span> {{ employee.score.summa }} ({{ employee.score.category }})
+                                                        </div>
+                                                    </div>
+                                                    <div class="employee-item__footer">
+                                                        <a href="{% url 'site:employee.detail' employee.id %}">Подробнее</a>
+                                                    </div>
+                                                    <div class="checkbox-favorite">
+                                                        <input
+                                                                id="fav{{ employee.id }}"
+                                                                class="favorite hide"
+                                                                data-url="{% url 'api:partner.bookmark.create' employee.id %}"
+                                                                type="checkbox"
+                                                                data-id="{{ employee.id }}"
+                                                                {% if bookmark %}
+                                                                    checked
+                                                                {% else %}
+
+                                                                {% endif %}
+                                                        />
+                                                        <label aria-hidden="true" data-icon="&#9733;" for="fav{{ employee.id }}">
+                                                            <span class="hide"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+
+
+    <script>
+        $(function () {
+            $(".favorite").change(function (event) {
+
+                let employee_id = $(this).data('id');
+
+                $.ajax({
+                    url: $(this).data('url'),
+                    processData: false,
+                    contentType: false,
+                    method: 'GET',
+                    success: function (data) {
+                        var obj = jQuery.parseJSON(data);
+                        $('#bookmarkCount').text(obj.count);
+                    },
+                    error: function (data) {
+                        var obj = jQuery.parseJSON(data);
+                        $('#bookmarkCount').text(obj.count);
+                    }
+                });
+            });
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,731 @@
+{% extends 'operators/_base.html' %}
+{% load static i18n %}
+
+{% block css %}
+    <link href="{% static 'operator/js/filepond/filepond-plugin-image-preview.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'operator/js/filepond/filepond.min.css' %}">
+{% endblock %}
+
+{% block content %}
+    <input type="hidden" name="edu_count" value="{{ employee.education_set.count }}">
+    <input type="hidden" name="army_count" value="{{ employee.army_set.count }}">
+    <input type="hidden" name="fam_count" value="{{ employee.family_set.count }}">
+    <input type="hidden" name="reward_count" value="{{ employee.reward_set.count }}">
+    <input type="hidden" name="rel_count" value="{{ employee.relative_set.count }}">
+    <input type="hidden" name="exp_cout" value="{{ employee.experience_set.count }}">
+    <input type="hidden" name="lang_count" value="{{ employee.language_set.count }}">
+    <div class="content-title">
+        <h2>{% trans 'Change employee' %}</h2>
+        <span>№: {{ employee.register_number }}</span>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{% blocktrans %}Employee's personal card{% endblocktrans %}</h2>
+            <a href="{% url 'operator:4.employees' %}">{% blocktrans %}Operator{% endblocktrans %} 4</a>
+        </div>
+        <div class="operator3-tab__main card-main__content">
+            <form>
+                <ul class="nav nav-tabs nav-stacked">
+                    <li class="active"><a href="#tab1" data-toggle="tab"><img src="{% static 'operator/images/graduation-hat-and-diploma.svg' %}"> <span>Образование</span></a></li>
+                    <li><a href="#tab2" data-toggle="tab"><img src="{% static 'operator/images/language.svg' %}"> <span>Знание языков</span></a></li>
+                    <li><a href="#tab3" data-toggle="tab"><img src="{% static 'operator/images/military.svg' %}"> <span>Служба в армии</span></a></li>
+                    <li><a href="#tab4" data-toggle="tab"><img src="{% static 'operator/images/first-prize-trophy.svg' %}"> <span>Полученные награды</span></a></li>
+                    <li><a href="#tab5" data-toggle="tab"><img src="{% static 'operator/images/family-group.svg' %}"> <span>Семейное положение</span></a></li>
+                    <li><a href="#tab6" data-toggle="tab"><img src="{% static 'operator/images/qarindoshlar.svg' %}"> <span>Близкие родственники</span></a></li>
+                    <li><a href="#tab7" data-toggle="tab"><img src="{% static 'operator/images/achievement.svg' %}"> <span>Трудовой опыт</span></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade active in" id="tab1">
+                        <div class="tab-form__main">
+                            <div class="form-title">
+                                <h2>{% trans 'Education' %}</h2>
+                            </div>
+                            <div class="education form-main" data-api="{% url 'api:directory:education-type:list' %}" data-form-url="{% url 'root.api.employee.update.3.education' employee.id %}">
+                                <input type="hidden" id="educationCount" name="education_count" value="{{ employee.education_set.count }}">
+                                {% for edu in employee.education_set.all %}
+                                    <div class="education-item education-item__{{ forloop.counter }}" data-files-count="{{ edu.file.count }}">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="eduType{{ forloop.counter }}">{% trans 'Education type' %} {{ edu.id }}</label>
+                                                    <select class="form-control selectpicker show-tick" name="edu_type_{{ forloop.counter }}" id="eduType{{ forloop.counter }}">
+                                                        <option value="">{% trans 'Select' %}</option>
+                                                        {% for education in educations %}
+                                                            <option value="{{ education.id }}" {% if education.id == edu.type.id %}selected{% endif %}>{{ education.name_ru }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="eduName{{ forloop.counter }}">{% trans 'Education name' %}</label>
+                                                    <input name="edu_name_{{ forloop.counter }}" type="text" class="form-control" id="eduName{{ forloop.counter }}" value="{{ edu.name_ru }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="eduAddress{{ forloop.counter }}">{% trans 'Education address' %}</label> <!-- TODO city list -->
+                                                    <input name="edu_address_{{ forloop.counter }}" list="eduRegion_list{{ forloop.counter }}" type="text" class="form-control" id="eduAddress{{ forloop.counter }}" value="{{ edu.address_ru }}" autocomplete="off">
+                                                    <datalist class="region-list" id="eduRegion_list{{ forloop.counter }}">
+                                                    </datalist>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="eduSpec{{ forloop.counter }}">{% trans 'Specialization' %}</label>
+                                                    <input name="edu_spec_{{ forloop.counter }}" type="text" class="form-control" id="eduSpec{{ forloop.counter }}" value="{{ edu.additional_ru }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="eduStartDate{{ forloop.counter }}">{% trans 'Education date start' %}</label>
+                                                    <input name="edu_start_date_{{ forloop.counter }}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="eduStartDate{{ forloop.counter }}" value="{{ edu.date_started|date:'d.m.Y' }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="eduGradDate{{ forloop.counter }}">{% trans 'Education date end' %}</label>
+                                                    <input name="edu_grad_date_{{ forloop.counter }}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="eduGradDate1" value="{{ edu.date_finished|date:'d.m.Y' }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="eduAddit{{ forloop.counter }}">{% trans 'Another info' %}</label>
+                                                    <input name="edu_addit_{{ forloop.counter }}" type="text" class="form-control" id="eduAddit{{ forloop.counter }}" value="{{ edu.additional_ru }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                    <div class="education-file__upload op3-file__upload form-group">
+                                                        <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                                        <input type="file"
+                                                               class="filepondEducation{{ forloop.counter }}"
+                                                               name="filepond_education_{{ forloop.counter }}"
+                                                               label-idle="{% trans 'Upload file' %}"
+                                                               multiple
+                                                               data-max-file-size="3MB"
+                                                               data-max-files="4"
+                                                               {% for file in edu.file.all %}
+                                                                   data-file-url-{{ forloop.counter }}="{{ file.file.url }}"
+                                                                   data-file-name-{{ forloop.counter }}="{{ file.file.name }}"
+                                                                   data-file-size-{{ forloop.counter }}="{{ file.file.size }}"
+                                                               {% endfor %}
+                                                        >
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <div class="delete-button">
+                                            <a href="javascript:void(null)" class="deleteButton">{% trans 'Delete' %}</a>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                {% endfor %}
+                                <div id="education_fields">
+
+                                </div>
+                                <div class="add-button">
+                                    <a href="#" class="add-education">{% trans 'Add' %}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab2">
+                        <div class="tab-form__main">
+                            <div class="form-title">
+                                <h2>{% trans 'Knowlegde languages' %}</h2>
+                            </div>
+                            <div class="language form-main" data-api="{% url 'api:directory:language:list' %}" data-form-url="{% url 'root.api.employee.update.3.language' employee.id %}">
+                                <input type="hidden" id="languageCount" name="language_count" value="{{ employee.language_set.count }}">
+                                {% for lang in employee.language_set.all %}
+                                    <div class="language-item language-item__{{ forloop.counter }}" data-files-count="{{ lang.file.count }}">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="langName{{ forloop.counter }}">{% trans 'Language name' %}</label>
+                                                    <select id="langName{{ forloop.counter }}" class="form-control selectpicker show-tick" name="lang_name_{{ forloop.counter }}" >
+                                                        <option value="">{% trans 'Select' %}</option>
+                                                        {% for language in languages %}
+                                                            <option value="{{ language.id }}" {% if language.id == lang.language.id %}selected{% endif %}>{{ language.name_ru }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="langLevel{{ forloop.counter }}">{% trans 'Language knowing level' %}</label>
+                                                    <select id="langLevel{{ forloop.counter }}" class="form-control selectpicker show-tick" name="lang_level_{{ forloop.counter }}">
+                                                        <option value="">{% trans 'Select' %}</option>
+                                                        <option value="1" {% if lang.level == 1 %}selected{% endif %}>{% trans 'Best' %}</option>
+                                                        <option value="2" {% if lang.level == 2 %}selected{% endif %}>{% trans 'Good' %}</option>
+                                                        <option value="3" {% if lang.level == 3 %}selected{% endif %}>{% trans 'Not bad' %}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input name="lang_required_{{ forloop.counter }}" type="checkbox" class="form-control" id="langRequired{{ forloop.counter }}" {% if lang.is_required_to_check %}checked{% endif %}>
+                                                    <label for="langRequired{{ forloop.counter }}">{% trans 'Must be checked' %}</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="language-file__upload op3-file__upload form-group">
+                                                    <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                                    <input type="file"
+                                                           class="filepondLanguage{{ forloop.counter }}"
+                                                           name="filepond_language_{{ forloop.counter }}"
+                                                           label-idle="{% trans 'Upload file' %}"
+                                                           multiple
+                                                           data-max-file-size="3MB"
+                                                           data-max-files="4"
+                                                           {% for file in lang.file.all %}
+                                                               data-file-url-{{ forloop.counter }}="{{ file.file.url }}"
+                                                               data-file-name-{{ forloop.counter }}="{{ file.file.name }}"
+                                                               data-file-size-{{ forloop.counter }}="{{ file.file.size }}"
+                                                           {% endfor %}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="delete-button">
+                                            <a href="javascript:void(null)" class="deleteButton">{% trans 'Delete' %}</a>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                {% endfor %}
+                                <div id="language_fields">
+                                </div>
+                                <div class="add-button">
+                                    <a href="#" class="add-language">{% trans 'Add' %}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab3">
+                        <div class="tab-form__main">
+                            <div class="form-title">
+                                <h2>{% trans 'Military service' %}</h2>
+                            </div>
+                                <div class="military form-main" data-api="{% url 'api:directory:city:list' %}" data-form-url="{% url 'root.api.employee.update.3.army' employee.id %}">
+                                    <input type="hidden" id="armyCount" name="military_count" value="{{ employee.army_set.count }}">
+                                    {% for army in employee.army_set.all %}
+                                    <div class="military-item military-item__{{ forloop.counter }}" data-files-count="{{ army.file.count }}">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>{% trans 'Military duty' %}</label>
+                                                            <div class="form-group radio-form">
+                                                                <div class="radio-group">
+                                                                    <input type="radio" id="military_duty_1" name="military_duty" value="true" {% if employee.military_duty %}checked{% endif %}>
+                                                                    <label for="military_duty_1">
+                                                                        <span>{% trans 'Yes' %}</span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio-group">
+                                                                    <input type="radio" id="military_duty_2" name="military_duty" value="false" {% if not employee.military_duty %}checked{% endif %}>
+                                                                    <label for="military_duty_2">
+                                                                        <span>{% trans 'No' %}</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-8">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="milName{{ forloop.counter }}">{% trans 'Name of the military unit' %}</label>
+                                                                            <input name="mil_name_{{ forloop.counter }}" type="text" class="form-control" id="milName{{ forloop.counter }}" value="{{ army.name_ru }}">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="milRegion{{ forloop.counter }}">{% trans 'Region' %}</label>
+                                                                            <input name="mil_region_{{ forloop.counter }}" list="milRegion_list{{ forloop.counter }}" type="text" class="form-control" id="milRegion{{ forloop.counter }}" value="{{ army.region_ru }}" autocomplete="off">
+                                                                            <datalist class="region-list" id="milRegion_list{{ forloop.counter }}">
+                                                                            </datalist>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="milSpecialization{{ forloop.counter }}">{% trans 'Specialty' %}</label>
+                                                                            <input name="mil_specialization_{{ forloop.counter }}" type="text" class="form-control" id="milSpecialization{{ forloop.counter }}" value="{{ army.specialization_ru }}">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="milDateStarted{{ forloop.counter }}">{% trans 'Start date of service' %}</label>
+                                                                            <input value="{{ army.date_started|date:'Y-m-md' }}" name="mil_date_started_{{ forloop.counter }}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="milDateStarted{{ forloop.counter }}">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="milDateGraduated{{ forloop.counter }}">{% trans 'End date' %}</label>
+                                                                            <input value="{{ army.date_finished|date:'d.m.Y' }}" name="mil_date_graduated_{{ forloop.counter }}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="milDateGraduated{{ forloop.counter }}">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="milRank{{ forloop.counter }}">{% trans 'Rank' %}</label>
+                                                                            <input name="mil_rank_{{ forloop.counter }}" type="text" class="form-control" id="milRank{{ forloop.counter }}" value="{{ army.rank_ru }}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="military-file__upload op3-file__upload form-group">
+                                                                    <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                                                    <input type="file"
+                                                                           class="filepondMilitary{{ forloop.counter }}"
+                                                                           name="filepond_military_{{ forloop.counter }}"
+                                                                           label-idle="{% trans 'Upload file' %}"
+                                                                           multiple
+                                                                           data-max-file-size="3MB"
+                                                                           data-max-files="4"
+                                                                           {% for file in army.file.all %}
+                                                                               data-file-url-{{ forloop.counter }}="{{ file.file.url }}"
+                                                                               data-file-name-{{ forloop.counter }}="{{ file.file.name }}"
+                                                                               data-file-size-{{ forloop.counter }}="{{ file.file.size }}"
+                                                                           {% endfor %}
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="delete-button">
+                                            <a href="javascript:void(null)" class="deleteButton">{% trans 'Delete' %}</a>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    <div id="military_fields">
+                                    </div>
+                                    <div class="add-button">
+                                        <a href="#" class="add-military">{% trans 'Add' %}</a>
+                                    </div>
+
+                                </div>
+                                <hr>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab4">
+                        <div class="tab-form__main">
+                            <div class="form-title">
+                                <h2>{% trans 'Rewards' %}</h2>
+                            </div>
+                            <div class="received form-main" data-form-url="{% url 'root.api.employee.update.3.reward' employee.id %}">
+                                <input type="hidden" id="receivedCount" name="received_count" value="{{ employee.reward_set.count }}">
+                                {% for reward in employee.reward_set.all %}
+                                    <div class="received-item received-item__{{ forloop.counter }}" data-files-count="{{ reward.file.count }}">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label for="recName{{ forloop.counter }}">{% trans 'Reward' %}</label>
+                                                    <input name="rec_name_{{ forloop.counter }}" type="text" class="form-control" id="recName{{ forloop.counter }}" value="{{ reward.name_ru }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="recComment{{ forloop.counter }}">{% trans 'Comment' %}</label>
+                                                    <textarea name="rec_comment_{{ forloop.counter }}" rows="4" class="form-control" id="recComment{{ forloop.counter }}">{{ reward.description_ru }}</textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="received-file__upload op3-file__upload form-group">
+                                                    <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                                    <input type="file"
+                                                           class="filepondReceived{{ forloop.counter }}"
+                                                           name="filepond_receiveds_{{ forloop.counter }}"
+                                                           label-idle="{% trans 'Upload file' %}"
+                                                           multiple
+                                                           data-max-file-size="3MB"
+                                                           data-max-files="4"
+                                                           {% for file in reward.file.all %}
+                                                               data-file-url-{{ forloop.counter }}="{{ file.file.url }}"
+                                                               data-file-name-{{ forloop.counter }}="{{ file.file.name }}"
+                                                               data-file-size-{{ forloop.counter }}="{{ file.file.size }}"
+                                                           {% endfor %}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="delete-button">
+                                            <a href="javascript:void(null)" class="deleteButton">{% trans 'Delete' %}</a>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                {% endfor %}
+
+                                <div id="received_fields">
+
+                                </div>
+                                <div class="add-button">
+                                    <a href="#" class="add-received">{% trans 'Add' %}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab5">
+                        <div class="tab-form__main">
+                            <div class="marital-status form-main" data-form-url="{% url 'root.api.employee.update.3.family' employee.id %}">
+                                <input type="hidden" id="maritalCount" name="marital_count" value="1">
+                                <div class="form-title">
+                                    <h2>{% trans 'Family status' %}</h2>
+                                </div>
+                            {% if employee.family %}
+                                <div class="marital-status-item marital-status-item__1" data-files-count="{{ employee.family.file.count }}">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="marStatus1">{% trans 'Family status' %}</label>
+                                                <select class="form-control selectpicker show-tick" name="mar_status_1" id="marStatus1">
+                                                    <option value="">{% trans 'Select' %}</option>
+                                                    {# TODO translate #}
+                                                    <option value="1" {% if employee.family.status == 1 %}selected{% endif %}>не женат / не замужем</option>
+                                                    <option value="2" {% if employee.family.status == 2 %}selected{% endif %}>женат / замужем</option>
+                                                    <option value="3" {% if employee.family.status == 3 %}selected{% endif %}>в разводе</option>
+                                                    <option value="4" {% if employee.family.status == 4 %}selected{% endif %}>вдовец / вдова</option>
+                                                    <option value="5" {% if employee.family.status == 5 %}selected{% endif %}>второй брак</option>
+                                                    <option value="6" {% if employee.family.status == 6 %}selected{% endif %}>гражданский брак</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="childrenAmount1">{% trans 'Children amount' %}</label>
+                                                <select class="form-control selectpicker show-tick" name="children_amount_1" id="childrenAmount1">
+                                                    <option value="">{% trans 'Select' %}</option>
+                                                    <option value="0" {% if employee.family.children_amount == 0 %}selected{% endif %}>{% trans 'No' %}</option>
+                                                    <option value="1" {% if employee.family.children_amount == 1 %}selected{% endif %}>1</option>
+                                                    <option value="2" {% if employee.family.children_amount == 2 %}selected{% endif %}>2</option>
+                                                    <option value="3" {% if employee.family.children_amount == 3 %}selected{% endif %}>3</option>
+                                                    <option value="4" {% if employee.family.children_amount == 4 %}selected{% endif %}>4</option>
+                                                    <option value="5" {% if employee.family.children_amount >= 4 %}selected{% endif %}>{% trans 'More than 4' %}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="marital-file__upload op3-file__upload form-group">
+                                                <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                                <input type="file"
+                                                       class="filepondMarital1"
+                                                       name="filepond_marital_1"
+                                                       label-idle="{% trans 'Upload file' %}"
+                                                       multiple
+                                                       data-max-file-size="3MB"
+                                                       data-max-files="4"
+                                                        {% for file in employee.family.file.all %}
+                                                       data-file-url-1="{{ file.file.url }}"
+                                                       data-file-name-1="{{ file.file.name }}"
+                                                       data-file-size-1="{{ file.file.size }}"
+                                                        {% endfor %}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                                    <hr>
+                                <!--<div id="marital_fields">
+
+                                </div>
+                                <div class="add-button">
+                                    <a href="#" class="add-marital">{% trans 'Add' %}</a>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab6">
+                        <div class="tab-form__main">
+                            <div class="relatives form-main" data-api="{% url 'api:directory:city:list' %}" data-form-url="{% url 'root.api.employee.update.3.relative' employee.id %}">
+                                <input type="hidden" id="relativeCount" name="relative_count" value="{{ employee.relative_set.count }}">
+                                <div class="form-title">
+                                    <h2>{% trans 'Relatives' %}</h2>
+                                </div>
+                                {% for rel in employee.relative_set.all %}
+                                    <div class="relatives-item relatives-item__{{ forloop.counter }}" data-files-count="{{ rel.file.count }}">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="relLevel{{ forloop.counter }}">{% trans 'Relative level' %}</label>
+                                                            <select class="form-control selectpicker show-tick" name="rel_level_{{ forloop.counter }}" id="relLevel{{ forloop.counter }}">
+                                                                <option value="">{% trans 'Select' %}</option>
+                                                                {# TODO translate #}
+                                                                <option value="1" {% if rel.level == 1 %}selected{% endif %}>Жена</option>
+                                                                <option value="2" {% if rel.level == 2 %}selected{% endif %}>Муж</option>
+                                                                <option value="3" {% if rel.level == 3 %}selected{% endif %}>Мать</option>
+                                                                <option value="4" {% if rel.level == 4 %}selected{% endif %}>Отец</option>
+                                                                <option value="5" {% if rel.level == 5 %}selected{% endif %}>Сын</option>
+                                                                <option value="6" {% if rel.level == 6 %}selected{% endif %}>Дочь</option>
+                                                                <option value="7" {% if rel.level == 7 %}selected{% endif %}>Бабушка</option>
+                                                                <option value="8" {% if rel.level == 8 %}selected{% endif %}>Дедушка</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="relName{{ forloop.counter }}">{% trans 'Relative full name' %}</label>
+                                                            <input name="rel_name_{{ forloop.counter }}" type="text" class="form-control" id="relName{{ forloop.counter }}" value="{{ rel.fullname_ru }}">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="relBirthDate{{ forloop.counter }}">{% trans 'Relative birth date' %}</label>
+                                                            <input name="rel_birth_date_{{ forloop.counter }}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="relBirthDate{{ forloop.counter }}" value="{{ rel.birth_date|date:'d.m.Y' }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="relStudyWorkPlace{{ forloop.counter }}">{% trans 'Relative work/study place' %}</label>
+
+                                                            <input name="rel_study_work_place_{{ forloop.counter }}" list="relStudyRegion_list{{ forloop.counter }}" type="text" class="form-control" id="relStudyWorkPlace{{ forloop.counter }}" value="{{ rel.study_work_place_ru }}" autocomplete="off">
+                                                            <datalist class="region-list" id="relStudyRegion_list{{ forloop.counter }}">
+                                                            </datalist>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="relPosition{{ forloop.counter }}">{% trans 'Relative position' %}</label>
+                                                            <input name="rel_position_{{ forloop.counter }}" type="text" class="form-control" id="relPosition{{ forloop.counter }}" value="{{ rel.position_ru }}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="relAddress{{ forloop.counter }}">{% trans 'Relative living address' %}</label>
+
+                                                            <input name="rel_address_{{ forloop.counter }}" list="relAddressRegion_list{{ forloop.counter }}" type="text" class="form-control" id="relAddress{{ forloop.counter }}" value="{{ rel.living_address_ru }}" autocomplete="off">
+                                                            <datalist class="region-list" id="relAddressRegion_list{{ forloop.counter }}">
+                                                            </datalist>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="relatives-file__upload op3-file__upload form-group">
+                                                    <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                                    <input type="file"
+                                                           class="filepondRelatives{{ forloop.counter }}"
+                                                           name="filepond_relatives_{{ forloop.counter }}"
+                                                           label-idle="{% trans 'Upload file' %}"
+                                                           multiple
+                                                           data-max-file-size="3MB"
+                                                           data-max-files="4"
+                                                           {% for file in rel.file.all %}
+                                                               data-file-url-{{ forloop.counter }}="{{ file.file.url }}"
+                                                               data-file-name-{{ forloop.counter }}="{{ file.file.name }}"
+                                                               data-file-size-{{ forloop.counter }}="{{ file.file.size }}"
+                                                           {% endfor %}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="delete-button">
+                                            <a href="javascript:void(null)" class="deleteButton">{% trans 'Delete' %}</a>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                {% endfor %}
+                                <div id="relatives_fields">
+                                </div>
+                                <div class="add-button">
+                                    <a href="#" class="add-relatives">{% trans 'Add' %}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab7">
+                        <div class="tab-form__main">
+                            <input type="hidden" id="experienceCount" name="experience_count" value="{{ employee.experience_set.count }}">
+                            <div class="form-title">
+                                <h2>{% trans 'Experience' %}</h2>
+                            </div>
+                            <div class="experience form-main" data-api="{% url 'api:directory:city:list' %}" data-form-url="{% url 'root.api.employee.update.3.experience' employee.id %}">
+                                {% for exp in employee.experience_set.all %}
+                                    <div class="experience-item experience-item__{{ forloop.counter }}" data-files-count="{{ exp.file.count }}">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="expOrg{{ forloop.counter }}">{% trans 'Organization' %}</label>
+                                                            <input name="exp_org_{{ forloop.counter }}" type="text" class="form-control" id="expOrg{{ forloop.counter }}" value="{{ exp.organization_ru }}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="expDateStarted{{ forloop.counter }}">{% trans 'Start date' %}</label>
+                                                            <input name="exp_date_started_{{ forloop.counter }}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="expDateStarted{{ forloop.counter }}" value="{{ exp.date_started|date:'d.m.Y' }}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="expDateFinished{{ forloop.counter }}">{% trans 'End date' %}</label>
+                                                            <input name="exp_date_finished_{{ forloop.counter }}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="expDateFinished{{ forloop.counter }}" value="{{ exp.date_finished|date:'d.m.Y' }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="expPosition{{ forloop.counter }}">{% trans 'Position' %}</label>
+                                                            <input name="exp_position_{{ forloop.counter }}" type="text" class="form-control" id="expPosition{{ forloop.counter }}" value="{{ exp.position_ru }}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="expSubDivision{{ forloop.counter }}">{% trans 'Subdivision' %}</label>
+                                                            <input name="exp_sub_division_{{ forloop.counter }}" type="text" class="form-control" id="expSubDivision{{ forloop.counter }}" value="{{ exp.sub_division_ru }}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="expAddress{{ forloop.counter }}">{% trans 'Address' %}</label>
+                                                            <input name="exp_address_{{ forloop.counter }}" list="expAddressRegion_list{{ forloop.counter }}" type="text" class="form-control" id="expAddress{{ forloop.counter }}" value="{{ exp.address_ru }}" autocomplete="off">
+                                                            <datalist class="region-list" id="expAddressRegion_list{{ forloop.counter }}">
+                                                            </datalist>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="experience-file__upload op3-file__upload form-group">
+                                                    <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                                    <input type="file"
+                                                           class="filepondExperience{{ forloop.counter }}"
+                                                           name="filepond_experience_{{ forloop.counter }}"
+                                                           label-idle="{% trans 'Upload file' %}"
+                                                           multiple
+                                                           data-max-file-size="3MB"
+                                                           data-max-files="4"
+                                                           {% for file in exp.file.all %}
+                                                               data-file-url-{{ forloop.counter }}="{{ file.file.url }}"
+                                                               data-file-name-{{ forloop.counter }}="{{ file.file.name }}"
+                                                               data-file-size-{{ forloop.counter }}="{{ file.file.size }}"
+                                                           {% endfor %}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="delete-button">
+                                            <a href="javascript:void(null)" class="deleteButton">{% trans 'Delete' %}</a>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                {% endfor %}
+                                <div id="experience_fields">
+                                </div>
+                                <div class="add-button">
+                                    <a href="#" class="add-experience">{% trans 'Add' %}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-send__buttons">
+                            <div class="form-send__button">
+                                <button id="root-employee-update3-button" type="submit">{% trans 'Save' %}</button>
+                            </div>
+                            <div class="form-reset__buttton">
+                                <button type="reset">{% trans 'Clear' %}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block sideRight %}
+    <div class="sideRight">
+        <div class="help-block">
+            <div class="help-block__icon">
+                <a href="#">
+                    <i class="fa fa-book" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <div class="bx-informer">
+            <div class="bx-im-informer-icon">
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right animated flipInY">
+                        <ul class="dropdown-not">
+                            <li>
+                                <a href="{% url 'operator:4.employees' %}">{% trans 'List of employees' %}</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="operator2Notification">
+                    <span id="notification-counter">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="bx-informer">
+            <div class="bx-im-informer-icon" style="background: #05b5ab;">
+                <a href="{% url 'operator:4.employees' %}" title="{% trans 'List of employees' %}">
+                    <i class="fa fa-list-alt" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <div class="bx-search">
+            <div class="bx-im-search-icon">
+                <a href="#">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'operator/js/filepond/filepond-plugin-file-encode.min.js' %}"></script>
+    <script src="{% static 'operator/js/filepond/filepond-plugin-file-validate-size.min.js' %}"></script>
+    <script src="{% static 'operator/js/filepond/filepond-plugin-image-exif-orientation.min.js' %}"></script>
+    <script src="{% static 'operator/js/filepond/filepond-plugin-image-preview.min.js' %}"></script>
+    <script src="{% static 'operator/js/filepond/filepond.min.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+            $("#search").focus(function() {
+                $(".search-box").addClass("border-searching");
+                $(".search-icon").addClass("si-rotate");
+            });
+            $("#search").blur(function() {
+                $(".search-box").removeClass("border-searching");
+                $(".search-icon").removeClass("si-rotate");
+            });
+            $("#search").keyup(function() {
+                if($(this).val().length > 0) {
+                    $(".go-icon").addClass("go-in");
+                }
+                else {
+                    $(".go-icon").removeClass("go-in");
+                }
+            });
+            $(".go-icon").click(function(){
+                $(".search-form").submit();
+            });
+
+
+        });
+
+        const MONTHS = {
+            0: 'Jan',
+            1: 'Feb',
+            2: 'Mar',
+            3: 'Apr',
+            4: 'May',
+            5: 'Jun',
+            6: 'Jul',
+            7: 'Aug',
+            8: 'Sep',
+            9: 'Oct',
+            10: 'Nov',
+            11: 'Dec'
+        };
+        let showTime = true;
+
+        function addZero(val) {
+            return val < 10 ? '0' + val : val;
+        }
+
+        function refresh() {
+            let now = new Date();
+            if (showTime) {
+                let time = [now.getHours(), now.getMinutes(), now.getSeconds()];
+                time.forEach(function(val, index, arr) {
+                    arr[index] = addZero(val);
+                });
+
+                let time_str = time.join(":");
+                //document.title = time_str;
+                document.getElementById('time').innerHTML = time_str;
+            } else {
+                let date = [addZero(now.getDate()), MONTHS[now.getMonth()], now.getFullYear().toString().slice(2, 4)];
+                let date_str = date.join(" ");
+                //document.title = date_str;
+                document.getElementById('time').innerHTML = date_str;
+            }
+        }
+
+        refresh();
+        setInterval(refresh, 1000);
+
+        document.getElementById('time').addEventListener('click', function() {
+            showTime = !showTime;
+            refresh();
+        });
+    </script>
+    <script src="{% static 'operator/js/employee_update/op3.js' %}"></script>
+{% endblock %}

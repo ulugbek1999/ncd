@@ -1,0 +1,89 @@
+{% extends 'root/_base.html' %}
+{% load static i18n %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% trans 'Countries' %}</h2>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{% trans 'Add' %}</h2>
+        </div>
+        <div class="card-main__content">
+            <form class="operator-add__form">
+                <div class="col-md-4">
+                    <div class="operators-form__item">
+                        <div class="form-title">
+                            <h2>{% trans 'Country name' %}</h2>
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'Russian' %}</label>
+                            <input name="name_ru" type="text" class="form-control" id="" autocomplete="off" value="{{ country.name_ru }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'English' %}</label>
+                            <input name="name_en" type="text" class="form-control" id="" autocomplete="off" value="{{ country.name_en }}">
+                        </div>
+                    </div>
+                    <div class="operators-button form-send__buttons">
+                        <div class="form-send__button">
+                            <button type="submit" id="formSendButton" data-url="{% url 'api:admin:directory:country.update' country.id %}">{% trans 'Save' %}</button>
+                        </div>
+                        <div class="form-reset__buttton">
+                            <button type="reset">{% trans 'Clear' %}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="operators-form__item">
+                        <div class="form-title">
+                            <h2>{% trans 'Score' %}</h2>
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'Score' %}</label>
+                            <input name="score" type="number" class="form-control" id="" autocomplete="off" value="{{ country.score }}">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(function () {
+            $("#formSendButton").click(function (e) {
+                e.preventDefault();
+                let $formData = new FormData();
+                $formData.append("name_ru", $("input[name='name_ru']").val());
+                $formData.append("name_en", $("input[name='name_en']").val());
+
+                $formData.append("score", $("input[name='score']").val());
+
+                $.ajax({
+                    url: $(this).data("url"),
+                    type: "PUT",
+                    data: $formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        var x = document.getElementById("mainSuccess");
+                        x.className = "show";
+                        setTimeout(function(){
+                            x.className = x.className.replace("show", "");
+                            window.location.href = "{% url 'root.directory.country.list' %}";
+                        }, 1500);
+                    },
+                    error: function (data) {
+                        var x = document.getElementById("mainError");
+
+                        x.className = "show";
+                        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

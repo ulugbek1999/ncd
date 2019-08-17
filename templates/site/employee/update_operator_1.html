@@ -1,0 +1,168 @@
+{% extends 'site/_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load thumbnail %}
+{% load get_json_value %}
+
+
+{% block css %}
+
+{% endblock %}
+{% block content %}
+    <section class="profile">
+        <div class="container">
+            <div class="row">
+                <div class="profile-main">
+                    <div class="content-title">
+                        <h2>Личные данные</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="profile-side">
+                                <div class="profile-side__title">
+                                    <h2>Личный кабинет</h2>
+                                </div>
+                                <nav class="nav_personal d-lnk-txt">
+                                    <ul>
+                                        <li class="">
+                                            <a href="#"><i class="fa fa-user"></i> Мой профиль</a>
+                                        </li>
+
+                                        <li class="">
+                                            <a href=""><i class="fa fa-book"></i> Курсы </a></li>
+                                        <li class="">
+
+                                    </ul>
+                                    <div class="nav_personal__footer">
+                                        <a href="#"> Выйти</a>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+
+                            <div class="profile-content">
+                                <div class="employee-detail">
+                                    <div class="row">
+                                        <form name="employee_update" id="employee_update">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="nameEn">Ф.И.О (англ)</label>
+                                                    <input name="full_name_en" type="text" class="form-control" id="nameEn" placeholder="{% json_value employee 'full_name_en' 'current' %}" autocomplete="off">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="nameRu">Ф.И.О (рус)</label>
+                                                    <input name="full_name_ru" type="text" class="form-control" id="nameRu" placeholder="{% json_value employee 'full_name_ru' 'current' %}" autocomplete="off">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="passportSerial">№ Паспорта</label>
+                                                    <input name="passport_serial" type="text" class="form-control" id="passportSerial" placeholder="{% json_value employee 'passport_serial' 'current' %}" autocomplete="off">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="passportGivenDate">Дата выдачи</label>
+                                                    <input name="passport_given_date" type="text" class="form-control" id="passportGivenDate" placeholder="{% json_value employee 'passport_given_date' 'current' %}" autocomplete="off">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="passportExpires">Срок действия</label>
+                                                    <input name="passport_expires" type="text" class="form-control" id="passportExpires" placeholder="{% json_value employee 'passport_expires' 'current' %}" autocomplete="off">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">{% trans 'Gender' %}</label>
+                                                    <div class="radio-group">
+                                                        <input type="radio" id="gender_male" name="gender" value="m" {% if employee.gender == "m" %} checked{% endif %}>
+                                                        <label for="gender_male">
+                                                            <img src="/static/site/images/man.svg" alt="">
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio-group">
+                                                        <input type="radio" id="gender_female" name="gender" value="f" {% if employee.gender == "f" %} checked{% endif %}>
+                                                        <label for="gender_female">
+                                                            <img src="/static/site/images/woman.svg" alt="">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="inn">ИНН</label>
+                                                    <input name="inn" type="text" class="form-control" id="inn" placeholder="{% json_value employee 'inn' 'current' %}" autocomplete="off">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="birthPlace">Место рождения</label>
+                                                    <input name="birth_place_ru" type="text" class="form-control" id="birthPlace" placeholder="{% json_value employee 'birth_place_ru' 'current' %}" autocomplete="off">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="livingAddress">Место проживания</label>
+                                                    <input name="lives_at_ru" type="text" class="form-control" id="livingAddress" placeholder="{% json_value employee 'lives_at_ru' 'current' %}" autocomplete="off">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="phone">Номер телефона</label>
+                                                    <input name="phone" type="text" class="form-control" id="phone" placeholder="{% json_value employee 'phone' 'current' %}" autocomplete="off">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="email">Эл.почта</label>
+                                                    <input name="email" type="text" class="form-control" id="email" placeholder="{% json_value employee 'email' 'current' %}" autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12" style="text-align: center;">
+                                                <button id="employeeEditButton" class="loginButton" data-api="{% url 'api:employee.update.1-employee' employee.id %}" type="submit">
+                                                    Отправить
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+    <script>
+
+        $("#employeeEditButton").click(function(event){
+            event.preventDefault();
+
+            let formData = new FormData();
+
+            formData.append("full_name_en", $("#nameEn").val());
+            formData.append("full_name_ru", $("#nameRu").val());
+            /*formData.append("birth_date", $("#birthDate").val());*/
+            formData.append("phone", $("#phone").val());
+            formData.append("email", $("#email").val());
+            formData.append("gender", $("input[name='gender']:checked").val());
+            formData.append("passport_serial", $("#passportSerial").val());
+            formData.append("passport_given_date", $("#passportGivenDate").val());
+            formData.append("passport_expires", $("#passportExpires").val());
+            formData.append("inn", $("#inn").val());
+            formData.append("birth_place_ru", $("#birthPlace").val());
+            formData.append("lives_at_ru", $("#livingAddress").val());
+
+            /*var object = {};
+            formData.forEach((value, key) => {object[key] = value});
+            var jsonData = JSON.stringify(object);
+
+            console.log(jsonData);*/
+
+            $.ajax({
+                url: $(this).data('api'),
+                data: formData,
+                processData: false,
+                contentType: false,
+                type: "PUT",
+                success: function (data) {
+                    alert('Success');
+                },
+                error: function (data) {
+                    alert('error');
+                },
+            });
+        });
+    </script>
+{% endblock %}

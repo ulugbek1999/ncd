@@ -1,0 +1,239 @@
+{% extends 'root/_base.html' %}
+{% load static i18n get_json_value %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% trans 'Partners' %}</h2>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{{ partner.company_name }}</h2>
+        </div>
+        <div class="card-main__content">
+            <div id="exTabPartners" class="partner-profile">
+                <ul  class="nav nav-pills">
+                    <li class="active">
+                        <a  href="#1a" data-toggle="tab">{% trans 'Additional information' %}</a>
+                    </li>
+                    <li>
+                        <a href="#2a" data-toggle="tab">{% trans 'Account' %}</a>
+                    </li>
+                    <li>
+                        <a href="#3a" data-toggle="tab">{% trans 'Documents' %}</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content clearfix">
+                    <div class="tab-pane active" id="1a">
+                        <form class="partners-add__form">
+                            <div class="col-md-8">
+                                <div class="partners-form__item">
+                                    <div class="form-title">
+                                        <h2>{% trans 'Additional information' %}</h2>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="companyName">{% trans 'Company name' %}</label>
+                                                <input name="company_name" type="text" class="form-control" id="companyName" value="{{ partner.company_name }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="regNumber">{% trans 'Reg.number' %}</label>
+                                                <input name="reg_number" type="text" class="form-control" id="regNumber" value="{{ partner.register_number }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nameBoss">{% trans 'Fullname' %} ({% trans 'first head' %})</label>
+                                                <input name="name_boss" type="text" class="form-control" id="nameBoss" value="{{ partner.boss_fullname }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nameLast">{% trans 'Fullname' %} ({% trans 'responsible person' %})</label>
+                                                <input name="name_last" type="text" class="form-control" id="nameLast" value="{{ partner.person_fullname_for_hiring }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="email">{% trans 'Email' %}</label>
+                                                <input name="email" type="text" class="form-control" id="email" value="{{ partner.email }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="phone">{% trans 'Phone' %}</label>
+                                                <input name="phone" type="text" class="form-control" id="phone" value="{{ partner.phone }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="address">{% trans 'Legal address' %}</label>
+                                                <input name="address" type="text" class="form-control" id="address" value="{{ partner.legal_address }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="count">{% trans 'Workers amount' %}</label>
+                                                <input name="count" type="number" class="form-control" id="count" value="{{ partner.workers_amount }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="partners-button form-send__buttons">
+                                    <div class="form-send__button" id="formSendButton">
+                                        <button type="submit" id="partners-update-button" data-url="{% url 'admin.api.partner.update' partner.id %}">{% trans 'Save' %}</button>
+                                    </div>
+                                    <div class="form-reset__buttton">
+                                        <button type="reset">{% trans 'Clear' %}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane" id="2a">
+                        <form class="partners-account__form">
+                            <div class="col-md-4">
+                                <div class="partners-form__item">
+                                    <div class="form-title">
+                                        <h2>{% trans 'Account' %}</h2>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username">{% trans 'Username' %}</label>
+                                        <input name="username" type="text" class="form-control" id="username" value="{{ partner.user.username }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">{% trans 'Password' %}</label>
+                                        <input name="password" type="password" class="form-control" id="password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password_confirm">{% trans 'Password confirm' %}</label>
+                                        <input name="password_confirm" type="password" class="form-control" id="password_confirm">
+                                    </div>
+                                </div>
+                                <div class="partners-button form-send__buttons">
+                                    <div class="form-send__button" id="formSendButton">
+                                        <button type="submit" id="partners-account-button" data-url="{% url 'api:admin:partner:change-account' partner.id %}">{% trans 'Save' %}</button>
+                                    </div>
+                                    <div class="form-reset__buttton">
+                                        <button type="reset">{% trans 'Clear' %}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane" id="3a">
+                        <div class="partners-docs">
+                            <div class="form-title">
+                                <h2>{% trans 'Documents' %}</h2>
+                            </div>
+                            <div class="partners-docs__main">
+                                <div class="files-view">
+                                    <ul class="files-view__main">
+                                        {% for file in partner.partnerfile_set.all %}
+                                            <li>
+                                                <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                <span>{{ file.file.size|filesizeformat }} KB</span>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $('#phone').inputmask({ mask: "+[d]{15}", greedy: false});
+        $(function () {
+            $("#partners-update-button").click(function (e) {
+                e.preventDefault();
+                let $formData = new FormData();
+
+                $formData.append("company_name", $("input[name='company_name']").val());
+                $formData.append("register_number", $("input[name='reg_number']").val());
+                $formData.append("boss_fullname", $("input[name='name_boss']").val());
+                $formData.append("person_fullname_for_hiring", $("input[name='name_last']").val());
+
+                $formData.append("email", $("input[name='email']").val());
+                $formData.append("phone", $("input[name='phone']").val());
+                $formData.append("legal_address", $("input[name='address']").val());
+                $formData.append("workers_amount", $("input[name='count']").val());
+
+                $.ajax({
+                    url: $(this).data("url"),
+                    type: "PUT",
+                    data: $formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        var x = document.getElementById("mainSuccess");
+                        x.className = "show";
+                        setTimeout(function(){
+                            x.className = x.className.replace("show", "");
+                            window.location.href = '/root/partners/';
+                        }, 1500);
+                    },
+                    error: function (data) {
+                        var x = document.getElementById("mainError");
+                        let message = data.responseJSON;
+                        console.log(message);
+                        if(message.company_name){
+                            $("#mainError").text(message.company_name);
+                        }else if(message.reg_number){
+                            $("#mainError").text(message.register_number);
+                        }else if(message.boss_fullname){
+                            $("#mainError").text(message.boss_fullname);
+                        }else if(message.person_fullname_for_hiring){
+                            $("#mainError").text(message.person_fullname_for_hiring);
+                        }else if(message.email){
+                            $("#mainError").text(message.email);
+                        }else if(message.phone){
+                            $("#mainError").text(message.phone);
+                        }else if(message.legal_address){
+                            $("#mainError").text(message.legal_address);
+                        }else if(message.workers_amount){
+                            $("#mainError").text(message.workers_amount);
+                        }
+
+                        x.className = "show";
+                        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                    }
+                });
+            });
+
+            $("#partners-account-button").click(function (e) {
+                e.preventDefault();
+
+                let $formData = new FormData();
+                $formData.append("username", $("input[name='username']").val());
+                $formData.append("password", $("input[name='password']").val());
+                $formData.append("password_confirm", $("input[name='password_confirm']").val());
+
+                $.ajax({
+                    url: $(this).data("url"),
+                    type: "POST",
+                    data: $formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        var x = document.getElementById("mainSuccess");
+                        x.className = "show";
+                        setTimeout(function(){
+                            x.className = x.className.replace("show", "");
+                            window.location.href = '/root/partners/';
+                        }, 1500);
+                    },
+                    error: function (data) {
+                        var x = document.getElementById("mainError");
+                        /*let message = data.responseJSON;
+                        console.log(message);
+
+                        if(message.username){
+                            $("#mainError").text(message.username);
+                        }*/
+                        x.className = "show";
+                        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                    }
+                });
+            });
+
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'root/_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% trans 'Logs' %}</h2>
+    </div>
+    <div class="card-main">
+        <div class="card-main__content">
+            <div class="search-form__app">
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="search-results__main">
+                <div class="table-main table-logs">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr class="table-row">
+                            <th class="td-id">№</th>
+                            <th class="td-name">{% trans 'Operator' %}</th>
+                            <th class="td-name">{% trans 'Act' %}</th>
+                            <th class="td-name">{% trans 'Employee' %}</th>
+                            <th class="td-region">{% trans 'Time' %}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for log in logs %}
+                            <tr class="table-row">
+                                <td class="td-id">{{ log.id }}</td>
+                                <td class="td-name">{{ log.operator.fullname }}</td>
+                                <td class="td-name">{% trans log.action %}</td>
+                                <td class="td-name">{{ log.employee.full_name_ru }}</td>
+                                <td class="td-region">{{ log.created|date:"Y-m-d H:i" }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% if is_paginated %}
+                        <div class="pagination-main">
+                            <ul class="pagination">
+                                {% if page_obj.has_previous %}
+                                    <li><a href="?{{ page_obj.previous_page_number.querystring }}" class="prev">&lsaquo;&lsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled prev">&lsaquo;&lsaquo;</span></li>
+                                {% endif %}
+                                {% for page in page_obj.pages %}
+                                    {% if page %}
+                                        {% ifequal page page_obj.number %}
+                                            <li><span class="current page">{{ page }}</span></li>
+                                        {% else %}
+                                            <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                        {% endifequal %}
+                                    {% else %}
+                                        ...
+                                    {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                    <li><a href="?{{ page_obj.next_page_number.querystring }}" class="next">&rsaquo;&rsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled next">&rsaquo;&rsaquo;</span></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'operator/js/root/search.js' %}"></script>
+{% endblock %}

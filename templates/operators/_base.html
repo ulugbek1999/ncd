@@ -1,0 +1,208 @@
+{% load static i18n %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NCD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{% static 'operator/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'operator/bootstrap/bootstrap-select/css/bootstrap-select.min.css' %}" rel="stylesheet">
+    <link href="{% static 'operator/fonts/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'operator/js/datepicker/bootstrap-datepicker.css' %}" />
+    {% block css %}
+    
+    {% endblock %}
+    <!-- styles -->
+    <link href="{% static 'operator/css/alerty.css' %}" rel="stylesheet">
+    <link href="{% static 'operator/css/styles.css' %}" rel="stylesheet">
+    <link href="{% static 'operator/css/media.css' %}" rel="stylesheet">
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static 'operator/js/jquery.js' %}"></script>
+    <script src="{% static 'operator/js/csrf.js' %}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'operator/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'operator/js/jquery.inputmask.bundle.js' %}"></script>
+    <script src="{% static 'operator/bootstrap/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
+    <script src="{% static 'operator/js/datepicker/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'operator/js/alerty.js' %}"></script>
+</head>
+<body>
+
+<section class="page-content">
+    <div class="sidebar">
+        <div class="sidebar-box">
+            <div class="sidebar-header">
+                <div class="hader-logo">
+                    <img src="/static/operator/images/logo.svg" alt="">
+                </div>
+            </div>
+{#            <div class="sidebar-menu">#}
+{#                <ul class="nav">#}
+{#                    <!-- Main menu -->#}
+{#                    <li class="current"><a href="{% url 'operator-1' %}"><span>Оператор 1</span></a></li>#}
+{#                    <li class="current"><a href="{% url 'operator:3.1employees' %}"><span>Оператор 2</span></a></li>#}
+{#                    <li class="current"><a href="{% url 'operator:3.employees' %}"><span>Оператор 3</span></a></li>#}
+{#                    <li class="current"><a href="{% url 'operator:4.employees' %}"><span>Оператор 4</span></a></li>#}
+{#                    <!--<li class="current"><a href="#"><span>Сотрудники</span></a></li>#}
+{#                    <li class="current"><a href="#"><span>Календарь</span></a></li>#}
+{#                    <li class="current"><a href="#"><span>Компания</span></a></li>#}
+{#                    <li class="current"><a href="#"><span>CRM</span></a></li>-->#}
+{#                    <li class="current"><a href="{% url 'operator-1.stat' %}"><span>Статистика</span></a></li>#}
+{#                </ul>#}
+{#            </div>#}
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-box">
+            <div class="content-header">
+                <div class="row">
+                    <!--<div class="col-md-5">
+                        <div class="content-header__left">
+                            <div class="search-box">
+                                <svg style="display: none">
+                                    <symbol id="magnify" viewBox="0 0 18 18" height="100%" width="100%">
+                                        <path d="M12.5 11h-.8l-.3-.3c1-1.1 1.6-2.6 1.6-4.2C13 2.9 10.1 0          6.5 0S0 2.9 0 6.5 2.9 13 6.5 13c1.6 0 3.1-.6 4.2-1.6l.3.3v.8l5 5          1.5-1.5-5-5zm-6 0C4 11 2 9 2 6.5S4 2 6.5 2 11 4 11 6.5 9 11 6.5            11z" fill="#fff" fill-rule="evenodd"/>
+                                    </symbol>
+                                </svg>
+                                <div class="search-bar">
+                                    <input type="text" class="input" placeholder="&nbsp;">
+                                    <span class="label">Поиск</span>
+                                    <span class="highlight"></span>
+                                    <div class="search-btn">
+                                        <svg class="icon icon-18">
+                                            <use xlink:href="#magnify"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="col-md-12">
+                        <div class="content-header__right">
+                            <div class="content-header__time">
+                                <h2 id="time"></h2>
+                            </div>
+                            <div class="content-header__user">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-user fa-fw"></i> <span>{{ request.user.username }}</span> <i class="fa fa-caret-down"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li>
+                                        <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-gear fa-fw"></i> {% trans 'Settings' %}</a>
+                                    </li>
+{#                                    <li>#}
+{#                                        <a href="#"><i class="fa fa-user fa-fw"></i> {% trans 'Profile' %}</a>#}
+{#                                    </li>#}
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="{% url 'auth.signout' %}"><i class="fa fa-sign-out fa-fw"></i> {% trans 'Logout' %}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            {% block content %}
+
+            {% endblock %}
+        </div>
+        <footer>
+            <div class="footer-main">
+                <div class="copy">
+                    © «NCD CRM v1.0», 2019
+                </div>
+                <div class="dev">
+                    {% trans 'Developed by' %}: <a href='#'>Online Service Group</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    {% block sideRight %}
+
+    {% endblock %}
+
+    <div class="clearfix"></div>
+    <div id="mainSuccess">{% trans 'Saved successfully' %}</div>
+    <div id="mainError">{% trans 'An error has occurred' %}</div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog change-password">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{% trans 'Change password' %}</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="form-group">
+                            <label for="newLogin">{% trans 'New login' %}</label>
+                            <input name="new_login" type="text" class="form-control" id="newLogin">
+                        </div>
+                        <div class="form-group">
+                            <label for="newPass">{% trans 'New password' %}</label>
+                            <input name="new_pass" type="password" class="form-control" id="newPass">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPass">{% trans 'Password confirm' %}</label>
+                            <input name="conf_pass" type="password" class="form-control" id="confirmPass">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="changePassButton" data-url="wtf" type="button" class="btn btn-default">{% trans 'Save' %}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+$(document).ready(function(){
+    $('#changePassButton').click(function () {
+        event.preventDefault();
+        let $formData = new FormData();
+        let url = $(this).data("url");
+
+        $formData.append("username", $("#newLogin").val());
+        $formData.append("password", $("#newPass").val());
+        $formData.append("password_confirm", $("#confirmPass").val());
+
+        $.ajax({
+            url: "{% url 'api:admin:operator:operator.username.password' request.user.id %}",
+            data: $formData,
+            type: "POST",
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                var x = document.getElementById("mainSuccess");
+                x.className = "show";
+                setTimeout(function(){
+                    x.className = x.className.replace("show", "");
+                    location.reload();
+                }, 1500);
+            },
+            error: function (data) {
+                var x = document.getElementById("mainError");
+
+                x.className = "show";
+                setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            },
+        });
+    });
+});
+</script>
+{% block js %}{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,567 @@
+﻿{% extends 'operators/_base.html' %}
+{% load static i18n %}
+
+{% block css %}
+    <link href="{% static 'operator/js/filepond/filepond-plugin-image-preview.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'operator/js/filepond/filepond.min.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% trans 'Register employee' %}</h2>
+        <span>№: {{ employee.register_number }}</span>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{% trans "Employee's personal card" %}</h2>
+        </div>
+        <div class="operator3-tab__main card-main__content">
+            <form>
+                <ul class="nav nav-tabs nav-stacked">
+                    <li class="active"><a href="#tab1" data-toggle="tab"><img src="{% static 'operator/images/graduation-hat-and-diploma.svg' %}"> <span>{% trans 'Education' %}</span></a></li>
+                    <li><a href="#tab2" data-toggle="tab"><img src="{% static 'operator/images/language.svg' %}"> <span>{% trans 'Knowledge of languages' %}</span></a></li>
+                    <li><a href="#tab3" data-toggle="tab"><img src="{% static 'operator/images/military.svg' %}"> <span>{% trans 'Military service' %}</span></a></li>
+                    <li><a href="#tab4" data-toggle="tab"><img src="{% static 'operator/images/first-prize-trophy.svg' %}"> <span>{% trans 'Received Awards' %}</span></a></li>
+                    <li><a href="#tab5" data-toggle="tab"><img src="{% static 'operator/images/family-group.svg' %}"> <span>{% trans 'Family status' %}</span></a></li>
+                    <li><a href="#tab6" data-toggle="tab"><img src="{% static 'operator/images/qarindoshlar.svg' %}"> <span>{% trans 'Relatives' %}</span></a></li>
+                    <li><a href="#tab7" data-toggle="tab"><img src="{% static 'operator/images/achievement.svg' %}"> <span>{% trans 'Experience' %}</span></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade active in" id="tab1">
+                        <div class="tab-form__main">
+                            <div class="form-title">
+                                <h2>{% trans 'Education' %}</h2>
+                            </div>
+                            <div class="education form-main" data-api="{% url 'api:directory:education-type:list' %}">
+                                <input type="hidden" id="educationCount" name="education_count" value="1">
+                                <div class="education-item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="eduType1">{% trans 'Education type' %}</label>
+                                                <select class="form-control selectpicker show-tick" name="edu_type_1" id="eduType1">
+                                                    <option value="">{% trans 'Select' %}</option>
+                                                    {% for type in education_types %}
+                                                        <option value="{{ type.id }}">{{ type.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="eduName1">{% trans 'Education name' %}</label>
+                                                <input name="edu_name_1" type="text" class="form-control" id="eduName1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="eduAddress1">{% trans 'Education address' %}</label> <!-- TODO city list -->
+                                                <input name="edu_address_1" list="eduRegion_list1" type="text" class="form-control" id="eduAddress1" autocomplete="off">
+                                                <datalist class="region-list" id="eduRegion_list1">
+                                                </datalist>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="eduSpec1">{% trans 'Education specialization' %}</label>
+                                                <input name="edu_spec_1" type="text" class="form-control" id="eduSpec1">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="eduStartDate1">{% trans 'Education date start' %}</label>
+                                                <input name="edu_start_date_1" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="eduStartDate1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="eduGradDate1">{% trans 'Education date end' %}</label>
+                                                <input name="edu_grad_date_1" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="eduGradDate1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="eduAddit1">{% trans 'Education other' %}</label>
+                                                <input name="edu_addit_1" type="text" class="form-control" id="eduAddit1">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="education-file__upload op3-file__upload form-group">
+                                                <label for="">{% trans 'Files' %} <i>({% trans 'not required' %})</i></label>
+                                                <input type="file"
+                                                   class="filepondEducation"
+                                                   name="filepond_education_1"
+                                                   label-idle="{% trans 'Upload files' %}"
+                                                   multiple
+                                                   data-max-file-size="3MB"
+                                                   data-max-files="4" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="education_fields">
+
+                                </div>
+                                <div class="add-button">
+                                    <a href="#" class="add-education">{% trans 'Add' %}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab2">
+                        <div class="tab-form__main">
+                            <div class="form-title">
+                                <h2>{% trans 'Knowledge of languages' %}</h2>
+                            </div>
+                            <div class="language form-main"  data-api="{% url 'api:directory:language:list' %}">
+                                <input type="hidden" id="languageCount" name="language_count" value="1">
+                                <div class="language-item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="langName1">{% trans 'Language name' %}</label>
+                                                <select id="langName1" class="form-control selectpicker show-tick" name="lang_name_1" >
+                                                    <option value="">{% trans 'Select' %}</option>
+                                                    {% for language in languages %}
+                                                        <option value="{{ language.id }}">{{ language.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="langLevel1">{% trans 'Language level' %}</label>
+                                                <select id="langLevel1" class="form-control selectpicker show-tick" name="lang_level_1">
+                                                    <option value="">{% trans 'Select' %}</option>
+                                                    <option value="1">{% trans 'Excellent' %}</option>
+                                                    <option value="2">{% trans 'Good' %}</option>
+                                                    <option value="3">{% trans 'Not bad' %}</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <input name="lang_required_1" type="checkbox" class="form-control" id="langRequired1">
+                                                <label for="langRequired1">{% trans 'Required to check' %}</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="language-file__upload op3-file__upload form-group">
+                                                <label for="">{% trans 'Files' %} <i>({% trans 'not required' %})</i></label>
+                                                <input type="file"
+                                                   class="filepondLanguage"
+                                                   name="filepond_language_1"
+                                                   label-idle="{% trans 'Upload files' %}"
+                                                   multiple
+                                                   data-max-file-size="3MB"
+                                                   data-max-files="4" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="language_fields">
+                                </div>
+                                <div class="add-button">
+                                    <a href="#" class="add-language">{% trans 'Add' %}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab3">
+                        <div class="tab-form__main">
+                            <div class="form-title">
+                                <h2>{% trans 'Military service' %}</h2>
+                            </div>
+                            <div class="military form-main" data-api="{% url 'api:directory:city:list' %}">
+                                <input type="hidden" id="armyCount" name="military_count" value="1">
+                                <div class="military-item">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>{% trans 'Military duty' %}</label>
+                                                        <div class="form-group radio-form">
+                                                            <div class="radio-group">
+                                                                <input type="radio" id="military_duty_1" name="military_duty" value="true" >
+                                                                <label for="military_duty_1">
+                                                                    <span>{% trans 'Yes' %}</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="radio-group">
+                                                                <input type="radio" id="military_duty_2" name="military_duty" value="false">
+                                                                <label for="military_duty_2">
+                                                                    <span>{% trans 'No' %}</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="milName1">{% trans 'Military name' %}</label>
+                                                                        <input name="mil_name_1" type="text" class="form-control" id="milName1">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="milRegion1">{% trans 'Military region' %}</label>
+                                                                        <input name="mil_region_1" list="milRegion_list1" type="text" class="form-control" id="milRegion1" autocomplete="off">
+                                                                        <datalist class="region-list" id="milRegion_list1">
+                                                                        </datalist>
+
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="milSpecialization1">{% trans 'Military specialization' %}</label>
+                                                                        <input name="mil_specialization_1" type="text" class="form-control" id="milSpecialization1">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="milDateStarted1">{% trans 'Military date start' %}</label>
+                                                                        <input name="mil_date_started_1" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="milDateStarted1">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="milDateGraduated1">{% trans 'Military date end' %}</label>
+                                                                        <input name="mil_date_graduated_1" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="milDateGraduated1">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="milRank1">{% trans 'Military rank' %}</label>
+                                                                        <input name="mil_rank_1" type="text" class="form-control" id="milRank1">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="military-file__upload op3-file__upload form-group">
+                                                                <label for="">{% trans 'Files' %} <i>({% trans 'not required' %})</i></label>
+                                                                <input type="file"
+                                                                   class="filepondMilitary"
+                                                                   name="filepond_military_1"
+                                                                   label-idle="{% trans 'Upload files' %}"
+                                                                   multiple
+                                                                   data-max-file-size="3MB"
+                                                                   data-max-files="4" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="military_fields">
+                                </div>
+                                <div class="add-button">
+                                    <a href="#" class="add-military">{% trans 'Add' %}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab4">
+                        <div class="tab-form__main">
+                            <div class="form-title">
+                                <h2>{% trans 'Rewards' %}</h2>
+                            </div>
+                            <div class="received form-main">
+                                <input type="hidden" id="receivedCount" name="received_count" value="1">
+                                <div class="received-item">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label for="recName1">{% trans 'Reward name' %}</label>
+                                                <input name="rec_name_1" type="text" class="form-control" id="recName1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="recComment1">{% trans 'Reward comment' %}</label>
+                                                <textarea name="rec_comment_1" rows="4" class="form-control" id="recComment1"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="received-file__upload op3-file__upload form-group">
+                                                <label for="">{% trans 'Files' %} <i>({% trans 'not required' %})</i></label>
+                                                <input type="file"
+                                                   class="filepondReceived"
+                                                   name="filepond_receiveds_1"
+                                                   label-idle="{% trans 'Upload files' %}"
+                                                   multiple
+                                                   data-max-file-size="3MB"
+                                                   data-max-files="4" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="received_fields">
+                                </div>
+                                <div class="add-button">
+                                    <a href="#" class="add-received">{% trans 'Add' %}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab5">
+                        <div class="tab-form__main">
+                            <div class="marital-status form-main">
+                                <input type="hidden" id="maritalCount" name="marital_count" value="1">
+                                <div class="form-title">
+                                    <h2>{% trans 'Family status' %}</h2>
+                                </div>
+                                <div class="marital-status-item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="marStatus1">{% trans 'Family status' %}</label>
+                                                <select class="form-control selectpicker show-tick" name="mar_status_1" id="marStatus1">
+                                                    <option value="">{% trans 'Select' %}</option>
+                                                    <option value="1">{% trans 'Not married' %}</option>
+                                                    <option value="2">{% trans 'Married' %}</option>
+                                                    <option value="3">{% trans 'Divorce' %}</option>
+                                                    <option value="4">{% trans 'Widow' %}</option>
+                                                    <option value="5">{% trans 'Second marriage' %}</option>
+                                                    <option value="6">{% trans 'Civil marriage' %}</option>
+
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="childrenAmount1">{% trans 'Children amount' %}</label>
+                                                <select class="form-control selectpicker show-tick" name="children_amount_1" id="childrenAmount1">
+                                                    <option value="">{% trans 'Select' %}</option>
+                                                    <option value="0">{% trans 'No' %}</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">{% trans '4 more' %}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="marital-file__upload op3-file__upload form-group">
+                                                <label for="">{% trans 'Files' %} <i>({% trans 'not required' %})</i></label>
+                                                <input type="file"
+                                                   class="filepondMarital"
+                                                   name="filepond_marital"
+                                                   label-idle="{% trans 'Upload files' %}"
+                                                   multiple
+                                                   data-max-file-size="3MB"
+                                                   data-max-files="4" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div id="marital_fields">
+
+                                </div>
+                                <div class="add-button">
+                                    <a href="#" class="add-marital">Добавить</a>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab6">
+                        <div class="tab-form__main">
+                            <div class="relatives form-main">
+                                <input type="hidden" id="relativeCount" name="relative_count" value="1">
+                                <div class="form-title">
+                                    <h2>{% trans 'Relatives' %}</h2>
+                                </div>
+                                <div class="relatives-item">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="relLevel1">{% trans 'Relative level' %}</label>
+                                                        <select class="form-control selectpicker show-tick" name="rel_level_1" id="relLevel1">
+                                                            <option value="">{% trans 'Select' %}</option>
+                                                            <option value="1">{% trans 'Wife' %}</option>
+                                                            <option value="2">{% trans 'Husband' %}</option>
+                                                            <option value="3">{% trans 'Mother' %}</option>
+                                                            <option value="4">{% trans 'Father' %}</option>
+                                                            <option value="5">{% trans 'Son' %}</option>
+                                                            <option value="6">{% trans 'Daughter' %}</option>
+                                                            <option value="7">{% trans 'Grandmother' %}</option>
+                                                            <option value="8">{% trans 'Grandfather' %}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="relName1">{% trans 'Relative fullname' %}</label>
+                                                        <input name="rel_name_1" type="text" class="form-control" id="relName1">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="relBirthDate1">{% trans 'Relative birth date' %}</label>
+                                                        <input name="rel_birth_date_1" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="relBirthDate1">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="relStudyWorkPlace1">{% trans 'Relative work/education address' %}</label> <!-- TODO city list -->
+
+                                                        <input name="rel_study_work_place_1" list="relStudyRegion_list1" type="text" class="form-control" id="relStudyWorkPlace1" autocomplete="off">
+                                                        <datalist class="region-list" id="relStudyRegion_list1">
+                                                        </datalist>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="relPosition1">{% trans 'Relative position' %}</label>
+                                                        <input name="rel_position_1" type="text" class="form-control" id="relPosition1">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="relAddress1">{% trans 'Relative living address' %}</label> <!-- TODO city list -->
+
+                                                        <input name="rel_address_1" list="relAddressRegion_list1" type="text" class="form-control" id="relAddress1" autocomplete="off">
+                                                        <datalist class="region-list" id="relAddressRegion_list1">
+                                                        </datalist>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="relatives-file__upload op3-file__upload form-group">
+                                                <label for="">{% trans 'Files' %} <i>({% trans 'not required' %})</i></label>
+                                                <input type="file"
+                                                   class="filepondRelatives"
+                                                   name="filepond_relatives_1"
+                                                   label-idle="{% trans 'Upload files' %}"
+                                                   multiple
+                                                   data-max-file-size="3MB"
+                                                   data-max-files="4" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="relatives_fields">
+                                </div>
+                                <div class="add-button">
+                                    <a href="#" class="add-relatives">{% trans 'Add' %}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab7">
+                        <div class="tab-form__main">
+                            <input type="hidden" id="experienceCount" name="experience_count" value="1">
+                            <div class="form-title">
+                                <h2>{% trans 'Experiences' %}</h2>
+                            </div>
+                            <div class="experience form-main" data-api="{% url 'api:directory:city:list' %}">
+                                <div class="experience-item">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="expOrg1">{% trans 'Experience organization' %}</label>
+                                                        <input name="exp_org_1" type="text" class="form-control" id="expOrg1">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="expDateStarted1">{% trans 'Experience date start' %}</label>
+                                                        <input name="exp_date_started_1" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="expDateStarted1">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="expDateFinished1">{% trans 'Experience date end' %}</label>
+                                                        <input name="exp_date_finished_1" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="expDateFinished1">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="expPosition1">{% trans 'Experience position' %}</label>
+                                                        <input name="exp_position_1" type="text" class="form-control" id="expPosition1">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="expSubDivision1">{% trans 'Experience subdivision' %}</label>
+                                                        <input name="exp_sub_division_1" type="text" class="form-control" id="expSubDivision1">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="expAddress1">{% trans 'Experience address' %}</label> <!-- TODO city list -->
+                                                        <input name="exp_address_1" list="expAddressRegion_list1" type="text" class="form-control" id="expAddress1" autocomplete="off">
+                                                        <datalist class="region-list" id="expAddressRegion_list1">
+                                                        </datalist>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="experience-file__upload op3-file__upload form-group">
+                                                <label for="">{% trans 'Files' %} <i>({% trans 'not required' %})</i></label>
+                                                <input type="file"
+                                                   class="filepondExperience"
+                                                   name="filepond_experience_1"
+                                                   label-idle="{% trans 'Upload files' %}"
+                                                   multiple
+                                                   data-max-file-size="3MB"
+                                                   data-max-files="4" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="experience_fields">
+                                </div>
+                                <div class="add-button">
+                                    <a href="#" class="add-experience">{% trans 'Add' %}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-send__buttons">
+                            <div class="form-send__button">
+                                <button id="form3SendButton" data-url="{% url 'api:operator3:employee.create' employee.id %}" type="submit">{% trans 'Save' %}</button>
+                            </div>
+                            <div class="form-reset__buttton">
+                                <button type="reset">{% trans 'Clear' %}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block sideRight %}
+    <div class="sideRight">
+            <div class="help-block">
+                <div class="help-block__icon">
+                    <a href="#">
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="bx-informer">
+                <div class="bx-im-informer-icon">
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right animated flipInY">
+                            <ul class="dropdown-not">
+                                <li>
+                                    <a href="{% url 'operator:3.employees' %}">{% trans 'List of employees' %}</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="operator2Notification">
+                        <span id="notification-counter">0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bx-informer">
+                <div class="bx-im-informer-icon" style="background: #05b5ab;">
+                    <a href="{% url 'operator:3.employees' %}" title="{% trans 'List of employees' %}">
+                        <i class="fa fa-list-alt" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="bx-search">
+                <div class="bx-im-search-icon">
+                    <a href="#">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'operator/js/filepond/filepond-plugin-file-encode.min.js' %}"></script>
+    <script src="{% static 'operator/js/filepond/filepond-plugin-file-validate-size.min.js' %}"></script>
+    <script src="{% static 'operator/js/filepond/filepond-plugin-image-exif-orientation.min.js' %}"></script>
+    <script src="{% static 'operator/js/filepond/filepond-plugin-image-preview.min.js' %}"></script>
+    <script src="{% static 'operator/js/filepond/filepond.min.js' %}"></script>
+
+    {% include 'operators/3/operator3_websocket.html' %}
+
+    <script src="{% static 'operator/js/stol/operator3.js' %}"></script>
+{% endblock %}

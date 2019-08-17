@@ -1,0 +1,206 @@
+{% extends 'root/_base.html' %}
+{% load static i18n root %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% trans 'Requests to change Personal Cards' %}</h2>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{% trans 'Filter' %}</h2>
+        </div>
+        <div class="card-main__content">
+            <div class="search-form__app">
+                <form action="">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">{% trans 'Fullname' %}</label>
+                            <input name="fullname" type="text" class="form-control" id="" value="{{ fullname }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="age">{% trans 'Age' %}</label>
+                            <input type="text" name="age" id="age" class="form-control" value="{{ age }}" maxlength="5">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">{% trans 'Gender' %}</label>
+                            <select class="form-control selectpicker show-tick" name="gender" id="">
+                                <option value="">{% trans 'Select' %}</option>
+                                <option value="m" {% if gender == 'm' %}selected{% endif %}>{% trans 'Male' %}</option>
+                                <option value="f" {% if gender == 'f' %}selected{% endif %}>{% trans 'Female' %}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Язык</label>
+                            <select class="form-control selectpicker show-tick" name="language" id="">
+                                <option value="">{% trans 'Select' %}</option>
+                                {% for lang in languages %}
+                                    <option value="{{ lang.id }}" {% if lang.id == language %}selected{% endif %}>{{ lang.name_ru }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="edu">{% trans 'Education' %}</label>
+                            <select class="form-control selectpicker show-tick" name="education" id="edu">
+                                <option value="">{% trans 'Select' %}</option>
+                                {% for edu in educations %}
+                                    <option value="{{ edu.id }}" {% if edu.id == education %}selected{% endif %}>{{ edu.name_ru }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'Category' %}</label>
+                            <select class="form-control selectpicker show-tick" name="category" id="edu">
+                                <option value="">{% trans 'Select' %}</option>
+                                <option value="A" {% if category == "A" %}selected{% endif %}>A</option>
+                                <option value="B" {% if category == "B" %}selected{% endif %}>B</option>
+                                <option value="C" {% if category == "C" %}selected{% endif %}>C</option>
+                                <option value="D" {% if category == "D" %}selected{% endif %}>D</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="search-buttons">
+                            <div class="form-search__button" id="">
+                                <button id="" type="submit">{% trans 'Search' %}</button>
+                            </div>
+                        </div>
+                        <div class="add-buttons">
+                            <div class="deletePart-buttons" style="margin-top: 45px;">
+                                <button id="deletePGroupButton" data-url="wtf">{% trans 'Delete' %}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+            <div class="search-results__main">
+                <div class="table-main">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr class="table-row" data-href="#">
+                            <th class="td-check"></th>
+                            <th class="td-id">№</th>
+                            <th class="td-fio">{% trans 'Fullname' %}</th>
+                            <th class="td-reg">{% trans 'Register number' %}</th>
+                            <th class="td-phone">{% trans 'phone' %}</th>
+                            <th class="td-date">{% trans 'Created' %}</th>
+                            <th class="td-cat">{% trans 'Category' %}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for emp in employees %}
+                            <tr class="table-row" data-id="{{emp.id}}" data-href="{% url 'root.employee.changed.detail' emp.id %}">
+                                <td class="td-checkbox td-check" >
+                                    <input class="deleteCheck" type="checkbox" data-id="{{emp.id}}" name="ids" >
+                                </td>
+                                <td class="td-id">{{ emp.id }}</td>
+                                <td class="td-fio">{{ emp.full_name }}</td>
+                                <td class="td-reg">{{ emp.register_number }}</td>
+                                <td class="td-phone">{{ emp.phone }}</td>
+                                <td class="td-date">{{ emp.created|date:"H:i d.m.Y" }}</td>
+                                {% if emp.score %}
+                                    {% if emp.score.category == "A" %}
+                                        <td class="td-cat scoreA">{{ emp.score.summa }} ({{ emp.score.category }})</td>
+                                    {% elif emp.score.category == "B" %}
+                                        <td class="td-cat scoreB">{{ emp.score.summa }} ({{ emp.score.category }})</td>
+                                    {% elif emp.score.category == "C" %}
+                                        <td class="td-cat scoreC">{{ emp.score.summa }} ({{ emp.score.category }})</td>
+                                    {% elif emp.score.category == "D" %}
+                                        <td class="td-cat scoreD">{{ emp.score.summa }} ({{ emp.score.category }})</td>
+                                    {% else %}
+                                        <td class="td-cat">{% trans 'Has no score' %}</td>
+                                    {% endif %}
+                                {% else %}
+                                    <td class="td-cat">{% trans 'Has no score' %}</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% if is_paginated %}
+                        <div class="pagination-main">
+                            <ul class="pagination">
+                                {% if page_obj.has_previous %}
+                                    <li><a href="?{{ page_obj.previous_page_number.querystring }}" class="prev">&lsaquo;&lsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled prev">&lsaquo;&lsaquo;</span></li>
+                                {% endif %}
+                                {% for page in page_obj.pages %}
+                                    {% if page %}
+                                        {% ifequal page page_obj.number %}
+                                            <li><span class="current page">{{ page }}</span></li>
+                                        {% else %}
+                                            <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                        {% endifequal %}
+                                    {% else %}
+                                        ...
+                                    {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                    <li><a href="?{{ page_obj.next_page_number.querystring }}" class="next">&rsaquo;&rsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled next">&rsaquo;&rsaquo;</span></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'operator/js/root/search.js' %}"></script>
+    <script>
+        $(function () {
+
+            $("#deletePGroupButton").click(function (e) {
+                e.preventDefault();
+
+                let formData = new FormData();
+                let url = $(this).data("url");
+
+                var myDeldata = jQuery(".table tr:not(.header) td input:checked").map(function() {
+                    return jQuery(this).closest("tr").data("id");
+                        }).get();
+
+                result = window.confirm("{% trans 'Do you really want to delete?' %}");
+
+                if(result){
+                    console.log(myDeldata);
+                    formData.append("ids", myDeldata);
+                    $.ajax({
+                        url: url,
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        method: 'POST',
+                        success: function (data) {
+                            location.reload();
+                        },
+                        error: function (data) {
+
+                        }
+                    });
+                }else{
+
+                }
+
+            });
+
+        });
+
+        $(function () {
+            $("#reset-employee-search").click(function (e) {
+                e.preventDefault();
+                alert(11);
+            })
+        })
+    </script>
+{% endblock %}

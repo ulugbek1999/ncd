@@ -1,0 +1,157 @@
+{% extends 'root/_base.html' %}
+{% load static i18n %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% trans 'Countries' %}</h2>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{% trans 'List of countries' %}</h2>
+        </div>
+        <div class="card-main__content">
+            <div class="search-form__app">
+                <form method="GET">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">{% trans 'Country name' %}</label>
+                            <input name="name" type="text" class="form-control" id="" value="{{ name }}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">{% trans 'Score' %}</label>
+                            <input name="score" type="number" class="form-control" id="" value="{{ score }}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="search-buttons">
+                            <div class="form-search__button" id="">
+                                <button id="" type="submit">{% trans 'Search' %}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="float: right;text-align: right">
+                        <div class="add-buttons">
+                            <div class="deletePart-buttons">
+                                <button id="deletePGroupButton" data-url="{% url 'api:admin:directory:country.delete' %}">{% trans 'Delete' %}</button>
+                            </div>
+                            <div class="form-add__button" id="">
+                                <a href="{% url 'root.directory.country.create' %}">{% trans 'Add' %}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+            <div class="search-results__main">
+                <div class="table-main">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr class="table-row" data-href="">
+                            <th class="td-check"></th>
+                            <th class="td-id">№</th>
+                            <th class="td-name">{% trans 'Country name' %} ({% trans 'Russian' %})</th>
+                            <th class="td-name">{% trans 'Country name' %} ({% trans 'English' %})</th>
+                            <th class="td-number">{% trans 'Score' %}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for country in countries %}
+                                <tr class="table-row" data-id="{{country.id}}" data-href="{% url 'root.directory.country.detail' country.id %}">
+                                    <td class="td-checkbox td-check" >
+                                        <input class="deleteCheck" type="checkbox" data-id="{{country.id}}" name="ids" >
+                                    </td>
+                                    <td class="td-id">{{ country.id }}</td>
+                                    <td class="td-name">{{ country.name_ru }}</td>
+                                    <td class="td-name">{{ country.name_en }}</td>
+                                    <td class="td-number">{{ country.score }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% if is_paginated %}
+                        <div class="pagination-main">
+                            <ul class="pagination">
+                                {% if page_obj.has_previous %}
+                                    <li><a href="?{{ page_obj.previous_page_number.querystring }}" class="prev">&lsaquo;&lsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled prev">&lsaquo;&lsaquo;</span></li>
+                                {% endif %}
+                                {% for page in page_obj.pages %}
+                                    {% if page %}
+                                        {% ifequal page page_obj.number %}
+                                            <li><span class="current page">{{ page }}</span></li>
+                                        {% else %}
+                                            <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                        {% endifequal %}
+                                    {% else %}
+                                        <li><span>...</span></li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                    <li><a href="?{{ page_obj.next_page_number.querystring }}" class="next">&rsaquo;&rsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled next">&rsaquo;&rsaquo;</span></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'operator/js/root/search.js' %}"></script>
+    <script>
+        $(function () {
+
+            $("#deletePGroupButton").click(function (e) {
+                e.preventDefault();
+
+                let formData = new FormData();
+                let url = $(this).data("url");
+
+                var myDeldata = jQuery(".table tr:not(.header) td input:checked").map(function() {
+                    return jQuery(this).closest("tr").data("id");
+                        }).get();
+
+                result = window.confirm("{% trans 'Do you really want to delete?' %}");
+
+                if(result){
+                    console.log(myDeldata);
+                    formData.append("ids", myDeldata);
+                    $.ajax({
+                        url: url,
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        method: 'POST',
+                        success: function (data) {
+                            location.reload();
+                        },
+                        error: function (data) {
+
+                        }
+                    });
+                }else{
+
+                }
+
+            });
+
+        });
+
+        $(function(){
+            $('.selectpicker').selectpicker();
+
+            $(".table-row").click(function() {
+                window.document.location = $(this).data("href");
+            });
+
+        });
+    </script>
+{% endblock %}

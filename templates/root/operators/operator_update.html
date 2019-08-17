@@ -1,0 +1,128 @@
+{% extends 'root/_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load str %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% trans 'Operators' %}</h2>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{{ group.group_name }}</h2>
+        </div>
+        <div class="card-main__content">
+            <form class="operator-add__form">
+                <div class="col-md-4">
+                    <div class="operators-form__item">
+                        <div class="form-title">
+                            <h2>{% trans 'Account' %}</h2>
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'Username' %}</label>
+                            <input name="username" type="text" class="form-control" id="" value="{{ operator.user.username }}" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'Password' %}</label>
+                            <input name="password" type="password" class="form-control" id="" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="operators-form__item">
+                        <div class="form-title">
+                            <h2>{% trans 'Additional information' %}</h2>
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'Firstname' %}</label>
+                            <input name="operator_firstname" type="text" class="form-control" id="" value="{{ operator.user.first_name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'Lastname' %}</label>
+                            <input name="operator_lastname" type="text" class="form-control" id="" value="{{ operator.user.last_name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">{% trans 'Phone' %}</label>
+                            <input name="operator_phone" type="text" class="form-control" id="phone" value="{{ operator.phone }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'Group' %}</label>
+                            {% get_group operator as gr %}
+                            <select class="form-control selectpicker show-tick" name="operator_group" id="">
+                                <option value="">{% trans 'Select' %}</option>
+                                {% for group in groups %}
+                                    <option value="{{ group.id }}" {% if gr == group.id %}selected{% endif %}>{{ group.group_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'Operator' %}</label>
+                            <select class="form-control selectpicker show-tick" name="operator_number" id="">
+                                <option value="">{% trans 'Select' %}</option>
+                                <option value="1" {% if operator.operator == 1 %}selected{% endif %}>1</option>
+                                <option value="2" {% if operator.operator == 2 %}selected{% endif %}>2</option>
+                                <option value="3" {% if operator.operator == 3 %}selected{% endif %}>3</option>
+                                <option value="4" {% if operator.operator == 4 %}selected{% endif %}>4</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="operators-button form-send__buttons">
+                        <div class="form-send__button" id="formSendButton">
+                            <button type="submit" id="operator-update-button" data-url="{% url 'root.api.operator.update' operator.id %}">{% trans 'Save' %}</button>
+                        </div>
+                        <div class="form-reset__buttton">
+                            <button type="reset">{% trans 'Clear' %}</button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $("#phone").inputmask({
+            "mask": "+998-dd-ddd-dddd"
+        });
+
+        $(function () {
+            $("#operator-update-button").click(function (e) {
+                e.preventDefault();
+                let $formData = new FormData();
+                $formData.append("username", $("input[name='username']").val());
+                $formData.append("password", $("input[name='password']").val());
+
+                $formData.append("firstname", $("input[name='operator_firstname']").val());
+                $formData.append("lastname", $("input[name='operator_lastname']").val());
+                $formData.append("phone", $("input[name='operator_phone']").val());
+                $formData.append("group", $("select[name='operator_group']").val());
+                $formData.append("operator", $("select[name='operator_number']").val());
+
+                $.ajax({
+                    url: $(this).data("url"),
+                    type: "PUT",
+                    data: $formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        var x = document.getElementById("mainSuccess");
+                        x.className = "show";
+                        setTimeout(function(){
+                            x.className = x.className.replace("show", "");
+                            window.location.href = '/root/operators/';
+                        }, 1500);
+                    },
+                    error: function (data) {
+                        var x = document.getElementById("mainError");
+
+                        x.className = "show";
+                        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

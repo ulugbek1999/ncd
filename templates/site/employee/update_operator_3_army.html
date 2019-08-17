@@ -1,0 +1,207 @@
+{% extends 'site/_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load thumbnail %}
+{% load get_json_value %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" />
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css">
+{% endblock %}
+{% block content %}
+    <section class="profile">
+        <div class="container">
+            <div class="row">
+                <div class="profile-main">
+                    <div class="content-title">
+                        <h2>Биометрические данные</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="profile-side">
+                                <div class="profile-side__title">
+                                    <h2>Личный кабинет</h2>
+                                </div>
+                                <nav class="nav_personal d-lnk-txt">
+                                    <ul>
+                                        <li class="">
+                                            <a href="#"><i class="fa fa-user"></i> Мой профиль</a>
+                                        </li>
+
+                                        <li class="">
+                                            <a href=""><i class="fa fa-book"></i> Курсы </a></li>
+                                        <li class="">
+
+                                    </ul>
+                                    <div class="nav_personal__footer">
+                                        <a href="#"> Выйти</a>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+
+                            <div class="profile-content">
+                                <div class="employee-detail">
+                                    <div class="row">
+                                        <form name="employee_update" style="padding: 0 15px;">
+                                            <div class="military-item military-item" data-files-count="">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="row">
+                                                                    <div class="col-md-8">
+                                                                        <div class="row">
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="milName">Наименование военной части</label>
+                                                                                    <input name="mil_name" type="text" class="form-control" id="milName" placeholder="{% json_value army 'name_ru' 'current' %}">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="milRegion">Регион</label>
+                                                                                    <input name="mil_region" list="milRegion_list" type="text" class="form-control" id="milRegion" placeholder="{% json_value army 'region_ru' 'current' %}" autocomplete="off">
+                                                                                    <datalist class="region-list" id="milRegion_list">
+                                                                                    </datalist>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="milSpecialization">Специальность</label>
+                                                                                    <input name="mil_specialization" type="text" class="form-control" id="milSpecialization" placeholder="{% json_value army 'specialization_ru' 'current' %}">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="milDateStarted">Дата начала службы</label>
+                                                                                    <input value="" name="mil_date_started" type="text" class="datepickerFrom form-control" data-date-format="yyyy-mm-dd" id="milDateStarted" placeholder="{% json_value army 'date_started' 'current' %}">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="milDateGraduated">Дата окончания службы</label>
+                                                                                    <input value="" name="mil_date_graduated" type="text" class="datepickerFrom form-control" data-date-format="yyyy-mm-dd" id="milDateGraduated" placeholder="{% json_value army 'date_graduated' 'current' %}">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="milRank">Звание</label>
+                                                                                    <input name="mil_rank" type="text" class="form-control" id="milRank" value="" placeholder="{% json_value army 'rank_ru' 'current' %}">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="military-file__upload op3-file__upload hidden" >
+                                                                            <input type="file"
+                                                                                   class="filepondMilitary"
+                                                                                   name="filepond_military"
+                                                                                   label-idle="Загрузить файл"
+                                                                                   multiple
+                                                                                   data-max-file-size="3MB"
+                                                                                   data-max-files="4"
+
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12" style="text-align: center;">
+                                                <button id="employeeEditButton" class="loginButton" data-api="{% url 'api:employee.update.3-employee.army' army.id %}" type="submit">
+                                                    Отправить
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+
+    <script>
+        $(function () {
+            $.fn.datepicker.dates['ru'] = {
+                days: ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"],
+                daysShort: ["Вск", "Пнд", "Втр", "Срд", "Чтв", "Птн", "Суб"],
+                daysMin: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+                months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+                monthsShort: ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
+                today: "Сегодня",
+                clear: "Очистить",
+                format: "dd.mm.yyyy",
+                weekStart: 1,
+                monthsTitle: 'Месяцы'
+            };
+        }(jQuery));
+        (function($){
+            $.fn.datepicker.dates['uz-latn'] = {
+                days: ["Yakshanba", "Dushanba", "Seshanba", "Chorshanba", "Payshanba", "Juma", "Shanba"],
+                daysShort: ["Yak", "Du", "Se", "Chor", "Pay", "Ju", "Sha"],
+                daysMin: ["Ya", "Du", "Se", "Cho", "Pa", "Ju", "Sha"],
+                months: ["Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun", "Iyul", "Avgust", "Sentabr", "Oktabr", "Noyabr", "Dekabr"],
+                monthsShort: ["Yan", "Fev", "Mar", "Apr", "May", "Iyn", "Iyl", "Avg", "Sen", "Okt", "Noy", "Dek"],
+                today: "Bugun",
+                clear: "O'chirish",
+                format: "dd.mm.yyyy",
+                weekStart: 1,
+                monthsTitle: 'Oylar'
+            };
+        }(jQuery));
+        $(function () {
+          $(".datepickerFrom").datepicker({
+              autoclose: true,
+              language: 'ru',
+              todayHighlight: true
+          });
+        });
+
+        $("#employeeEditButton").click(function(event){
+            event.preventDefault();
+
+            let formData = new FormData();
+
+            formData.append(`name_ru`, $(`input[name='mil_name']`).val());
+            formData.append(`region_ru`, $(`input[name='mil_region']`).val());
+            formData.append(`specialization_ru`, $(`input[name='mil_specialization']`).val());
+            formData.append(`date_started`, $(`input[name='mil_date_started']`).val());
+            formData.append(`date_graduated`, $(`input[name='mil_date_graduated']`).val());
+            formData.append(`rank_ru`, $(`input[name='mil_rank']`).val());
+
+            /*var object = {};
+            formData.forEach((value, key) => {object[key] = value});
+            var jsonData = JSON.stringify(object);
+
+            console.log(jsonData);*/
+
+            $.ajax({
+                url: $(this).data('api'),
+                data: formData,
+                processData: false,
+                contentType: false,
+                type: "PUT",
+                success: function (data) {
+                    alert('Success');
+                },
+                error: function (data) {
+                    alert('error');
+                },
+            });
+        });
+    </script>
+{% endblock %}

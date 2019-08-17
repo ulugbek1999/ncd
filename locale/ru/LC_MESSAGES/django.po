@@ -1,0 +1,3358 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-07-10 14:54+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: api/admin/employee/views.py:264 api/admin/partner/serializers.py:37
+#: api/admin/partner/views.py:43
+msgid "Password didnt match"
+msgstr "Пароль не совпадает"
+
+#: api/admin/employee/views.py:265 api/admin/employee/views.py:266
+msgid "Employee not found"
+msgstr "Аппликант не найден"
+
+#: api/admin/partner/serializers.py:29 api/admin/partner/views.py:34
+msgid "Username is missing"
+msgstr "Имя пользователя отсутствует"
+
+#: api/admin/partner/serializers.py:31 api/admin/partner/views.py:36
+msgid "Password is missing"
+msgstr "Пароль отсутствует"
+
+#: api/admin/partner/serializers.py:33 api/admin/partner/views.py:38
+msgid "Password confirm is missing"
+msgstr "Подтверждение пароля отсутствует"
+
+#: api/admin/partner/serializers.py:35 api/admin/partner/views.py:41
+msgid "Username already exist"
+msgstr "Имя пользователя уже существует"
+
+#: employee/model/army.py:9 employee/model/education.py:11
+#: employee/model/education.py:72 employee/model/employee.py:112
+#: employee/model/employee.py:122 employee/model/experience.py:9
+#: employee/model/family.py:21 employee/model/language.py:18
+#: employee/model/relative.py:24 employee/model/reward.py:9
+#: message_templates/models.py:6 templates/operators/4/operator4.html:205
+#: templates/root/employee/employee_update_4.html:204
+#: templates/root/employee/employees.html:270 templates/root/logs.html:23
+#: templates/root/templates/list.html:63
+msgid "Employee"
+msgstr "Аппликант"
+
+
+msgid "History of sent SMS/Email messages"
+msgstr "История СМС/E-mail рассылок"
+
+#: employee/model/army.py:10 employee/model/army.py:83
+#: employee/model/education.py:13 employee/model/education.py:92
+#: employee/model/reward.py:10 employee/model/reward.py:58
+msgid "Name ru"
+msgstr "Название (русс)"
+
+#: employee/model/army.py:11 employee/model/education.py:14
+#: employee/model/reward.py:11
+msgid "Name en"
+msgstr "Название (англ)"
+
+#: employee/model/army.py:12 employee/model/army.py:84
+msgid "Region ru"
+msgstr "Регион (русс)"
+
+#: employee/model/army.py:13
+msgid "Region en"
+msgstr "Регион (англ)"
+
+#: employee/model/army.py:14 employee/model/army.py:85
+#: employee/model/education.py:17 employee/model/education.py:94
+msgid "Specialization ru"
+msgstr "Специализация (русс)"
+
+#: employee/model/army.py:15 employee/model/education.py:18
+msgid "Specialization en"
+msgstr "Специализация (англ)"
+
+#: employee/model/army.py:16 employee/model/army.py:86
+#: employee/model/education.py:19 employee/model/education.py:95
+#: employee/model/experience.py:12 employee/model/experience.py:88
+msgid "Date started"
+msgstr "Дата начало"
+
+#: employee/model/army.py:17 employee/model/army.py:87
+#: employee/model/education.py:20 employee/model/education.py:96
+#: employee/model/experience.py:13 employee/model/experience.py:89
+msgid "Date finished"
+msgstr "Дата финиша"
+
+#: employee/model/army.py:18 employee/model/army.py:88
+msgid "Rank ru"
+msgstr "Звание (русс)"
+
+#: employee/model/army.py:19
+msgid "Rank en"
+msgstr "Звание (англ)"
+
+#: employee/model/army.py:25 templates/operators/3/operator3.html:23
+#: templates/operators/3/operator3.html:159
+#: templates/operators/4/employee_update_3.html:191
+#: templates/root/employee/changed_employee.html:346
+#: templates/root/employee/changed_employee.html:658
+#: templates/root/employee/employee_detail.html:270
+#: templates/root/employee/employee_translation_3.html:170
+#: templates/root/employee/employee_update_3.html:185
+#: templates/root/employee/personal_card.html:254
+msgid "Military service"
+msgstr "Служба в армии"
+
+#: employee/model/army.py:26
+msgid "Military services"
+msgstr "Служба в армии"
+
+#: employee/model/army.py:65
+msgid "Military"
+msgstr "Армия"
+
+#: employee/model/army.py:66 employee/model/army.py:102
+#: employee/model/education.py:73 employee/model/education.py:111
+#: employee/model/experience.py:70 employee/model/experience.py:106
+#: employee/model/family.py:37 employee/model/family.py:72
+#: employee/model/language.py:36 employee/model/language.py:69
+#: employee/model/relative.py:88 employee/model/relative.py:126
+#: employee/model/reward.py:43 employee/model/reward.py:76
+msgid "File"
+msgstr "Файл"
+
+#: employee/model/army.py:71
+msgid "Military service file"
+msgstr "Служба в армии файл"
+
+#: employee/model/army.py:72
+msgid "Military services files"
+msgstr "Служба в армии файлы"
+
+#: employee/model/army.py:93
+msgid "Military service change"
+msgstr "Новый: Служба в армии файл"
+
+#: employee/model/army.py:94
+msgid "Military services change"
+msgstr "Новый: Служба в армии файлы"
+
+#: employee/model/army.py:101
+msgid "Military change"
+msgstr "Новый: Служба в армии"
+
+#: employee/model/army.py:107
+msgid "Military service change file"
+msgstr "Новый: Служба в армии файлы"
+
+#: employee/model/army.py:108
+msgid "Military service change files"
+msgstr "Новый: Служба в армии файлы"
+
+#: employee/model/education.py:12 employee/model/education.py:91
+#: templates/operators/3/operator3.html:41
+#: templates/operators/4/employee_update_3.html:50
+#: templates/root/directory/education_create.html:17
+#: templates/root/directory/education_detail.html:17
+#: templates/root/employee/changed_employee.html:268
+#: templates/root/employee/changed_employee.html:580
+#: templates/root/employee/employee_detail.html:192
+#: templates/root/employee/employee_translation_3.html:44
+#: templates/root/employee/employee_update_3.html:44
+#: templates/root/employee/employee_update_3.html:842
+#: templates/root/employee/personal_card.html:115
+#: templates/root/partners/partner_bookmark.html:158
+#: templates/site/employee/update_operator_3_education.html:54
+msgid "Education type"
+msgstr "Тип/вид учебного заведения"
+
+#: employee/model/education.py:15 employee/model/education.py:93
+#: employee/model/experience.py:18 employee/model/experience.py:92
+msgid "Address ru"
+msgstr "Адрес (русс)"
+
+#: employee/model/education.py:16 employee/model/experience.py:19
+msgid "Address en"
+msgstr "Адрес (англ)"
+
+#: employee/model/education.py:21 employee/model/education.py:97
+msgid "Additional ru"
+msgstr "Дополнительно (русс)"
+
+#: employee/model/education.py:22
+msgid "Additional en"
+msgstr "Дополнительно (англ)"
+
+#: employee/model/education.py:28 templates/operators/3/operator3.html:21
+#: templates/operators/3/operator3.html:33
+#: templates/operators/4/employee_update_3.html:41
+#: templates/root/directory/education_create.html:6
+#: templates/root/directory/education_detail.html:6
+#: templates/root/directory/education_list.html:6
+#: templates/root/employee/changed_employee.html:260
+#: templates/root/employee/changed_employee.html:572
+#: templates/root/employee/changed_employees.html:46
+#: templates/root/employee/employee_detail.html:184
+#: templates/root/employee/employee_statistics.html:26
+#: templates/root/employee/employee_translation_3.html:35
+#: templates/root/employee/employee_update_3.html:35
+#: templates/root/employee/employees.html:50
+#: templates/root/employee/employees.html:182
+#: templates/root/employee/ratings.html:57
+msgid "Education"
+msgstr "Образование"
+
+#: employee/model/education.py:29
+msgid "Educations"
+msgstr "Образование"
+
+#: employee/model/education.py:78
+msgid "Education file"
+msgstr "Образование файл"
+
+#: employee/model/education.py:79
+msgid "Education files"
+msgstr "Образование файлы"
+
+#: employee/model/education.py:102 employee/model/education.py:110
+msgid "Education change"
+msgstr "Новый: Образование"
+
+#: employee/model/education.py:103
+msgid "Educations change"
+msgstr "Новый: Образование"
+
+#: employee/model/education.py:116 employee/model/education.py:117
+msgid "Education change files"
+msgstr "Новый: Образование файлы"
+
+#: employee/model/employee.py:43 employee/model/employee.py:190
+#: templates/operators/2/operator1_employees.html:32
+#: templates/operators/3/operator2_employees.html:32
+#: templates/operators/4/operator3_employees.html:32
+#: templates/root/employee/changed_employees.html:30
+#: templates/root/employee/employees.html:34
+#: templates/root/employee/employees.html:280
+#: templates/root/employee/personal_card.html:80
+#: templates/root/employee/ratings.html:42
+msgid "Male"
+msgstr "Мужской"
+
+#: employee/model/employee.py:44 employee/model/employee.py:190
+#: templates/operators/2/operator1_employees.html:33
+#: templates/operators/3/operator2_employees.html:33
+#: templates/operators/4/operator3_employees.html:33
+#: templates/root/employee/changed_employees.html:31
+#: templates/root/employee/employees.html:35
+#: templates/root/employee/employees.html:281
+#: templates/root/employee/personal_card.html:81
+#: templates/root/employee/ratings.html:43
+msgid "Female"
+msgstr "Женский"
+
+#: employee/model/employee.py:49
+msgid "User"
+msgstr "Пользователь"
+
+#: employee/model/employee.py:50
+msgid "Step finished"
+msgstr "Шаг закончен"
+
+#: employee/model/employee.py:51
+#: templates/root/operators/operator_create.html:48
+#: templates/root/operators/operator_update.html:49
+msgid "Group"
+msgstr "Группа"
+
+#: employee/model/employee.py:52 employee/model/employee.py:371
+#: templates/operators/2/operator1_employees.html:57
+#: templates/operators/3/operator2_employees.html:57
+#: templates/operators/4/operator3_employees.html:57
+#: templates/root/employee/changed_employees.html:90
+#: templates/root/employee/employee_statistics.html:150
+#: templates/root/employee/employees.html:93
+#: templates/root/employee/ratings.html:93
+#: templates/root/partners/partner_bookmarks.html:22
+msgid "Created"
+msgstr "Создан"
+
+#: employee/model/employee.py:53 employee/model/employee.py:372
+msgid "Updated"
+msgstr "Изменён"
+
+#: employee/model/employee.py:54
+msgid "I must send SMS"
+msgstr "Отправить sms"
+
+#: employee/model/employee.py:55
+msgid "I must send Email"
+msgstr "Отправить email"
+
+#: employee/model/employee.py:56
+msgid "Notification sent to Operator 2"
+msgstr "Уведомление отправлено Оператору 2"
+
+#: employee/model/employee.py:57
+msgid "Notification sent to Operator 3"
+msgstr "Уведомление отправлено Оператору 3"
+
+#: employee/model/employee.py:58
+msgid "Notification sent to Operator 4"
+msgstr "Уведомление отправлено Оператору 4"
+
+#: employee/model/employee.py:60 employee/model/employee.py:374
+#: employee/model/relative.py:26 employee/model/relative.py:105
+#: templates/operators/1/operator1.html:62
+#: templates/root/employee/changed_employee.html:37
+#: templates/root/employee/changed_employee.html:98
+#: templates/root/employee/employee_detail.html:65
+#: templates/root/employee/employee_translation_1.html:56
+#: templates/root/employee/employee_update_1.html:54
+#: templates/root/partners/partner_bookmark.html:36
+msgid "Fullname ru"
+msgstr "Ф.И.О (русс)"
+
+#: employee/model/employee.py:61 employee/model/employee.py:375
+#: employee/model/relative.py:27 templates/operators/1/operator1.html:23
+#: templates/root/employee/changed_employee.html:41
+#: templates/root/employee/changed_employee.html:102
+#: templates/root/employee/employee_detail.html:69
+#: templates/root/employee/employee_translation_1.html:21
+#: templates/root/employee/employee_update_1.html:19
+#: templates/root/partners/partner_bookmark.html:40
+msgid "Fullname en"
+msgstr "Ф.И.О (англ)"
+
+#: employee/model/employee.py:62 employee/model/employee.py:376
+#: templates/operators/1/operator1.html:27
+#: templates/root/employee/changed_employee.html:49
+#: templates/root/employee/changed_employee.html:110
+#: templates/root/employee/employee_detail.html:77
+#: templates/root/employee/employee_translation_1.html:25
+#: templates/root/employee/employee_update_1.html:23
+#: templates/root/employee/employees.html:170
+#: templates/root/employee/personal_card.html:42
+#: templates/root/partners/partner_bookmark.html:48
+msgid "Passport serial"
+msgstr "Серия паспорта"
+
+#: employee/model/employee.py:63 employee/model/employee.py:377
+#: templates/operators/1/operator1.html:74
+#: templates/root/employee/changed_employee.html:53
+#: templates/root/employee/changed_employee.html:114
+#: templates/root/employee/employee_detail.html:81
+#: templates/root/employee/employee_translation_1.html:68
+#: templates/root/employee/employee_update_1.html:66
+#: templates/root/employee/personal_card.html:46
+#: templates/root/partners/partner_bookmark.html:52
+msgid "Passport given date"
+msgstr "Дата выдачи"
+
+#: employee/model/employee.py:64 employee/model/employee.py:378
+#: templates/operators/1/operator1.html:35
+#: templates/root/employee/changed_employee.html:57
+#: templates/root/employee/changed_employee.html:118
+#: templates/root/employee/employee_detail.html:85
+#: templates/root/employee/employee_translation_1.html:33
+#: templates/root/employee/employee_update_1.html:31
+#: templates/root/employee/personal_card.html:50
+#: templates/root/partners/partner_bookmark.html:56
+msgid "Passport expires"
+msgstr "Срок действия"
+
+#: employee/model/employee.py:65
+#: templates/root/employee/employee_detail.html:114
+msgid "Passport image"
+msgstr "Копия паспорта"
+
+#: employee/model/employee.py:66 employee/model/employee.py:379
+#: employee/model/relative.py:28 employee/model/relative.py:106
+#: templates/operators/1/operator1.html:31
+#: templates/root/employee/changed_employee.html:65
+#: templates/root/employee/changed_employee.html:126
+#: templates/root/employee/employee_detail.html:93
+#: templates/root/employee/employee_translation_1.html:29
+#: templates/root/employee/employee_update_1.html:27
+#: templates/root/employee/personal_card.html:91
+#: templates/root/partners/partner_bookmark.html:64
+msgid "Birth date"
+msgstr "Дата рождения"
+
+#: employee/model/employee.py:67 employee/model/employee.py:380
+msgid "Birth place ru"
+msgstr "Место рождения (русс)"
+
+#: employee/model/employee.py:68
+msgid "Birth place en"
+msgstr "Место рождения (англ)"
+
+#: employee/model/employee.py:69 employee/model/employee.py:381
+#: employee/model/relative.py:33 employee/model/relative.py:109
+msgid "Living address ru"
+msgstr "Место проживания (русс)"
+
+#: employee/model/employee.py:70 employee/model/relative.py:34
+msgid "Living address en"
+msgstr "Место проживания (англ)"
+
+#: employee/model/employee.py:71 templates/operators/1/operator1.html:39
+#: templates/operators/2/operator1_employees.html:29
+#: templates/operators/3/operator2_employees.html:29
+#: templates/operators/4/operator3_employees.html:29
+#: templates/root/employee/changed_employee.html:45
+#: templates/root/employee/changed_employee.html:106
+#: templates/root/employee/changed_employees.html:27
+#: templates/root/employee/employee_detail.html:73
+#: templates/root/employee/employee_translation_1.html:37
+#: templates/root/employee/employee_update_1.html:35
+#: templates/root/employee/employees.html:31
+#: templates/root/employee/employees.html:277
+#: templates/root/employee/personal_card.html:77
+#: templates/root/employee/ratings.html:39
+#: templates/root/partners/partner_bookmark.html:44
+#: templates/site/employee/update_operator_1.html:70
+msgid "Gender"
+msgstr "Пол"
+
+#: employee/model/employee.py:72 employee/model/employee.py:382
+#: templates/operators/1/operator1.html:78
+#: templates/root/employee/changed_employee.html:61
+#: templates/root/employee/changed_employee.html:122
+#: templates/root/employee/employee_detail.html:89
+#: templates/root/employee/employee_translation_1.html:72
+#: templates/root/employee/employee_update_1.html:70
+#: templates/root/employee/employees.html:227
+#: templates/root/employee/personal_card.html:54
+#: templates/root/partners/partner_bookmark.html:60
+msgid "Inn"
+msgstr "ИНН"
+
+#: employee/model/employee.py:73 employee/model/employee.py:383
+#: templates/operators/1/operator1.html:66
+#: templates/operators/2/operator1_employees.html:23
+#: templates/operators/2/operator1_employees.html:56
+#: templates/operators/3/operator2_employees.html:23
+#: templates/operators/3/operator2_employees.html:56
+#: templates/operators/4/operator3_employees.html:23
+#: templates/operators/4/operator3_employees.html:56
+#: templates/root/employee/changed_employee.html:77
+#: templates/root/employee/changed_employee.html:138
+#: templates/root/employee/employee_detail.html:105
+#: templates/root/employee/employee_statistics.html:149
+#: templates/root/employee/employee_translation_1.html:60
+#: templates/root/employee/employee_update_1.html:58
+#: templates/root/employee/employees.html:92
+#: templates/root/employee/employees.html:285
+#: templates/root/employee/ratings.html:92
+#: templates/root/operators/operator_create.html:44
+#: templates/root/operators/operator_update.html:45
+#: templates/root/operators/operators.html:29
+#: templates/root/operators/operators.html:63
+#: templates/root/partners/partner_bookmark.html:76
+#: templates/root/partners/partner_create.html:63
+#: templates/root/partners/partner_update.html:59
+#: templates/root/partners/partners.html:29
+#: templates/root/partners/partners.html:63
+msgid "Phone"
+msgstr "Телефон"
+
+#: employee/model/employee.py:74 employee/model/employee.py:384
+#: templates/operators/1/operator1.html:70
+#: templates/root/employee/changed_employee.html:81
+#: templates/root/employee/changed_employee.html:142
+#: templates/root/employee/employee_detail.html:109
+#: templates/root/employee/employee_translation_1.html:64
+#: templates/root/employee/employee_update_1.html:62
+#: templates/root/employee/personal_card.html:101
+#: templates/root/partners/partner_bookmark.html:80
+#: templates/root/partners/partner_create.html:59
+#: templates/root/partners/partner_update.html:55
+msgid "Email"
+msgstr "Э-почта"
+
+#: employee/model/employee.py:75 templates/operators/1/operator1.html:94
+#: templates/operators/2/operator1_employees.html:55
+#: templates/operators/3/operator2_employees.html:55
+#: templates/operators/4/operator3_employees.html:55
+#: templates/root/employee/changed_employee.html:33
+#: templates/root/employee/changed_employee.html:94
+#: templates/root/employee/changed_employees.html:88
+#: templates/root/employee/employee_detail.html:61
+#: templates/root/employee/employee_statistics.html:148
+#: templates/root/employee/employee_translation_1.html:86
+#: templates/root/employee/employee_update_1.html:86
+#: templates/root/employee/employees.html:91
+#: templates/root/employee/employees.html:166
+#: templates/root/employee/ratings.html:91
+#: templates/root/partners/partner_bookmark.html:32
+#: templates/root/partners/partner_bookmarks.html:20
+msgid "Register number"
+msgstr "Регистрационный номер"
+
+#: employee/model/employee.py:77 employee/model/employee.py:386
+#: templates/operators/2/operator2.html:22
+#: templates/root/employee/changed_employee.html:162
+#: templates/root/employee/changed_employee.html:207
+#: templates/root/employee/employee_detail.html:133
+#: templates/root/employee/employee_update_2.html:18
+#: templates/root/partners/partner_bookmark.html:99
+msgid "Appearance"
+msgstr "Внешность"
+
+#: employee/model/employee.py:78 employee/model/employee.py:387
+#: templates/operators/2/operator2.html:43
+#: templates/root/employee/changed_employee.html:166
+#: templates/root/employee/changed_employee.html:211
+#: templates/root/employee/employee_detail.html:137
+#: templates/root/employee/employee_update_2.html:39
+#: templates/root/partners/partner_bookmark.html:103
+msgid "Neatness"
+msgstr "Опрятность"
+
+#: employee/model/employee.py:79 employee/model/employee.py:388
+#: templates/operators/2/operator2.html:64
+#: templates/root/employee/changed_employee.html:170
+#: templates/root/employee/changed_employee.html:215
+#: templates/root/employee/employee_detail.html:141
+#: templates/root/employee/employee_update_2.html:60
+#: templates/root/partners/partner_bookmark.html:107
+msgid "Skin"
+msgstr "Кожа"
+
+#: employee/model/employee.py:80 employee/model/employee.py:389
+#: templates/operators/2/operator2.html:89
+#: templates/root/employee/changed_employee.html:174
+#: templates/root/employee/changed_employee.html:219
+#: templates/root/employee/employee_detail.html:145
+#: templates/root/employee/employee_statistics.html:59
+#: templates/root/employee/employee_update_2.html:85
+#: templates/root/employee/employees.html:231
+#: templates/root/employee/personal_card.html:233
+#: templates/root/partners/partner_bookmark.html:111
+msgid "Height"
+msgstr "Рост"
+
+#: employee/model/employee.py:81 employee/model/employee.py:390
+#: templates/operators/2/operator2.html:93
+#: templates/root/employee/changed_employee.html:178
+#: templates/root/employee/changed_employee.html:223
+#: templates/root/employee/employee_detail.html:149
+#: templates/root/employee/employee_statistics.html:63
+#: templates/root/employee/employee_update_2.html:89
+#: templates/root/employee/employees.html:289
+#: templates/root/employee/personal_card.html:229
+#: templates/root/partners/partner_bookmark.html:115
+msgid "Weight"
+msgstr "Вес"
+
+#: employee/model/employee.py:82 employee/model/employee.py:391
+#: templates/operators/2/operator2.html:97
+#: templates/root/employee/changed_employee.html:182
+#: templates/root/employee/changed_employee.html:227
+#: templates/root/employee/employee_detail.html:153
+#: templates/root/employee/employee_statistics.html:69
+#: templates/root/employee/employee_update_2.html:93
+#: templates/root/employee/employees.html:178
+#: templates/root/employee/personal_card.html:237
+#: templates/root/partners/partner_bookmark.html:119
+msgid "Fatness"
+msgstr "Жирность"
+
+#: employee/model/employee.py:83 employee/model/employee.py:392
+#: templates/operators/2/operator2.html:101
+#: templates/root/employee/changed_employee.html:186
+#: templates/root/employee/changed_employee.html:231
+#: templates/root/employee/employee_detail.html:157
+#: templates/root/employee/employee_update_2.html:97
+#: templates/root/employee/personal_card.html:241
+#: templates/root/partners/partner_bookmark.html:123
+msgid "Blood group"
+msgstr "Группа крови"
+
+#: employee/model/employee.py:84 employee/model/employee.py:393
+#: templates/operators/2/operator2.html:128
+#: templates/root/employee/employee_update_2.html:124
+msgid "Blood resus"
+msgstr "Резус крови"
+
+#: employee/model/employee.py:85 employee/model/employee.py:394
+#: templates/operators/2/operator2.html:143
+#: templates/root/employee/changed_employee.html:190
+#: templates/root/employee/changed_employee.html:235
+#: templates/root/employee/employee_detail.html:161
+#: templates/root/employee/employees.html:235
+#: templates/root/employee/personal_card.html:245
+#: templates/root/partners/partner_bookmark.html:127
+msgid "Vision left"
+msgstr "Зрение (л)"
+
+#: employee/model/employee.py:86 employee/model/employee.py:395
+#: templates/operators/2/operator2.html:147
+#: templates/root/employee/changed_employee.html:194
+#: templates/root/employee/changed_employee.html:239
+#: templates/root/employee/employee_detail.html:165
+#: templates/root/employee/employees.html:293
+#: templates/root/employee/personal_card.html:249
+#: templates/root/partners/partner_bookmark.html:131
+msgid "Vision right"
+msgstr "Зрение (п)"
+
+#: employee/model/employee.py:87
+msgid "Photo1"
+msgstr "Фото 1"
+
+#: employee/model/employee.py:88
+msgid "Photo2"
+msgstr "Фото 2"
+
+#: employee/model/employee.py:89
+msgid "Photo3"
+msgstr "Фото 3"
+
+#: employee/model/employee.py:90
+msgid "Photo4"
+msgstr "Фото 4"
+
+#: employee/model/employee.py:92 employee/model/employee.py:397
+#: templates/operators/3/operator3.html:169
+#: templates/operators/4/employee_update_3.html:202
+#: templates/root/employee/changed_employee.html:354
+#: templates/root/employee/changed_employee.html:666
+#: templates/root/employee/employee_detail.html:278
+#: templates/root/employee/employee_translation_3.html:182
+#: templates/root/employee/employee_update_3.html:196
+#: templates/root/employee/employees.html:199
+#: templates/root/partners/partner_bookmark.html:244
+msgid "Military duty"
+msgstr "Военная обязанность"
+
+#: employee/model/employee.py:94 employee/model/employee.py:399
+#: templates/operators/4/operator4.html:40
+#: templates/root/employee/changed_employee.html:893
+#: templates/root/employee/changed_employee.html:938
+#: templates/root/employee/employee_detail.html:505
+#: templates/root/employee/employee_statistics.html:82
+#: templates/root/employee/employee_translation_4.html:40
+#: templates/root/employee/employee_update_4.html:39
+#: templates/root/employee/employees.html:310
+#: templates/root/partners/partner_bookmark.html:471
+#: templates/site/employee/update_operator_4.html:129
+msgid "Wages"
+msgstr "Заработная плата"
+
+#: employee/model/employee.py:95 employee/model/employee.py:400
+#: templates/operators/4/operator4.html:77
+#: templates/root/employee/changed_employee.html:897
+#: templates/root/employee/changed_employee.html:942
+#: templates/root/employee/employee_detail.html:509
+#: templates/root/employee/employee_statistics.html:95
+#: templates/root/employee/employee_translation_4.html:77
+#: templates/root/employee/employee_update_4.html:76
+#: templates/root/partners/partner_bookmark.html:475
+#: templates/site/employee/update_operator_4.html:86
+msgid "Ready for university"
+msgstr "Готовность поступать в ВУЗ"
+
+#: employee/model/employee.py:96 employee/model/employee.py:401
+#: templates/operators/4/operator4.html:104
+#: templates/root/employee/changed_employee.html:901
+#: templates/root/employee/changed_employee.html:946
+#: templates/root/employee/employee_detail.html:513
+#: templates/root/employee/employee_translation_4.html:104
+#: templates/root/employee/employee_update_4.html:103
+#: templates/root/partners/partner_bookmark.html:479
+#: templates/site/employee/update_operator_4.html:73
+msgid "Criminal number"
+msgstr "Номер справки (Наличие или отсутствие судимости)"
+
+#: employee/model/employee.py:97 employee/model/employee.py:402
+#: templates/root/employee/changed_employee.html:905
+#: templates/root/employee/changed_employee.html:950
+#: templates/root/employee/employee_detail.html:517
+#: templates/root/partners/partner_bookmark.html:483
+msgid "Criminal issue"
+msgstr "Дата выдачи (Наличие или отсутствие судимости)"
+
+#: employee/model/employee.py:98 employee/model/employee.py:403
+msgid "Criminal comment ru"
+msgstr "Комментарий (русс)"
+
+#: employee/model/employee.py:99
+msgid "Criminal comment en"
+msgstr "Комментарий (англ)"
+
+#: employee/model/employee.py:100 employee/model/employee.py:404
+msgid "Spec signs ru"
+msgstr "Особые приметы (русс)"
+
+#: employee/model/employee.py:101
+msgid "Spec signs en"
+msgstr "Особые приметы (англ)"
+
+#: employee/model/employee.py:102 employee/model/employee.py:405
+msgid "Hobby ru"
+msgstr "Хобби (русс)"
+
+#: employee/model/employee.py:103
+msgid "Hobby en"
+msgstr "Хобби (англ)"
+
+#: employee/model/employee.py:104 employee/model/employee.py:406
+msgid "Other ru"
+msgstr "Дополнительно (русс)"
+
+#: employee/model/employee.py:105
+msgid "Other en"
+msgstr "Дополнительно (англ)"
+
+#: employee/model/employee.py:106
+msgid "Psycholog"
+msgstr "Психолог"
+
+#: employee/model/employee.py:107 templates/operators/4/operator4.html:213
+msgid "Fingerprint"
+msgstr "Отпечаток пальца"
+
+#: employee/model/employee.py:109
+msgid "Busy"
+msgstr "Занят"
+
+#: employee/model/employee.py:110 templates/operators/4/operator4.html:193
+#: templates/root/employee/employee_update_4.html:192
+#: templates/root/employee/employees.html:268
+msgid "Student"
+msgstr "Студент"
+
+#: employee/model/employee.py:111 templates/operators/4/operator4.html:199
+#: templates/root/employee/employee_update_4.html:198
+#: templates/root/employee/employees.html:269
+msgid "Young talent"
+msgstr "Юный талант"
+
+#: employee/model/employee.py:113
+msgid "Can change profile"
+msgstr "Можно изменить профиль"
+
+#: employee/model/employee.py:123
+msgid "Employees"
+msgstr "Аппликанты"
+
+#: employee/model/employee.py:194 templates/operators/3/operator3.html:174
+#: templates/operators/4/employee_update_3.html:207
+#: templates/operators/4/operator4.html:84
+#: templates/root/employee/changed_employee.html:355
+#: templates/root/employee/changed_employee.html:667
+#: templates/root/employee/employee_detail.html:279
+#: templates/root/employee/employee_statistics.html:100
+#: templates/root/employee/employee_translation_3.html:187
+#: templates/root/employee/employee_translation_4.html:84
+#: templates/root/employee/employee_update_3.html:201
+#: templates/root/employee/employee_update_4.html:83
+#: templates/root/employee/employees.html:195
+#: templates/root/employee/employees.html:203
+#: templates/root/employee/employees.html:252
+#: templates/root/partners/partner_bookmark.html:245
+msgid "Yes"
+msgstr "Да"
+
+#: employee/model/employee.py:194 templates/operators/3/operator3.html:180
+#: templates/operators/3/operator3.html:321
+#: templates/operators/4/employee_update_3.html:213
+#: templates/operators/4/employee_update_3.html:381
+#: templates/operators/4/operator4.html:90
+#: templates/root/employee/changed_employee.html:355
+#: templates/root/employee/changed_employee.html:667
+#: templates/root/employee/employee_detail.html:279
+#: templates/root/employee/employee_statistics.html:106
+#: templates/root/employee/employee_translation_3.html:193
+#: templates/root/employee/employee_translation_4.html:90
+#: templates/root/employee/employee_update_3.html:207
+#: templates/root/employee/employee_update_3.html:373
+#: templates/root/employee/employee_update_4.html:89
+#: templates/root/employee/employees.html:194
+#: templates/root/employee/employees.html:202
+#: templates/root/employee/employees.html:251
+#: templates/root/partners/partner_bookmark.html:245
+msgid "No"
+msgstr "Нет"
+
+#: employee/model/employee.py:411
+msgid "Employee changes"
+msgstr ""
+
+#: employee/model/employee.py:412
+msgid "Employees changes"
+msgstr ""
+
+#: employee/model/experience.py:10 employee/model/experience.py:87
+msgid "Organization name ru"
+msgstr "Название организации ()"
+
+#: employee/model/experience.py:11
+msgid "Organization name en"
+msgstr "Название организации ()"
+
+#: employee/model/experience.py:14 employee/model/experience.py:90
+#: employee/model/relative.py:31 employee/model/relative.py:108
+msgid "Position ru"
+msgstr "Должность (русс)"
+
+#: employee/model/experience.py:15 employee/model/relative.py:32
+msgid "Position en"
+msgstr "Должность (англ)"
+
+#: employee/model/experience.py:16 employee/model/experience.py:91
+msgid "Sub division ru"
+msgstr "Подразделение (русс)"
+
+#: employee/model/experience.py:17
+msgid "Sub division en"
+msgstr "Подразделение (англ)"
+
+#: employee/model/experience.py:25 employee/model/experience.py:69
+#: templates/operators/3/operator3.html:27
+#: templates/operators/4/employee_update_3.html:518
+#: templates/root/employee/employee_translation_3.html:471
+#: templates/root/employee/employee_update_3.html:510
+msgid "Experience"
+msgstr "Трудовой опыт"
+
+#: employee/model/experience.py:26 templates/operators/3/operator3.html:437
+#: templates/root/employee/changed_employee.html:514
+#: templates/root/employee/changed_employee.html:826
+#: templates/root/employee/employee_detail.html:438
+#: templates/root/employee/employees.html:306
+msgid "Experiences"
+msgstr "Трудовой опыт"
+
+#: employee/model/experience.py:75
+msgid "Experience file"
+msgstr ""
+
+#: employee/model/experience.py:76
+msgid "Experience files"
+msgstr ""
+
+#: employee/model/experience.py:97 employee/model/experience.py:105
+msgid "Experience change"
+msgstr ""
+
+#: employee/model/experience.py:98
+msgid "Experience changes"
+msgstr ""
+
+#: employee/model/experience.py:111
+msgid "Experience change file"
+msgstr ""
+
+#: employee/model/experience.py:112
+msgid "Experience change files"
+msgstr ""
+
+#: employee/model/family.py:9 employee/model/relative.py:11
+msgid "Not selected"
+msgstr "Не указан"
+
+#: employee/model/family.py:10 templates/operators/3/operator3.html:308
+#: templates/root/employee/employee_statistics.html:49
+#: templates/root/employee/employee_update_3.html:361
+#: templates/root/employee/personal_card.html:280
+msgid "Not married"
+msgstr "Не женат/не замужем"
+
+#: employee/model/family.py:11 templates/operators/3/operator3.html:309
+#: templates/root/employee/employee_statistics.html:50
+#: templates/root/employee/employee_update_3.html:362
+#: templates/root/employee/personal_card.html:281
+msgid "Married"
+msgstr "Женат/Замужем"
+
+#: employee/model/family.py:12 templates/root/employee/personal_card.html:282
+msgid "Divorced"
+msgstr "Разведен/Разведена"
+
+#: employee/model/family.py:13 templates/root/employee/personal_card.html:283
+msgid "Widower"
+msgstr "Вдовец/Вдова"
+
+#: employee/model/family.py:14 templates/operators/3/operator3.html:312
+#: templates/root/employee/employee_update_3.html:365
+#: templates/root/employee/personal_card.html:284
+msgid "Second marriage"
+msgstr "Второй брак"
+
+#: employee/model/family.py:15 templates/operators/3/operator3.html:313
+#: templates/root/employee/employee_update_3.html:366
+#: templates/root/employee/personal_card.html:285
+msgid "Civil marriage"
+msgstr "Гражданский брак"
+
+#: employee/model/family.py:22 employee/model/family.py:28
+#: employee/model/family.py:54 templates/operators/3/operator3.html:25
+#: templates/operators/3/operator3.html:299
+#: templates/operators/3/operator3.html:305
+#: templates/operators/4/employee_update_3.html:358
+#: templates/operators/4/employee_update_3.html:365
+#: templates/root/employee/changed_employee.html:432
+#: templates/root/employee/changed_employee.html:440
+#: templates/root/employee/changed_employee.html:744
+#: templates/root/employee/changed_employee.html:752
+#: templates/root/employee/employee_detail.html:356
+#: templates/root/employee/employee_detail.html:364
+#: templates/root/employee/employee_statistics.html:46
+#: templates/root/employee/employee_translation_3.html:325
+#: templates/root/employee/employee_translation_3.html:332
+#: templates/root/employee/employee_update_3.html:351
+#: templates/root/employee/employee_update_3.html:358
+#: templates/root/employee/employees.html:207
+#: templates/root/employee/personal_card.html:277
+#: templates/root/partners/partner_bookmark.html:330
+msgid "Family status"
+msgstr "Семейный статус"
+
+#: employee/model/family.py:23 employee/model/family.py:55
+#: templates/operators/3/operator3.html:318
+#: templates/operators/4/employee_update_3.html:378
+#: templates/root/employee/employee_translation_3.html:345
+#: templates/root/employee/employee_update_3.html:370
+msgid "Children amount"
+msgstr "Количество детей"
+
+#: employee/model/family.py:29
+msgid "Family statuses"
+msgstr "Семейный статус"
+
+#: employee/model/family.py:36 employee/model/family.py:53
+msgid "Family"
+msgstr ""
+
+#: employee/model/family.py:41
+msgid "Family status file"
+msgstr ""
+
+#: employee/model/family.py:42
+msgid "Family status files"
+msgstr ""
+
+#: employee/model/family.py:59 employee/model/family.py:71
+msgid "Family status change"
+msgstr ""
+
+#: employee/model/family.py:60
+msgid "Family statuses change"
+msgstr ""
+
+#: employee/model/family.py:76
+msgid "Family status change file"
+msgstr ""
+
+#: employee/model/family.py:77
+msgid "Family status change files"
+msgstr ""
+
+#: employee/model/language.py:10
+#: templates/operators/4/employee_update_3.html:145
+#: templates/root/employee/employee_translation_3.html:133
+#: templates/root/employee/employee_update_3.html:139
+#: templates/root/employee/employee_update_3.html:939
+#: templates/root/employee/employees.html:300
+msgid "Best"
+msgstr "Отлично"
+
+#: employee/model/language.py:11 templates/operators/3/operator3.html:125
+#: templates/operators/4/employee_update_3.html:146
+#: templates/root/directory/language_create.html:40
+#: templates/root/directory/language_detail.html:40
+#: templates/root/directory/language_list.html:57
+#: templates/root/employee/employee_translation_3.html:134
+#: templates/root/employee/employee_update_3.html:140
+#: templates/root/employee/employee_update_3.html:940
+#: templates/root/employee/employees.html:301
+msgid "Good"
+msgstr "Хорошо"
+
+#: employee/model/language.py:12 templates/operators/3/operator3.html:126
+#: templates/operators/4/employee_update_3.html:147
+#: templates/root/directory/language_create.html:44
+#: templates/root/directory/language_detail.html:44
+#: templates/root/directory/language_list.html:58
+#: templates/root/employee/employee_translation_3.html:135
+#: templates/root/employee/employee_update_3.html:141
+#: templates/root/employee/employee_update_3.html:941
+#: templates/root/employee/employees.html:302
+msgid "Not bad"
+msgstr "Удовлетворительное"
+
+#: employee/model/language.py:19 employee/model/language.py:27
+#: employee/model/language.py:35 employee/model/language.py:53
+#: templates/root/employee/employee_statistics.html:35
+#: templates/root/employee/employees.html:39
+#: templates/root/employee/employees.html:239
+#: templates/root/employee/ratings.html:47
+msgid "Language"
+msgstr "Язык"
+
+#: employee/model/language.py:20 employee/model/language.py:54
+#: employee/model/relative.py:25 employee/model/relative.py:104
+#: templates/operators/4/operator4.html:187
+#: templates/root/employee/employee_update_4.html:186
+#: templates/root/employee/employees.html:265
+msgid "Level"
+msgstr "Уровень"
+
+#: employee/model/language.py:21 employee/model/language.py:55
+#: templates/operators/4/employee_update_3.html:152
+#: templates/root/employee/employee_translation_3.html:140
+#: templates/root/employee/employee_update_3.html:146
+#: templates/root/employee/employee_update_3.html:946
+msgid "Must be checked"
+msgstr "Необходимо проверить"
+
+#: employee/model/language.py:28
+msgid "Languages"
+msgstr ""
+
+#: employee/model/language.py:41
+msgid "Language file"
+msgstr ""
+
+#: employee/model/language.py:42
+msgid "Language files"
+msgstr ""
+
+#: employee/model/language.py:60 employee/model/language.py:68
+msgid "Language change"
+msgstr ""
+
+#: employee/model/language.py:61
+msgid "Languages change"
+msgstr ""
+
+#: employee/model/language.py:74
+msgid "Language change file"
+msgstr ""
+
+#: employee/model/language.py:75
+msgid "Language change files"
+msgstr ""
+
+#: employee/model/relative.py:12 templates/operators/3/operator3.html:369
+#: templates/root/employee/employee_update_3.html:431
+#: templates/root/employee/employee_update_3.html:1148
+msgid "Wife"
+msgstr "Жена"
+
+#: employee/model/relative.py:13 templates/operators/3/operator3.html:370
+#: templates/root/employee/employee_update_3.html:432
+#: templates/root/employee/employee_update_3.html:1149
+msgid "Husband"
+msgstr "Муж"
+
+#: employee/model/relative.py:14 templates/operators/3/operator3.html:371
+#: templates/root/employee/employee_update_3.html:433
+#: templates/root/employee/employee_update_3.html:1150
+msgid "Mother"
+msgstr "Мать"
+
+#: employee/model/relative.py:15 templates/operators/3/operator3.html:372
+#: templates/root/employee/employee_update_3.html:434
+#: templates/root/employee/employee_update_3.html:1151
+msgid "Father"
+msgstr "Отец"
+
+#: employee/model/relative.py:16 templates/operators/3/operator3.html:373
+#: templates/root/employee/employee_update_3.html:435
+#: templates/root/employee/employee_update_3.html:1152
+msgid "Son"
+msgstr "Сын"
+
+#: employee/model/relative.py:17
+#, fuzzy
+#| msgid "Father"
+msgid "Dauther"
+msgstr "Отец"
+
+#: employee/model/relative.py:18 templates/operators/3/operator3.html:375
+#: templates/root/employee/employee_update_3.html:437
+#: templates/root/employee/employee_update_3.html:1154
+msgid "Grandmother"
+msgstr "Бабушка"
+
+#: employee/model/relative.py:19 templates/operators/3/operator3.html:376
+#: templates/root/employee/employee_update_3.html:438
+#: templates/root/employee/employee_update_3.html:1155
+msgid "Grandfather"
+msgstr "Дедушка"
+
+#: employee/model/relative.py:29 employee/model/relative.py:107
+msgid "Study/work place ru"
+msgstr "Место учёбы/работы (русс)"
+
+#: employee/model/relative.py:30
+msgid "Study/work place en"
+msgstr "Место учёбы/работы (англ)"
+
+#: employee/model/relative.py:39 employee/model/relative.py:87
+#: employee/model/relative.py:103
+msgid "Relative"
+msgstr "Близкие родственники"
+
+#: employee/model/relative.py:40 templates/operators/3/operator3.html:26
+#: templates/operators/3/operator3.html:358
+#: templates/operators/4/employee_update_3.html:426
+#: templates/root/employee/changed_employee.html:465
+#: templates/root/employee/changed_employee.html:777
+#: templates/root/employee/employee_detail.html:389
+#: templates/root/employee/employee_translation_3.html:386
+#: templates/root/employee/employee_update_3.html:418
+msgid "Relatives"
+msgstr "Близкие родственники"
+
+#: employee/model/relative.py:92
+msgid "Relative file"
+msgstr ""
+
+#: employee/model/relative.py:93
+msgid "Relative files"
+msgstr ""
+
+#: employee/model/relative.py:113 employee/model/relative.py:125
+msgid "Relative change"
+msgstr ""
+
+#: employee/model/relative.py:114
+msgid "Relatives change"
+msgstr ""
+
+#: employee/model/relative.py:130
+msgid "Relative change file"
+msgstr ""
+
+#: employee/model/relative.py:131
+msgid "Relative change files"
+msgstr ""
+
+#: employee/model/reward.py:12 employee/model/reward.py:59
+msgid "Description ru"
+msgstr "Описание"
+
+#: employee/model/reward.py:13
+msgid "Description en"
+msgstr "Описание"
+
+#: employee/model/reward.py:18 employee/model/reward.py:42
+#: templates/operators/4/employee_update_3.html:309
+#: templates/root/employee/employee_translation_3.html:284
+#: templates/root/employee/employee_update_3.html:302
+#: templates/root/employee/employee_update_3.html:1087
+msgid "Reward"
+msgstr "Награда"
+
+#: employee/model/reward.py:19 templates/operators/3/operator3.html:255
+#: templates/operators/4/employee_update_3.html:300
+#: templates/root/employee/changed_employee.html:399
+#: templates/root/employee/changed_employee.html:711
+#: templates/root/employee/employee_detail.html:323
+#: templates/root/employee/employee_translation_3.html:275
+#: templates/root/employee/employee_update_3.html:293
+#: templates/root/employee/employees.html:248
+#: templates/root/employee/personal_card.html:272
+msgid "Rewards"
+msgstr "Награды"
+
+#: employee/model/reward.py:47
+msgid "Reward file"
+msgstr ""
+
+#: employee/model/reward.py:48
+msgid "Reward files"
+msgstr ""
+
+#: employee/model/reward.py:63 employee/model/reward.py:75
+msgid "Reward change"
+msgstr ""
+
+#: employee/model/reward.py:64
+msgid "Rewards change"
+msgstr ""
+
+#: employee/model/reward.py:80
+msgid "Reward change file"
+msgstr ""
+
+#: employee/model/reward.py:81
+msgid "Reward change files"
+msgstr ""
+
+#: log/models.py:13
+msgid "deleted"
+msgstr ""
+
+#: log/models.py:14
+msgid "updated"
+msgstr ""
+
+#: log/models.py:15
+msgid "created"
+msgstr ""
+
+#: log/models.py:16
+msgid "logged in"
+msgstr ""
+
+#: message_templates/models.py:7 templates/root/templates/list.html:69
+msgid "Partner"
+msgstr "Партнёр"
+
+#: partner/models.py:98
+msgid "Partner employee request"
+msgstr ""
+
+#: partner/models.py:99
+msgid "Partner employee requests"
+msgstr ""
+
+#: root/views/settings.py:17
+msgid "current password is empty"
+msgstr ""
+
+#: root/views/settings.py:19
+#, fuzzy
+#| msgid "New password"
+msgid "new password is empty"
+msgstr "Новый пароль"
+
+#: root/views/settings.py:21
+#, fuzzy
+#| msgid "Confirm the password"
+msgid "New confirm password is empty"
+msgstr "Подтвердите пароль"
+
+#: root/views/settings.py:24
+#, fuzzy
+#| msgid "Username or Password is incorrect"
+msgid "current password is incorrect"
+msgstr "Логин или пароль неверны"
+
+#: root/views/settings.py:26
+msgid "passwords didn`t match"
+msgstr ""
+
+#: settings/settings.py:143 templates/root/_base.html:130
+#: templates/root/directory/city_create.html:20
+#: templates/root/directory/city_detail.html:20
+#: templates/root/directory/city_list.html:48
+#: templates/root/directory/country_create.html:20
+#: templates/root/directory/country_detail.html:20
+#: templates/root/directory/country_list.html:54
+#: templates/root/directory/district_create.html:29
+#: templates/root/directory/district_detail.html:29
+#: templates/root/directory/district_list.html:59
+#: templates/root/directory/education_create.html:20
+#: templates/root/directory/education_detail.html:20
+#: templates/root/directory/education_list.html:54
+#: templates/root/directory/language_create.html:20
+#: templates/root/directory/language_detail.html:20
+#: templates/root/directory/language_list.html:54
+#: templates/root/employee/ratings.html:51
+msgid "Russian"
+msgstr "Русский"
+
+#: settings/settings.py:144 templates/root/_base.html:134
+#: templates/root/directory/city_create.html:24
+#: templates/root/directory/city_detail.html:24
+#: templates/root/directory/city_list.html:49
+#: templates/root/directory/country_create.html:24
+#: templates/root/directory/country_detail.html:24
+#: templates/root/directory/country_list.html:55
+#: templates/root/directory/district_create.html:33
+#: templates/root/directory/district_detail.html:33
+#: templates/root/directory/district_list.html:60
+#: templates/root/directory/education_create.html:24
+#: templates/root/directory/education_detail.html:24
+#: templates/root/directory/education_list.html:55
+#: templates/root/directory/language_create.html:24
+#: templates/root/directory/language_detail.html:24
+#: templates/root/directory/language_list.html:55
+#: templates/root/employee/ratings.html:50
+msgid "English"
+msgstr "Английский"
+
+#: templates/auth/signin.html:33
+#: templates/root/operators/operator_create.html:21
+#: templates/root/operators/operator_update.html:22
+#: templates/root/operators/operators.html:17
+#: templates/root/operators/operators.html:62
+#: templates/root/partners/partner_create.html:20
+#: templates/root/partners/partner_update.html:92
+#: templates/root/partners/partners.html:17
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: templates/auth/signin.html:38
+#: templates/root/operators/operator_create.html:25
+#: templates/root/operators/operator_update.html:26
+#: templates/root/partners/partner_create.html:24
+#: templates/root/partners/partner_update.html:96
+msgid "Password"
+msgstr "Пароль"
+
+#: templates/auth/signin.html:45
+msgid "Username or Password is incorrect"
+msgstr "Логин или пароль неверны"
+
+#: templates/auth/signin.html:50
+msgid "Log in"
+msgstr "Войти"
+
+#: templates/auth/signin.html:54
+msgid "Forgot password"
+msgstr "Забыли пароль"
+
+#: templates/operators/1/operator1.html:10 templates/operators/1/stat.html:98
+#: templates/operators/2/operator1_employees.html:6
+#: templates/operators/2/operator2.html:10
+#: templates/operators/3/operator2_employees.html:6
+#: templates/operators/3/operator3.html:11
+#: templates/operators/4/operator3_employees.html:6
+#: templates/operators/4/operator4.html:10
+msgid "Register employee"
+msgstr "Зарегистрировать аппликанта"
+
+#: templates/operators/1/operator1.html:15
+#: templates/operators/2/operator2.html:15
+#: templates/operators/3/operator3.html:16
+#: templates/operators/4/employee_update_3.html:23
+#: templates/operators/4/operator4.html:15
+#: templates/root/employee/employee_update_3.html:18
+#: templates/root/employee/personal_card.html:13
+#: templates/root/employee/personal_card.html:33
+msgid "Employee's personal card"
+msgstr "Личная карточка аппликанта"
+
+#: templates/operators/1/operator1.html:54 templates/root/settings/main.html:19
+msgid "Login"
+msgstr "Логин"
+
+#: templates/operators/1/operator1.html:54
+msgid "wishes"
+msgstr "пожеланию"
+
+#: templates/operators/1/operator1.html:82
+#: templates/root/employee/changed_employee.html:69
+#: templates/root/employee/changed_employee.html:130
+#: templates/root/employee/employee_detail.html:97
+#: templates/root/employee/employee_translation_1.html:76
+#: templates/root/employee/employee_update_1.html:74
+#: templates/root/employee/personal_card.html:89
+#: templates/root/partners/partner_bookmark.html:68
+msgid "Birth place"
+msgstr "Место рождения"
+
+#: templates/operators/1/operator1.html:88
+#: templates/root/employee/changed_employee.html:73
+#: templates/root/employee/changed_employee.html:134
+#: templates/root/employee/employee_detail.html:101
+#: templates/root/employee/employee_translation_1.html:81
+#: templates/root/employee/employee_update_1.html:80
+#: templates/root/partners/partner_bookmark.html:72
+msgid "Living address"
+msgstr "Место проживания"
+
+#: templates/operators/1/operator1.html:116
+msgid "Passport copy"
+msgstr "Копия паспорта"
+
+#: templates/operators/1/operator1.html:122
+msgid "Send username and password to user"
+msgstr "Отправить имя пользователя и пароль пользователю"
+
+#: templates/operators/1/operator1.html:144
+#: templates/operators/2/operator2.html:245
+#: templates/operators/3/operator3.html:499
+#: templates/operators/4/employee_update_3.html:592
+#: templates/operators/4/operator4.html:223 templates/operators/_base.html:162
+#: templates/root/directory/city_create.html:34
+#: templates/root/directory/city_detail.html:34
+#: templates/root/directory/country_create.html:30
+#: templates/root/directory/country_detail.html:30
+#: templates/root/directory/district_create.html:39
+#: templates/root/directory/district_detail.html:39
+#: templates/root/directory/education_create.html:30
+#: templates/root/directory/education_detail.html:30
+#: templates/root/directory/language_create.html:50
+#: templates/root/directory/language_detail.html:50
+#: templates/root/employee/employee_detail.html:38
+#: templates/root/employee/employee_translation_1.html:107
+#: templates/root/employee/employee_translation_3.html:540
+#: templates/root/employee/employee_translation_4.html:190
+#: templates/root/employee/employee_update_1.html:109
+#: templates/root/employee/employee_update_2.html:249
+#: templates/root/employee/employee_update_3.html:584
+#: templates/root/employee/employee_update_4.html:222
+#: templates/root/operators/operator_create.html:69
+#: templates/root/operators/operator_group_create.html:79
+#: templates/root/operators/operator_group_update.html:78
+#: templates/root/operators/operator_update.html:71
+#: templates/root/partners/partner_create.html:79
+#: templates/root/partners/partner_update.html:75
+#: templates/root/partners/partner_update.html:106
+#: templates/root/settings/main.html:45
+#: templates/root/templates/employees.html:137
+#: templates/root/templates/list.html:77
+#: templates/root/templates/partners.html:111
+msgid "Save"
+msgstr "Сохранить"
+
+#: templates/operators/1/operator1.html:147
+#: templates/operators/2/operator2.html:248
+#: templates/operators/3/operator3.html:502
+#: templates/operators/4/employee_update_3.html:595
+#: templates/operators/4/operator4.html:226
+#: templates/root/directory/city_create.html:37
+#: templates/root/directory/city_detail.html:37
+#: templates/root/directory/country_create.html:33
+#: templates/root/directory/country_detail.html:33
+#: templates/root/directory/district_create.html:42
+#: templates/root/directory/district_detail.html:42
+#: templates/root/directory/education_create.html:33
+#: templates/root/directory/education_detail.html:33
+#: templates/root/directory/language_create.html:53
+#: templates/root/directory/language_detail.html:53
+#: templates/root/employee/employee_translation_1.html:110
+#: templates/root/employee/employee_translation_4.html:193
+#: templates/root/employee/employee_update_1.html:112
+#: templates/root/employee/employee_update_2.html:252
+#: templates/root/employee/employee_update_3.html:587
+#: templates/root/employee/employee_update_4.html:225
+#: templates/root/operators/operator_create.html:72
+#: templates/root/operators/operator_group_create.html:82
+#: templates/root/operators/operator_group_update.html:81
+#: templates/root/operators/operator_update.html:74
+#: templates/root/partners/partner_create.html:82
+#: templates/root/partners/partner_update.html:78
+#: templates/root/partners/partner_update.html:109
+msgid "Clear"
+msgstr "Очистить"
+
+#: templates/operators/1/operator1.html:157
+msgid "Passport scanner found"
+msgstr "Обнаружен сканер паспорта"
+
+#: templates/operators/1/operator1.html:158
+msgid "Passport scanner not found"
+msgstr "Сканнер паспорта не найден"
+
+#: templates/operators/1/stat.html:80 templates/operators/_base.html:94
+#: templates/root/_base.html:116
+msgid "Profile"
+msgstr "Профиль"
+
+#: templates/operators/1/stat.html:83 templates/root/_base.html:119
+#: templates/root/settings/main.html:6
+msgid "Settings"
+msgstr "Настройки"
+
+#: templates/operators/1/stat.html:87 templates/operators/_base.html:101
+#: templates/root/_base.html:123
+msgid "Logout"
+msgstr "Выйти"
+
+#: templates/operators/1/stat.html:102
+#: templates/root/employee/changed_employee.html:7
+#: templates/root/employee/employee_detail.html:7
+#: templates/root/partners/partner_bookmark.html:7
+msgid "Employee's Personal card"
+msgstr "Личная карточка аппликанта"
+
+#: templates/operators/2/operator1_employees.html:10
+#: templates/operators/3/operator2_employees.html:10
+#: templates/operators/4/operator3_employees.html:10
+#: templates/root/employee/changed_employees.html:10
+#: templates/root/employee/employee_statistics.html:10
+#: templates/root/employee/employees.html:14
+#: templates/root/employee/ratings.html:13
+#: templates/root/operators/operator_groups.html:11
+#: templates/root/operators/operators.html:10
+#: templates/root/partners/partners.html:10
+msgid "Filter"
+msgstr "Фильтр"
+
+#: templates/operators/2/operator1_employees.html:17
+#: templates/operators/2/operator1_employees.html:54
+#: templates/operators/3/operator2_employees.html:17
+#: templates/operators/3/operator2_employees.html:54
+#: templates/operators/4/operator3_employees.html:17
+#: templates/operators/4/operator3_employees.html:54
+#: templates/root/employee/changed_employees.html:17
+#: templates/root/employee/changed_employees.html:87
+#: templates/root/employee/employee_statistics.html:147
+#: templates/root/employee/employees.html:21
+#: templates/root/employee/employees.html:90
+#: templates/root/employee/employees.html:223
+#: templates/root/employee/personal_card.html:62
+#: templates/root/employee/personal_card.html:311
+#: templates/root/employee/ratings.html:19
+#: templates/root/employee/ratings.html:90
+#: templates/root/operators/operators.html:23
+#: templates/root/operators/operators.html:61
+#: templates/root/partners/partner_bookmarks.html:19
+#: templates/root/partners/partner_create.html:49
+#: templates/root/partners/partner_create.html:53
+#: templates/root/partners/partner_update.html:45
+#: templates/root/partners/partner_update.html:49
+#: templates/root/partners/partners.html:23
+#: templates/root/partners/partners_bookmark.html:27
+#: templates/root/templates/detail.html:27
+#: templates/root/templates/detail.html:74
+#: templates/root/templates/employees.html:26
+#: templates/root/templates/employees.html:72
+msgid "Fullname"
+msgstr "Ф.И.О"
+
+#: templates/operators/2/operator1_employees.html:31
+#: templates/operators/3/operator2_employees.html:31
+#: templates/operators/3/operator3.html:43
+#: templates/operators/3/operator3.html:114
+#: templates/operators/3/operator3.html:123
+#: templates/operators/3/operator3.html:307
+#: templates/operators/3/operator3.html:320
+#: templates/operators/3/operator3.html:368
+#: templates/operators/4/employee_update_3.html:52
+#: templates/operators/4/employee_update_3.html:135
+#: templates/operators/4/employee_update_3.html:144
+#: templates/operators/4/employee_update_3.html:367
+#: templates/operators/4/employee_update_3.html:380
+#: templates/operators/4/employee_update_3.html:437
+#: templates/operators/4/operator3_employees.html:31
+#: templates/root/directory/district_create.html:22
+#: templates/root/directory/district_detail.html:22
+#: templates/root/directory/district_list.html:25
+#: templates/root/employee/changed_employees.html:29
+#: templates/root/employee/changed_employees.html:37
+#: templates/root/employee/changed_employees.html:48
+#: templates/root/employee/changed_employees.html:57
+#: templates/root/employee/employee_statistics.html:19
+#: templates/root/employee/employee_statistics.html:28
+#: templates/root/employee/employee_statistics.html:37
+#: templates/root/employee/employee_statistics.html:48
+#: templates/root/employee/employee_statistics.html:75
+#: templates/root/employee/employee_statistics.html:84
+#: templates/root/employee/employee_statistics.html:114
+#: templates/root/employee/employee_translation_3.html:46
+#: templates/root/employee/employee_translation_3.html:123
+#: templates/root/employee/employee_translation_3.html:132
+#: templates/root/employee/employee_translation_3.html:334
+#: templates/root/employee/employee_translation_3.html:347
+#: templates/root/employee/employee_translation_3.html:397
+#: templates/root/employee/employee_translation_4.html:28
+#: templates/root/employee/employee_update_3.html:46
+#: templates/root/employee/employee_update_3.html:129
+#: templates/root/employee/employee_update_3.html:138
+#: templates/root/employee/employee_update_3.html:360
+#: templates/root/employee/employee_update_3.html:372
+#: templates/root/employee/employee_update_3.html:429
+#: templates/root/employee/employee_update_3.html:844
+#: templates/root/employee/employee_update_3.html:931
+#: templates/root/employee/employee_update_3.html:938
+#: templates/root/employee/employee_update_3.html:1147
+#: templates/root/employee/employee_update_4.html:27
+#: templates/root/employee/employees.html:33
+#: templates/root/employee/employees.html:41
+#: templates/root/employee/employees.html:52
+#: templates/root/employee/employees.html:61
+#: templates/root/employee/employees.html:184
+#: templates/root/employee/employees.html:193
+#: templates/root/employee/employees.html:201
+#: templates/root/employee/employees.html:209
+#: templates/root/employee/employees.html:241
+#: templates/root/employee/employees.html:250
+#: templates/root/employee/employees.html:258
+#: templates/root/employee/employees.html:267
+#: templates/root/employee/employees.html:279
+#: templates/root/employee/employees.html:299
+#: templates/root/employee/employees.html:312
+#: templates/root/employee/employees.html:325
+#: templates/root/employee/ratings.html:25
+#: templates/root/employee/ratings.html:41
+#: templates/root/employee/ratings.html:49
+#: templates/root/employee/ratings.html:59
+#: templates/root/operators/operator_create.html:50
+#: templates/root/operators/operator_create.html:59
+#: templates/root/operators/operator_group_create.html:24
+#: templates/root/operators/operator_group_create.html:33
+#: templates/root/operators/operator_group_create.html:43
+#: templates/root/operators/operator_group_create.html:52
+#: templates/root/operators/operator_group_create.html:61
+#: templates/root/operators/operator_group_create.html:70
+#: templates/root/operators/operator_group_update.html:24
+#: templates/root/operators/operator_group_update.html:33
+#: templates/root/operators/operator_group_update.html:42
+#: templates/root/operators/operator_group_update.html:51
+#: templates/root/operators/operator_group_update.html:60
+#: templates/root/operators/operator_group_update.html:69
+#: templates/root/operators/operator_groups.html:26
+#: templates/root/operators/operator_groups.html:48
+#: templates/root/operators/operator_update.html:52
+#: templates/root/operators/operator_update.html:61
+#: templates/root/templates/detail.html:35
+#: templates/root/templates/detail.html:47
+#: templates/root/templates/employees.html:34
+#: templates/root/templates/employees.html:45
+#: templates/root/templates/list.html:59
+#: templates/site/employee/update_operator_3_education.html:56
+#: templates/site/employee/update_operator_4.html:57
+msgid "Select"
+msgstr "Выберите"
+
+#: templates/operators/2/operator1_employees.html:40
+#: templates/operators/3/operator2_employees.html:40
+#: templates/operators/4/operator3_employees.html:40
+#: templates/root/directory/city_list.html:24
+#: templates/root/directory/country_list.html:30
+#: templates/root/directory/district_list.html:35
+#: templates/root/directory/education_list.html:30
+#: templates/root/directory/language_list.html:30
+#: templates/root/employee/changed_employees.html:68
+#: templates/root/employee/employees.html:72
+#: templates/root/employee/employees.html:73
+#: templates/root/employee/employees.html:161
+#: templates/root/employee/employees.html:337
+#: templates/root/employee/ratings.html:77
+#: templates/root/operators/operator_groups.html:70
+#: templates/root/operators/operators.html:36
+#: templates/root/partners/partners.html:36
+#: templates/root/templates/detail.html:58
+#: templates/root/templates/employees.html:56
+#: templates/root/templates/partners.html:41
+msgid "Search"
+msgstr "Поиск"
+
+#: templates/operators/2/operator1_employees.html:123
+#: templates/operators/2/operator1_employees.html:135
+#: templates/operators/2/operator2.html:276
+#: templates/operators/2/operator2.html:289
+#: templates/operators/3/operator2_employees.html:123
+#: templates/operators/3/operator2_employees.html:136
+#: templates/operators/3/operator3.html:529
+#: templates/operators/3/operator3.html:542
+#: templates/operators/4/employee_update_3.html:623
+#: templates/operators/4/employee_update_3.html:636
+#: templates/operators/4/operator4.html:254
+#: templates/operators/4/operator4.html:267 templates/root/_base.html:210
+#: templates/root/partners/partner_bookmarks.html:6
+msgid "List of employees"
+msgstr "Список аппликантов"
+
+#: templates/operators/2/operator2.html:171
+#, fuzzy
+#| msgid "Photo1"
+msgid "Photo 1"
+msgstr "Фото 1"
+
+#: templates/operators/2/operator2.html:192
+msgid "photo2"
+msgstr "Фото 2"
+
+#: templates/operators/2/operator2.html:213
+msgid "photo3"
+msgstr "Фото 3"
+
+#: templates/operators/2/operator2.html:234
+msgid "photo4"
+msgstr "Фото 4"
+
+#: templates/operators/3/operator3.html:22
+#: templates/operators/3/operator3.html:104
+#: templates/root/employee/changed_employee.html:313
+#: templates/root/employee/changed_employee.html:625
+#: templates/root/employee/employee_detail.html:237
+#: templates/root/employee/personal_card.html:161
+msgid "Knowledge of languages"
+msgstr "Знание языков"
+
+#: templates/operators/3/operator3.html:24
+msgid "Received Awards"
+msgstr "Полученные награды"
+
+#: templates/operators/3/operator3.html:50
+#: templates/operators/4/employee_update_3.html:59
+#: templates/root/employee/changed_employee.html:272
+#: templates/root/employee/changed_employee.html:584
+#: templates/root/employee/employee_detail.html:196
+#: templates/root/employee/employee_translation_3.html:53
+#: templates/root/employee/employee_update_3.html:53
+#: templates/root/employee/employee_update_3.html:849
+#: templates/root/partners/partner_bookmark.html:162
+#: templates/site/employee/update_operator_3_education.html:63
+msgid "Education name"
+msgstr "Учебное заведение"
+
+#: templates/operators/3/operator3.html:54
+#: templates/operators/4/employee_update_3.html:63
+#: templates/root/employee/changed_employee.html:276
+#: templates/root/employee/changed_employee.html:588
+#: templates/root/employee/employee_detail.html:200
+#: templates/root/employee/employee_translation_3.html:58
+#: templates/root/employee/employee_update_3.html:57
+#: templates/root/employee/employee_update_3.html:853
+#: templates/root/partners/partner_bookmark.html:166
+#: templates/site/employee/update_operator_3_education.html:67
+msgid "Education address"
+msgstr "Адрес учебного заведения"
+
+#: templates/operators/3/operator3.html:60
+#: templates/root/employee/changed_employee.html:280
+#: templates/root/employee/changed_employee.html:592
+#: templates/root/employee/employee_detail.html:204
+#: templates/root/employee/personal_card.html:213
+#: templates/root/partners/partner_bookmark.html:170
+msgid "Education specialization"
+msgstr "Специальность"
+
+#: templates/operators/3/operator3.html:66
+#: templates/operators/4/employee_update_3.html:75
+#: templates/root/employee/changed_employee.html:284
+#: templates/root/employee/changed_employee.html:596
+#: templates/root/employee/employee_detail.html:208
+#: templates/root/employee/employee_translation_3.html:72
+#: templates/root/employee/employee_update_3.html:69
+#: templates/root/employee/employee_update_3.html:866
+#: templates/root/partners/partner_bookmark.html:174
+#: templates/site/employee/update_operator_3_education.html:79
+msgid "Education date start"
+msgstr "Дата начала обучения"
+
+#: templates/operators/3/operator3.html:70
+#: templates/operators/4/employee_update_3.html:79
+#: templates/root/employee/changed_employee.html:288
+#: templates/root/employee/changed_employee.html:600
+#: templates/root/employee/employee_detail.html:212
+#: templates/root/employee/employee_translation_3.html:76
+#: templates/root/employee/employee_update_3.html:73
+#: templates/root/employee/employee_update_3.html:870
+#: templates/root/partners/partner_bookmark.html:178
+#: templates/site/employee/update_operator_3_education.html:83
+msgid "Education date end"
+msgstr "Дата окончания обучения"
+
+#: templates/operators/3/operator3.html:74
+#: templates/root/employee/changed_employee.html:292
+#: templates/root/employee/changed_employee.html:604
+#: templates/root/employee/employee_detail.html:216
+#: templates/root/partners/partner_bookmark.html:182
+msgid "Education other"
+msgstr "Прочие данные об учебе"
+
+#: templates/operators/3/operator3.html:80
+#: templates/operators/3/operator3.html:136
+#: templates/operators/3/operator3.html:227
+#: templates/operators/3/operator3.html:274
+#: templates/operators/3/operator3.html:332
+#: templates/operators/3/operator3.html:413
+#: templates/operators/3/operator3.html:478
+#: templates/operators/4/employee_update_3.html:89
+#: templates/operators/4/employee_update_3.html:157
+#: templates/operators/4/employee_update_3.html:259
+#: templates/operators/4/employee_update_3.html:320
+#: templates/operators/4/employee_update_3.html:392
+#: templates/operators/4/employee_update_3.html:483
+#: templates/operators/4/employee_update_3.html:560
+#: templates/root/employee/employee_update_3.html:83
+#: templates/root/employee/employee_update_3.html:151
+#: templates/root/employee/employee_update_3.html:253
+#: templates/root/employee/employee_update_3.html:313
+#: templates/root/employee/employee_update_3.html:384
+#: templates/root/employee/employee_update_3.html:475
+#: templates/root/employee/employee_update_3.html:552
+#: templates/root/employee/employee_update_3.html:880
+#: templates/root/employee/employee_update_3.html:951
+#: templates/root/employee/employee_update_3.html:1034
+#: templates/root/employee/employee_update_3.html:1098
+#: templates/root/employee/employee_update_3.html:1193
+#: templates/root/employee/employee_update_3.html:1280
+msgid "Files"
+msgstr "Файлы"
+
+#: templates/operators/3/operator3.html:80
+#: templates/operators/3/operator3.html:136
+#: templates/operators/3/operator3.html:227
+#: templates/operators/3/operator3.html:274
+#: templates/operators/3/operator3.html:332
+#: templates/operators/3/operator3.html:413
+#: templates/operators/3/operator3.html:478
+#: templates/operators/4/operator4.html:112
+#: templates/operators/4/operator4.html:125
+#: templates/operators/4/operator4.html:129
+#: templates/operators/4/operator4.html:133
+#: templates/root/employee/employee_translation_4.html:112
+#: templates/root/employee/employee_translation_4.html:126
+#: templates/root/employee/employee_translation_4.html:131
+#: templates/root/employee/employee_translation_4.html:136
+#: templates/root/employee/employee_update_4.html:111
+#: templates/root/employee/employee_update_4.html:124
+#: templates/root/employee/employee_update_4.html:128
+#: templates/root/employee/employee_update_4.html:132
+#: templates/site/employee/update_operator_4.html:81
+#: templates/site/employee/update_operator_4.html:114
+#: templates/site/employee/update_operator_4.html:118
+#: templates/site/employee/update_operator_4.html:122
+msgid "not required"
+msgstr "не обязательно"
+
+#: templates/operators/3/operator3.html:84
+#: templates/operators/3/operator3.html:140
+#: templates/operators/3/operator3.html:231
+#: templates/operators/3/operator3.html:278
+#: templates/operators/3/operator3.html:336
+#: templates/operators/3/operator3.html:417
+#: templates/operators/3/operator3.html:482
+msgid "Upload files"
+msgstr "Загрузить файлы"
+
+#: templates/operators/3/operator3.html:96
+#: templates/operators/3/operator3.html:151
+#: templates/operators/3/operator3.html:247
+#: templates/operators/3/operator3.html:289
+#: templates/operators/3/operator3.html:428
+#: templates/operators/3/operator3.html:493
+#: templates/operators/4/employee_update_3.html:116
+#: templates/operators/4/employee_update_3.html:183
+#: templates/operators/4/employee_update_3.html:289
+#: templates/operators/4/employee_update_3.html:348
+#: templates/operators/4/employee_update_3.html:416
+#: templates/operators/4/employee_update_3.html:509
+#: templates/operators/4/employee_update_3.html:586
+#: templates/root/directory/city_create.html:10
+#: templates/root/directory/city_detail.html:10
+#: templates/root/directory/city_list.html:34
+#: templates/root/directory/country_create.html:10
+#: templates/root/directory/country_detail.html:10
+#: templates/root/directory/country_list.html:40
+#: templates/root/directory/district_create.html:10
+#: templates/root/directory/district_detail.html:10
+#: templates/root/directory/district_list.html:45
+#: templates/root/directory/education_create.html:10
+#: templates/root/directory/education_detail.html:10
+#: templates/root/directory/education_list.html:40
+#: templates/root/directory/language_create.html:10
+#: templates/root/directory/language_detail.html:10
+#: templates/root/directory/language_list.html:40
+#: templates/root/employee/employee_update_3.html:110
+#: templates/root/employee/employee_update_3.html:177
+#: templates/root/employee/employee_update_3.html:283
+#: templates/root/employee/employee_update_3.html:341
+#: templates/root/employee/employee_update_3.html:408
+#: templates/root/employee/employee_update_3.html:501
+#: templates/root/employee/employee_update_3.html:578
+#: templates/root/operators/operator_groups.html:80
+#: templates/root/operators/operators.html:46
+#: templates/root/partners/partners.html:46
+msgid "Add"
+msgstr "Добавить"
+
+#: templates/operators/3/operator3.html:112
+#: templates/operators/4/employee_update_3.html:133
+#: templates/root/employee/changed_employee.html:321
+#: templates/root/employee/changed_employee.html:633
+#: templates/root/employee/employee_detail.html:245
+#: templates/root/employee/employee_translation_3.html:121
+#: templates/root/employee/employee_update_3.html:127
+#: templates/root/employee/employee_update_3.html:929
+#: templates/root/partners/partner_bookmark.html:211
+msgid "Language name"
+msgstr "Название языка"
+
+#: templates/operators/3/operator3.html:121
+#: templates/root/employee/changed_employee.html:325
+#: templates/root/employee/changed_employee.html:637
+#: templates/root/employee/employee_detail.html:249
+#: templates/root/partners/partner_bookmark.html:215
+msgid "Language level"
+msgstr "Уровень знания"
+
+#: templates/operators/3/operator3.html:124
+#: templates/root/directory/language_create.html:36
+#: templates/root/directory/language_detail.html:36
+#: templates/root/directory/language_list.html:56
+msgid "Excellent"
+msgstr "Отлично"
+
+#: templates/operators/3/operator3.html:131
+msgid "Required to check"
+msgstr "Необходимо проверить"
+
+#: templates/operators/3/operator3.html:194
+#: templates/root/employee/changed_employee.html:358
+#: templates/root/employee/changed_employee.html:670
+#: templates/root/employee/employee_detail.html:282
+#: templates/root/partners/partner_bookmark.html:248
+msgid "Military name"
+msgstr "Наименование военной части"
+
+#: templates/operators/3/operator3.html:198
+#: templates/root/employee/changed_employee.html:366
+#: templates/root/employee/changed_employee.html:678
+#: templates/root/employee/employee_detail.html:290
+#: templates/root/employee/personal_card.html:260
+#: templates/root/partners/partner_bookmark.html:256
+msgid "Military region"
+msgstr "Регион"
+
+#: templates/operators/3/operator3.html:205
+#: templates/root/employee/changed_employee.html:374
+#: templates/root/employee/changed_employee.html:686
+#: templates/root/employee/employee_detail.html:298
+#: templates/root/partners/partner_bookmark.html:264
+msgid "Military specialization"
+msgstr "Специальность"
+
+#: templates/operators/3/operator3.html:211
+#: templates/root/employee/changed_employee.html:362
+#: templates/root/employee/changed_employee.html:674
+#: templates/root/employee/employee_detail.html:286
+#: templates/root/partners/partner_bookmark.html:252
+msgid "Military date start"
+msgstr "Дата начала службы"
+
+#: templates/operators/3/operator3.html:215
+#: templates/root/employee/changed_employee.html:370
+#: templates/root/employee/changed_employee.html:682
+#: templates/root/employee/employee_detail.html:294
+#: templates/root/partners/partner_bookmark.html:260
+msgid "Military date end"
+msgstr "Дата окончания службы"
+
+#: templates/operators/3/operator3.html:219
+#: templates/root/employee/changed_employee.html:378
+#: templates/root/employee/changed_employee.html:690
+#: templates/root/employee/employee_detail.html:302
+#: templates/root/partners/partner_bookmark.html:268
+msgid "Military rank"
+msgstr "Звание"
+
+#: templates/operators/3/operator3.html:263
+#: templates/root/employee/changed_employee.html:407
+#: templates/root/employee/changed_employee.html:719
+#: templates/root/employee/employee_detail.html:331
+#: templates/root/partners/partner_bookmark.html:297
+msgid "Reward name"
+msgstr "Награда"
+
+#: templates/operators/3/operator3.html:267
+#: templates/root/employee/changed_employee.html:411
+#: templates/root/employee/changed_employee.html:723
+#: templates/root/employee/employee_detail.html:335
+#: templates/root/partners/partner_bookmark.html:301
+msgid "Reward comment"
+msgstr "Комментарий"
+
+#: templates/operators/3/operator3.html:310
+#: templates/root/employee/employee_update_3.html:363
+msgid "Divorce"
+msgstr "Развод"
+
+#: templates/operators/3/operator3.html:311
+#: templates/root/employee/employee_update_3.html:364
+msgid "Widow"
+msgstr "Вдова"
+
+#: templates/operators/3/operator3.html:326
+msgid "4 more"
+msgstr "Больше 4"
+
+#: templates/operators/3/operator3.html:366
+#: templates/operators/4/employee_update_3.html:435
+#: templates/root/employee/changed_employee.html:473
+#: templates/root/employee/changed_employee.html:785
+#: templates/root/employee/employee_detail.html:397
+#: templates/root/employee/employee_translation_3.html:395
+#: templates/root/employee/employee_update_3.html:427
+#: templates/root/employee/employee_update_3.html:1145
+#: templates/root/employee/personal_card.html:308
+#: templates/root/partners/partner_bookmark.html:363
+msgid "Relative level"
+msgstr "Степень родства"
+
+#: templates/operators/3/operator3.html:374
+#: templates/root/employee/employee_update_3.html:436
+#: templates/root/employee/employee_update_3.html:1153
+msgid "Daughter"
+msgstr "Дочь"
+
+#: templates/operators/3/operator3.html:380
+#: templates/root/employee/changed_employee.html:477
+#: templates/root/employee/changed_employee.html:789
+#: templates/root/employee/employee_detail.html:401
+#: templates/root/employee/employee_update_3.html:1159
+#: templates/root/partners/partner_bookmark.html:367
+msgid "Relative fullname"
+msgstr "Ф.И.О. родственника"
+
+#: templates/operators/3/operator3.html:385
+#: templates/operators/4/employee_update_3.html:455
+#: templates/root/employee/changed_employee.html:481
+#: templates/root/employee/changed_employee.html:793
+#: templates/root/employee/employee_detail.html:405
+#: templates/root/employee/employee_translation_3.html:416
+#: templates/root/employee/employee_update_3.html:447
+#: templates/root/employee/employee_update_3.html:1163
+#: templates/root/partners/partner_bookmark.html:371
+msgid "Relative birth date"
+msgstr "Год рождения"
+
+#: templates/operators/3/operator3.html:391
+#: templates/root/employee/employee_update_3.html:1169
+msgid "Relative work/education address"
+msgstr "Место учебы, работы"
+
+#: templates/operators/3/operator3.html:398
+#: templates/operators/4/employee_update_3.html:468
+#: templates/root/employee/changed_employee.html:489
+#: templates/root/employee/changed_employee.html:801
+#: templates/root/employee/employee_detail.html:413
+#: templates/root/employee/employee_translation_3.html:429
+#: templates/root/employee/employee_update_3.html:460
+#: templates/root/employee/employee_update_3.html:1176
+#: templates/root/partners/partner_bookmark.html:379
+msgid "Relative position"
+msgstr "Должность"
+
+#: templates/operators/3/operator3.html:402
+#: templates/operators/4/employee_update_3.html:472
+#: templates/root/employee/changed_employee.html:493
+#: templates/root/employee/changed_employee.html:805
+#: templates/root/employee/employee_detail.html:417
+#: templates/root/employee/employee_translation_3.html:434
+#: templates/root/employee/employee_update_3.html:464
+#: templates/root/employee/employee_update_3.html:1180
+#: templates/root/employee/personal_card.html:323
+#: templates/root/partners/partner_bookmark.html:383
+msgid "Relative living address"
+msgstr "Адрес проживания"
+
+#: templates/operators/3/operator3.html:446
+#: templates/root/employee/changed_employee.html:522
+#: templates/root/employee/changed_employee.html:834
+#: templates/root/employee/employee_detail.html:446
+#: templates/root/partners/partner_bookmark.html:412
+msgid "Experience organization"
+msgstr "Организация"
+
+#: templates/operators/3/operator3.html:450
+#: templates/root/employee/changed_employee.html:526
+#: templates/root/employee/changed_employee.html:838
+#: templates/root/employee/employee_detail.html:450
+#: templates/root/partners/partner_bookmark.html:416
+msgid "Experience date start"
+msgstr "Дата начала работы"
+
+#: templates/operators/3/operator3.html:454
+#: templates/root/employee/changed_employee.html:530
+#: templates/root/employee/changed_employee.html:842
+#: templates/root/employee/employee_detail.html:454
+#: templates/root/partners/partner_bookmark.html:420
+msgid "Experience date end"
+msgstr "Дата окончания работы"
+
+#: templates/operators/3/operator3.html:460
+#: templates/root/employee/changed_employee.html:534
+#: templates/root/employee/changed_employee.html:846
+#: templates/root/employee/employee_detail.html:458
+#: templates/root/partners/partner_bookmark.html:424
+msgid "Experience position"
+msgstr "Должность"
+
+#: templates/operators/3/operator3.html:464
+#: templates/root/employee/changed_employee.html:538
+#: templates/root/employee/changed_employee.html:850
+#: templates/root/employee/employee_detail.html:462
+#: templates/root/partners/partner_bookmark.html:428
+msgid "Experience subdivision"
+msgstr "Подразделение"
+
+#: templates/operators/3/operator3.html:468
+#: templates/root/employee/changed_employee.html:542
+#: templates/root/employee/changed_employee.html:854
+#: templates/root/employee/employee_detail.html:466
+#: templates/root/partners/partner_bookmark.html:432
+msgid "Experience address"
+msgstr "Место нахождения/адресс"
+
+#: templates/operators/4/employee_update_3.html:18
+#: templates/root/employee/employee_translation_1.html:9
+#: templates/root/employee/employee_translation_3.html:13
+#: templates/root/employee/employee_translation_4.html:11
+#: templates/root/employee/employee_update_1.html:7
+#: templates/root/employee/employee_update_2.html:6
+#: templates/root/employee/employee_update_3.html:13
+#: templates/root/employee/employee_update_4.html:10
+msgid "Change employee"
+msgstr ""
+
+#: templates/operators/4/employee_update_3.html:24
+#: templates/root/employee/changed_employee.html:17
+#: templates/root/employee/changed_employee.html:18
+#: templates/root/employee/changed_employee.html:19
+#: templates/root/employee/changed_employee.html:20
+#: templates/root/employee/changed_employee.html:28
+#: templates/root/employee/changed_employee.html:89
+#: templates/root/employee/changed_employee.html:157
+#: templates/root/employee/changed_employee.html:202
+#: templates/root/employee/changed_employee.html:254
+#: templates/root/employee/changed_employee.html:566
+#: templates/root/employee/changed_employee.html:884
+#: templates/root/employee/changed_employee.html:929
+#: templates/root/employee/employee_detail.html:46
+#: templates/root/employee/employee_detail.html:47
+#: templates/root/employee/employee_detail.html:48
+#: templates/root/employee/employee_detail.html:49
+#: templates/root/employee/employee_detail.html:56
+#: templates/root/employee/employee_detail.html:128
+#: templates/root/employee/employee_detail.html:178
+#: templates/root/employee/employee_detail.html:496 templates/root/logs.html:21
+#: templates/root/operators/operator_create.html:57
+#: templates/root/operators/operator_group_create.html:41
+#: templates/root/operators/operator_group_create.html:50
+#: templates/root/operators/operator_group_create.html:59
+#: templates/root/operators/operator_group_create.html:68
+#: templates/root/operators/operator_group_update.html:40
+#: templates/root/operators/operator_group_update.html:49
+#: templates/root/operators/operator_group_update.html:58
+#: templates/root/operators/operator_group_update.html:67
+#: templates/root/operators/operator_groups.html:98
+#: templates/root/operators/operator_groups.html:99
+#: templates/root/operators/operator_groups.html:100
+#: templates/root/operators/operator_groups.html:101
+#: templates/root/operators/operator_update.html:59
+#: templates/root/operators/operators.html:66
+#: templates/root/partners/partner_bookmark.html:17
+#: templates/root/partners/partner_bookmark.html:18
+#: templates/root/partners/partner_bookmark.html:19
+#: templates/root/partners/partner_bookmark.html:20
+#: templates/root/partners/partner_bookmark.html:27
+#: templates/root/partners/partner_bookmark.html:94
+#: templates/root/partners/partner_bookmark.html:144
+#: templates/root/partners/partner_bookmark.html:462
+msgid "Operator"
+msgstr "Оператор"
+
+#: templates/operators/4/employee_update_3.html:69
+#: templates/root/employee/employee_translation_3.html:65
+#: templates/root/employee/employee_update_3.html:63
+#: templates/root/employee/employee_update_3.html:860
+#: templates/site/employee/update_operator_3_education.html:73
+msgid "Specialization"
+msgstr "Специальность"
+
+#: templates/operators/4/employee_update_3.html:83
+#: templates/root/employee/employee_translation_3.html:80
+#: templates/root/employee/employee_update_3.html:77
+#: templates/root/employee/employee_update_3.html:874
+msgid "Another info"
+msgstr "Дополнительно"
+
+#: templates/operators/4/employee_update_3.html:89
+#: templates/operators/4/employee_update_3.html:157
+#: templates/operators/4/employee_update_3.html:259
+#: templates/operators/4/employee_update_3.html:320
+#: templates/operators/4/employee_update_3.html:392
+#: templates/operators/4/employee_update_3.html:483
+#: templates/operators/4/employee_update_3.html:560
+#: templates/root/employee/employee_update_3.html:83
+#: templates/root/employee/employee_update_3.html:151
+#: templates/root/employee/employee_update_3.html:253
+#: templates/root/employee/employee_update_3.html:313
+#: templates/root/employee/employee_update_3.html:384
+#: templates/root/employee/employee_update_3.html:475
+#: templates/root/employee/employee_update_3.html:552
+#: templates/root/employee/employee_update_3.html:880
+#: templates/root/employee/employee_update_3.html:951
+#: templates/root/employee/employee_update_3.html:1034
+#: templates/root/employee/employee_update_3.html:1098
+#: templates/root/employee/employee_update_3.html:1193
+#: templates/root/employee/employee_update_3.html:1280
+msgid "Not required"
+msgstr "не обязательно"
+
+#: templates/operators/4/employee_update_3.html:93
+#: templates/operators/4/employee_update_3.html:161
+#: templates/operators/4/employee_update_3.html:263
+#: templates/operators/4/employee_update_3.html:324
+#: templates/operators/4/employee_update_3.html:396
+#: templates/operators/4/employee_update_3.html:487
+#: templates/operators/4/employee_update_3.html:564
+#: templates/root/employee/employee_translation_3.html:90
+#: templates/root/employee/employee_translation_3.html:148
+#: templates/root/employee/employee_translation_3.html:247
+#: templates/root/employee/employee_translation_3.html:300
+#: templates/root/employee/employee_translation_3.html:362
+#: templates/root/employee/employee_translation_3.html:448
+#: templates/root/employee/employee_translation_3.html:520
+#: templates/root/employee/employee_update_3.html:87
+#: templates/root/employee/employee_update_3.html:155
+#: templates/root/employee/employee_update_3.html:257
+#: templates/root/employee/employee_update_3.html:317
+#: templates/root/employee/employee_update_3.html:388
+#: templates/root/employee/employee_update_3.html:479
+#: templates/root/employee/employee_update_3.html:556
+#: templates/root/employee/employee_update_3.html:884
+#: templates/root/employee/employee_update_3.html:955
+#: templates/root/employee/employee_update_3.html:1038
+#: templates/root/employee/employee_update_3.html:1102
+#: templates/root/employee/employee_update_3.html:1197
+#: templates/root/employee/employee_update_3.html:1284
+msgid "Upload file"
+msgstr "Загрузить файл"
+
+#: templates/operators/4/employee_update_3.html:107
+#: templates/operators/4/employee_update_3.html:175
+#: templates/operators/4/employee_update_3.html:282
+#: templates/operators/4/employee_update_3.html:338
+#: templates/operators/4/employee_update_3.html:501
+#: templates/operators/4/employee_update_3.html:578
+#: templates/root/directory/city_list.html:31
+#: templates/root/directory/country_list.html:37
+#: templates/root/directory/district_list.html:42
+#: templates/root/directory/education_list.html:37
+#: templates/root/directory/language_list.html:37
+#: templates/root/employee/changed_employees.html:73
+#: templates/root/employee/employee_update_3.html:101
+#: templates/root/employee/employee_update_3.html:169
+#: templates/root/employee/employee_update_3.html:276
+#: templates/root/employee/employee_update_3.html:331
+#: templates/root/employee/employee_update_3.html:493
+#: templates/root/employee/employee_update_3.html:570
+#: templates/root/employee/employee_update_3.html:892
+#: templates/root/employee/employee_update_3.html:964
+#: templates/root/employee/employee_update_3.html:1050
+#: templates/root/employee/employee_update_3.html:1111
+#: templates/root/employee/employee_update_3.html:1206
+#: templates/root/employee/employee_update_3.html:1292
+#: templates/root/employee/employees.html:77
+#: templates/root/operators/operator_groups.html:77
+#: templates/root/operators/operators.html:43
+#: templates/root/partners/partners.html:43
+#: templates/root/partners/partners_bookmark.html:16
+msgid "Delete"
+msgstr "Удалить"
+
+#: templates/operators/4/employee_update_3.html:124
+#: templates/root/employee/employee_translation_3.html:112
+#: templates/root/employee/employee_update_3.html:118
+msgid "Knowlegde languages"
+msgstr "Знание языков"
+
+#: templates/operators/4/employee_update_3.html:142
+#: templates/root/employee/employee_translation_3.html:130
+#: templates/root/employee/employee_update_3.html:136
+#: templates/root/employee/employee_update_3.html:936
+#: templates/root/employee/employees.html:297
+msgid "Language knowing level"
+msgstr "Уровень владения языком"
+
+#: templates/operators/4/employee_update_3.html:227
+#: templates/root/employee/employee_translation_3.html:208
+#: templates/root/employee/employee_update_3.html:221
+#: templates/root/employee/employee_update_3.html:1000
+msgid "Name of the military unit"
+msgstr "Наименование воинской части"
+
+#: templates/operators/4/employee_update_3.html:231
+#: templates/root/employee/employee_statistics.html:17
+#: templates/root/employee/employee_translation_3.html:213
+#: templates/root/employee/employee_update_3.html:225
+#: templates/root/employee/employee_update_3.html:1004
+#: templates/root/operators/operator_group_update.html:22
+#: templates/root/operators/operator_groups.html:24
+#: templates/root/operators/operator_groups.html:97
+#: templates/root/operators/operators.html:65
+#: templates/root/templates/detail.html:33
+#: templates/root/templates/detail.html:75
+#: templates/root/templates/employees.html:32
+#: templates/root/templates/employees.html:73
+msgid "Region"
+msgstr "Регион"
+
+#: templates/operators/4/employee_update_3.html:237
+#: templates/root/employee/employee_translation_3.html:220
+#: templates/root/employee/employee_update_3.html:231
+#: templates/root/employee/employee_update_3.html:1011
+msgid "Specialty"
+msgstr "Специальность"
+
+#: templates/operators/4/employee_update_3.html:243
+#: templates/root/employee/employee_translation_3.html:227
+#: templates/root/employee/employee_update_3.html:237
+#: templates/root/employee/employee_update_3.html:1017
+msgid "Start date of service"
+msgstr "Дата начала службы"
+
+#: templates/operators/4/employee_update_3.html:247
+#: templates/operators/4/employee_update_3.html:536
+#: templates/root/employee/employee_translation_3.html:231
+#: templates/root/employee/employee_translation_3.html:490
+#: templates/root/employee/employee_update_3.html:241
+#: templates/root/employee/employee_update_3.html:528
+#: templates/root/employee/employee_update_3.html:1021
+#: templates/root/employee/employee_update_3.html:1253
+msgid "End date"
+msgstr "Дата окончания службы"
+
+#: templates/operators/4/employee_update_3.html:251
+#: templates/root/employee/employee_translation_3.html:235
+#: templates/root/employee/employee_update_3.html:245
+#: templates/root/employee/employee_update_3.html:1025
+#: templates/root/employee/personal_card.html:268
+msgid "Rank"
+msgstr "Звание"
+
+#: templates/operators/4/employee_update_3.html:313
+#: templates/operators/4/operator4.html:112
+#: templates/root/employee/employee_translation_3.html:289
+#: templates/root/employee/employee_translation_4.html:112
+#: templates/root/employee/employee_update_3.html:306
+#: templates/root/employee/employee_update_3.html:1091
+#: templates/root/employee/employee_update_4.html:111
+#: templates/site/employee/update_operator_4.html:81
+msgid "Comment"
+msgstr "Комментарий"
+
+#: templates/operators/4/employee_update_3.html:386
+#: templates/root/employee/employee_update_3.html:378
+msgid "More than 4"
+msgstr "Более 4"
+
+#: templates/operators/4/employee_update_3.html:450
+#: templates/root/employee/employee_translation_3.html:410
+#: templates/root/employee/employee_update_3.html:442
+msgid "Relative full name"
+msgstr ""
+
+#: templates/operators/4/employee_update_3.html:461
+#: templates/root/employee/changed_employee.html:485
+#: templates/root/employee/changed_employee.html:797
+#: templates/root/employee/employee_detail.html:409
+#: templates/root/employee/employee_translation_3.html:422
+#: templates/root/employee/employee_update_3.html:453
+#: templates/root/employee/personal_card.html:317
+#: templates/root/partners/partner_bookmark.html:375
+msgid "Relative work/study place"
+msgstr "Место учебы, работы"
+
+#: templates/operators/4/employee_update_3.html:528
+#: templates/root/employee/employee_translation_3.html:481
+#: templates/root/employee/employee_update_3.html:520
+#: templates/root/employee/employee_update_3.html:1245
+msgid "Organization"
+msgstr "Организация"
+
+#: templates/operators/4/employee_update_3.html:532
+#: templates/root/employee/employee_translation_3.html:486
+#: templates/root/employee/employee_update_3.html:524
+#: templates/root/employee/employee_update_3.html:1249
+msgid "Start date"
+msgstr "Дата начала"
+
+#: templates/operators/4/employee_update_3.html:542
+#: templates/root/employee/employee_translation_3.html:496
+#: templates/root/employee/employee_update_3.html:534
+#: templates/root/employee/employee_update_3.html:1259
+#: templates/root/employee/personal_card.html:320
+#: templates/root/employee/personal_card.html:410
+msgid "Position"
+msgstr "Должность"
+
+#: templates/operators/4/employee_update_3.html:546
+#: templates/root/employee/employee_translation_3.html:501
+#: templates/root/employee/employee_update_3.html:538
+#: templates/root/employee/employee_update_3.html:1263
+#: templates/root/employee/personal_card.html:411
+msgid "Subdivision"
+msgstr "Подразделение"
+
+#: templates/operators/4/employee_update_3.html:550
+#: templates/root/employee/employee_translation_3.html:506
+#: templates/root/employee/employee_update_3.html:542
+#: templates/root/employee/employee_update_3.html:1268
+#: templates/root/employee/personal_card.html:95
+#: templates/root/employee/personal_card.html:114
+msgid "Address"
+msgstr "Адрес"
+
+#: templates/operators/4/operator4.html:16
+msgid "Show 3 operator data"
+msgstr "Показать 3-оператор"
+
+#: templates/operators/4/operator4.html:23 templates/root/_base.html:175
+#: templates/root/directory/country_create.html:6
+#: templates/root/directory/country_detail.html:6
+#: templates/root/directory/country_list.html:6
+#: templates/root/employee/employee_translation_4.html:23
+#: templates/root/employee/employee_update_4.html:22
+#: templates/root/employee/employees.html:256
+#: templates/site/employee/update_operator_4.html:51
+msgid "Countries"
+msgstr "Страны"
+
+#: templates/operators/4/operator4.html:47
+msgid "500$ less"
+msgstr "Меньше 500$"
+
+#: templates/operators/4/operator4.html:53
+#: templates/root/employee/employee_statistics.html:86
+#: templates/root/employee/employee_translation_4.html:53
+#: templates/root/employee/employee_update_4.html:52
+#: templates/root/employee/employees.html:314
+#: templates/site/employee/update_operator_4.html:143
+msgid "500$-1000$"
+msgstr "500$-1000$"
+
+#: templates/operators/4/operator4.html:59
+#: templates/root/employee/employee_statistics.html:87
+#: templates/root/employee/employee_translation_4.html:59
+#: templates/root/employee/employee_update_4.html:58
+#: templates/root/employee/employees.html:315
+#: templates/site/employee/update_operator_4.html:149
+msgid "1000$-1500$"
+msgstr "1000$-1500$"
+
+#: templates/operators/4/operator4.html:65
+#: templates/root/employee/employee_statistics.html:88
+#: templates/root/employee/employee_translation_4.html:65
+#: templates/root/employee/employee_update_4.html:64
+#: templates/root/employee/employees.html:316
+#: templates/site/employee/update_operator_4.html:155
+msgid "1500$-2000$"
+msgstr "1500$-2000$"
+
+#: templates/operators/4/operator4.html:71
+#: templates/root/employee/employee_update_4.html:70
+#: templates/root/employee/employees.html:317
+msgid "2500$ more"
+msgstr "Больше 2500$"
+
+#: templates/operators/4/operator4.html:100
+#: templates/root/employee/employee_translation_4.html:100
+#: templates/root/employee/employee_update_4.html:99
+#: templates/root/employee/employees.html:191
+#: templates/site/employee/update_operator_4.html:69
+msgid "Criminal issues"
+msgstr "Наличие или отсутствие судимости"
+
+#: templates/operators/4/operator4.html:108
+#: templates/root/employee/employee_translation_4.html:108
+#: templates/root/employee/employee_update_4.html:107
+#: templates/site/employee/update_operator_4.html:77
+msgid "Criminal date"
+msgstr "Дата выдачи"
+
+#: templates/operators/4/operator4.html:121
+#: templates/root/employee/employee_translation_4.html:122
+#: templates/root/employee/employee_update_4.html:120
+#: templates/site/employee/update_operator_4.html:110
+msgid "Additional info"
+msgstr "Дополнительная информация"
+
+#: templates/operators/4/operator4.html:125
+#: templates/root/employee/personal_card.html:544
+#: templates/site/employee/update_operator_4.html:114
+msgid "Add spec signs"
+msgstr "Особые приметы"
+
+#: templates/operators/4/operator4.html:129
+#: templates/root/employee/changed_employee.html:917
+#: templates/root/employee/changed_employee.html:962
+#: templates/root/employee/employee_detail.html:529
+#: templates/root/employee/employee_translation_4.html:131
+#: templates/root/employee/employee_update_4.html:128
+#: templates/root/partners/partner_bookmark.html:495
+#: templates/site/employee/update_operator_4.html:118
+msgid "Hobby"
+msgstr "Хобби"
+
+#: templates/operators/4/operator4.html:133
+#: templates/root/employee/changed_employee.html:921
+#: templates/root/employee/changed_employee.html:966
+#: templates/root/employee/employee_detail.html:533
+#: templates/root/employee/employee_translation_4.html:136
+#: templates/root/employee/employee_update_4.html:132
+#: templates/root/partners/partner_bookmark.html:499
+#: templates/site/employee/update_operator_4.html:122
+msgid "Other"
+msgstr "Дополнительно"
+
+#: templates/operators/4/operator4.html:142
+#: templates/root/employee/personal_card.html:511
+msgid "Psycolog score"
+msgstr "Оценка психолога"
+
+#: templates/operators/_base.html:122 templates/root/_base.html:153
+msgid "Developed by"
+msgstr "Разработка CRM-системы"
+
+#: templates/operators/_base.html:132 templates/root/_base.html:224
+#: templates/root/templates/employees.html:149
+#: templates/root/templates/partners.html:123
+msgid "Saved successfully"
+msgstr "Успешно сохранено"
+
+#: templates/operators/_base.html:133 templates/root/_base.html:225
+#: templates/root/settings/main.html:55
+#: templates/root/templates/employees.html:148
+#: templates/root/templates/employees.html:150
+#: templates/root/templates/partners.html:122
+#: templates/root/templates/partners.html:124
+msgid "An error has occurred"
+msgstr "Произошла ошибка"
+
+#: templates/operators/_base.html:143
+#: templates/root/employee/employee_detail.html:13
+#: templates/root/employee/employee_detail.html:23
+msgid "Change password"
+msgstr "Новый пароль"
+
+#: templates/operators/_base.html:148
+msgid "New login"
+msgstr "Новый логин"
+
+#: templates/operators/_base.html:152
+#: templates/root/employee/employee_detail.html:28
+#: templates/root/settings/main.html:31
+msgid "New password"
+msgstr "Новый пароль"
+
+#: templates/operators/_base.html:156
+#: templates/root/employee/employee_detail.html:32
+#: templates/root/partners/partner_create.html:28
+#: templates/root/partners/partner_update.html:100
+msgid "Password confirm"
+msgstr "Подтвердить пароль"
+
+#: templates/root/_base.html:61
+msgid "Search for candidates"
+msgstr "Поиск аппликантов"
+
+#: templates/root/_base.html:63
+msgid "Operator Accounts"
+msgstr "Учетные записи операторов"
+
+#: templates/root/_base.html:65
+#: templates/root/operators/operator_group_create.html:7
+#: templates/root/operators/operator_group_update.html:7
+#: templates/root/operators/operator_groups.html:7
+msgid "Operator groups"
+msgstr "Группы операторов"
+
+#: templates/root/_base.html:66 templates/root/operators/operators.html:6
+msgid "List of operators"
+msgstr "Список операторов"
+
+#: templates/root/_base.html:69
+msgid "Partner Accounts"
+msgstr "Учетные записи партнеров"
+
+#: templates/root/_base.html:70
+#: templates/root/partners/partners_bookmark.html:6
+msgid "Requests for candidates from partners"
+msgstr "Запросы по кандидатам от партнеров"
+
+#: templates/root/_base.html:71
+#: templates/root/employee/changed_employees.html:6
+msgid "Requests to change Personal Cards"
+msgstr "Запросы на изменение Личных карточек"
+
+#: templates/root/_base.html:72
+msgid "SMS, E-mail"
+msgstr "Рассылка СМС, E-mail"
+
+#: templates/root/_base.html:73
+msgid "Statistic"
+msgstr "Статистика"
+
+#: templates/root/_base.html:74 templates/root/logs.html:7
+msgid "Logs"
+msgstr "Логи"
+
+#: templates/root/_base.html:171
+#: templates/root/directory/language_create.html:6
+#: templates/root/directory/language_list.html:6
+msgid "World languages"
+msgstr "Языки мира"
+
+#: templates/root/_base.html:179
+msgid "Cities"
+msgstr "Города"
+
+#: templates/root/_base.html:183
+#: templates/root/directory/district_create.html:6
+#: templates/root/directory/district_detail.html:6
+msgid "Districts"
+msgstr "Районы"
+
+#: templates/root/_base.html:187
+msgid "Types of educational institutions"
+msgstr "Типы образовательных учреждений"
+
+#: templates/root/directory/city_create.html:6
+#: templates/root/directory/city_detail.html:6
+#: templates/root/directory/city_list.html:6
+#: templates/root/directory/district_create.html:20
+#: templates/root/directory/district_detail.html:20
+#: templates/root/directory/district_list.html:23
+#: templates/root/directory/district_list.html:61
+#: templates/root/operators/operator_group_create.html:22
+msgid "City"
+msgstr "Город"
+
+#: templates/root/directory/city_create.html:17
+#: templates/root/directory/city_detail.html:17
+#: templates/root/directory/city_list.html:17
+#: templates/root/directory/city_list.html:48
+#: templates/root/directory/city_list.html:49
+#: templates/root/directory/district_create.html:29
+#: templates/root/directory/district_create.html:33
+#: templates/root/directory/district_detail.html:29
+#: templates/root/directory/district_detail.html:33
+#: templates/root/directory/district_list.html:17
+#: templates/root/directory/district_list.html:59
+#: templates/root/directory/district_list.html:60
+#: templates/root/directory/education_list.html:17
+#: templates/root/directory/education_list.html:54
+#: templates/root/directory/education_list.html:55
+#: templates/root/directory/language_create.html:17
+#: templates/root/directory/language_detail.html:17
+#: templates/root/directory/language_list.html:17
+#: templates/root/directory/language_list.html:54
+#: templates/root/directory/language_list.html:55
+msgid "Name"
+msgstr "Название"
+
+#: templates/root/directory/city_create.html:28
+#: templates/root/directory/city_detail.html:28
+#: templates/root/directory/city_list.html:50
+msgid "Code"
+msgstr "Код"
+
+#: templates/root/directory/city_list.html:10
+msgid "List of Cities"
+msgstr "Список городов"
+
+#: templates/root/directory/city_list.html:116
+#: templates/root/directory/country_list.html:122
+#: templates/root/directory/district_list.html:127
+#: templates/root/directory/education_list.html:122
+#: templates/root/directory/language_list.html:126
+#: templates/root/employee/changed_employees.html:173
+#: templates/root/employee/employees.html:373
+#: templates/root/operators/operator_groups.html:169
+#: templates/root/operators/operators.html:140
+#: templates/root/partners/partners.html:134
+#: templates/root/partners/partners_bookmark.html:97
+msgid "Do you really want to delete?"
+msgstr "Вы действительно хотите удалить?"
+
+#: templates/root/directory/country_create.html:17
+#: templates/root/directory/country_detail.html:17
+#: templates/root/directory/country_list.html:17
+#: templates/root/directory/country_list.html:54
+#: templates/root/directory/country_list.html:55
+msgid "Country name"
+msgstr "Название страны"
+
+#: templates/root/directory/country_create.html:40
+#: templates/root/directory/education_create.html:43
+#: templates/root/directory/education_detail.html:43
+msgid "Score count"
+msgstr "Счетчик баллов"
+
+#: templates/root/directory/country_create.html:43
+#: templates/root/directory/country_detail.html:40
+#: templates/root/directory/country_detail.html:43
+#: templates/root/directory/country_list.html:23
+#: templates/root/directory/country_list.html:56
+#: templates/root/directory/education_create.html:40
+#: templates/root/directory/education_detail.html:40
+#: templates/root/directory/education_list.html:23
+#: templates/root/directory/education_list.html:56
+#: templates/root/directory/language_create.html:33
+#: templates/root/directory/language_detail.html:33
+#: templates/root/directory/language_list.html:23
+msgid "Score"
+msgstr "Балл"
+
+#: templates/root/directory/country_list.html:10
+msgid "List of countries"
+msgstr "Список стран"
+
+#: templates/root/directory/district_list.html:6
+msgid "Disticts"
+msgstr "Районы"
+
+#: templates/root/directory/district_list.html:10
+msgid "List of districts"
+msgstr "Список районов"
+
+#: templates/root/directory/education_list.html:10
+msgid "List of education types"
+msgstr "Список видов образования"
+
+#: templates/root/directory/language_detail.html:6
+msgid "World language"
+msgstr "Мировой язык"
+
+#: templates/root/directory/language_list.html:10
+msgid "List of world languages"
+msgstr "Список мировых языков"
+
+#: templates/root/employee/changed_employee.html:174
+#: templates/root/employee/changed_employee.html:219
+#: templates/root/employee/employee_detail.html:145
+#: templates/root/employee/employees.html:231
+#: templates/root/partners/partner_bookmark.html:111
+msgid "sm"
+msgstr "см"
+
+#: templates/root/employee/changed_employee.html:178
+#: templates/root/employee/changed_employee.html:223
+#: templates/root/employee/employee_detail.html:149
+#: templates/root/employee/employees.html:289
+#: templates/root/partners/partner_bookmark.html:115
+msgid "kg"
+msgstr "кг"
+
+#: templates/root/employee/changed_employee.html:444
+#: templates/root/employee/changed_employee.html:756
+#: templates/root/employee/employee_detail.html:368
+#: templates/root/partners/partner_bookmark.html:334
+msgid "Family children amount"
+msgstr "Количество детей"
+
+#: templates/root/employee/changed_employee.html:889
+#: templates/root/employee/changed_employee.html:934
+#: templates/root/employee/employee_detail.html:501
+#: templates/root/partners/partner_bookmark.html:467
+msgid "Desired countries"
+msgstr "Желаемые страны"
+
+#: templates/root/employee/changed_employee.html:909
+#: templates/root/employee/changed_employee.html:954
+#: templates/root/employee/employee_detail.html:521
+#: templates/root/partners/partner_bookmark.html:487
+msgid "Criminal comment"
+msgstr "Комментарий (Наличие или отсутствие судимости)"
+
+#: templates/root/employee/changed_employee.html:913
+#: templates/root/employee/changed_employee.html:958
+#: templates/root/employee/employee_detail.html:525
+#: templates/root/employee/employee_translation_4.html:126
+#: templates/root/employee/employee_update_4.html:124
+#: templates/root/partners/partner_bookmark.html:491
+msgid "Spec. signs"
+msgstr "Особые приметы"
+
+#: templates/root/employee/changed_employees.html:21
+#: templates/root/employee/employees.html:25
+#: templates/root/employee/employees.html:174
+#: templates/root/employee/personal_card.html:314
+#: templates/root/employee/ratings.html:23
+msgid "Age"
+msgstr "Возраст"
+
+#: templates/root/employee/changed_employees.html:55
+#: templates/root/employee/changed_employees.html:91
+#: templates/root/employee/employee_statistics.html:151
+#: templates/root/employee/employees.html:59
+#: templates/root/employee/employees.html:94
+#: templates/root/employee/employees.html:323
+#: templates/root/employee/ratings.html:70
+#: templates/root/employee/ratings.html:94
+#: templates/root/partners/partner_bookmarks.html:23
+#: templates/root/templates/detail.html:45
+#: templates/root/templates/detail.html:76
+#: templates/root/templates/employees.html:43
+#: templates/root/templates/employees.html:74
+msgid "Category"
+msgstr "Категория"
+
+#: templates/root/employee/changed_employees.html:89
+#: templates/root/partners/partner_bookmarks.html:21
+msgid "phone"
+msgstr "Телефон"
+
+#: templates/root/employee/changed_employees.html:115
+#: templates/root/employee/changed_employees.html:118
+#: templates/root/employee/employees.html:118
+#: templates/root/employee/employees.html:121
+#: templates/root/partners/partner_bookmarks.html:45
+#: templates/root/partners/partner_bookmarks.html:48
+#: templates/root/templates/detail.html:97
+#: templates/root/templates/detail.html:100
+#: templates/root/templates/employees.html:95
+#: templates/root/templates/employees.html:98
+msgid "Has no score"
+msgstr "Не имеет оценки"
+
+#: templates/root/employee/employee_detail.html:50
+msgid "Export to PDF"
+msgstr "Экспорт в PDF"
+
+#: templates/root/employee/employee_detail.html:120
+#: templates/root/employee/employee_detail.html:171
+#: templates/root/employee/employee_detail.html:488
+#: templates/root/employee/employee_detail.html:539
+#: templates/root/partners/partner_bookmark.html:86
+#: templates/root/partners/partner_bookmark.html:137
+#: templates/root/partners/partner_bookmark.html:454
+#: templates/root/partners/partner_bookmark.html:505
+msgid "Edit"
+msgstr "Редактировать"
+
+#: templates/root/employee/employee_detail.html:121
+#: templates/root/employee/employee_detail.html:489
+#: templates/root/employee/employee_detail.html:540
+#: templates/root/partners/partner_bookmark.html:87
+#: templates/root/partners/partner_bookmark.html:455
+#: templates/root/partners/partner_bookmark.html:506
+msgid "Translate"
+msgstr "Перевод"
+
+#: templates/root/employee/employee_detail.html:601
+#: templates/root/partners/partner_bookmark.html:567
+msgid "Employed"
+msgstr "Трудоустроен"
+
+#: templates/root/employee/employee_statistics.html:6
+msgid "Statistics"
+msgstr "Статистика"
+
+#: templates/root/employee/employee_statistics.html:51
+msgid "Razvode"
+msgstr ""
+
+#: templates/root/employee/employee_statistics.html:52
+msgid "Vdova"
+msgstr ""
+
+#: templates/root/employee/employee_statistics.html:53
+msgid "Vtoroy_brak"
+msgstr ""
+
+#: templates/root/employee/employee_statistics.html:54
+msgid "Grandanskiy brak"
+msgstr ""
+
+#: templates/root/employee/employee_statistics.html:73
+msgid "Countries for work"
+msgstr "Желаемые страны"
+
+#: templates/root/employee/employee_statistics.html:85
+#: templates/root/employee/employee_translation_4.html:47
+#: templates/root/employee/employee_update_4.html:46
+#: templates/root/employee/employees.html:313
+#: templates/root/employee/personal_card.html:491
+#: templates/site/employee/update_operator_4.html:137
+msgid "Less than 500$"
+msgstr "менше 500"
+
+#: templates/root/employee/employee_statistics.html:89
+#: templates/root/employee/employee_translation_4.html:71
+#: templates/root/employee/personal_card.html:495
+#: templates/site/employee/update_operator_4.html:161
+msgid "Above 2500$"
+msgstr "Больше 2500$"
+
+#: templates/root/employee/employee_statistics.html:112
+#: templates/root/employee/employee_translation_4.html:146
+#: templates/root/employee/employee_update_4.html:141
+msgid "Psycholog score"
+msgstr "Оценка психолога"
+
+#: templates/root/employee/employee_statistics.html:125
+msgid "search"
+msgstr "Поиск"
+
+#: templates/root/employee/employee_statistics.html:134
+msgid "Results"
+msgstr "Результаты"
+
+#: templates/root/employee/employee_statistics.html:138
+#: templates/root/employee/personal_card.html:559
+msgid "Download"
+msgstr "Скачать"
+
+#: templates/root/employee/employee_statistics.html:172
+#: templates/root/employee/employee_statistics.html:175
+msgid "No score"
+msgstr "Нет баллов"
+
+#: templates/root/employee/employee_translation_1.html:14
+#: templates/root/employee/employee_translation_3.html:18
+#: templates/root/employee/employee_translation_4.html:16
+#: templates/root/employee/employee_update_1.html:12
+#: templates/root/employee/employee_update_2.html:11
+#: templates/root/employee/employee_update_4.html:15
+msgid "Personal card"
+msgstr "Личная карточка"
+
+#: templates/root/employee/employee_update_2.html:85
+#: templates/root/employee/employee_update_2.html:89
+msgid "Change"
+msgstr "Изменить"
+
+#: templates/root/employee/employee_update_2.html:139
+#: templates/root/employee/employee_update_2.html:143
+msgid "Vision"
+msgstr "Зрения"
+
+#: templates/root/employee/employees.html:10
+msgid "Search employees"
+msgstr "Поиск аппликантов"
+
+#: templates/root/employee/personal_card.html:18
+msgid "PDF document"
+msgstr "PDF документ"
+
+#: templates/root/employee/personal_card.html:36
+#, fuzzy
+#| msgid "Reg.number"
+msgid "Reg.Number"
+msgstr "Рег.номер"
+
+#: templates/root/employee/personal_card.html:66
+msgid "In Russian"
+msgstr "На русском"
+
+#: templates/root/employee/personal_card.html:70
+msgid "In English"
+msgstr "На английском"
+
+#: templates/root/employee/personal_card.html:99
+msgid "Contact details"
+msgstr "Контактные данные"
+
+#: templates/root/employee/personal_card.html:111
+msgid "date"
+msgstr "дата"
+
+#: templates/root/employee/personal_card.html:112
+msgid "month"
+msgstr "мес"
+
+#: templates/root/employee/personal_card.html:113
+msgid "year"
+msgstr "год"
+
+#: templates/root/employee/personal_card.html:155
+msgid "Name of the university"
+msgstr "Наименование ВУЗ"
+
+#: templates/root/employee/personal_card.html:162
+msgid "elem"
+msgstr "удов"
+
+#: templates/root/employee/personal_card.html:163
+msgid "inter"
+msgstr "хор"
+
+#: templates/root/employee/personal_card.html:164
+msgid "adv"
+msgstr "отл"
+
+#: templates/root/employee/personal_card.html:168
+msgid "Native language"
+msgstr "Родной язык"
+
+#: templates/root/employee/personal_card.html:219
+msgid "Other study data"
+msgstr "Прочие данные об учёбе"
+
+#: templates/root/employee/personal_card.html:227
+msgid "Medical data"
+msgstr "Медицинские данные"
+
+#: templates/root/employee/personal_card.html:256
+msgid "HF name"
+msgstr "Назв-е ВЧ"
+
+#: templates/root/employee/personal_card.html:264
+msgid "Period of service"
+msgstr "Период службы"
+
+#: templates/root/employee/personal_card.html:265
+#: templates/root/employee/personal_card.html:420
+#: templates/root/employee/personal_card.html:432
+msgid "to"
+msgstr "с"
+
+#: templates/root/employee/personal_card.html:265
+#: templates/root/employee/personal_card.html:420
+#: templates/root/employee/personal_card.html:432
+msgid "do"
+msgstr "по"
+
+#: templates/root/employee/personal_card.html:288
+msgid "Having"
+msgstr "Наличие"
+
+#: templates/root/employee/personal_card.html:288
+msgid "children"
+msgstr "детей"
+
+#: templates/root/employee/personal_card.html:404
+msgid "Labor experience (including abroad) for the last 5 years"
+msgstr "Трудовой опыт (в том числе за рубежом) за последние 5 лет"
+
+#: templates/root/employee/personal_card.html:408
+msgid "Name of company"
+msgstr "Наименование организации"
+
+#: templates/root/employee/personal_card.html:409
+msgid "Work period"
+msgstr "Период работы"
+
+#: templates/root/employee/personal_card.html:412
+msgid "Location"
+msgstr "Местонахождение"
+
+#: templates/root/employee/personal_card.html:456
+msgid "According to the results of the interview with the applicant"
+msgstr "По результатам собеседования с аппликантом"
+
+#: templates/root/employee/personal_card.html:460
+msgid "Choice by the applicant of foreign countries for employment"
+msgstr "Выбор аппликантом иностранных государств для трудоустройства"
+
+#: templates/root/employee/personal_card.html:487
+msgid "Desired salary after employment abroad"
+msgstr "Желаемая зарплата после трудоустройства за рубежом"
+
+#: templates/root/employee/personal_card.html:487
+msgid "base salary"
+msgstr "базовый оклад"
+
+#: templates/root/employee/personal_card.html:501
+msgid "Willingness of the applicant to enter a university abroad"
+msgstr "Готовность аппликанта на поступление в ВУЗ за рубежом"
+
+#: templates/root/employee/personal_card.html:505
+#: templates/site/employee/update_operator_4.html:94
+msgid "yes"
+msgstr "да"
+
+#: templates/root/employee/personal_card.html:506
+#: templates/site/employee/update_operator_4.html:100
+msgid "no"
+msgstr "нет"
+
+#: templates/root/employee/personal_card.html:521
+msgid "unfit"
+msgstr "негоден"
+
+#: templates/root/employee/personal_card.html:532
+msgid "fit"
+msgstr "годен"
+
+#: templates/root/employee/personal_card.html:537
+msgid "Other features of the applicant"
+msgstr "Иные особенности аппликанта"
+
+#: templates/root/employee/personal_card.html:540
+msgid ""
+"Information about the presence or absence of a criminal record: reference "
+"number"
+msgstr "Сведения о наличии или отсутствии судимости: № справки"
+
+#: templates/root/employee/personal_card.html:540
+msgid "Date of issue"
+msgstr "Дата выдычи"
+
+#: templates/root/employee/personal_card.html:548
+msgid "Hobbies, special skills"
+msgstr "Хобби, особые навыки"
+
+#: templates/root/employee/personal_card.html:552
+msgid "Other information"
+msgstr "Прочая информация"
+
+#: templates/root/employee/ratings.html:9
+msgid "Counting Rating"
+msgstr "Подсчет рейтинга"
+
+#: templates/root/employee/ratings.html:70
+msgid "score"
+msgstr "балл"
+
+#: templates/root/logs.html:22
+msgid "Act"
+msgstr "Действие"
+
+#: templates/root/logs.html:24
+msgid "Time"
+msgstr "Время"
+
+#: templates/root/operators/operator_create.html:7
+#: templates/root/operators/operator_update.html:8
+msgid "Operators"
+msgstr "Операторы"
+
+#: templates/root/operators/operator_create.html:18
+#: templates/root/operators/operator_update.html:19
+#: templates/root/partners/partner_create.html:17
+#: templates/root/partners/partner_update.html:19
+#: templates/root/partners/partner_update.html:89
+msgid "Account"
+msgstr "Аккаунт"
+
+#: templates/root/operators/operator_create.html:33
+#: templates/root/operators/operator_update.html:34
+#: templates/root/partners/partner_create.html:36
+#: templates/root/partners/partner_update.html:16
+#: templates/root/partners/partner_update.html:32
+msgid "Additional information"
+msgstr "Дополнительная информация"
+
+#: templates/root/operators/operator_create.html:36
+#: templates/root/operators/operator_update.html:37
+msgid "Firstname"
+msgstr "Имя"
+
+#: templates/root/operators/operator_create.html:40
+#: templates/root/operators/operator_update.html:41
+msgid "Lastname"
+msgstr "Фамилия"
+
+#: templates/root/operators/operator_group_create.html:18
+#: templates/root/operators/operator_group_update.html:18
+#: templates/root/operators/operator_groups.html:18
+#: templates/root/operators/operator_groups.html:96
+#: templates/root/operators/operators.html:64
+msgid "Group name"
+msgstr "Название группы"
+
+#: templates/root/operators/operator_group_create.html:31
+#: templates/root/operators/operator_group_update.html:31
+#: templates/root/operators/operator_groups.html:46
+msgid "District"
+msgstr "Район"
+
+#: templates/root/partners/partner_bookmarks.html:10
+#: templates/root/partners/partners_bookmark.html:10
+msgid "List"
+msgstr "Список"
+
+#: templates/root/partners/partner_create.html:6
+#: templates/root/partners/partner_update.html:6
+#: templates/root/partners/partners.html:6
+msgid "Partners"
+msgstr "Партнёры"
+
+#: templates/root/partners/partner_create.html:41
+#: templates/root/partners/partner_update.html:37
+#: templates/root/templates/partners.html:27
+msgid "Company name"
+msgstr "Название компании"
+
+#: templates/root/partners/partner_create.html:45
+#: templates/root/partners/partner_update.html:41
+#: templates/root/partners/partners.html:62
+#: templates/root/partners/partners_bookmark.html:29
+msgid "Reg.number"
+msgstr "Рег.номер"
+
+#: templates/root/partners/partner_create.html:49
+#: templates/root/partners/partner_update.html:45
+msgid "first head"
+msgstr "первого руководителя"
+
+#: templates/root/partners/partner_create.html:53
+#: templates/root/partners/partner_update.html:49
+msgid "responsible person"
+msgstr "ответственного лица"
+
+#: templates/root/partners/partner_create.html:67
+#: templates/root/partners/partner_update.html:63
+msgid "Legal address"
+msgstr "Адрес"
+
+#: templates/root/partners/partner_create.html:71
+#: templates/root/partners/partner_update.html:67
+msgid "Workers amount"
+msgstr "Количество работников"
+
+#: templates/root/partners/partner_update.html:22
+#: templates/root/partners/partner_update.html:118
+msgid "Documents"
+msgstr "Документы"
+
+#: templates/root/partners/partners.html:61
+#: templates/root/templates/detail.html:158
+#: templates/root/templates/partners.html:57
+msgid "Company"
+msgstr "Компания"
+
+#: templates/root/partners/partners.html:64
+#: templates/root/templates/detail.html:159
+#: templates/root/templates/partners.html:58
+msgid "Status"
+msgstr "Статус"
+
+#: templates/root/partners/partners.html:78
+#: templates/root/templates/detail.html:170
+#: templates/root/templates/partners.html:69
+msgid "Not accepted"
+msgstr "Не подтверждено"
+
+#: templates/root/partners/partners.html:80
+#: templates/root/templates/detail.html:172
+#: templates/root/templates/partners.html:71
+msgid "Accepted"
+msgstr "Подтверждено"
+
+#: templates/root/partners/partners_bookmark.html:28
+msgid "Subject name"
+msgstr "Название субъекта"
+
+#: templates/root/partners/partners_bookmark.html:30
+msgid "Count"
+msgstr "Подсчет"
+
+#: templates/root/settings/main.html:10
+msgid "Change of personal data"
+msgstr "Изменение личных данных"
+
+#: templates/root/settings/main.html:25
+msgid "Old password"
+msgstr "Старый пароль"
+
+#: templates/root/settings/main.html:37
+msgid "Confirm the password"
+msgstr "Подтвердите пароль"
+
+#: templates/root/settings/main.html:54
+msgid "Your password has been changed"
+msgstr "Ваш пароль изменено"
+
+#: templates/root/templates/employees.html:9
+#: templates/root/templates/list.html:6
+#: templates/root/templates/partners.html:10
+msgid "Newsletter SMS, E-mail"
+msgstr "Рассылка СМС, E-mail"
+
+#: templates/root/templates/employees.html:13
+#: templates/root/templates/employees.html:138
+#: templates/root/templates/partners.html:14
+#: templates/root/templates/partners.html:112
+msgid "Send"
+msgstr "Отправить"
+
+#: templates/root/templates/employees.html:111
+#: templates/root/templates/list.html:47
+#: templates/root/templates/partners.html:85
+msgid "Message title"
+msgstr "Заголовок сообщения"
+
+#: templates/root/templates/employees.html:115
+#: templates/root/templates/list.html:52
+#: templates/root/templates/partners.html:89
+msgid "Message content"
+msgstr "Содержание сообщения"
+
+#: templates/root/templates/employees.html:147
+#: templates/root/templates/partners.html:121
+msgid "Successfully sent"
+msgstr "Успешно отправлено"
+
+#: templates/root/templates/list.html:10
+msgid "Templates"
+msgstr "Шаблоны"
+
+#: templates/root/templates/list.html:11 templates/root/templates/list.html:39
+msgid "Add template"
+msgstr "Добавить шаблон"
+
+#: templates/root/templates/partners.html:33
+msgid "Boss fullname"
+msgstr "Ф.И.О"
+
+#, fuzzy
+#~| msgid "Send"
+#~ msgid "en"
+#~ msgstr "Отправить"
+
+#, fuzzy
+#~| msgid "Confirm the password"
+#~ msgid "Confirm password"
+#~ msgstr "Подтвердите пароль"
+
+#~ msgid "photo_1"
+#~ msgstr "Фото 1"
+
+#~ msgid "City districts"
+#~ msgstr "Районы города"
+
+#~ msgid "Army date end"
+#~ msgstr "Дата окончания службы"
+
+#~ msgid "Organization name"
+#~ msgstr "Организация"
+
+#~ msgid "Experience Position"
+#~ msgstr "Должность"
+
+#~ msgid "Education type name"
+#~ msgstr "Тип учебного заведения"
+
+#~ msgid "Education date started"
+#~ msgstr "Дата начала обучения"
+
+#~ msgid "Education date graduated"
+#~ msgstr "Дата окончания обучения"
+
+#~ msgid "Education additioanal"
+#~ msgstr "Прочие данные об учебе"
+
+#~ msgid "Knowledge languages"
+#~ msgstr "Знание языков"
+
+#~ msgid "Language knowledge level"
+#~ msgstr "Уровень знания"
+
+#, fuzzy
+#~| msgid "Employee"
+#~ msgid "All employees"
+#~ msgstr "Аппликант"
+
+#~ msgid "gender"
+#~ msgstr "Пол"
+
+#~ msgid "male"
+#~ msgstr "Мужской"
+
+#~ msgid "female"
+#~ msgstr "Женский"
+
+#~ msgid "register_number"
+#~ msgstr "Регистрационный номер"
+
+#, fuzzy
+#~| msgid "Employee"
+#~ msgid "Employee register"
+#~ msgstr "Аппликант"

@@ -1,0 +1,579 @@
+{% extends 'root/_base.html' %}
+
+{% load static i18n %}
+{% load thumbnail operands employee %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'ncdKart/css/card.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- TODO Tarjima -->
+    <div class="content-title">
+        <h2>{% trans "Employee's personal card" %}</h2>
+        <span>№: {{ employee.register_number }}</span>
+    </div>
+    <div class="card-main personalCard">
+        <div class="card-main__header">
+            <h2>{% trans 'PDF document' %}</h2>
+        </div>
+        <div class="personalCard__main">
+            <div class="list-main" id="root">
+                <div class="card-mainMain">
+                    <div class="card-main__block">
+                        <div class="personal-data">
+                            <div class="avatar-image">
+                                {% thumbnail employee.photo_1 "108x108" crop="center" as im %}
+                                    <img src="{{ im.url }}" alt="">
+                                {% endthumbnail %}
+                            </div>
+                            <div class="personal-data__top">
+                                <div class="personal-data__top-left">
+                                    <div class="title">
+                                        {% trans "Employee's personal card" %}
+                                    </div>
+                                    <div class="register-number__block">
+                                        <div class="register-number__title bg-title">{% trans 'Reg.Number' %}</div>
+                                        <div class="register-number">{{ employee.register_number }}</div>
+                                    </div>
+                                </div>
+                                <div class="personal-data__top-right">
+                                    <div class="passport-number__block">
+                                        <div class="passport-number__title bg-title">{% trans 'Passport serial' %}:</div>
+                                        <div class="passport-number">{{ employee.passport_serial }}</div>
+                                    </div>
+                                    <div class="passport-number__block">
+                                        <div class="passport-number__title bg-title">{% trans 'Passport given date' %}:</div>
+                                        <div class="passport-number">{{ employee.passport_given_date|date:'d.m.Y' }}</div>
+                                    </div>
+                                    <div class="passport-number__block">
+                                        <div class="passport-number__title bg-title">{% trans 'Passport expires' %}:</div>
+                                        <div class="passport-number">{{ employee.passport_expires|date:'d.m.Y' }}</div>
+                                    </div>
+                                    <div class="passport-number__block inn">
+                                        <div class="passport-number__title bg-title">{% trans 'Inn' %}:</div>
+                                        <div class="passport-number">{{ employee.inn }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="personal-data__bottom">
+                                <div class="fio-block">
+                                    <div class="fio-block__title-main bg-title">
+                                        {% trans 'Fullname' %}
+                                    </div>
+                                    <div class="fio-data-block">
+                                        <div class="fio-data">
+                                            <div class="fio-lang bg-title">{% trans 'In Russian' %}</div>
+                                            <div class="fio">{{ employee.full_name }}</div>
+                                        </div>
+                                        <div class="fio-data">
+                                            <div class="fio-lang bg-title">{% trans 'In English' %}</div>
+                                            <div class="fio">{{ employee.full_name_en }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gender-block__main">
+                                    <div class="gender-title bg-title">
+                                        {% trans 'Gender' %}
+                                    </div>
+                                    <div class="gender-block">
+                                        <div class="gender"> <span class="square {% if employee.gender == 'm' %}active{% endif %}"></span> {% trans 'Male' %}</div>
+                                        <div class="gender"> <span class="square {% if employee.gender == 'f' %}active{% endif %}"></span> {% trans 'Female' %}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gr-line"></div>
+                        <div class="contacts-data">
+                            <div class="contacts-line">
+                                <div class="address-title bg-title alignCenter">{% trans 'Birth place' %}</div>
+                                <div class="address alignLeft">{{ employee.birth_place }}</div>
+                                <div class="birth-title bg-title alignCenter">{% trans 'Birth date' %}</div>
+                                <div class="birth-date alignCenter">{{ employee.birth_date|date:"d.m.Y" }}</div>
+                            </div>
+                            <div class="contacts-line">
+                                <div class="address-title bg-title alignCenter">{% trans 'Address' %}</div>
+                                <div class="address-all alignLeft">{{ employee.living_address }}</div>
+                            </div>
+                            <div class="contacts-line">
+                                <div class="address-title bg-title alignCenter">{% trans 'Contact details' %}</div>
+                                <div class="address-tel alignCenter">{{ employee.phone }}</div>
+                                <div class="email-title bg-title alignCenter">{% trans 'Email' %}</div>
+                                <div class="email alignLeft">{{ employee.email }}</div>
+                            </div>
+                        </div>
+                        <div class="education-data">
+                            <div class="education-title bg-title">
+                                <img src="{% static 'operator/images/2.jpg' %}" alt="">
+                            </div>
+                            <div class="education-main">
+                                <div class="education-row">
+                                    <div class="edu-date bg-title alignCenter">{% trans 'date' %}</div>
+                                    <div class="edu-month bg-title alignCenter">{% trans 'month' %}</div>
+                                    <div class="edu-year bg-title alignCenter">{% trans 'year' %}</div>
+                                    <div class="edu-address bg-title alignCenter">{% trans 'Address' %}</div>
+                                    <div class="edu-type bg-title alignCenter">{% trans 'Education type' %}</div>
+                                </div>
+                                {% if employee.education_set.count >= 5 %}
+                                    {% for education in employee.education_set.all %}
+                                        {% if forloop.counter <= 5 %}
+                                            <div class="education-row">
+                                                <div class="edu-date alignCenter">{{ education.date_finished|date:'d' }}</div>
+                                                <div class="edu-month alignCenter">{{ education.date_finished|date:'m' }}</div>
+                                                <div class="edu-year alignCenter">{{ education.date_finished|date:'Y' }}</div>
+                                                <div class="edu-address alignCenter">{{ education.address|truncatechars:15 }}</div>
+                                                <div class="edu-type alignCenter"><span class="square active"></span>{{ education.type.name }}</div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    {% for education in employee.education_set.all %}
+                                        <div class="education-row">
+                                            <div class="edu-date alignCenter">{{ education.date_finished|date:'d' }}</div>
+                                            <div class="edu-month alignCenter">{{ education.date_finished|date:'m' }}</div>
+                                            <div class="edu-year alignCenter">{{ education.date_finished|date:'Y' }}</div>
+                                            <div class="edu-address alignCenter">{{ education.address|truncatechars:15 }}</div>
+                                            <div class="edu-type alignCenter"><span class="square active"></span>{{ education.type.name }}</div>
+                                        </div>
+                                    {% endfor %}
+                                        {% range_number 5 employee.education_set.count as count %}
+                                        {% for c in count %}
+                                            <div class="education-row">
+                                                <div class="edu-date alignCenter">---</div>
+                                                <div class="edu-month alignCenter">---</div>
+                                                <div class="edu-year alignCenter">---</div>
+                                                <div class="edu-address alignCenter">---</div>
+                                                <div class="edu-type alignCenter"><span class="square"></span>---</div>
+                                            </div>
+                                        {% endfor %}
+                                {% endif %}
+
+{#                                {% for education in employee.education_set.all %}#}
+{##}
+{#                                {% endfor %}#}
+                                <div class="education-row">
+                                    <div class="edu-name__title alignCenter bg-title">{% trans 'Name of the university' %}</div>
+                                    <div class="edu-name alignCenter">{{ employee.get_last_education_name }}</div>
+                                </div>
+                            </div>
+                            <div class="language-main">
+                                <div class="lang-row">
+                                    <div class="lang-name bg-title alignCenter">{% trans 'Knowledge of languages' %}</div>
+                                    <div class="lang-step1 alignCenter">{% trans 'elem' %}</div>
+                                    <div class="lang-step2 alignCenter">{% trans 'inter' %}</div>
+                                    <div class="lang-step3 alignCenter">{% trans 'adv' %}</div>
+                                </div>
+
+                                <div class="lang-row">
+                                    <div class="lang-name alignCenter">{% trans 'Native language' %}</div>
+                                    <div class="lang-step alignCenter">{{ employee.get_primary_language.language.name }}</div>
+                                </div>
+
+                                {% if employee.get_languages.count >= 4 %}
+                                    {% for lang in employee.get_languages %}
+                                        {% if forloop.counter <= 4 %}
+                                            <div class="lang-row">
+                                                <div class="lang-name alignCenter">{{ lang.language.name }}</div>
+                                                <div class="lang-step1 alignCenter"><span class="square {% if lang.level == 3 %}active{% endif %}"></span></div>
+                                                <div class="lang-step2 alignCenter"><span class="square {% if lang.level == 2 %}active{% endif %}"></span></div>
+                                                <div class="lang-step3 alignCenter"><span class="square {% if lang.level == 1 %}active{% endif %}"></span></div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    {% for lang in employee.get_languages %}
+                                        <div class="lang-row">
+                                            <div class="lang-name alignCenter">{{ lang.language.name }}</div>
+                                            <div class="lang-step1 alignCenter"><span class="square {% if lang.level == 3 %}active{% endif %}"></span></div>
+                                            <div class="lang-step2 alignCenter"><span class="square {% if lang.level == 2 %}active{% endif %}"></span></div>
+                                            <div class="lang-step3 alignCenter"><span class="square {% if lang.level == 1 %}active{% endif %}"></span></div>
+                                        </div>
+                                    {% endfor %}
+                                    {% range_number 4 employee.get_languages.count as count %}
+                                    {% for c in count %}
+                                        <div class="lang-row">
+                                            <div class="lang-name alignCenter">---</div>
+                                            <div class="lang-step1 alignCenter"><span class="square">---</span></div>
+                                            <div class="lang-step2 alignCenter"><span class="square">---</span></div>
+                                            <div class="lang-step3 alignCenter"><span class="square">---</span></div>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+
+{#                            #}
+{#                                {% for lang in employee.get_languages %}#}
+{#                                    <div class="lang-row">#}
+{#                                        <div class="lang-name alignCenter">{{ lang.language.name }}</div>#}
+{#                                        <div class="lang-step1 alignCenter"><span class="square {% if lang.level == 1 %}active{% endif %}"></span></div>#}
+{#                                        <div class="lang-step2 alignCenter"><span class="square {% if lang.level == 2 %}active{% endif %}"></span></div>#}
+{#                                        <div class="lang-step3 alignCenter"><span class="square {% if lang.level == 3 %}active{% endif %}"></span></div>#}
+{#                                    </div>#}
+{#                                {% endfor %}#}
+                                <div class="lang-row">
+                                    <div class="lang-name bg-title alignCenter">{% trans 'Education specialization' %}</div>
+                                    <div class="lang-step alignCenter">{{ employee.get_last_education_speciality }}</div>
+                                </div>
+                            </div>
+                            <div class="education-other">
+                                <div class="education-row">
+                                    <div class="edu-name__title alignCenter bg-title">{% trans 'Other study data' %}</div>
+                                    <div class="edu-name alignCenter">{{ employee.get_last_education_other }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gr-line"></div>
+                        <div class="medArmyFam-data">
+                            <div class="med-data">
+                                <div class="med-data-title bg-title alignCenter">{% trans 'Medical data' %}</div>
+                                <div class="med-data__row">
+                                    <div class="med-data__row-title bg-title alignLeft">{% trans 'Weight' %}</div>
+                                    <div class="med-data__row-item alignCenter">{{ employee.weight|floatformat }} кг</div>
+                                </div>
+                                <div class="med-data__row">
+                                    <div class="med-data__row-title bg-title alignLeft">{% trans 'Height' %}</div>
+                                    <div class="med-data__row-item alignCenter">{{ employee.height|floatformat }} см</div>
+                                </div>
+                                <div class="med-data__row">
+                                    <div class="med-data__row-title bg-title alignLeft">{% trans 'Fatness' %} %</div>
+                                    <div class="med-data__row-item alignCenter">{{ employee.fatness|floatformat }} </div>
+                                </div>
+                                <div class="med-data__row">
+                                    <div class="med-data__row-title bg-title alignLeft">{% trans 'Blood group' %}</div>
+                                    <div class="med-data__row-item alignCenter">{{ employee.blood_group }}</div>
+                                </div>
+                                <div class="med-data__row">
+                                    <div class="med-data__row-title bg-title alignLeft">{% trans 'Vision left' %}</div>
+                                    <div class="med-data__row-item alignCenter">{{ employee.vision_l|floatformat }}</div>
+                                </div>
+                                <div class="med-data__row">
+                                    <div class="med-data__row-title bg-title alignLeft">{% trans 'Vision right' %}</div>
+                                    <div class="med-data__row-item alignCenter">{{ employee.vision_r|floatformat }}</div>
+                                </div>
+                            </div>
+                            <div class="army-data">
+                                <div class="army-data-title bg-title alignCenter">{% trans 'Military service' %}</div>
+                                <div class="army-data__row">
+                                    <div class="army-data__row-title bg-title alignLeft">{% trans 'HF name' %}</div>
+                                    <div class="army-data__row-item alignCenter">{{ employee.army_set.first.name }}</div>
+                                </div>
+                                <div class="army-data__row">
+                                    <div class="army-data__row-title bg-title alignLeft">{% trans 'Military region' %}</div>
+                                    <div class="army-data__row-item alignCenter">{{ employee.army_set.first.region|truncatechars:15 }}</div>
+                                </div>
+                                <div class="army-data__row">
+                                    <div class="army-data__row-title bg-title alignLeft">{% trans 'Period of service' %}</div>
+                                    <div class="army-data__row-item alignCenter">{% trans 'to' %} {{ employee.army_set.first.date_started|date:'Y' }} {% trans 'do' %} {{ employee.army_set.first.date_finished|date:'Y' }}</div>
+                                </div>
+                                <div class="army-data__row">
+                                    <div class="army-data__row-title bg-title alignLeft">{% trans 'Rank' %}</div>
+                                    <div class="army-data__row-item alignCenter">{{ employee.army_set.first.rank }}</div>
+                                </div>
+                                <div class="awards-data">
+                                    <div class="awards-title bg-title alignCenter">{% trans 'Rewards' %}</div>
+                                    <div class="awards alignCenter">{{ employee.reward_set.first.name }}</div>
+                                </div>
+                            </div>
+                            <div class="marital-data">
+                                <div class="marital-data__title bg-title alignCenter">{% trans 'Family status' %}</div>
+                                <div class="marital-data__main">
+                                    <div class="marital-role">
+                                        <div class="marital-role__item alignLeft"><span class="square {% if employee.family.status == 1 %}active{% endif %}"></span> {% trans 'Not married' %}</div>
+                                        <div class="marital-role__item alignLeft"><span class="square {% if employee.family.status == 2 %}active{% endif %}"></span> {% trans 'Married' %}</div>
+                                        <div class="marital-role__item alignLeft"><span class="square {% if employee.family.status == 3 %}active{% endif %}"></span> {% trans 'Divorced' %}</div>
+                                        <div class="marital-role__item alignLeft"><span class="square {% if employee.family.status == 4 %}active{% endif %}"></span> {% trans 'Widower' %}</div>
+                                        <div class="marital-role__item alignLeft"><span class="square {% if employee.family.status == 5 %}active{% endif %}"></span> {% trans 'Second marriage' %}</div>
+                                        <div class="marital-role__item alignLeft"><span class="square {% if employee.family.status == 6 %}active{% endif %}"></span> {% trans 'Civil marriage' %}</div>
+                                    </div>
+                                    <div class="marital-child">
+                                        <div class="marital-child__title bg-title alignCenter">{% trans 'Having' %} <br>{% trans 'children' %}</div>
+                                        <div class="marital-child__count alignLeft"><span class="square {% if employee.family.children_amount == 1 %}active{% endif %}"></span>1</div>
+                                        <div class="marital-child__count alignLeft"><span class="square {% if employee.family.children_amount == 2 %}active{% endif %}"></span>2</div>
+                                        <div class="marital-child__count alignLeft"><span class="square {% if employee.family.children_amount == 3 %}active{% endif %}"></span>3</div>
+                                        <div class="marital-child__count alignLeft">
+                                            <span class="square {% if employee.family.children_amount == 4 %}active{% endif %}"></span>4
+                                            ~ <span class="square {% if employee.family.children_amount == 5 %}active{% endif %}"></span>4 +
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="family-data">
+                            <div class="family-data-title bg-title">
+                                <img src="{% static 'operator/images/1.jpg' %}" alt="">
+                            </div>
+                            <diyv class="family-data__main">
+                                    <div class="family-row__title bg-title">
+                                        <div class="fam-role alignCenter">
+                                            {% trans 'Relative level' %}
+                                        </div>
+                                        <div class="fam-fio alignCenter">
+                                            {% trans 'Fullname' %}
+                                        </div>
+                                        <div class="fam-age alignCenter">
+                                            {% trans 'Age' %}
+                                        </div>
+                                        <div class="fam-edu alignCenter">
+                                            {% trans 'Relative work/study place' %}
+                                        </div>
+                                        <div class="fam-exp alignCenter">
+                                            {% trans 'Position' %}
+                                        </div>
+                                        <div class="fam-address alignCenter">
+                                            {% trans 'Relative living address' %}
+                                        </div>
+                                    </div>
+
+                                {% if employee.relative_set.count >= 7 %}
+                                    {% for rel in employee.relative_set.all %}
+                                        {% if forloop.counter <= 7 %}
+                                            <div class="family-row">
+                                                <div class="fam-role alignCenter">
+                                                    {{ rel.get_level_display }}
+                                                </div>
+                                                <div class="fam-fio alignLeft">
+                                                    {{ rel.fullname }}
+                                                </div>
+                                                <div class="fam-age alignCenter">
+                                                    {{ rel.age }}
+                                                </div>
+                                                <div class="fam-edu alignCenter">
+                                                    {{ rel.study_work_place|truncatechars:15 }}
+                                                </div>
+                                                <div class="fam-exp alignCenter">
+                                                    {{ rel.position }}
+                                                </div>
+                                                <div class="fam-address alignCenter">
+                                                    {{ rel.living_address|truncatechars:15 }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    {% for rel in employee.relative_set.all %}
+                                        <div class="family-row">
+                                            <div class="fam-role alignCenter">
+                                                {{ rel.get_level_display }}
+                                            </div>
+                                            <div class="fam-fio alignLeft">
+                                                {{ rel.fullname }}
+                                            </div>
+                                            <div class="fam-age alignCenter">
+                                                {{ rel.age }}
+                                            </div>
+                                            <div class="fam-edu alignCenter">
+                                                {{ rel.study_work_place|truncatechars:15 }}
+                                            </div>
+                                            <div class="fam-exp alignCenter">
+                                                {{ rel.position }}
+                                            </div>
+                                            <div class="fam-address alignCenter">
+                                                {{ rel.living_address|truncatechars:15 }}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    {% range_number 7 employee.relative_set.count as count %}
+                                    {% for c in count %}
+                                        <div class="family-row">
+                                            <div class="fam-role alignCenter">
+                                                ---
+                                            </div>
+                                            <div class="fam-fio alignLeft">
+                                                ---
+                                            </div>
+                                            <div class="fam-age alignCenter">
+                                                ---
+                                            </div>
+                                            <div class="fam-edu alignCenter">
+                                                ---
+                                            </div>
+                                            <div class="fam-exp alignCenter">
+                                                ---
+                                            </div>
+                                            <div class="fam-address alignCenter">
+                                                ---
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </diyv>
+                        </div>
+                        <div class="gr-line"></div>
+                        <div class="experience-data">
+                            <div class="experience-title alignCenter">
+                                {% trans 'Labor experience (including abroad) for the last 5 years' %}
+                            </div>
+                            <div class="experience-row__title bg-title">
+                                <div class="exp-id alignCenter">№</div>
+                                <div class="exp-name alignCenter">{% trans 'Name of company' %}</div>
+                                <div class="exp-period alignCenter">{% trans 'Work period' %}</div>
+                                <div class="exp-job alignCenter">{% trans 'Position' %}</div>
+                                <div class="exp-role alignCenter">{% trans 'Subdivision' %}</div>
+                                <div class="exp-address alignCenter">{% trans 'Location' %}</div>
+                            </div>
+                            {% if employee.experience_set.count >= 4 %}
+                                {% for exp in employee.experience_set.all %}
+                                    {% if forloop.counter <= 4 %}
+                                        <div class="experience-row">
+                                            <div class="exp-id alignCenter">{{ forloop.counter }}</div>
+                                            <div class="exp-name alignLeft">{{ exp.organization }}</div>
+                                            <div class="exp-period alignCenter">{% trans 'to' %} {{ exp.date_started|date:'Y' }} {% trans 'do' %} {{ exp.date_finished|date:'Y' }}</div>
+                                            <div class="exp-job alignCenter">{{ exp.position }}</div>
+                                            <div class="exp-role alignCenter">{{ exp.sub_division }}</div>
+                                            <div class="exp-address alignCenter">{{ exp.address|truncatechars:15 }}</div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                {% for exp in employee.experience_set.all %}
+                                    <div class="experience-row">
+                                        <div class="exp-id alignCenter">{{ forloop.counter }}</div>
+                                        <div class="exp-name alignLeft">{{ exp.organization }}</div>
+                                        <div class="exp-period alignCenter">{% trans 'to' %} {{ exp.date_started|date:'Y' }} {% trans 'do' %} {{ exp.date_finished|date:'Y' }}</div>
+                                        <div class="exp-job alignCenter">{{ exp.position }}</div>
+                                        <div class="exp-role alignCenter">{{ exp.sub_division }}</div>
+                                        <div class="exp-address alignCenter">{{ exp.address|truncatechars:15 }}</div>
+                                    </div>
+                                {% endfor %}
+                                {% range_number 4 employee.experience_set.count as count %}
+                                {% for c in count %}
+                                    {% minus_numbers 4 count as counter %}
+                                    {% plus_numbers counter forloop.counter as counter %}
+                                    <div class="experience-row">
+                                        <div class="exp-id alignCenter">{{ counter }}</div>
+                                        <div class="exp-name alignLeft">---</div>
+                                        <div class="exp-period alignCenter">---</div>
+                                        <div class="exp-job alignCenter">---</div>
+                                        <div class="exp-role alignCenter">---</div>
+                                        <div class="exp-address alignCenter">---</div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="officalUse-data__title alignCenter">ONLY FOR OFFICAL USE</div>
+                        <div class="officalUse-data">
+                            <div class="officalUse-A">
+                                <div class="officalUse-A__title alignLeft">A. {% trans 'According to the results of the interview with the applicant' %}:</div>
+                                <div class="officalUse-A1">
+                                    <div class="region__row">
+                                        <div class="region-id alignLeft">1.</div>
+                                        <div class="region-name__title alignLeft">{% trans 'Choice by the applicant of foreign countries for employment' %}</div>
+                                    </div>
+                                    <div class="regionAll-id alignLeft"></div>
+                                    <div class="regionAll__row">
+                                        {% if countries.count >= 16 %}
+                                            {% for country in countries %}
+                                                {% check_for_country employee.id country.id as has_country %}
+                                                {% if forloop.counter <= 16 %}
+                                                    <div class="region-name alignLeft"><span class="square {% if has_country %}active{% endif %}"></span>{{ country.name }}</div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            {% for country in countries %}
+                                                {% check_for_country employee.id country.id as has_country %}
+                                                <div class="region-name alignLeft"><span class="square {% if has_country %}active{% endif %}"></span>{{ country.name }}</div>
+                                            {% endfor %}
+                                            {% range_number 16 countries.count as count %}
+                                            {% for c in count %}
+                                                <div class="region-name alignLeft"><span class="square {% if has_country %}active{% endif %}"></span>---</div>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="officalUse-A2">
+                                    <div class="region__row">
+                                        <div class="region-id alignLeft">2.</div>
+                                        <div class="region-name__title alignLeft">{% trans 'Desired salary after employment abroad' %} ({% trans 'base salary' %})</div>
+                                    </div>
+                                    <div class="region__row">
+                                        <div class="region-id"></div>
+                                        <div class="region-name5 alignLeft"><span class="square {% if employee.wages == '500' %}active{% endif %}"></span> {% trans 'Less than 500$' %}</div>
+                                        <div class="region-name5 alignLeft"><span class="square {% if employee.wages == '500-1000' %}active{% endif %}"></span> 500-1000</div>
+                                        <div class="region-name5 alignLeft"><span class="square {% if employee.wages == '1000-1500' %}active{% endif %}"></span> 1000-1500</div>
+                                        <div class="region-name5 alignLeft"><span class="square {% if employee.wages == '1500-2500' %}active{% endif %}"></span> 1500-2500</div>
+                                        <div class="region-name5 alignLeft"><span class="square {% if employee.wages == '2500' %}active{% endif %}"></span> {% trans 'Above 2500$' %}</div>
+                                    </div>
+                                </div>
+                                <div class="officalUse-A3">
+                                    <div class="region__row">
+                                        <div class="region-id alignLeft">3.</div>
+                                        <div class="region-name__title alignLeft">{% trans 'Willingness of the applicant to enter a university abroad' %}</div>
+                                    </div>
+                                    <div class="region__row">
+                                        <div class="region-id alignLeft"></div>
+                                        <div class="region-name alignLeft"><span class="square {% if employee.is_ready_for_university %}active{% endif %}"></span> {% trans 'yes' %}</div>
+                                        <div class="region-name alignLeft"><span class="square {% if not employee.is_ready_for_university %}active{% endif %}"></span> {% trans 'no' %}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="psixolog-data">
+                                <div class="psixolog-data__title alignCenter">{% trans 'Psycolog score' %}</div>
+                                <div class="psixolog-data__1">
+                                    <div class="psixolog-data__item alignLeft"></div>
+                                    <div class="psixolog-data__item alignLeft"><span class="square"></span> 1</div>
+                                    <div class="psixolog-data__item alignLeft"><span class="square"></span> 2</div>
+                                    <div class="psixolog-data__item alignLeft"><span class="square"></span> 3</div>
+                                    <div class="psixolog-data__item alignLeft"><span class="square"></span> 4</div>
+                                    <div class="psixolog-data__item alignLeft"><span class="square {% if employee.psycholog == 5 %}active{% endif %}"></span> 5</div>
+                                    <div class="psixolog-data__item alignLeft"></div>
+                                    <div class="psixolog-data__item alignLeft"></div>
+                                    <div class="psixolog-data__item alignLeft"><span class="square {% if employee.psycholog <= 5 %}active{% endif %}"></span> {% trans 'unfit' %}</div>
+                                </div>
+                                <div class="psixolog-data__2">
+                                    <div class="psixolog-data__item alignLeft"></div>
+                                    <div class="psixolog-data__item alignLeft"><span class="square {% if employee.psycholog == 6 %}active{% endif %}"></span> 6</div>
+                                    <div class="psixolog-data__item alignLeft"><span class="square {% if employee.psycholog == 7 %}active{% endif %}"></span> 7</div>
+                                    <div class="psixolog-data__item alignLeft"><span class="square {% if employee.psycholog == 8 %}active{% endif %}"></span> 8</div>
+                                    <div class="psixolog-data__item alignLeft"><span class="square {% if employee.psycholog == 9 %}active{% endif %}"></span> 9</div>
+                                    <div class="psixolog-data__item alignLeft"><span class="square {% if employee.psycholog == 10 %}active{% endif %}"></span> 10</div>
+                                    <div class="psixolog-data__item alignLeft"></div>
+                                    <div class="psixolog-data__item alignLeft"></div>
+                                    <div class="psixolog-data__item alignLeft"><span class="square {% if employee.psycholog > 5 %}active{% endif %}"></span> {% trans 'fit' %}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="others-data">
+                            <div class="officalUse-B__title alignLeft">B. {% trans 'Other features of the applicant' %}: </div>
+                            <div class="officalUse-Brow">
+                                <div class="officalUse-Bid alignLeft">1.</div>
+                                <div class="officalUse-Bdata alignLeft">{% trans 'Information about the presence or absence of a criminal record: reference number' %} <span style="text-decoration: underline;">{{ employee.criminal_number }}</span> {% trans 'Date of issue' %} <span style="text-decoration: underline;">{{ employee.criminal_issue|date:'d.m.Y' }}</span></div>
+                            </div>
+                            <div class="officalUse-Brow">
+                                <div class="officalUse-Bid alignLeft">2.</div>
+                                <div class="officalUse-Bdata alignLeft">{% trans 'Add spec signs' %}: <span style="text-decoration: underline;">{{ employee.add_spec_signs }}</span> </div>
+                            </div>
+                            <div class="officalUse-Brow">
+                                <div class="officalUse-Bid alignLeft">3.</div>
+                                <div class="officalUse-Bdata alignLeft">{% trans 'Hobbies, special skills' %}: <span style="text-decoration: underline;">{{ employee.hobby }}</span> </div>
+                            </div>
+                            <div class="officalUse-Brow">
+                                <div class="officalUse-Bid alignLeft">4.</div>
+                                <div class="officalUse-Bdata alignLeft">{% trans 'Other information' %}: <span style="text-decoration: underline;">{{ employee.other }}</span> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="test()"><i class="fa fa-download" aria-hidden="true"></i> {% trans 'Download' %}</button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'ncdKart/js/html2pdf.bundle.js' %}"></script>
+<script>
+    function test() {
+      // Get the element.
+      var element = document.getElementById('root');
+
+      // Generate the PDF.
+      html2pdf().from(element).set({
+        margin: 0,
+        filename: 'test.pdf',
+        html2canvas: { scale: 4 },
+        jsPDF: {orientation: 'portrait', unit: 'in', format: 'letter'}
+      }).save();
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,35 @@
+<script>
+    let ws;
+    var protocol = ( window.location.protocol === 'http:' ) ? 'ws://' : 'wss://';
+    let wsUrl = `${protocol}${window.location.host}/ws/notify/operator2/{{ request.user.operator.channel }}/`;
+
+    $(function () {
+        ws = new WebSocket(wsUrl);
+        ws.onopen = function (data) {
+            wsOnOpen(data);
+        };
+        ws.onmessage = function (data) {
+            wsOnMessage(data);
+        }
+    });
+
+    function wsOnOpen() {
+        console.log("ws connected", wsUrl);
+    }
+
+    function wsOnMessage(data) {
+        let counterHTML = $("#notification-counter");
+        counterINT = parseInt(counterHTML.html());
+        counterINT++;
+        counterHTML.html(counterINT);
+        $(".operator2Notification").addClass("active");
+        // 2
+        data = JSON.parse(data.data);
+        $(".dropdown-not").prepend(
+            `<li>
+                <a href="{% url 'operator:3' %}?id=${ data.message.id }" data-id="${data.message.id}"><i class="ti-email"></i>${data.message.fullname}</a>
+            </li>
+            <li role="separator" class="divider"></li>`
+        );
+    }
+</script>

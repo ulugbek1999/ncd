@@ -1,0 +1,133 @@
+{% extends 'root/_base.html' %}
+{% load static root i18n %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% trans 'Requests for candidates from partners' %}</h2>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{% trans 'List' %}</h2>
+        </div>
+        <div class="card-main__content">
+            <div class="col-md-12" style="float: right;text-align: right">
+                <div class="add-buttons">
+                    <div class="deleteBook-buttons">
+                        <button id="deletePGroupButton" data-url="{% url 'api:admin:partner:request-delete' %}">{% trans 'Delete' %}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="search-results__main" style="padding-top: 30px;">
+                <div class="table-main">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="table-row" data-href="#">
+                                <th class="td-check"></th>
+                                <th class="td-id">№</th>
+                                <th class="td-fio">{% trans 'Fullname' %}</th>
+                                <th class="td-company">{% trans 'Subject name' %}</th>
+                                <th class="td-reg">{% trans 'Reg.number' %}</th>
+                                <td class="td-empCount">{% trans 'Count' %}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for p in partner_requests %}
+                                <tr class="table-row" data-id="{{ p.partner.id }}" data-href="{% url 'root.partner.bookmarks' p.id %}">
+                                    <td class="td-checkbox td-check" >
+                                        <input class="deleteCheck" type="checkbox" data-id="{{ p.id }}" name="ids" >
+                                    </td>
+                                    <td class="td-id">{{ p.partner.id }}</td>
+                                    <td class="td-fio">{{ p.partner.boss_fullname }}</td>
+                                    <td class="td-company">{{ p.partner.company_name }}</td>
+                                    <td class="td-reg">{{ p.partner.register_number }}</td>
+                                    <td class="td-empCount">{{ p.employees.count }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% if is_paginated %}
+                        <div class="pagination-main">
+                            <ul class="pagination">
+                                {% if page_obj.has_previous %}
+                                    <li><a href="?{{ page_obj.previous_page_number.querystring }}" class="prev">&lsaquo;&lsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled prev">&lsaquo;&lsaquo;</span></li>
+                                {% endif %}
+                                {% for page in page_obj.pages %}
+                                    {% if page %}
+                                        {% ifequal page page_obj.number %}
+                                            <li><span class="current page">{{ page }}</span></li>
+                                        {% else %}
+                                            <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                        {% endifequal %}
+                                    {% else %}
+                                        ...
+                                    {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                    <li><a href="?{{ page_obj.next_page_number.querystring }}" class="next">&rsaquo;&rsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled next">&rsaquo;&rsaquo;</span></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+
+    <script>
+        $(function () {
+
+            $("#deletePGroupButton").click(function (e) {
+                e.preventDefault();
+
+                let formData = new FormData();
+                let url = $(this).data("url");
+
+                var myDeldata = jQuery(".table tr:not(.header) td input:checked").map(function() {
+                    return jQuery(this).closest("tr").data("id");
+                        }).get();
+
+                result = window.confirm("{% trans 'Do you really want to delete?' %}");
+
+                if(result){
+                    console.log(myDeldata);
+                    formData.append("ids", myDeldata);
+                    $.ajax({
+                        url: url,
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        method: 'POST',
+                        success: function (data) {
+                            location.reload();
+                        },
+                        error: function (data) {
+
+                        }
+                    });
+                }else{
+
+                }
+
+            });
+
+        });
+    </script>
+    <script src="{% static 'operator/js/root/search.js' %}"></script>
+    <script>
+        $(function(){
+            $(".table-row").click(function(e) {
+                e.stopPropagation();
+                window.document.location = $(this).data("href");
+            });
+
+        });
+    </script>
+{% endblock %}

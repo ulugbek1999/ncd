@@ -1,0 +1,234 @@
+{% extends 'root/_base.html' %}
+{% load static i18n root %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% trans 'Statistics' %}</h2>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{% trans 'Filter' %}</h2>
+        </div>
+        <div class="card-main__content">
+            <div class="search-form__app statistics">
+                <form action="">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="edu">{% trans 'Region' %}</label>
+                            <select class="form-control selectpicker show-tick" name="region" id="edu">
+                                <option value="">{% trans 'Select' %}</option>
+                                {% for reg in regions %}
+                                    <option value="{{ reg.name_ru }}" {% if reg.name_ru == region %}selected{% endif %}>{{ reg.name_ru }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edu">{% trans 'Education' %}</label>
+                            <select class="form-control selectpicker show-tick" name="education" id="edu">
+                                <option value="">{% trans 'Select' %}</option>
+                                {% for edu in educations %}
+                                    <option value="{{ edu.id }}" {% if edu.id == education %}selected{% endif %}>{{ edu.name_ru }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'Language' %}</label>
+                            <select class="form-control selectpicker show-tick" name="language" id="">
+                                <option value="">{% trans 'Select' %}</option>
+                                {% for lang in languages %}
+                                    <option value="{{ lang.id }}" {% if lang.id == language %}selected{% endif %}>{{ lang.name_ru }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">{% trans 'Family status' %}</label>
+                            <select class="form-control selectpicker show-tick" name="family" id="">
+                                <option value="">{% trans 'Select' %}</option>
+                                <option value="1" {% if family == "1" %}selected{% endif %}>{% trans 'Not married' %}</option>
+                                <option value="2" {% if family == "2" %}selected{% endif %}>{% trans 'Married' %}</option>
+                                <option value="3" {% if family == "3" %}selected{% endif %}>{% trans 'Razvode' %}</option>
+                                <option value="4" {% if family == "4" %}selected{% endif %}>{% trans 'Vdova' %}</option>
+                                <option value="5" {% if family == "5" %}selected{% endif %}>{% trans 'Vtoroy_brak' %}</option>
+                                <option value="6" {% if family == "6" %}selected{% endif %}>{% trans 'Grandanskiy brak' %}</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="height">{% trans 'Height' %}</label>
+                            <input type="text" name="height" id="height" class="form-control" value="{{ height }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="weight">{% trans 'Weight' %}</label>
+                            <input type="text" name="weight" id="weight" class="form-control" value="{{ weight }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="body_type">{% trans 'Fatness' %}</label>
+                            <input type="text" name="fatness" id="body_type" class="form-control" value="{{ fatness }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="edu">{% trans 'Countries for work' %}</label>
+                            <select class="form-control selectpicker show-tick" name="country" id="edu">
+                                <option value="">{% trans 'Select' %}</option>
+                                {% for c in countries %}
+                                    <option value="{{ c.id }}" {% if c.id == country %}selected{% endif %}>{{ c.name_ru }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'Wages' %}</label>
+                            <select class="form-control selectpicker show-tick" name="wages" id="edu">
+                                <option value="">{% trans 'Select' %}</option>
+                                <option value="500"> {% if wages == "500" %}selected{% endif %}{% trans 'Less than 500$' %}</option>
+                                <option value="500-1000" {% if wages == "500-1000" %}selected{% endif %}>{% trans '500$-1000$' %}</option>
+                                <option value="1000-1500" {% if wages == "1000-1500" %}selected{% endif %}>{% trans '1000$-1500$' %}</option>
+                                <option value="1500-2000" {% if wages == "1500-2000" %}selected{% endif %}>{% trans '1500$-2000$' %}</option>
+                                <option value="2500" {% if wages == "2500" %}selected{% endif %}>{% trans 'Above 2500$' %}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">{% trans 'Ready for university' %}</label>
+                            <div class="form-group radio-form">
+                                <div class="radio-group"  style="float: left;">
+                                    <input type="radio" id="to_university1" name="to_university" value="true" {% if to_university == 'true' %}checked{% endif %}>
+                                    <label for="to_university1">
+                                        <span>{% trans 'Yes' %}</span>
+                                    </label>
+                                </div>
+                                <div class="radio-group"  style="float: left;">
+                                    <input type="radio" id="to_university2" name="to_university" value="false" {% if to_university == 'false' %}checked{% endif %}>
+                                    <label for="to_university2">
+                                        <span>{% trans 'No' %}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'Psycholog score' %}</label>
+                            <select class="form-control selectpicker show-tick" name="psycholog" id="psix">
+                                <option value="">{% trans 'Select' %}</option>
+                                <option value="5" {% if psycholog == '5' %}selected{% endif %}>5</option>
+                                <option value="6" {% if psycholog == '6' %}selected{% endif %}>6</option>
+                                <option value="7" {% if psycholog == '7' %}selected{% endif %}>7</option>
+                                <option value="8" {% if psycholog == '8' %}selected{% endif %}>8</option>
+                                <option value="9" {% if psycholog == '9' %}selected{% endif %}>9</option>
+                                <option value="10" {% if psycholog == '10' %}selected{% endif %}>10</option>
+                            </select>
+                        </div>
+                        <div class="search-buttons">
+                            <div class="form-search__button" id="">
+                                <button id="" type="submit">{% trans 'search' %}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+            <div class="statistics-results">
+                <div class="results">
+                    <span>{% trans 'Results' %}: </span>
+                    <span class="count-results">{{ employees.count }}</span>
+                </div>
+                <div class="downloads">
+                    <a href="{{ request.full_path }}?download=true&{{ request.GET.urlencode }}"><i class="fa fa-download" aria-hidden="true"></i> {% trans 'Download' %}</a>
+                </div>
+            </div>
+            <div class="search-results__main">
+                <div class="table-main">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr class="table-row" data-href="#">
+                            <th class="td-id">№</th>
+                            <th class="td-fio">{% trans 'Fullname' %}</th>
+                            <th class="td-reg">{% trans 'Register number' %}</th>
+                            <th class="td-phone">{% trans 'Phone' %}</th>
+                            <th class="td-date">{% trans 'Created' %}</th>
+                            <th class="td-cat">{% trans 'Category' %}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for emp in employees %}
+                            <tr class="table-row" data-href="{% url 'root.employee.detail' emp.id %}">
+                                <td class="td-id">{{ emp.id }}</td>
+                                <td class="td-fio">{{ emp.full_name_ru }}</td>
+                                <td class="td-reg">{{ emp.register_number }}</td>
+                                <td class="td-phone">{{ emp.phone }}</td>
+                                <td class="td-date">{{ emp.created|date:"H:i d.m.Y" }}</td>
+                                {% if emp.score %}
+                                    {% if emp.score.category == "A" %}
+                                        <td class="td-cat scoreA">{{ emp.score.summa }} ({{ emp.score.category }})</td>
+                                    {% elif emp.score.category == "B" %}
+                                        <td class="td-cat scoreB">{{ emp.score.summa }} ({{ emp.score.category }})</td>
+                                    {% elif emp.score.category == "C" %}
+                                        <td class="td-cat scoreC">{{ emp.score.summa }} ({{ emp.score.category }})</td>
+                                    {% elif emp.score.category == "D" %}
+                                        <td class="td-cat scoreD">{{ emp.score.summa }} ({{ emp.score.category }})</td>
+                                    {% else %}
+                                        <td class="td-cat">{% trans 'No score' %}</td>
+                                    {% endif %}
+                                {% else %}
+                                    <td class="td-cat">{% trans 'No score' %}</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% if is_paginated %}
+                        <div class="pagination-main">
+                            <ul class="pagination">
+                                {% if page_obj.has_previous %}
+                                    <li><a href="?{{ page_obj.previous_page_number.querystring }}" class="prev">&lsaquo;&lsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled prev">&lsaquo;&lsaquo;</span></li>
+                                {% endif %}
+                                {% for page in page_obj.pages %}
+                                    {% if page %}
+                                        {% ifequal page page_obj.number %}
+                                            <li><span class="current page">{{ page }}</span></li>
+                                        {% else %}
+                                            <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                        {% endifequal %}
+                                    {% else %}
+                                        ...
+                                    {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                    <li><a href="?{{ page_obj.next_page_number.querystring }}" class="next">&rsaquo;&rsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled next">&rsaquo;&rsaquo;</span></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'operator/js/root/search.js' %}"></script>
+    <script>
+        $(function () {
+            $("#height").inputmask({
+                "mask": "ddd-ddd"
+            });
+            $("#weight").inputmask({
+                "mask": "ddd-ddd"
+            });
+            $("#body_type").inputmask({
+                "mask": "ddd-ddd"
+            });
+            $("#reset-employee-search").click(function (e) {
+                e.preventDefault();
+                alert(11);
+            })
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,238 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NCD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="{% static 'operator/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'operator/fonts/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- styles -->
+    <link href="/static/operator/css/styles.css" rel="stylesheet">
+
+</head>
+<body>
+
+<section class="page-content">
+    <div class="sidebar">
+        <div class="sidebar-box">
+            <div class="sidebar-header">
+                <div class="hader-logo">
+                    <img src="/static/operator/images/logo.svg" alt="">
+                </div>
+            </div>
+            <div class="sidebar-menu">
+                <ul class="nav">
+                    <!-- Main menu -->
+                    <li class="current"><a href="{% url 'operator-1' %}"><span>Оператор 1</span></a></li>
+{#                    <li class="current"><a href="{% url 'operator:3' %}"><span>Оператор 2</span></a></li>#}
+{#                    <li class="current"><a href="{% url 'operator:3' %}"><span>Оператор 3</span></a></li>#}
+{#                    <li class="current"><a href="#"><span>Оператор 4</span></a></li>#}
+{#                    <li class="current"><a href="#"><span>Сотрудники</span></a></li>#}
+{#                    <li class="current"><a href="#"><span>Календарь</span></a></li>#}
+{#                    <li class="current"><a href="#"><span>Компания</span></a></li>#}
+{#                    <li class="current"><a href="#"><span>CRM</span></a></li>#}
+{#                    <li class="current"><a href="{% url 'operator-1.stat' %}"><span>Статистика</span></a></li>#}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="content-box">
+            <div class="content-header">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="content-header__left">
+                            <div class="search-box">
+                                <svg style="display: none">
+                                    <symbol id="magnify" viewBox="0 0 18 18" height="100%" width="100%">
+                                        <path d="M12.5 11h-.8l-.3-.3c1-1.1 1.6-2.6 1.6-4.2C13 2.9 10.1 0          6.5 0S0 2.9 0 6.5 2.9 13 6.5 13c1.6 0 3.1-.6 4.2-1.6l.3.3v.8l5 5          1.5-1.5-5-5zm-6 0C4 11 2 9 2 6.5S4 2 6.5 2 11 4 11 6.5 9 11 6.5            11z" fill="#fff" fill-rule="evenodd"/>
+                                    </symbol>
+                                </svg>
+
+                                <div class="search-bar">
+
+                                    <input type="text" class="input" placeholder="&nbsp;">
+                                    <span class="label">Поиск</span>
+                                    <span class="highlight"></span>
+                                    <div class="search-btn">
+                                        <svg class="icon icon-18">
+                                            <use xlink:href="#magnify"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="content-header__right">
+                            <div class="content-header__time">
+                                <h2 id="time"></h2>
+                            </div>
+                            <div class="content-header__user">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-user fa-fw"></i> <span>{{ request.user.username }}</span> <i class="fa fa-caret-down"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li>
+                                        <a href="#"><i class="fa fa-user fa-fw"></i> {% trans 'Profile' %}</a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-gear fa-fw"></i> {% trans 'Settings' %}</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="{% url 'auth.signout' %}"><i class="fa fa-sign-out fa-fw"></i> {% trans 'Logout' %}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="content-title">
+                <h2>{% trans 'Register employee' %}</h2>
+            </div>
+            <div class="card-main">
+                <div class="card-main__header">
+                    <h2>{% trans "Employee's Personal card" %}</h2>
+                </div>
+                <div class="card-main__content">
+                    {% for employee in employees %}
+                        {{ employee.full_name_en }}
+                    {% endfor %}
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="footer-main">
+                <div class="copy">
+                    © «NCD CRM v1.0», 2019
+                </div>
+                <div class="dev">
+                    Разработка CRM-системы: <a href='#'>Online Service Group</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <div class="sideRight">
+        <div class="help-block">
+            <div class="help-block__icon">
+                <a href="#">
+                    <i class="fa fa-question" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <div class="bx-informer">
+            <div class="bx-im-informer-icon">
+                <a href="#">
+                    <i class="fa fa-bell" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <div class="bx-informer">
+            <div class="bx-im-informer-icon" style="background: #05b5ab;">
+                <a href="#">
+                    <i class="fa fa-bell" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <div class="bx-search">
+            <div class="bx-im-search-icon">
+                <a href="#">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</section>
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="{% static 'operator/js/jquery.js' %}"></script>
+<script src="{% static 'operator/js/csrf.js' %}"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{% static 'operator/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'operator/js/custom.js' %}"></script>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $("#search").focus(function() {
+            $(".search-box").addClass("border-searching");
+            $(".search-icon").addClass("si-rotate");
+        });
+        $("#search").blur(function() {
+            $(".search-box").removeClass("border-searching");
+            $(".search-icon").removeClass("si-rotate");
+        });
+        $("#search").keyup(function() {
+            if($(this).val().length > 0) {
+                $(".go-icon").addClass("go-in");
+            }
+            else {
+                $(".go-icon").removeClass("go-in");
+            }
+        });
+        $(".go-icon").click(function(){
+            $(".search-form").submit();
+        });
+    });
+
+    const MONTHS = {
+        0: 'Jan',
+        1: 'Feb',
+        2: 'Mar',
+        3: 'Apr',
+        4: 'May',
+        5: 'Jun',
+        6: 'Jul',
+        7: 'Aug',
+        8: 'Sep',
+        9: 'Oct',
+        10: 'Nov',
+        11: 'Dec'
+    };
+    let showTime = true;
+
+    function addZero(val) {
+        return val < 10 ? '0' + val : val;
+    }
+
+    function refresh() {
+        let now = new Date();
+        if (showTime) {
+            let time = [now.getHours(), now.getMinutes(), now.getSeconds()];
+            time.forEach(function(val, index, arr) {
+                arr[index] = addZero(val);
+            });
+
+            let time_str = time.join(":");
+            //document.title = time_str;
+            document.getElementById('time').innerHTML = time_str;
+        } else {
+            let date = [addZero(now.getDay()), MONTHS[now.getMonth()], now.getFullYear().toString().slice(2, 4)];
+            let date_str = date.join(" ");
+            //document.title = date_str;
+            document.getElementById('time').innerHTML = date_str;
+        }
+    }
+
+    refresh();
+    setInterval(refresh, 1000);
+
+    document.getElementById('time').addEventListener('click', function() {
+        showTime = !showTime;
+        refresh();
+    });
+
+</script>
+
+</body>
+</html>

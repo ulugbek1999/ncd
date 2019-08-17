@@ -1,0 +1,308 @@
+﻿{% extends 'operators/_base.html' %}
+{% load static i18n %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'operator/fancybox/jquery.fancybox.min.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% trans 'Register employee' %}</h2>
+        <span>№: {{ employee.register_number }}</span>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{% trans "Employee's personal card" %}</h2>
+        </div>
+        <div class="card-main__content">
+            <form>
+                <div class="col-md-3">
+                    <div class="stol2-col-form">
+                        <div class="form-group radio-form">
+                            <label for="">{% trans 'Appearance' %}</label>
+                            <div class="radio-group">
+                                <input type="radio" id="appearance4" name="appearance" value="4">
+                                <label for="appearance4">
+                                    <span>4</span>
+                                </label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="appearance7" name="appearance" value="7">
+                                <label for="appearance7">
+                                    <span>7</span>
+                                </label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="appearance10" name="appearance" value="10">
+                                <label for="appearance10">
+                                    <span>10</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group radio-form">
+                            <label for="">{% trans 'Neatness' %}</label>
+                            <div class="radio-group">
+                                <input type="radio" id="neatness4" name="neatness" value="4">
+                                <label for="neatness4">
+                                    <span>4</span>
+                                </label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="neatness7" name="neatness" value="7">
+                                <label for="neatness7">
+                                    <span>7</span>
+                                </label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="neatness10" name="neatness" value="10">
+                                <label for="neatness10">
+                                    <span>10</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group radio-form">
+                            <label for="">{% trans 'Skin' %}</label>
+                            <div class="radio-group">
+                                <input type="radio" id="skin4" name="skin" value="4">
+                                <label for="skin4">
+                                    <span>4</span>
+                                </label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="skin7" name="skin" value="7">
+                                <label for="skin7">
+                                    <span>7</span>
+                                </label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="skin10" name="skin" value="10">
+                                <label for="skin10">
+                                    <span>10</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stol2-col-form">
+                        <div class="form-group">
+                            <label for="heightID">{% trans 'Height' %}</label>
+                            <input name="height" type="text" class="form-control" id="heightID">
+                        </div>
+                        <div class="form-group">
+                            <label for="weightID">{% trans 'Weight' %}</label>
+                            <input name="weight" type="text" class="form-control" id="weightID">
+                        </div>
+                        <div class="form-group">
+                            <label for="fatnessID">{% trans 'Fatness' %}</label>
+                            <input name="fatness" type="text" class="form-control" id="fatnessID">
+                        </div>
+                        <div class="form-group radio-form">
+                            <label for="">{% trans 'Blood group' %}</label>
+                            <div class="radio-group">
+                                <input type="radio" id="blood_group1ID" name="blood_group" value="1">
+                                <label for="blood_group1ID">
+                                    <span>I</span>
+                                </label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="blood_group2ID" name="blood_group" value="2">
+                                <label for="blood_group2ID">
+                                    <span>II</span>
+                                </label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="blood_group3ID" name="blood_group" value="3">
+                                <label for="blood_group3ID">
+                                    <span>III</span>
+                                </label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="blood_group4ID" name="blood_group" value="4">
+                                <label for="blood_group4ID">
+                                    <span>IV</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group radio-form">
+                            <label for="">{% trans 'Blood resus' %}</label>
+                            <div class="radio-group">
+                                <input type="radio" id="blood_resusPlusID" name="blood_resus" value="+">
+                                <label for="blood_resusPlusID">
+                                    <span>(+)</span>
+                                </label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="blood_resusMinusID" name="blood_resus" value="-">
+                                <label for="blood_resusMinusID">
+                                    <span>(-)</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="vision_lID">{% trans 'Vision left' %}</label>
+                            <input name="vision_l" type="text" class="form-control" id="vision_lID">
+                        </div>
+                        <div class="form-group">
+                            <label for="vision_rID">{% trans 'Vision right' %}</label>
+                            <input name="vision_r" type="text" class="form-control" id="vision_rID">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="photos-human__main">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="avatar-upload humanAvatar1">
+                                    <div class="avatar-edit">
+                                        <input type='file' name="photo_1" id="photo_1ID" accept=".png, .jpg, .jpeg" />
+                                        <label for="photo_1ID"></label>
+                                    </div>
+                                    <a data-fancybox href="#">
+                                        <div class="avatar-preview">
+                                            <div id="passportPreview">
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="avatar-upload__button">
+                                        <div class="pasport-icon photos4">
+                                            <img style="width: 75px;" src="{% static 'operator/images/upload_icon.png' %}">
+                                        </div>
+                                        <label class="humanUpload1Button">{% trans 'Photo 1' %}</label>
+                                    </div>
+                                    <label class="humanUpload1Button humanCameraEdit__icon"></label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="avatar-upload humanAvatar2">
+                                    <div class="avatar-edit">
+                                        <input type='file' name="photo_2" id="photo_2ID" accept=".png, .jpg, .jpeg" />
+                                        <label for="photo_2ID"></label>
+                                    </div>
+                                    <a data-fancybox href="#">
+                                        <div class="avatar-preview">
+                                            <div id="passportPreview">
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="avatar-upload__button">
+                                        <div class="pasport-icon photos4">
+                                            <img style="width: 75px;" src="{% static 'operator/images/upload_icon.png' %}">
+                                        </div>
+                                        <label class="humanUpload2Button">{% trans 'photo2' %}</label>
+                                    </div>
+                                    <label class="humanUpload2Button humanCameraEdit__icon"></label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="avatar-upload humanAvatar3">
+                                    <div class="avatar-edit">
+                                        <input type='file' name="photo_3" id="photo_3ID" accept=".png, .jpg, .jpeg" />
+                                        <label for="photo_3ID"></label>
+                                    </div>
+                                    <a data-fancybox href="#">
+                                        <div class="avatar-preview">
+                                            <div id="passportPreview">
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="avatar-upload__button">
+                                        <div class="pasport-icon photos4">
+                                            <img style="width: 75px;" src="{% static 'operator/images/upload_icon.png' %}">
+                                        </div>
+                                        <label class="humanUpload3Button">{% trans 'photo3' %}</label>
+                                    </div>
+                                    <label class="humanUpload3Button humanCameraEdit__icon"></label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="avatar-upload humanAvatar4">
+                                    <div class="avatar-edit">
+                                        <input type='file' name="photo_4" id="photo_4ID" accept=".png, .jpg, .jpeg" />
+                                        <label for="photo_4ID"></label>
+                                    </div>
+                                    <a data-fancybox href="#">
+                                        <div class="avatar-preview">
+                                            <div id="passportPreview">
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="avatar-upload__button">
+                                        <div class="pasport-icon photos4">
+                                            <img style="width: 75px;" src="{% static 'operator/images/upload_icon.png' %}">
+                                        </div>
+                                        <label class="humanUpload4Button">{% trans 'photo4' %}</label>
+                                    </div>
+                                    <label class="humanUpload4Button humanCameraEdit__icon"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-send__buttons">
+                    <div class="form-send__button">
+                        <button type="submit" id="operator-2-submit" data-url="{% url 'api:operator2:employee.create' employee.id %}">{% trans 'Save' %}</button>
+                    </div>
+                    <div class="form-reset__buttton">
+                        <button type="reset">{% trans 'Clear' %}</button>
+                    </div>
+                </div>
+            </form>
+            <!--<div class="holder">
+                <div class="preloader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>-->
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block sideRight %}
+    <div class="sideRight">
+        <div class="help-block">
+            <div class="help-block__icon">
+                <a href="#">
+                    <i class="fa fa-book" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <div class="bx-informer">
+            <div class="bx-im-informer-icon">
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right animated flipInY">
+                        <ul class="dropdown-not">
+                            <li>
+                                <a href="{% url 'operator:2.employees' %}">{% blocktrans %}List of employees{% endblocktrans %}</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="operator2Notification">
+                    <span id="notification-counter">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="bx-informer">
+            <div class="bx-im-informer-icon" style="background: #05b5ab;">
+                <a href="{% url 'operator:2.employees' %}" title="{% blocktrans %}List of employees{% endblocktrans %}">
+                    <i class="fa fa-list-alt" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <div class="bx-search">
+            <div class="bx-im-search-icon">
+                <a href="#">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'operator/fancybox/jquery.fancybox.min.js' %}"></script>
+    <script src="{% static 'operator/js/stol/operator2.js' %}"></script>
+    {% include 'operators/2/operator2_websocket.html' %}
+{% endblock %}

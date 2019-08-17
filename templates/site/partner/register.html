@@ -1,0 +1,165 @@
+{% extends 'site/_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block css %}
+
+{% endblock %}
+{% block content %}
+    <section class="registration">
+        <div class="container">
+            <div class="row">
+                <div class="register-main">
+                    <div class="content-title">
+                        <h2>Регистрация партнеров</h2>
+                    </div>
+                    <div class="register-block">
+                        <div class="form-title">
+                            <h2 style="text-align: center">Регистрационная форма</h2>
+                        </div>
+                        <form>
+                            <div class="form-data">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="subjectName">Название субъекта</label>
+                                            <input name="company_name" type="text" class="form-control" id="subjectName" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="regNumber">Регистрационный номер</label>
+                                            <input name="register_number" type="text" class="form-control" id="regNumber" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="fioBoss">Ф.И.О (первого руководителя)</label>
+                                            <input name="boss_fullname" type="text" class="form-control" id="fioBoss" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="fioLast">Ф.И.О (ответственного лица)</label>
+                                            <input name="person_fullname_for_hiring" type="text" class="form-control" id="fioLast" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="firstName2">Имя (ответственного лица за наем трудовых мигрантов)</label>
+                                            <input name="person_first_name_for_hiring" type="text" class="form-control" id="firstName2" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="lastName2">Фамилия (ответственного лица за наем трудовых мигрантов)</label>
+                                            <input name="person_last_name_for_hiring" type="text" class="form-control" id="lastName2" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="email">Э-почта
+                                            </label>
+                                            <input name="email" type="email" class="form-control" id="email" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="phone">Телефон</label>
+                                            <input name="phone" type="text" class="form-control" id="phone" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="address">Юридический адрес</label>
+                                            <input name="legal_address" type="text" class="form-control" id="address" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="col">Количество работников организации</label>
+                                            <input name="workers_amount" type="number" class="form-control" id="col" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group checkbox-form">
+                                            <div class="checkbox-group ">
+                                                <input type="checkbox" id="soglasen" name="soglasen">
+                                                <label for="soglasen">
+                                                    <span>Я принимаю условия пользовательского соглашения</span>
+                                                </label>
+                                                <a href="{% static 'site/docs/Пользовательское_соглашение_Веб.pdf' %}" title="Пользовательское_соглашение_Веб.pdf" target="_blank"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row">
+                            <div class="col-md-12" style="text-align: center;">
+                                <button type="submit" id="partnerRequestButton" class="loginButton disableButton" data-api="{% url 'api:partner.create' %}" >
+                                    Отправить
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+
+    <script>
+        $(function () {
+
+            $('#soglasen').change(function(){
+
+                 if ($(this).is(':checked')) {
+                     $('#partnerRequestButton').removeClass('disableButton');
+                 }else{
+                     $('#partnerRequestButton').addClass('disableButton');
+                 }
+
+            });
+
+            $("#partnerRequestButton").click(function (event) {
+                event.preventDefault();
+                let formData = new FormData();
+                formData.append('company_name', $('input[name="company_name"]').val());
+                formData.append('register_number', $('input[name="register_number"]').val());
+                formData.append('boss_fullname', $('input[name="boss_fullname"]').val());
+                formData.append('person_fullname_for_hiring', $('input[name="person_fullname_for_hiring"]').val());
+                formData.append('phone', $('input[name="phone"]').val());
+                formData.append('legal_address', $('input[name="legal_address"]').val());
+                formData.append('workers_amount', $('input[name="workers_amount"]').val());
+                formData.append('email', $('input[name="email"]').val());
+                $.ajax({
+                   url: $(this).data('api'),
+                    processData: false,
+                    contentType: false,
+                    method: 'POST',
+                    data: formData,
+                    success: function (data) {
+                        alert("success")
+                    },
+                    error: function (data) {
+                        alert("error")
+                    }
+                });
+            });
+        })
+    </script>
+{% endblock %}

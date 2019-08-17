@@ -1,0 +1,151 @@
+{% extends 'root/_base.html' %}
+{% load static %}
+{% load i18n %}
+{# TODO list of languages&educations&region #}
+
+{% block content %}
+    <!-- TODO Tarjima -->
+    <div class="content-title">
+        <h2>{% trans 'Counting Rating' %}</h2>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{% trans 'Filter' %}</h2>
+        </div>
+        <div class="card-main__content">
+            <div class="search-form__app">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">{% trans 'Fullname' %}</label>
+                        <input name="" type="text" class="form-control" id="">
+                    </div>
+                    <div class="form-group">
+                        <label for="">{% trans 'Age' %}</label>
+                        <select class="form-control selectpicker show-tick" name="" id="">
+                            <option value="">{% trans 'Select' %}</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="24">25</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">{% trans 'Gender' %}</label>
+                        <select class="form-control selectpicker show-tick" name="" id="">
+                            <option value="">{% trans 'Select' %}</option>
+                            <option value="male">{% trans 'Male' %}</option>
+                            <option value="femele">{% trans 'Female' %}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">{% trans 'Language' %}</label>
+                        <select class="form-control selectpicker show-tick" name="" id="">
+                            <option value="">{% trans 'Select' %}</option>
+                            <option value="male">{% trans 'English' %}</option>
+                            <option value="femele">{% trans 'Russian' %}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="edu">{% trans 'Education' %}</label>
+                        <select class="form-control selectpicker show-tick" name="edu" id="edu">
+                            <option value="">{% trans 'Select' %}</option>
+                            <option value="Средняя школа">Средняя школа</option>
+                            <option value="Лицей/Колледж/Техникум">Лицей/Колледж/Техникум</option>
+                            <option value="Университет(Бакалвр)">Университет(Бакалвр)</option>
+                            <option value="Университет(Магистр)">Университет(Магистр)</option>
+                            <option value="Университет(Аспирантура)">Университет(Аспирантура)</option>
+                            <option value="Университет(Докторантура)">Университет(Докторантура)</option>
+                            <option value="Прочее">Прочее</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">{% trans 'Category' %} ({% trans 'score' %})</label>
+                        <input name="" type="number" class="form-control" id="">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="search-buttons">
+                        <div class="form-search__button" id="">
+                            <button id="" type="submit">{% trans 'Search' %}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="search-results__main">
+                <div class="table-main">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="table-row" data-href="#">
+                                <th class="td-id">№</th>
+                                <th class="td-fio">{% trans 'Fullname' %}</th>
+                                <th class="td-reg">{% trans 'Register number' %}</th>
+                                <th class="td-phone">{% trans 'Phone' %}</th>
+                                <th class="td-date">{% trans 'Created' %}</th>
+                                <th class="td-cat">{% trans 'Category' %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for emp in employees %}
+                                <tr class="table-row" data-href="{% url 'root.employee.detail' emp.id %}">
+                                    <td class="td-id">{{ emp.id }}</td>
+                                    <td class="td-fio">{{ emp.full_name_ru }}</td>
+                                    <td class="td-reg">{{ emp.register_number }}</td>
+                                    <td class="td-phone">{{ emp.phone }}</td>
+                                    <td class="td-date">{{ emp.created|date:"H:i d.m.Y" }}</td>
+                                    {% if emp.score %}
+                                        <td class="td-cat scoreA">{{ emp.score.id }}</td>
+                                    {% else %}
+                                        <td class="td-cat scoreB">not score</td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% if is_paginated %}
+                        <div class="pagination-main">
+                            <ul class="pagination">
+                                {% if page_obj.has_previous %}
+                                    <li><a href="?{{ page_obj.previous_page_number.querystring }}" class="prev">&lsaquo;&lsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled prev">&lsaquo;&lsaquo;</span></li>
+                                {% endif %}
+                                {% for page in page_obj.pages %}
+                                    {% if page %}
+                                        {% ifequal page page_obj.number %}
+                                            <li><span class="current page">{{ page }}</span></li>
+                                        {% else %}
+                                            <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                        {% endifequal %}
+                                    {% else %}
+                                        ...
+                                    {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                    <li><a href="?{{ page_obj.next_page_number.querystring }}" class="next">&rsaquo;&rsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled next">&rsaquo;&rsaquo;</span></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'operator/js/root/search.js' %}"></script>
+{% endblock %}

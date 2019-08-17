@@ -1,0 +1,124 @@
+{% extends 'root/_base.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load thumbnail %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% trans 'Change employee' %}</h2>
+        <span>№: {{ employee.register_number }}</span>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{% trans 'Personal card' %}</h2>
+        </div>
+        <div class="card-main__content">
+            <form>
+                <div class="col-md-4">
+                    <div class="stol1-col-form">
+                        <div class="form-group">
+                            <label for="fullNameEn">{% trans 'Fullname en' %}</label>
+                            <input name="full_name_en" type="text" class="form-control" id="fullNameEn" value="{{ employee.full_name_en }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="passportSerial">{% trans 'Passport serial' %}</label>
+                            <input name="passport_serial" type="text" class="form-control" id="passportSerial" value="{{ employee.passport_serial }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="birthDate">{% trans 'Birth date' %}</label>
+                            <input name="birth_date" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" autocomplete="off" id="birthDate"  value="{{ employee.birth_date|date:'d.m.Y' }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="passportExpires">{% trans 'Passport expires' %}</label>
+                            <input name="passport_expires" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" autocomplete="off" id="passportExpires"  value="{{ employee.passport_expires|date:'d.m.Y' }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'Gender' %}</label>
+                            <div class="radio-group">
+                                <input type="radio" id="gender_male" name="gender" value="m" {% if employee.gender == "m" %} checked{% endif %} disabled>
+                                <label for="gender_male">
+                                    <img src="/static/operator/images/man.svg" alt="">
+                                </label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="gender_female" name="gender" value="f" {% if employee.gender == "f" %} checked{% endif %} disabled>
+                                <label for="gender_female">
+                                    <img src="/static/operator/images/woman.svg" alt="">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stol1-col-form">
+                        <div class="form-group">
+                            <label for="fullNameRu">{% trans 'Fullname ru' %}</label>
+                            <input name="full_name_ru" type="text" class="form-control" id="fullNameRu" value="{{ employee.full_name_ru }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">{% trans 'Phone' %}</label>
+                            <input name="phone" type="text" class="form-control" id="phone" value="{{ employee.phone }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">{% trans 'Email' %}</label>
+                            <input name="email" type="text" class="form-control" id="email" value="{{ employee.email }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="passportGivendate">{% trans 'Passport given date' %}</label>
+                            <input name="passport_given_date" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" autocomplete="off" id="passportGivendate" value="{{ employee.passport_given_date|date:'d.m.Y' }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="inn">{% trans 'Inn' %}</label>
+                            <input name="inn" type="text" class="form-control" id="inn" value="{{ employee.inn }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="birthPlace">{% trans 'Birth place' %}</label>
+                            <span>{{ employee.birth_place_ru }}</span>
+                            <input name="birth_place_en" type="text" class="form-control" id="birthPlace" value="{{ employee.birth_place_en }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="livesAt">{% trans 'Living address' %}</label>
+                            <span>{{ employee.living_address_ru }}</span>
+                            <input name="lives_at_en" type="text" class="form-control" id="livesAt" value="{{ employee.living_address_en }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="registerNumber">{% trans 'Register number' %}</label>
+                            <input name="register_number" type="text" class="form-control" id="registerNumber" value="{{ employee.register_number }}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="photos-upload__main">
+                        <div class="avatar-upload">
+                            <div class="avatar-edit">
+                                <input type='file' name="passport_file" id="passportUpload" accept=".png, .jpg, .jpeg" src="{{ employee.passport_image.url }}" disabled/>
+                                <label for="passportUpload"></label>
+                            </div>
+                            <div class="avatar-preview">
+                                <div id="passportPreview" style="background-image: url('{{ employee.passport_image.url }}');">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-send__buttons">
+                    <div class="form-send__button" id="formSendButton" data-url="{% url 'root.api.employee.translate.1' employee.id %}">
+                        <button type="submit" id="adminEmployeeUpdate1SubmitButton">{% trans 'Save' %}</button>
+                    </div>
+                    <div class="form-reset__buttton">
+                        <button type="reset">{% trans 'Clear' %}</button>
+                    </div>
+                </div>
+            </form>
+
+            <!--<div class="holder">
+                <div class="preloader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>-->
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'operator/js/translate/op1.js' %}"></script>
+{% endblock %}

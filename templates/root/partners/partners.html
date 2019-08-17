@@ -1,0 +1,161 @@
+{% extends 'root/_base.html' %}
+{% load static i18n %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% trans 'Partners' %}</h2>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{% trans 'Filter' %}</h2>
+        </div>
+        <div class="card-main__content">
+            <div class="search-form__app">
+                <form method="GET">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">{% trans 'Username' %}</label>
+                            <input name="username" type="text" class="form-control" id="" value="{{ username }}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">{% trans 'Fullname' %}</label>
+                            <input name="fullname" type="text" class="form-control" id="" value="{{ fullname }}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">{% trans 'Phone' %}</label>
+                            <input name="phone" type="text" class="form-control" id="" value="{{ phone }}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="search-buttons">
+                            <div class="form-search__button" id="">
+                                <button id="" type="submit">{% trans 'Search' %}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="float: right;text-align: right">
+                        <div class="add-buttons">
+                            <div class="deletePart-buttons">
+                                <button id="deletePGroupButton" data-url="{% url 'api:admin:partner:delete' %}">{% trans 'Delete' %}</button>
+                            </div>
+                            <div class="form-add__button" id="">
+                                <a href="{% url 'root.partner.create' %}">{% trans 'Add' %}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+
+            <div class="search-results__main">
+                <div class="table-main">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr class="table-row" data-href="#">
+                            <th class="td-check"></th>
+                            <th class="td-id">№</th>
+                            <th class="td-comp">{% trans 'Company' %}</th>
+                            <th class="td-reg">{% trans 'Reg.number' %}</th>
+                            <th class="td-phone">{% trans 'Phone' %}</th>
+                            <th class="td-status">{% trans 'Status' %}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for partner in partners %}
+                            <tr class="table-row" data-id="{{partner.id}}" data-href="{% url 'root.partner.detail' partner.id %}">
+                                <td class="td-checkbox td-check" >
+                                    <input class="deleteCheck" type="checkbox" data-id="{{partner.id}}" name="ids" >
+                                </td>
+                                <td class="td-id">{{ partner.id }}</td>
+                                <td class="td-comp">{{ partner.company_name }}</td>
+                                <td class="td-reg">{{ partner.register_number }}</td>
+                                <td class="td-phone">{{ partner.phone }}</td>
+                                {% if partner.user is None %}
+                                    <td class="td-status">{% trans 'Not accepted' %}</td>
+                                {% else %}
+                                    <td class="td-status">{% trans 'Accepted' %}</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% if is_paginated %}
+                        <div class="pagination-main">
+                            <ul class="pagination">
+                                {% if page_obj.has_previous %}
+                                    <li><a href="?{{ page_obj.previous_page_number.querystring }}" class="prev">&lsaquo;&lsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled prev">&lsaquo;&lsaquo;</span></li>
+                                {% endif %}
+                                {% for page in page_obj.pages %}
+                                    {% if page %}
+                                        {% ifequal page page_obj.number %}
+                                            <li><span class="current page">{{ page }}</span></li>
+                                        {% else %}
+                                            <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                        {% endifequal %}
+                                    {% else %}
+                                        ...
+                                    {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                    <li><a href="?{{ page_obj.next_page_number.querystring }}" class="next">&rsaquo;&rsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled next">&rsaquo;&rsaquo;</span></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(function () {
+
+            $("#deletePGroupButton").click(function (e) {
+                e.preventDefault();
+
+                let formData = new FormData();
+                let url = $(this).data("url");
+
+                var myDeldata = jQuery(".table tr:not(.header) td input:checked").map(function() {
+                    return jQuery(this).closest("tr").data("id");
+                        }).get();
+
+                result = window.confirm("{% trans 'Do you really want to delete?' %}");
+
+                if(result){
+                    console.log(myDeldata);
+                    formData.append("ids", myDeldata);
+                    $.ajax({
+                        url: url,
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        method: 'POST',
+                        success: function (data) {
+                            location.reload();
+                        },
+                        error: function (data) {
+
+                        }
+                    });
+                }else{
+
+                }
+
+            });
+
+        });
+    </script>
+    <script src="{% static 'operator/js/root/search.js' %}"></script>
+{% endblock %}

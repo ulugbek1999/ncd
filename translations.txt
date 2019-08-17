@@ -1,0 +1,19 @@
+[key] = [russian] = [english]
+
+Logs = Логи
+Statistic = Статистика
+Partner Accounts
+Requests for candidates from partners
+Requests to change Personal Cards
+SMS, E-mail
+Logout = Выйти
+English = Английский
+Russian = Русский
+CRM system development
+World languages = Языки страны
+Countries = Страны
+Cities = Города
+Districts = Районы
+Types of educational institutions
+Saved successfully = Успешно сохранено
+An error has occurred = Произошла ошибка

@@ -1,0 +1,161 @@
+{% extends 'root/_base.html' %}
+{% load static i18n %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% trans 'Partners' %}</h2>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{{ partner.company_name }}</h2>
+        </div>
+        <div class="card-main__content">
+            <form class="partners-add__form">
+                <div class="col-md-4">
+                    <div class="partners-form__item">
+                        <div class="form-title">
+                            <h2>{% trans 'Account' %}</h2>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">{% trans 'Username' %}</label>
+                            <input name="username" type="text" class="form-control" id="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">{% trans 'Password' %}</label>
+                            <input name="password" type="password" class="form-control" id="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="password_confirm">{% trans 'Password confirm' %}</label>
+                            <input name="password_confirm" type="password" class="form-control" id="password_confirm">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="partners-form__item">
+                        <div class="form-title">
+                            <h2>{% trans 'Additional information' %}</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="companyName">{% trans 'Company name' %}</label>
+                                    <input name="company_name" type="text" class="form-control" id="companyName" >
+                                </div>
+                                <div class="form-group">
+                                    <label for="regNumber">{% trans 'Reg.number' %}</label>
+                                    <input name="reg_number" type="text" class="form-control" id="regNumber">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nameBoss">{% trans 'Fullname' %} ({% trans 'first head' %})</label>
+                                    <input name="name_boss" type="text" class="form-control" id="nameBoss" >
+                                </div>
+                                <div class="form-group">
+                                    <label for="nameLast">{% trans 'Fullname' %} ({% trans 'responsible person' %})</label>
+                                    <input name="name_last" type="text" class="form-control" id="nameLast" >
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">{% trans 'Email' %}</label>
+                                    <input name="email" type="text" class="form-control" id="email" >
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">{% trans 'Phone' %}</label>
+                                    <input name="phone" type="text" class="form-control" id="phone" >
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">{% trans 'Legal address' %}</label>
+                                    <input name="address" type="text" class="form-control" id="address" >
+                                </div>
+                                <div class="form-group">
+                                    <label for="count">{% trans 'Workers amount' %}</label>
+                                    <input name="count" type="number" class="form-control" id="count" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="partners-button form-send__buttons">
+                        <div class="form-send__button" id="formSendButton">
+                            <button type="submit" id="partners-create-button" data-url="{% url 'api:admin:partner:create' %}">{% trans 'Save' %}</button>
+                        </div>
+                        <div class="form-reset__buttton">
+                            <button type="reset">{% trans 'Clear' %}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $('#phone').inputmask({ mask: "+[d]{15}", greedy: false});
+
+        $(function () {
+
+
+            $("#partners-create-button").click(function (e) {
+                e.preventDefault();
+                let $formData = new FormData();
+                $formData.append("username", $("input[name='username']").val());
+                $formData.append("password", $("input[name='password']").val());
+                $formData.append("password_confirm", $("input[name='password_confirm']").val());
+
+                $formData.append("company_name", $("input[name='company_name']").val());
+                $formData.append("register_number", $("input[name='reg_number']").val());
+                $formData.append("boss_fullname", $("input[name='name_boss']").val());
+                $formData.append("person_fullname_for_hiring", $("input[name='name_last']").val());
+
+                $formData.append("email", $("input[name='email']").val());
+                $formData.append("phone", $("input[name='phone']").val());
+                $formData.append("legal_address", $("input[name='address']").val());
+                $formData.append("workers_amount", $("input[name='count']").val());
+
+                $.ajax({
+                    url: $(this).data("url"),
+                    type: "POST",
+                    data: $formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        var x = document.getElementById("mainSuccess");
+                        x.className = "show";
+                        setTimeout(function(){
+                            x.className = x.className.replace("show", "");
+                            window.location.href = '/root/partners/';
+                        }, 1500);
+                    },
+                    error: function (data) {
+                        var x = document.getElementById("mainError");
+                        let message = data.responseJSON;
+                        console.log(message);
+                        if(message.username){
+                            $("#mainError").text(message.username);
+                        }else if(message.company_name){
+                            $("#mainError").text(message.company_name);
+                        }else if(message.reg_number){
+                            $("#mainError").text(message.register_number);
+                        }else if(message.boss_fullname){
+                            $("#mainError").text(message.boss_fullname);
+                        }else if(message.person_fullname_for_hiring){
+                            $("#mainError").text(message.person_fullname_for_hiring);
+                        }else if(message.email){
+                            $("#mainError").text(message.email);
+                        }else if(message.phone){
+                            $("#mainError").text(message.phone);
+                        }else if(message.legal_address){
+                            $("#mainError").text(message.legal_address);
+                        }else if(message.workers_amount){
+                            $("#mainError").text(message.workers_amount);
+                        }
+
+                        x.className = "show";
+                        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

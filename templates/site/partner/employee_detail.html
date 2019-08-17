@@ -1,0 +1,566 @@
+{% extends 'site/_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load thumbnail %}
+{% load partner_employees %}
+
+{% block css %}
+
+{% endblock %}
+{% block content %}
+    <section class="profile">
+        <div class="container">
+            <div class="row">
+                <div class="profile-main">
+                    <div class="content-title">
+                        <h2>Данные аппликанта</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="profile-side">
+                                <div class="profile-side__title">
+                                    <h2>Личный кабинет</h2>
+                                </div>
+                                <nav class="nav_personal d-lnk-txt">
+                                    <ul>
+                                        <li class="">
+                                            <a href="#"><i class="fa fa-user"></i> Мой профиль</a>
+                                        </li>
+                                        <li  class="">
+                                            <a href="{% url 'site:partner.employees' %}"><i class="fa fa-list"></i> Список апликантов</a>
+                                        </li>
+                                        <li class="">
+                                            <a href="{% url 'site:partner.bookmarks' %}"><i class="fa fa-list"></i> Мой список <span id="bookmarkCount">{{ request.user.partner.partneremployee_set.count }}</span></a></li>
+                                        <li class="">
+
+                                    </ul>
+                                    <div class="nav_personal__footer">
+                                        <a href="#"> Выйти</a>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="profile-content">
+                                <div class="employee-detail">
+                                    <div class="row">
+                                        <div class="employee-images">
+                                            <div class="employee-image__row">
+                                                <div class="employee-image__item">
+                                                    <a href="{{ employee.photo_1.url }}">
+                                                        {% thumbnail employee.photo_1 "148x178" crop="center" as im %}
+                                                            <img src="{{ im.url }}" alt="">
+                                                        {% endthumbnail %}
+                                                    </a>
+                                                </div>
+                                                <div class="employee-image__item">
+                                                    <a href="{{ employee.photo_2.url }}">
+                                                        {% thumbnail employee.photo_2 "148x178" crop="center" as im %}
+                                                            <img src="{{ im.url }}" alt="">
+                                                        {% endthumbnail %}
+                                                    </a>
+                                                </div>
+                                                <div class="employee-image__item">
+                                                    <a href="{{ employee.photo_3.url }}">
+                                                        {% thumbnail employee.photo_3 "148x178" crop="center" as im %}
+                                                            <img src="{{ im.url }}" alt="">
+                                                        {% endthumbnail %}
+                                                    </a>
+                                                </div>
+                                                <div class="employee-image__item">
+                                                    <a href="{{ employee.photo_4.url }}">
+                                                        {% thumbnail employee.photo_4 "148x178" crop="center" as im %}
+                                                            <img src="{{ im.url }}" alt="">
+                                                        {% endthumbnail %}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="employee-detail__content">
+                                            {% is_in_bookmark employee.id as bookmark %}
+                                            <div class="detail-title">
+                                                <h2>{{ employee.full_name_en }}</h2>
+                                                <span>{{ employee.register_number }}</span>
+                                                <div class="checkbox-favorite">
+                                                    <input
+                                                            id="fav{{ employee.id }}"
+                                                            class="favorite hide"
+                                                            data-url="{% url 'api:partner.bookmark' employee.id %}"
+                                                            type="checkbox"
+                                                            data-id="{{ employee.id }}"
+                                                            {% if bookmark %}
+                                                                checked
+                                                            {% else %}
+
+                                                            {% endif %}
+                                                    />
+                                                    <label aria-hidden="true" data-icon="&#9733;" for="fav{{ employee.id }}">
+                                                        <span class="hide"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="detail-content">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <ul>
+                                                            <li>
+                                                                <strong>Рег.номер:</strong>
+                                                                <span>{{ employee.full_name_en }}{{ employee.register_number }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Ф.И.О (рус):</strong>
+                                                                <span>{{ employee.full_name_ru }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Пол:</strong>
+                                                                <span>{{ employee.full_name_en }}{{ employee.get_gender_display }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>№ Паспорта:</strong>
+                                                                <span>{{ employee.passport_serial }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Дата выдачи:</strong>
+                                                                <span>{{ employee.passport_given_date }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Срок действия:</strong>
+                                                                <span>{{ employee.passport_expires }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>ИНН:</strong>
+                                                                <span>{{ employee.inn }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Дата рождения:</strong>
+                                                                <span>{{ employee.birth_date|date:"d.m.Y" }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Место рождения:</strong>
+                                                                <span>{{ employee.birth_place_ru }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Место проживания:</strong>
+                                                                <span>{{ employee.lives_at_ru }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Рост (см):</strong>
+                                                                <span>{{ employee.height|floatformat }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Вес (кг):</strong>
+                                                                <span>{{ employee.weight|floatformat }}</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <ul>
+                                                            <li>
+                                                                <strong>Внешний вид:</strong>
+                                                                <span>{{ employee.appearance }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Опрятность:</strong>
+                                                                <span>{{ employee.neatness }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Состояние кожи:</strong>
+                                                                <span>{{ employee.skin }}</span>
+                                                            </li>
+
+                                                            <li>
+                                                                <strong>Жирность (%):</strong>
+                                                                <span>{{ employee.fatness|floatformat }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Группа крови:</strong>
+                                                                <span>{{ employee.blood_group }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Зрение (L):</strong>
+                                                                <span>{{ employee.vision_l|floatformat }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Зрение (R):</strong>
+                                                                <span>{{ employee.vision_r|floatformat }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Желаемые страны:</strong>
+                                                                <span>{{ employee.get_countries_list }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Заработная плата:</strong>
+                                                                <span>{{ employee.wages }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Готовность поступать в ВУЗ:</strong>
+                                                                <span>{{ employee.is_ready_for_university }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Особые приметы:</strong>
+                                                                <span>{{ employee.add_spec_signs_ru }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Хобби:</strong>
+                                                                <span>{{ employee.hobby_ru }}</span>
+                                                            </li>
+                                                            <li>
+                                                                <strong>Прочее:</strong>
+                                                                <span>{{ employee.other_ru }}</span>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="employee-tabs">
+                                    <div class="panel-group d-accordion">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#educations-view">
+                                                <h4 class="panel-title">Образование <i class="fa fa-chevron-up pull-right"></i></h4>
+                                            </div>
+                                            <div id="educations-view" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+                                                    {% for edu in employee.education_set.all %}
+                                                        <div class="op3View-item">
+                                                            <ul>
+                                                                <li>
+                                                                    <strong>Тип учебного заведения:</strong>
+                                                                    <span>{{ edu.type.name_ru }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Наименование:</strong>
+                                                                    <span>{{ edu.name_ru }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Адрес:</strong>
+                                                                    <span>{{ edu.address_ru }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Специальность:</strong>
+                                                                    <span>{{ edu.specialization_ru }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Дата начала обучения:</strong>
+                                                                    <span>{{ edu.date_started|date:'d.m.Y' }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Дата окончания обучения:</strong>
+                                                                    <span>{{ edu.date_graduated|date:'d.m.Y' }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Прочие данные об учебе:</strong>
+                                                                    <span>{{ edu.additional_ru }}</span>
+                                                                </li>
+                                                                <li class="files-view">
+                                                                    {% for file in edu.file.all %}
+                                                                        <ul class="files-view__main">
+                                                                            <li>
+                                                                                <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                <span>{{ file.file.size|filesizeformat }}</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    {% endfor %}
+                                                                </li>
+                                                            </ul>
+                                                            <a href="{% url 'site:employee.profile.update.3.education' edu.id %}" class="editButtonProfile">Редактировать</a>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#language-view">
+                                                <h4 class="panel-title">Знание языков <i class="fa fa-chevron-up pull-right"></i></h4>
+                                            </div>
+                                            <div id="language-view" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    {% for lang in employee.language_set.all %}
+                                                        <div class="op3View-item">
+                                                            <ul>
+                                                                <li>
+                                                                    <strong>Название языка:</strong>
+                                                                    <span>{{ lang.language.name_ru }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Уровень знания:</strong>
+                                                                    <span>{{ lang.level_ru }}</span>
+                                                                </li>
+                                                                <li class="files-view">
+                                                                    {% for file in lang.file.all %}
+                                                                        <ul class="files-view__main">
+                                                                            <li>
+                                                                                <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                <span>{{ file.file.size|filesizeformat }}</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    {% endfor %}
+                                                                </li>
+                                                            </ul>
+                                                            <a href="{% url 'site:employee.profile.update.3.language' lang.id %}" class="editButtonProfile">Редактировать</a>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#militaryView">
+                                                <h4 class="panel-title">Служба в армии<i class="fa fa-chevron-up pull-right"></i></h4>
+                                            </div>
+                                            <div id="militaryView" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    {% for army in employee.army_set.all %}
+                                                        <div class="op3View-item">
+                                                            <ul>
+                                                                <li>
+                                                                    <strong>Военная обязанность</strong>
+                                                                    <span>{% if employee.military_duty %}Да{% else %}Нет{% endif %}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Наименование военной части</strong>
+                                                                    <span>{{ army.name_ru }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Дата начала службы</strong>
+                                                                    <span>{{ army.date_started|date:'d.m.Y' }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Регион</strong>
+                                                                    <span>{{ army.region_ru }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Дата окончания службы</strong>
+                                                                    <span>{{ army.date_graduated|date:'d.m.Y' }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Специальность</strong>
+                                                                    <span>{{ army.specialization_ru }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Звание</strong>
+                                                                    <span>{{ army.rank_ru }}</span>
+                                                                </li>
+                                                                <li class="files-view">
+                                                                    {% for file in army.file.all %}
+                                                                        <ul class="files-view__main">
+                                                                            <li>
+                                                                                <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                <span>{{ file.file.size|filesizeformat }}</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    {% endfor %}
+                                                                </li>
+                                                            </ul>
+                                                            <a href="{% url 'site:employee.profile.update.3.army' army.id %}" class="editButtonProfile">Редактировать</a>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#receivedView">
+                                                <h4 class="panel-title">Полученные награды<i class="fa fa-chevron-up pull-right"></i></h4>
+                                            </div>
+                                            <div id="receivedView" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    {% for reward in employee.reward_set.all %}
+                                                        <div class="op3View-item">
+                                                            <ul>
+                                                                <li>
+                                                                    <strong>Награда</strong>
+                                                                    <span>{{ reward.name_ru }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Комментарий</strong>
+                                                                    <span>{{ reward.description_ru }}</span>
+                                                                </li>
+                                                                <li class="files-view">
+                                                                    {% for file in reward.file.all %}
+                                                                        <ul class="files-view__main">
+                                                                            <li>
+                                                                                <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                <span>{{ file.file.size|filesizeformat }}</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    {% endfor %}
+                                                                </li>
+                                                            </ul>
+                                                            <a href="{% url 'site:employee.profile.update.3.reward' reward.id %}" class="editButtonProfile">Редактировать</a>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#familyView">
+                                                <h4 class="panel-title">Семейное положение<i class="fa fa-chevron-up pull-right"></i></h4>
+                                            </div>
+                                            <div id="familyView" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    {% if employee.family %}
+                                                        <div class="op3View-item">
+                                                            <ul>
+                                                                <li>
+                                                                    <strong>Семейное положение</strong>
+                                                                    <span>{{ employee.family.get_status_display }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Количество детей</strong>
+                                                                    <span>{{ employee.family.children_amount }}</span>
+                                                                </li>
+                                                                <li class="files-view">
+                                                                    {% for file in employee.family.file.all %}
+                                                                        <ul class="files-view__main">
+                                                                            <li>
+                                                                                <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                <span>{{ file.file.size|filesizeformat }}</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    {% endfor %}
+                                                                </li>
+                                                            </ul>
+                                                            <a href="{% url 'site:employee.profile.update.3.family' employee.family.id %}" class="editButtonProfile">Редактировать</a>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#relativesView">
+                                                <h4 class="panel-title">Близкие родственники<i class="fa fa-chevron-up pull-right"></i></h4>
+                                            </div>
+                                            <div id="relativesView" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    {% for rel in employee.relative_set.all %}
+                                                        <div class="op3View-item">
+                                                            <ul>
+                                                                <li>
+                                                                    <strong>Степень родства</strong>
+                                                                    <span>{{ rel.level_ru }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Ф.И.О. родственника</strong>
+                                                                    <span>{{ rel.fullname_ru }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Год рождения</strong>
+                                                                    <span>{{ rel.birth_date }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Место учебы, работы</strong>
+                                                                    <span>{{ rel.study_work_place_ru }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Должность</strong>
+                                                                    <span>{{ rel.position_ru }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Адрес проживания</strong>
+                                                                    <span>{{ rel.living_address_ru }}</span>
+                                                                </li>
+                                                                <li class="files-view">
+                                                                    {% for file in rel.file.all %}
+                                                                        <ul class="files-view__main">
+                                                                            <li>
+                                                                                <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                <span>{{ file.file.size|filesizeformat }}</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    {% endfor %}
+                                                                </li>
+                                                            </ul>
+                                                            <a href="{% url 'site:employee.profile.update.3.relative' rel.id %}" class="editButtonProfile">Редактировать</a>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" data-toggle="collapse" data-parent=".d-accordion" href="#experienceView">
+                                                <h4 class="panel-title">Трудовой опыт<i class="fa fa-chevron-up pull-right"></i></h4>
+                                            </div>
+                                            <div id="experienceView" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    {% for ex in employee.experience_set.all %}
+                                                        <div class="op3View-item">
+                                                            <ul>
+                                                                <li>
+                                                                    <strong>Организация</strong>
+                                                                    <span>{{ ex.organization_ru }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Дата начала работы</strong>
+                                                                    <span>{{ ex.date_started }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Дата окончания работы</strong>
+                                                                    <span>{{ ex.date_finished }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Должность</strong>
+                                                                    <span>{{ ex.position_ru }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Подразделение</strong>
+                                                                    <span>{{ ex.sub_division_ru }}</span>
+                                                                </li>
+                                                                <li>
+                                                                    <strong>Место нахождения/адресс</strong>
+                                                                    <span>{{ ex.address_ru }}</span>
+                                                                </li>
+                                                                <li class="files-view">
+                                                                    {% for file in ex.file.all %}
+                                                                        <ul class="files-view__main">
+                                                                            <li>
+                                                                                <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
+                                                                                <span>{{ file.file.size|filesizeformat }}</span>
+                                                                            </li>
+                                                                        </ul>
+                                                                    {% endfor %}
+                                                                </li>
+                                                            </ul>
+                                                            <a href="{% url 'site:employee.profile.update.3.experience' ex.id %}" class="editButtonProfile">Редактировать</a>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+
+    <script>
+       $(function () {
+            $(".favorite").change(function (event) {
+
+                let employee_id = $(this).data('id');
+
+                $.ajax({
+                    url: $(this).data('url'),
+                    processData: false,
+                    contentType: false,
+                    method: 'GET',
+                    success: function (data) {
+                        var obj = jQuery.parseJSON(data);
+                        $('#bookmarkCount').text(obj.count);
+                    },
+                    error: function (data) {
+                        var obj = jQuery.parseJSON(data);
+                        $('#bookmarkCount').text(obj.count);
+                    }
+                });
+            });
+        })
+    </script>
+{% endblock %}

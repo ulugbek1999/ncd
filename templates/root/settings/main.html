@@ -1,0 +1,104 @@
+{% extends 'root/_base.html' %}
+{% load static i18n %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% trans 'Settings' %}</h2>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{% trans 'Change of personal data' %}</h2>
+        </div>
+        <div class="card-main__content">
+            <div class="admin-profile">
+                <form action="">
+                    <div class="form-data">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="login">{% trans 'Login' %}</label>
+                                    <input name="login" type="text" class="form-control" id="login">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="oldPass">{% trans 'Old password' %}</label>
+                                    <input name="old_pass" type="password" class="form-control" id="oldPass">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="newPass">{% trans 'New password' %}</label>
+                                    <input name="new_pass" type="password" class="form-control" id="newPass">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="passConf">{% trans 'Confirm the password' %}</label>
+                                    <input name="pass_conf" type="password" class="form-control" id="passConf">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="adminEditButton" data-api="">
+                                    {% trans 'Save' %}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div id="mainSuccess">{% trans 'Your password has been changed' %}</div>
+        <div id="mainError">{% trans 'An error has occurred' %}</div>
+    </div>
+{% endblock %}
+
+{% block js %}
+
+    <script>
+        $(function () {
+
+            $(".adminEditButton").click(function (event) {
+                event.preventDefault();
+
+                let formData = new FormData();
+                formData.append('login', $('input[name="login"]').val());
+                formData.append('current_passwd', $('input[name="old_pass"]').val());
+                formData.append('new_passwd', $('input[name="new_pass"]').val());
+                formData.append('new_confirm_passwd', $('input[name="pass_conf"]').val());
+
+                $.ajax({
+                   {#url: $(this).data('api'),#}
+                    processData: false,
+                    contentType: false,
+                    method: 'POST',
+                    data: formData,
+                    success: function (data) {
+                        /*window.location.reload(true);*/
+                        var x = document.getElementById("mainSuccess");
+                        x.className = "show";
+                        setTimeout(function(){
+                            x.className = x.className.replace("show", "");
+                            window.location.href = '/root/employees/';
+                        }, 1500);
+
+                    },
+                    error: function (data) {
+                        console.log(data.responseJSON.error);
+
+                        var x = document.getElementById("mainError");
+                        $("#mainError").text(data.responseJSON.error);
+
+                        x.className = "show";
+                        setTimeout(function(){
+                            x.className = x.className.replace("show", "");
+                        }, 3000);
+                    }
+                });
+            });
+        })
+    </script>
+{% endblock %}

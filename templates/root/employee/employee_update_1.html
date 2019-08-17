@@ -1,0 +1,148 @@
+{% extends 'root/_base.html' %}
+
+{% load static i18n thumbnail %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% trans 'Change employee' %}</h2>
+        <span>№: {{ employee.register_number }}</span>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{% trans 'Personal card' %}</h2>
+        </div>
+        <div class="card-main__content">
+            <form>
+                <div class="col-md-4">
+                    <div class="stol1-col-form">
+                        <div class="form-group">
+                            <label for="fullNameEn">{% trans 'Fullname en' %}</label>
+                            <input name="full_name_en" type="text" class="form-control" id="fullNameEn" value="{{ employee.full_name_en }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="passportSerial">{% trans 'Passport serial' %}</label>
+                            <input name="passport_serial" type="text" class="form-control" id="passportSerial" value="{{ employee.passport_serial }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="birthDate">{% trans 'Birth date' %}</label>
+                            <input name="birth_date" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" autocomplete="off" id="birthDate"  value="{{ employee.birth_date|date:"d.m.Y" }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="passportExpires">{% trans 'Passport expires' %}</label>
+                            <input name="passport_expires" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" autocomplete="off" id="passportExpires"  value="{{ employee.passport_expires|date:"d.m.Y" }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'Gender' %}</label>
+                            <div class="radio-group">
+                                <input type="radio" id="gender_male" name="gender" value="m" {% if employee.gender == "m" %} checked{% endif %}>
+                                <label for="gender_male">
+                                    <img src="/static/operator/images/man.svg" alt="">
+                                </label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="gender_female" name="gender" value="f" {% if employee.gender == "f" %} checked{% endif %}>
+                                <label for="gender_female">
+                                    <img src="/static/operator/images/woman.svg" alt="">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stol1-col-form">
+                        <div class="form-group">
+                            <label for="fullNameRu">{% trans 'Fullname ru' %}</label>
+                            <input name="full_name_ru" type="text" class="form-control" id="fullNameRu" value="{{ employee.full_name_ru }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">{% trans 'Phone' %}</label>
+                            <input name="phone" type="text" class="form-control" id="phone" value="{{ employee.phone }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">{% trans 'Email' %}</label>
+                            <input name="email" type="text" class="form-control" id="email" value="{{ employee.email }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="passportGivendate">{% trans 'Passport given date' %}</label>
+                            <input name="passport_given_date" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" autocomplete="off" id="passportGivendate" value="{{ employee.passport_given_date|date:'d.m.Y' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="inn">{% trans 'Inn' %}</label>
+                            <input name="inn" type="text" class="form-control" id="inn" value="{{ employee.inn }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="birthPlace">{% trans 'Birth place' %}</label>
+                            <input name="birth_place" list="birthPlace_list" type="text" class="form-control" id="birthPlace" value="{{ employee.birth_place_ru }}">
+                            <datalist id="birthPlace_list">
+                            </datalist>
+                        </div>
+                        <div class="form-group">
+                            <label for="livesAt">{% trans 'Living address' %}</label>
+                            <input name="lives_at" list="livesAt_list" type="text" class="form-control" id="livesAt" value="{{ employee.living_address_ru }}">
+                            <datalist id="livesAt_list">
+                            </datalist>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerNumber">{% trans 'Register number' %}</label>
+                            <input name="register_number" type="text" class="form-control" id="registerNumber" value="{{ employee.register_number }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="photos-upload__main">
+                        <div class="avatar-upload">
+                            <div class="avatar-edit">
+                                <input type='file' name="passport_file" id="passportUpload" accept=".png, .jpg, .jpeg" src="{{ employee.passport_image.url }}" />
+                                <label for="passportUpload"></label>
+                            </div>
+                            <a data-fancybox href="{{ employee.passport_image.url }}">
+                                <div class="avatar-preview">
+                                    <div id="passportPreview" style="background-image: url('{{ employee.passport_image.url }}');">
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-send__buttons">
+                    <div class="form-send__button" id="formSendButton">
+                        <button type="submit" id="adminEmployeeUpdate1SubmitButton" data-url="{% url 'api:admin:employee:1.update' employee.id %}">{% trans 'Save' %}</button>
+                    </div>
+                    <div class="form-reset__buttton">
+                        <button type="reset">{% trans 'Clear' %}</button>
+                    </div>
+                </div>
+            </form>
+
+            <!--<div class="holder">
+                <div class="preloader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>-->
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'operator/js/employee_update/op1.js' %}"></script>
+    <script>
+    $(function () {
+        var regions = "";
+        $.ajax({
+            url: "{% url 'api:directory:city:list' %}",
+            type: 'GET',
+            success: function (data) {
+                for (var i=0; i<data.length; i++) {
+                    for (var j = 0; j < data[i].district.length; j++) {
+                        regions += `<option value="${data[i].name_ru}, ${data[i].district[j].name_ru}" />`;
+                    }
+                }
+                $("#birthPlace_list").append(regions);
+                $("#livesAt_list").html(regions);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    })
+</script>
+{% endblock %}

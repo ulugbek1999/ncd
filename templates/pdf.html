@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Личная карточка аппликанта</title>
+
+    <!-- <link rel="stylesheet" href="css/card.css"> -->
+
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body{
+            margin: 0;
+            padding: 50px 0;
+            font-family: sans-serif;
+            font-size: 15px;
+        }
+        .list-main{
+            margin: 50px 0;
+            width: 1240px;
+            height: 1754px;
+            background: #f2f2f2;
+            overflow: hidden;
+            margin: 0 auto;
+            border: 1px solid #000000;
+            padding:  118px 89px 118px 177px;
+        }
+        .card-main{
+            background: #ffffff;
+            width: 100%;
+            /* height: 100%; */
+            border: 1px solid #000000;
+            padding: 15px 15px 10px 15px;
+        }
+        .card-main{
+            padding: 10px;
+        }
+        .card-main__block{
+            width: 100%;
+            /* height: 100%; */
+            border: 1px solid #000000;
+        }
+        .personal-data{
+            width: 100%;
+            height: 162px;
+            overflow: hidden;
+        }
+        .gr-line{
+            height: 6px;
+            border-top: 1px solid #000000;
+            border-bottom: 1px solid #000000;
+            background: #d9d9d9;
+            width: 100%;
+            overflow: hidden;
+        }
+        .bg-title{
+            background: #f2f2f2;
+        }
+        .avatar-image{
+            height: 162px;
+            width: 162px;
+            background: #f2f2f2;
+            border-right: 1px solid #000000;
+            overflow: hidden;
+            float: left;
+        }
+        .personal-data__top{
+            float: left;
+            width: calc(100% - 162px);
+            height: 108px;
+            overflow: hidden;
+            border-bottom: 1px solid #000000;
+        }
+        .personal-data__top-left{
+            width: 400px;
+            height: 107px;
+            border-right: 1px solid;
+            float: left;
+        }
+        .title{
+            height: 81px;
+            display: flex;
+            font-size: 24px;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid;
+            font-family: sans-serif;
+            font-weight: 500;
+        }
+        .register-number__block{
+            height: 26px;
+            overflow: hidden;
+            width: 100%;
+        }
+        .register-number__title{
+            float: left;
+            height: 26px;
+            width: 150px;
+            border-right: 1px solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .register-number{
+            width: calc(100% - 150px);
+            float: left;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .personal-data__top-right{
+            float: left;
+            height: 108px;
+            width: calc(100% - 400px);
+            overflow: hidden;
+        }
+        .passport-number__block{
+            width: 100%;
+            height: 27px;
+            overflow: hidden;
+            border-bottom: 1px solid #000000;
+        }
+        .passport-number__title{
+            float: left;
+            height: 26px;
+            width: 165px;
+            border-right: 1px solid #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .passport-number{
+            float: left;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: calc(100% - 165px);
+        }
+        .personal-data__bottom{
+            float: left;
+            width: calc(100% - 162px);
+            height: 54px;
+            overflow: hidden;
+        }
+        .fio-block{
+            float: left;
+            width: 565px;
+            height: 54px;
+            overflow: hidden;
+            border-right: 1px solid #000000;
+        }
+        .fio-block__title-main{
+            height: 54px;
+            float: left;
+            display: flex;
+            width: 90px;
+            border-right: 1px solid #000;
+            justify-content: center;
+            align-items: center;
+        }
+        .fio-data-block{
+            float: left;
+            height: 54px;
+            width: calc(100% - 90px);
+            overflow: hidden;
+        }
+        .fio-data{
+            height: 27.5px;
+            border-bottom: 1px solid #000;
+            width: 100%;
+        }
+        .fio-lang{
+            float: left;
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            width: 140px;
+            border-right: 1px solid #000;
+        }
+        .fio{
+            float: left;
+            display: flex;
+            height: 100%;
+            width: calc(100% - 140px);
+            justify-content: center;
+            align-items: center;
+        }
+        .gender-block__main{
+            float: left;
+            width: calc(100% - 565px);
+            height: 54px;
+            overflow: hidden;
+        }
+        .gender-title{
+            float: left;
+            height: 54px;
+            width: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #000;
+        }
+        .gender-block{
+            float: left;
+            height: 54px;
+            width: calc(100% - 70px);
+            overflow: hidden;
+        }
+        .gender{
+            width: 100%;
+            float: left;
+            height: 27.5px;
+            border-bottom: 1px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .alignCenter{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .alignLeft{
+            display: flex;
+            justify-content: left;
+            padding-left: 15px;
+            align-items: center;
+        }
+        .alignright{
+            display: flex;
+            justify-content: right;
+            padding-right: 15px;
+            align-items: center;
+        }
+        /* contacts */
+        .contacts-data{
+            width: 100%;
+            height: 81px;
+            overflow: hidden;
+            border-bottom: 1px solid #000;
+        }
+        .contacts-line{
+            height: 27px;
+            width: 100%;
+            border-bottom: 1px solid #000;
+            overflow: hidden;
+        }
+        .address-title{
+            height: 26px;
+            width: 200px;
+            float: left;
+            border-right: 1px solid #000;
+        }
+        .address{
+            height: 26px;
+            width: 400px;
+            float: left;
+            border-right: 1px solid #000;
+        }
+        .birth-title{
+            height: 26px;
+            width: 180px;
+            float: left;
+            border-right: 1px solid #000;
+        }
+        .birth-date{
+            height: 26px;
+            width: calc(100% - 780px);
+            float: left;
+        }
+        .address-all{
+            height: 26px;
+            width: calc(100% - 200px);
+            float: left;
+        }
+        .email-title{
+            height: 26px;
+            width: 200px;
+            float: left;
+            border-right: 1px solid #000;
+        }
+        .address-tel{
+            height: 26px;
+            width: 200px;
+            float: left;
+            border-right: 1px solid #000;
+        }
+        .email{
+            height: 26px;
+            width: calc(100% - 600px);
+            float: left;
+            color: blue;
+        }
+
+
+
+
+
+
+
+        /* educations */
+        .education-data{
+            width: 100%;
+            
+            overflow: hidden;
+        }
+        .education-title{
+            height: 216px;
+            overflow: hidden;
+            width: 50px;
+            float: left;
+            border-right: 1px solid #000;
+        }
+        .education-main{
+            float: left;
+            width: 600px;
+            overflow: hidden;
+            border-right: 1px solid #000;
+        }
+        .education-row{
+            width: 100%;
+            height: 27px;
+            border-bottom: 1px solid #000000;
+        }
+        .edu-date{
+            height: 26px;
+            width: 50px;
+            border-right: 1px solid #000000;
+            float: left;
+            overflow: hidden;
+        }
+        .edu-month{
+            height: 26px;
+            width: 50px;
+            border-right: 1px solid #000000;
+            float: left;
+            overflow: hidden;
+        }
+        .edu-year{
+            height: 26px;
+            width: 100px;
+            border-right: 1px solid #000000;
+            float: left;
+            overflow: hidden;
+        }
+        .edu-address{
+            height: 26px;
+            width: 150px;
+            border-right: 1px solid #000000;
+            float: left;
+            overflow: hidden;
+        }
+        .edu-type{
+            height: 26px;
+            width: calc(100% - 350px);
+            float: left;
+            overflow: hidden;
+        }
+        .edu-name__title{
+            height: 26px;
+            width: 200px;
+            float: left;
+            border-right: 1px solid #000000;
+            overflow: hidden;
+        }
+        .edu-name{
+            height: 26px;
+            width: calc(100% - 200px);
+            float: left;
+            overflow: hidden;
+        }
+        .language-main{
+            width: calc(100% - 650px);
+            float: left;
+        }
+        .lang-row{
+            width: 100%;
+            height: 27px;
+            border-bottom: 1px solid #000000;
+        }
+        .lang-name{
+            height: 26px;
+            width: calc(100% - 150px);
+            float: left;
+            border-right: 1px solid #000000;
+            overflow: hidden;
+        }
+        .lang-step{
+            height: 26px;
+            width: 150px;
+            float: left;
+            overflow: hidden;
+        }
+        .lang-step1{
+            height: 26px;
+            width: 50px;
+            border-right: 1px solid #000000;
+            float: left;
+            overflow: hidden;
+        }
+        .lang-step2{
+            height: 26px;
+            width: 50px;
+            border-right: 1px solid #000000;
+            float: left;
+            overflow: hidden;
+        }
+        .lang-step3{
+            height: 26px;
+            width: 50px;
+            float: left;
+            overflow: hidden;
+        }
+        .education-other{
+            width: calc(100% - 50px);
+            float: left;
+        }
+        .education-other .education-row{
+            border-bottom: none;
+        }
+        /* medArmyFam */
+        .medArmyFam-data{
+            width: 100%;
+            height: 189px;
+            overflow: hidden;
+            border-bottom: 1px solid #000;
+        }
+        .med-data{
+            height: 189px;
+            width: 220px;
+            border-right: 1px solid #000000;
+            float: left;
+            overflow: hidden;
+        }
+        .med-data-title{
+            width: 100%;
+            height: 27px;
+            border-bottom: 1px solid #000000;
+        }
+        .med-data__row{
+            width: 100%;
+            height: 27px;
+            border-bottom: 1px solid #000000;
+        }
+        .med-data__row-title{
+            width: 50%;
+            height: 26px;
+            float: left;
+            border-right: 1px solid #000000;
+        }
+        .med-data__row-item{
+            float: left;
+            width: 50%;
+            height: 26px;
+        }
+        .army-data{
+            height: 189px;
+            width: 320px;
+            border-right: 1px solid #000000;
+            float: left;
+            overflow: hidden;
+        }
+        .army-data-title{
+            width: 100%;
+            height: 27px;
+            border-bottom: 1px solid #000000;
+        }
+        .army-data__row{
+            width: 100%;
+            height: 27px;
+            border-bottom: 1px solid #000000;
+        }
+        .army-data__row-title{
+            width: 50%;
+            height: 26px;
+            float: left;
+            border-right: 1px solid #000000;
+        }
+        .army-data__row-item{
+            float: left;
+            width: 50%;
+            height: 26px;
+        }
+        .awards-data{
+            width: 100%;
+            height: 54px;
+            overflow: hidden;
+        }
+        .awards-title{
+            height: 27px;
+            border-bottom: 1px solid #000000;
+        }
+        .awards{
+            width: 100%;
+            height: 26px;
+        }
+        .marital-data{
+            height: 189px;
+            width: calc(100% - 540px);
+            float: left;
+            overflow: hidden;
+        }
+        .marital-data__title{
+            width: 100%;
+            height: 27px;
+            border-bottom: 1px solid #000000;
+        }
+        .marital-data__main{
+            height: 162px;
+            width: 100%;
+            float: left;
+            overflow: hidden;
+        }
+        .marital-role{
+            height: 162px;
+            width: 300px;
+            float: left;
+            overflow: hidden;
+            border-right: 1px solid #000000;
+        }
+        .marital-role__item{
+            width: 100%;
+            height: 27px;
+            border-bottom: 1px solid #000000;
+        }
+        .marital-child{
+            height: 162px;
+            width: calc(100% - 300px);
+            float: left;
+            overflow: hidden;
+        }
+        .marital-child__title{
+            width: 100%;
+            height: 54px;
+            border-bottom: 1px solid #000000;
+        }
+        .marital-child__count{
+            width: 100%;
+            height: 27px;
+            border-bottom: 1px solid #000000;
+        }
+        /* family */
+        .family-data{
+            width: 100%;
+            height: 243px;
+            overflow: hidden;
+        }
+        .family-data-title{
+            height: 243px;
+            overflow: hidden;
+            width: 50px;
+            float: left;
+            border-right: 1px solid #000;
+        }
+        .family-data__main{
+            height: 243px;
+            float: left;
+            width: calc(100% - 50px);
+        }
+        .family-row{
+            height: 27px;
+            overflow: hidden;
+            border-bottom: 1px solid #000;
+        }
+        .family-row__title{
+            height: 54px;
+            overflow: hidden;
+            border-bottom: 1px solid #000;
+        }
+        .family-row:last-child{
+            border-bottom: 0;
+        }
+        .fam-role{
+            width: 110px;
+            height: 100%;
+            border-right: 1px solid #000000;
+            float: left;
+        }
+        .fam-fio{
+            width: 220px;
+            height: 100%;
+            border-right: 1px solid #000000;
+            float: left;
+        }
+        .fam-age{
+            width: 120px;
+            height: 100%;
+            border-right: 1px solid #000000;
+            float: left;
+        }
+        .fam-edu{
+            width: 140px;
+            height: 100%;
+            border-right: 1px solid #000000;
+            float: left;
+        }
+        .fam-exp{
+            width: 140px;
+            height: 100%;
+            border-right: 1px solid #000000;
+            float: left;
+        }
+        .fam-address{
+            width: calc(100% - 730px);
+            height: 100%;
+            float: left;
+        }
+
+        /* experience */
+        .experience-data{
+            width: 100%;
+            height: 162px;
+            overflow: hidden;
+            border-bottom: 1px solid #000;
+        }
+        .experience-title{
+            width: 100%;
+            height: 27px;
+            border-bottom: 1px solid #000000;
+            color: blue;
+            font-weight: 600;
+        }
+        .experience-row__title{
+            height: 27px;
+            width: 100%;
+            border-bottom: 1px solid #000000;
+            overflow: hidden;
+        }
+        .experience-row{
+            height: 27px;
+            width: 100%;
+            border-bottom: 1px solid #000000;
+            overflow: hidden;
+        }
+        .exp-id{
+            width: 50px;
+            height: 100%;
+            border-right: 1px solid #000000;
+            float: left;
+        }
+        .exp-name{
+            width: 280px;
+            height: 100%;
+            border-right: 1px solid #000000;
+            float: left;
+        }
+        .exp-period{
+            width: 150px;
+            height: 100%;
+            border-right: 1px solid #000000;
+            float: left;
+        }
+        .exp-job{
+            width: 150px;
+            height: 100%;
+            border-right: 1px solid #000000;
+            float: left;
+        }
+        .exp-role{
+            width: 150px;
+            height: 100%;
+            border-right: 1px solid #000000;
+            float: left;
+        }
+        .exp-address{
+            width: calc(100% - 780px);
+            height: 100%;
+            float: left;
+        }
+
+
+
+        /* Offical Use */
+        .officalUse-data{
+            width: 100%;
+            height: 270px;
+            overflow: hidden;
+            border-bottom: 1px dotted #000;
+        }
+        .officalUse-data__title{
+            height: 27px;
+            width: 100%;
+            border-bottom: 1px solid #000000;
+            overflow: hidden;
+            background: #37a6ff;
+        }
+        .officalUse-data{
+
+        }
+        .officalUse-A{
+            width: 680px;
+            border-right: 1px dotted #000;
+            height: 100%;
+
+            background:url(
+                data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAKklEQVQYV2NkwAMYscn9X8rwnzGagRGrJEwDiiRMB1ZJdCvAOtF1EKUTAJLICQgfW9u+AAAAAElFTkSuQmCC
+                    ) repeat;
+        }
+        .officalUse-A__title{
+            height: 27px;
+            width: 100%;
+            border-bottom: 1px dotted #000;
+        }
+        .officalUse-A1{
+
+        }
+        .region__row{
+            height: 27px;
+            width: 100%;
+            overflow: hidden;
+            border-bottom: 1px dotted #000;
+        }
+        .region-id{
+            height: 26px;
+            width: 50px;
+            float: left;
+            border-right: 1px dotted #000;
+        }
+        .region-name{
+            height: 26px;
+            float: left;
+            border-right: 1px dotted #000;
+            width: calc(25% - 12.5px);
+        }
+        .region-name:last-child{
+            border: none;
+        }
+        .region-name__title{
+            height: 26px;
+            float: left;
+            width: calc(100% - 50px);
+        }
+        .region-name5{
+            height: 26px;
+            float: left;
+            border-right: 1px dotted #000;
+            width: calc(20% - 10px);
+        }
+        .region-name5:last-child{
+            border: none;
+        }
+        /* Others */
+        .others-data{
+            width: 100%;
+            height: 135px;
+            overflow: hidden;
+            background:url(
+                data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAKklEQVQYV2NkwAMYscn9X8rwnzGagRGrJEwDiiRMB1ZJdCvAOtF1EKUTAJLICQgfW9u+AAAAAElFTkSuQmCC
+                    ) repeat;
+        }
+        .officalUse-B__title{
+            height: 27px;
+            width: 100%;
+            border-bottom: 1px dotted #000;
+        }
+        .officalUse-Brow{
+            height: 27px;
+            width: 100%;
+            overflow: hidden;
+            border-bottom: 1px dotted #000;
+        }
+        .officalUse-Brow:last-child{
+            border: none;
+        }
+        .officalUse-Bid{
+            height: 26px;
+            width: 50px;
+            float: left;
+            border-right: 1px dotted #000;
+        }
+        .officalUse-Bdata{
+            height: 26px;
+            float: left;
+            width: calc(100% - 50px);
+        }
+    </style>
+</head>
+<body>
+<!-- <button onclick="test()">Generate PDF</button>     -->
+
+<div class="list-main" >
+    <div class="card-main" id="root">
+        <div class="card-main__block">
+            <div class="personal-data">
+                <div class="avatar-image">
+                    <img src="" alt="">
+                </div>
+                <div class="personal-data__top">
+                    <div class="personal-data__top-left">
+                        <div class="title">
+                            Личная карточка аппликанта
+                        </div>
+                        <div class="register-number__block">
+                            <div class="register-number__title bg-title">Рег.Номер</div>
+                            <div class="register-number">712F-010224CA</div>
+                        </div>
+                    </div>
+                    <div class="personal-data__top-right">
+                        <div class="passport-number__block">
+                            <div class="passport-number__title bg-title">№ Паспорта:</div>
+                            <div class="passport-number">AA 4024207</div>
+                        </div>
+                        <div class="passport-number__block">
+                            <div class="passport-number__title bg-title">Дата выдачи:</div>
+                            <div class="passport-number">08.02.2014</div>
+                        </div>
+                        <div class="passport-number__block">
+                            <div class="passport-number__title bg-title">Срок действия:</div>
+                            <div class="passport-number">08.02.2024</div>
+                        </div>
+                        <div class="passport-number__block inn">
+                            <div class="passport-number__title bg-title">ИНН:</div>
+                            <div class="passport-number">785465125445</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="personal-data__bottom">
+                    <div class="fio-block">
+                        <div class="fio-block__title-main bg-title">
+                            Ф.И.О
+                        </div>
+                        <div class="fio-data-block">
+                            <div class="fio-data">
+                                <div class="fio-lang bg-title">На русском</div>
+                                <div class="fio">Ураков Муродилло</div>
+                            </div>
+                            <div class="fio-data">
+                                <div class="fio-lang bg-title">На английском</div>
+                                <div class="fio">Ураков Муродилло</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gender-block__main">
+                        <div class="gender-title bg-title">
+                            Пол
+                        </div>
+                        <div class="gender-block">
+                            <div class="gender">Муж</div>
+                            <div class="gender">Жен</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="gr-line"></div>
+            <div class="contacts-data">
+                <div class="contacts-line">
+                    <div class="address-title bg-title alignCenter">Место рождения</div>
+                    <div class="address alignLeft">вфыв вывыв фвывывыв фывы</div>
+                    <div class="birth-title bg-title alignCenter">Дата рождения</div>
+                    <div class="birth-date alignCenter">25.07.1996</div>
+                </div>
+                <div class="contacts-line">
+                    <div class="address-title bg-title alignCenter">Настоящий адрес</div>
+                    <div class="address-all alignLeft">sdsds dsd sd sd sdsd sds dsdsdsdsd</div>
+                </div>
+                <div class="contacts-line">
+                    <div class="address-title bg-title alignCenter">Контактные данные</div>
+                    <div class="address-tel alignCenter">+998 99 307 0004</div>
+                    <div class="email-title bg-title alignCenter">Адрес эл.почты</div>
+                    <div class="email alignLeft">murakov1996@gmail.com</div>
+                </div>
+            </div>
+            <div class="education-data">
+                <div class="education-title bg-title">
+                    
+                </div>
+                <div class="education-main">
+                    <div class="education-row">
+                        <div class="edu-date bg-title alignCenter">дата</div>
+                        <div class="edu-month bg-title alignCenter">мес</div>
+                        <div class="edu-year bg-title alignCenter">год</div>
+                        <div class="edu-address bg-title alignCenter">Адрес УЗ</div>
+                        <div class="edu-type bg-title alignCenter">Вид учебного заведения</div>
+                    </div>
+                    <div class="education-row">
+                        <div class="edu-date alignCenter">---</div>
+                        <div class="edu-month alignCenter">---</div>
+                        <div class="edu-year alignCenter">---</div>
+                        <div class="edu-address alignCenter">---</div>
+                        <div class="edu-type alignCenter">---</div>
+                    </div>
+                    <div class="education-row">
+                        <div class="edu-date alignCenter">---</div>
+                        <div class="edu-month alignCenter">---</div>
+                        <div class="edu-year alignCenter">---</div>
+                        <div class="edu-address alignCenter">---</div>
+                        <div class="edu-type alignCenter">---</div>
+                    </div>
+                    <div class="education-row">
+                        <div class="edu-date alignCenter">---</div>
+                        <div class="edu-month alignCenter">---</div>
+                        <div class="edu-year alignCenter">---</div>
+                        <div class="edu-address alignCenter">---</div>
+                        <div class="edu-type alignCenter">---</div>
+                    </div>
+                    <div class="education-row">
+                        <div class="edu-date alignCenter">---</div>
+                        <div class="edu-month alignCenter">---</div>
+                        <div class="edu-year alignCenter">---</div>
+                        <div class="edu-address alignCenter">---</div>
+                        <div class="edu-type alignCenter">---</div>
+                    </div>
+                    <div class="education-row">
+                        <div class="edu-date alignCenter">---</div>
+                        <div class="edu-month alignCenter">---</div>
+                        <div class="edu-year alignCenter">---</div>
+                        <div class="edu-address alignCenter">---</div>
+                        <div class="edu-type alignCenter">---</div>
+                    </div>
+                    <div class="education-row">
+                        <div class="edu-name__title alignCenter bg-title">Наименование ВУЗ</div>
+                        <div class="edu-name alignCenter">---</div>
+                    </div>
+                </div>
+                <div class="language-main">
+                    <div class="lang-row">
+                        <div class="lang-name bg-title alignCenter">Знание языков</div>
+                        <div class="lang-step1 alignCenter">удов</div>
+                        <div class="lang-step2 alignCenter">хор</div>
+                        <div class="lang-step3 alignCenter">отл</div>
+                    </div>
+                    <div class="lang-row">
+                        <div class="lang-name alignCenter">Родной язык</div>
+                        <div class="lang-step alignCenter">---</div>
+                    </div>
+                    <div class="lang-row">
+                        <div class="lang-name alignCenter">Русский</div>
+                        <div class="lang-step1 alignCenter">---</div>
+                        <div class="lang-step2 alignCenter">---</div>
+                        <div class="lang-step3 alignCenter">---</div>
+                    </div>
+                    <div class="lang-row">
+                        <div class="lang-name alignCenter">English</div>
+                        <div class="lang-step1 alignCenter">---</div>
+                        <div class="lang-step2 alignCenter">---</div>
+                        <div class="lang-step3 alignCenter">---</div>
+                    </div>
+                    <div class="lang-row">
+                        <div class="lang-name alignCenter">Корейский</div>
+                        <div class="lang-step1 alignCenter">---</div>
+                        <div class="lang-step2 alignCenter">---</div>
+                        <div class="lang-step3 alignCenter">---</div>
+                    </div>
+                    <div class="lang-row">
+                        <div class="lang-name alignCenter">---</div>
+                        <div class="lang-step1 alignCenter">---</div>
+                        <div class="lang-step2 alignCenter">---</div>
+                        <div class="lang-step3 alignCenter">---</div>
+                    </div>
+                    <div class="lang-row">
+                        <div class="lang-name bg-title alignCenter">Специоналность</div>
+                        <div class="lang-step alignCenter">---</div>
+                    </div>
+                </div>
+                <div class="education-other">
+                    <div class="education-row">
+                        <div class="edu-name__title alignCenter bg-title">Прочие данные об учёбе</div>
+                        <div class="edu-name alignCenter">---</div>
+                    </div>
+                </div>
+            </div>
+            <div class="gr-line"></div>
+            <div class="medArmyFam-data">
+                <div class="med-data">
+                    <div class="med-data-title bg-title alignCenter">Медицинские данные</div>
+                    <div class="med-data__row">
+                        <div class="med-data__row-title bg-title alignLeft">Вес</div>
+                        <div class="med-data__row-item alignCenter">---</div>
+                    </div>
+                    <div class="med-data__row">
+                        <div class="med-data__row-title bg-title alignLeft">Рост</div>
+                        <div class="med-data__row-item alignCenter">---</div>
+                    </div>
+                    <div class="med-data__row">
+                        <div class="med-data__row-title bg-title alignLeft">Жирность %</div>
+                        <div class="med-data__row-item alignCenter">---</div>
+                    </div>
+                    <div class="med-data__row">
+                        <div class="med-data__row-title bg-title alignLeft">гр.крови</div>
+                        <div class="med-data__row-item alignCenter">---</div>
+                    </div>
+                    <div class="med-data__row">
+                        <div class="med-data__row-title bg-title alignLeft">Зрение L</div>
+                        <div class="med-data__row-item alignCenter">---</div>
+                    </div>
+                    <div class="med-data__row">
+                        <div class="med-data__row-title bg-title alignLeft">Зрение R</div>
+                        <div class="med-data__row-item alignCenter">---</div>
+                    </div>
+                </div>
+                <div class="army-data">
+                    <div class="army-data-title bg-title alignCenter">Служба в Армии</div>
+                    <div class="army-data__row">
+                        <div class="army-data__row-title bg-title alignLeft">Назв-е ВЧ</div>
+                        <div class="army-data__row-item alignCenter">---</div>
+                    </div>
+                    <div class="army-data__row">
+                        <div class="army-data__row-title bg-title alignLeft">Регион</div>
+                        <div class="army-data__row-item alignCenter">---</div>
+                    </div>
+                    <div class="army-data__row">
+                        <div class="army-data__row-title bg-title alignLeft">Период службы</div>
+                        <div class="army-data__row-item alignCenter">---</div>
+                    </div>
+                    <div class="army-data__row">
+                        <div class="army-data__row-title bg-title alignLeft">Звание</div>
+                        <div class="army-data__row-item alignCenter">---</div>
+                    </div>
+                    <div class="awards-data">
+                        <div class="awards-title bg-title alignCenter">Полученые награды</div>
+                        <div class="awards alignCenter">---</div>
+                    </div>
+                </div>
+                <div class="marital-data">
+                    <div class="marital-data__title bg-title alignCenter">Семейное положение</div>
+                    <div class="marital-data__main">
+                        <div class="marital-role">
+                            <div class="marital-role__item alignLeft">---</div>
+                            <div class="marital-role__item alignLeft">---</div>
+                            <div class="marital-role__item alignLeft">---</div>
+                            <div class="marital-role__item alignLeft">---</div>
+                            <div class="marital-role__item alignLeft">---</div>
+                            <div class="marital-role__item alignLeft">---</div>
+                        </div>
+                        <div class="marital-child">
+                            <div class="marital-child__title bg-title alignCenter">Наличие <br>детей</div>
+                            <div class="marital-child__count alignLeft">1</div>
+                            <div class="marital-child__count alignLeft">2</div>
+                            <div class="marital-child__count alignLeft">3</div>
+                            <div class="marital-child__count alignLeft">4</div>
+                            <div class="marital-child__count alignLeft">4 +</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="family-data">
+                <div class="family-data-title bg-title">
+                    
+                </div>
+                <div class="family-data__main">
+                        <div class="family-row__title bg-title">
+                            <div class="fam-role alignCenter">
+                                Степень родства
+                            </div>
+                            <div class="fam-fio alignCenter">
+                                Ф.И.О
+                            </div>
+                            <div class="fam-age alignCenter">
+                                Возраст
+                            </div>
+                            <div class="fam-edu alignCenter">
+                                Место Учёбы, работы
+                            </div>
+                            <div class="fam-exp alignCenter">
+                                Должность
+                            </div>
+                            <div class="fam-address alignCenter">
+                                Адрес прожииания
+                            </div>
+                        </div>
+                    <div class="family-row">
+                        <div class="fam-role alignCenter">
+                            отец
+                        </div>
+                        <div class="fam-fio alignLeft">
+                            Муродов Мехриддин
+                        </div>
+                        <div class="fam-age alignCenter">
+                            52 года
+                        </div>
+                        <div class="fam-edu alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-exp alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-address alignCenter">
+                            Бухара
+                        </div>
+                    </div>
+                    <div class="family-row">
+                        <div class="fam-role alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-fio alignLeft">
+                            ---
+                        </div>
+                        <div class="fam-age alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-edu alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-exp alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-address alignCenter">
+                            Бухара
+                        </div>
+                    </div>
+                    <div class="family-row">
+                        <div class="fam-role alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-fio alignLeft">
+                            ---
+                        </div>
+                        <div class="fam-age alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-edu alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-exp alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-address alignCenter">
+                            Бухара
+                        </div>
+                    </div>
+                    <div class="family-row">
+                        <div class="fam-role alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-fio alignLeft">
+                            ---
+                        </div>
+                        <div class="fam-age alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-edu alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-exp alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-address alignCenter">
+                            Бухара
+                        </div>
+                    </div>
+                    <div class="family-row">
+                        <div class="fam-role alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-fio alignLeft">
+                            ---
+                        </div>
+                        <div class="fam-age alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-edu alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-exp alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-address alignCenter">
+                            Бухара
+                        </div>
+                    </div>
+                    <div class="family-row">
+                        <div class="fam-role alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-fio alignLeft">
+                            ---
+                        </div>
+                        <div class="fam-age alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-edu alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-exp alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-address alignCenter">
+                            Бухара
+                        </div>
+                    </div>
+                    <div class="family-row">
+                        <div class="fam-role alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-fio alignLeft">
+                            ---
+                        </div>
+                        <div class="fam-age alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-edu alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-exp alignCenter">
+                            ---
+                        </div>
+                        <div class="fam-address alignCenter">
+                            Бухара
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="gr-line"></div>
+            <div class="experience-data">
+                <div class="experience-title alignCenter">
+                    sd1sd31sd21sd21s d1s2d1s3d21sd2ssd1 2sd13s
+                </div>
+                <div class="experience-row__title bg-title">
+                    <div class="exp-id alignCenter">№</div>
+                    <div class="exp-name alignCenter">Наименование организации</div>
+                    <div class="exp-period alignCenter">Период работы</div>
+                    <div class="exp-job alignCenter">Должность</div>
+                    <div class="exp-role alignCenter">Подразделение</div>
+                    <div class="exp-address alignCenter">Местонахождение</div>
+                </div>
+                <div class="experience-row">
+                    <div class="exp-id alignCenter">1</div>
+                    <div class="exp-name alignLeft">---</div>
+                    <div class="exp-period alignCenter">---</div>
+                    <div class="exp-job alignCenter">---</div>
+                    <div class="exp-role alignCenter">---</div>
+                    <div class="exp-address alignCenter">---</div>
+                </div>
+                <div class="experience-row">
+                    <div class="exp-id alignCenter">2</div>
+                    <div class="exp-name alignLeft">---</div>
+                    <div class="exp-period alignCenter">---</div>
+                    <div class="exp-job alignCenter">---</div>
+                    <div class="exp-role alignCenter">---</div>
+                    <div class="exp-address alignCenter">---</div>
+                </div>
+                <div class="experience-row">
+                    <div class="exp-id alignCenter">3</div>
+                    <div class="exp-name alignLeft">---</div>
+                    <div class="exp-period alignCenter">---</div>
+                    <div class="exp-job alignCenter">---</div>
+                    <div class="exp-role alignCenter">---</div>
+                    <div class="exp-address alignCenter">---</div>
+                </div>
+                <div class="experience-row">
+                    <div class="exp-id alignCenter">4</div>
+                    <div class="exp-name alignLeft">---</div>
+                    <div class="exp-period alignCenter">---</div>
+                    <div class="exp-job alignCenter">---</div>
+                    <div class="exp-role alignCenter">---</div>
+                    <div class="exp-address alignCenter">---</div>
+                </div>
+            </div>
+            <div class="officalUse-data__title alignCenter">ONLY FOR OFFICAL USE</div>
+            <div class="officalUse-data">
+                <div class="officalUse-A">
+                    <div class="officalUse-A__title alignLeft">A. По резултатом собеседования с апликантом:</div>
+                    <div class="officalUse-A1">
+                        <div class="region__row">
+                            <div class="region-id alignLeft">1.</div>
+                            <div class="region-name__title"></div>
+                        </div>
+                        <div class="region__row">
+                            <div class="region-id alignLeft"></div>
+                            <div class="region-name"></div>
+                            <div class="region-name"></div>
+                            <div class="region-name"></div>
+                            <div class="region-name"></div>
+                        </div>
+                        <div class="region__row">
+                            <div class="region-id alignLeft"></div>
+                            <div class="region-name"></div>
+                            <div class="region-name"></div>
+                            <div class="region-name"></div>
+                            <div class="region-name"></div>
+                        </div>
+                        <div class="region__row">
+                            <div class="region-id alignLeft"></div>
+                            <div class="region-name"></div>
+                            <div class="region-name"></div>
+                            <div class="region-name"></div>
+                            <div class="region-name"></div>
+                        </div>
+                        <div class="region__row">
+                            <div class="region-id alignLeft"></div>
+                            <div class="region-name"></div>
+                            <div class="region-name"></div>
+                            <div class="region-name"></div>
+                            <div class="region-name"></div>
+                        </div>
+                    </div>
+                    <div class="officalUse-A2">
+                        <div class="region__row">
+                            <div class="region-id alignLeft">2.</div>
+                            <div class="region-name__title"></div>
+                        </div>
+                        <div class="region__row">
+                            <div class="region-id"></div>
+                            <div class="region-name5"></div>
+                            <div class="region-name5"></div>
+                            <div class="region-name5"></div>
+                            <div class="region-name5"></div>
+                            <div class="region-name5"></div>
+                        </div>
+                    </div>
+                    <div class="officalUse-A3">
+                        <div class="region__row">
+                            <div class="region-id alignLeft">3.</div>
+                            <div class="region-name__title"></div>
+                        </div>
+                        <div class="region__row">
+                            <div class="region-id alignLeft"></div>
+                            <div class="region-name"></div>
+                            <div class="region-name"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="psixolog-data">
+
+                </div>
+            </div>
+            <div class="others-data">
+                <div class="officalUse-B__title alignLeft">B. Иные особенности аппликанта: </div>
+                <div class="officalUse-Brow">
+                    <div class="officalUse-Bid alignLeft">1.</div>
+                    <div class="officalUse-Bdata alignLeft"></div>
+                </div>
+                <div class="officalUse-Brow">
+                    <div class="officalUse-Bid alignLeft">2.</div>
+                    <div class="officalUse-Bdata alignLeft"></div>
+                </div>
+                <div class="officalUse-Brow">
+                    <div class="officalUse-Bid alignLeft">3.</div>
+                    <div class="officalUse-Bdata alignLeft"></div>
+                </div>
+                <div class="officalUse-Brow">
+                    <div class="officalUse-Bid alignLeft">4.</div>
+                    <div class="officalUse-Bdata alignLeft"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <script src="js/html2pdf.bundle.js"></script>
+<script>
+    function test() {
+      // Get the element.
+      var element = document.getElementById('root');
+
+      // Generate the PDF.
+      html2pdf().from(element).set({
+        margin: 0,
+        filename: 'test.pdf',
+        html2canvas: { scale: 1 },
+        jsPDF: {orientation: 'portrait', unit: 'in', format: 'letter'}
+      }).save();
+    }
+  </script> -->
+</body>
+</html>

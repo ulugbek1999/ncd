@@ -1,0 +1,703 @@
+{% extends 'site/_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block css %}
+
+{% endblock %}
+{% block content %}
+    <section class="slider-main">
+        <div class="container-slider">
+            <div class="row">
+                <div id="slider" class="slider-pro">
+                    <div class="sp-slides">
+                        <div class="sp-slide">
+                            <img class="sp-image" src="{% static 'site/plugins/slider-pro/css/images/blank.gif' %}"
+                                data-src="{% static 'site/images/slide1.jpg' %}"
+                                data-retina="{% static 'site/images/slide1.jpg' %}"/>
+                            <!--
+                            <p class="sp-layer sp-white sp-padding"
+                                data-horizontal="50" data-vertical="50"
+                                data-show-transition="left" data-hide-transition="up" data-show-delay="400" data-hide-delay="200">
+                                Lorem ipsum
+                            </p>
+
+                            <p class="sp-layer sp-black sp-padding hide-small-screen"
+                                data-horizontal="180" data-vertical="50"
+                                data-show-transition="left" data-hide-transition="up" data-show-delay="600" data-hide-delay="100">
+                                dolor sit amet
+                            </p>
+
+                            <p class="sp-layer sp-white sp-padding hide-medium-screen"
+                                data-horizontal="315" data-vertical="50"
+                                data-show-transition="left" data-hide-transition="up" data-show-delay="800">
+                                consectetur adipisicing elit.
+                            </p> -->
+                        </div>
+
+                        <div class="sp-slide">
+                            <img class="sp-image" src="{% static 'site/plugins/slider-pro/css/images/blank.gif' %}"
+                                data-src="{% static 'site/images/slide2.jpg' %}"
+                                data-retina="{% static 'site/images/slide2.jpg' %}"/>
+                            <!--
+                            <h3 class="sp-layer sp-black sp-padding"
+                                data-horizontal="40" data-vertical="10%"
+                                data-show-transition="left" data-hide-transition="left">
+                                Lorem ipsum dolor sit amet
+                            </h3>
+
+                            <p class="sp-layer sp-white sp-padding hide-medium-screen"
+                                data-horizontal="40" data-vertical="22%"
+                                data-show-transition="left" data-show-delay="200" data-hide-transition="left" data-hide-delay="200">
+                                consectetur adipisicing elit
+                            </p>
+
+                            <p class="sp-layer sp-black sp-padding hide-small-screen"
+                                data-horizontal="40" data-vertical="34%" data-width="350"
+                                data-show-transition="left" data-show-delay="400" data-hide-transition="left" data-hide-delay="500">
+                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </p> -->
+                        </div>
+
+                        <div class="sp-slide">
+                            <img class="sp-image" src="{% static 'site/plugins/slider-pro/css/images/blank.gif' %}"
+                                data-src="{% static 'site/images/slide3.jpg' %}"
+                                data-retina="{% static 'site/images/slide3.jpg' %}"/>
+                            <!--
+                            <p class="sp-layer sp-black sp-padding"
+                                data-position="bottomLeft" data-horizontal="50" data-vertical="100"
+                                data-show-transition="down" data-show-delay="500" data-hide-transition="up">
+                                Lorem ipsum dolor sit amet
+                            </p>
+
+                            <p class="sp-layer sp-white sp-padding hide-small-screen"
+                                data-position="bottomLeft" data-horizontal="50" data-vertical="50"
+                                data-show-transition="up" data-show-delay="500" data-hide-transition="down">
+                                consectetur adipisicing elit <span class="hide-medium-screen">, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+                            </p> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-main">
+        <div class="container">
+            <div class="row">
+                <div class="content-title">
+                    <h2>Услуги</h2>
+                </div>
+                <div class="services">
+                    <div class="row-main">
+                        <div class="service-col">
+                            <div class="service-item">
+                                <a href="#">
+                                    <div class="service-item__image">
+                                        <img src="{% static 'site/images/База данных заявителей.svg' %}" alt="">
+                                    </div>
+                                    <div class="service-item__content">
+                                        <h2>База данных заявителей</h2>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and type settngdtry.</p>
+                                    </div>
+                                    <div class="service-counter">
+                                        01
+                                    </div>
+                                    <!-- <div class="service-item__read">
+                                        <a href="#">Read more <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                    </div> -->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="service-col">
+                            <div class="service-item">
+                                <a href="#">
+                                    <div class="service-item__image">
+                                        <img src="{% static 'site/images/Профиль кандидата.svg' %}" alt="">
+                                    </div>
+                                    <div class="service-item__content">
+                                        <h2>Профиль кандидата</h2>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and type settngdtry.</p>
+                                    </div>
+                                    <div class="service-counter">
+                                        02
+                                    </div>
+                                    <!-- <div class="service-item__read">
+                                        <a href="#">Read more <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                    </div> -->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="service-col">
+                            <div class="service-item">
+                                <a href="#">
+                                    <div class="service-item__image">
+                                        <img src="{% static 'site/images/Гарантийное соглашение.svg' %}" alt="">
+                                    </div>
+                                    <div class="service-item__content">
+                                        <h2>Гарантийное соглашение</h2>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and type settngdtry.</p>
+                                    </div>
+                                    <div class="service-counter">
+                                        03
+                                    </div>
+                                    <!-- <div class="service-item__read">
+                                        <a href="#">Read more <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                    </div> -->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="service-col">
+                            <div class="service-item">
+                                <a href="#">
+                                    <div class="service-item__image">
+                                        <img src="{% static 'site/images/Трудовое соглашение.svg' %}" alt="">
+                                    </div>
+                                    <div class="service-item__content">
+                                        <h2>Трудовое соглашение</h2>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and type settngdtry.</p>
+                                    </div>
+                                    <div class="service-counter">
+                                        04
+                                    </div>
+                                    <!-- <div class="service-item__read">
+                                        <a href="#">Read more <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                    </div> -->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="service-col">
+                            <div class="service-item">
+                                <a href="#">
+                                    <div class="service-item__image">
+                                        <img src="{% static 'site/images/Подготовка к отъезду.svg' %}" alt="">
+                                    </div>
+                                    <div class="service-item__content">
+                                        <h2>Подготовка к отъезду</h2>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and type settngdtry.</p>
+                                    </div>
+                                    <div class="service-counter">
+                                        05
+                                    </div>
+                                    <!-- <div class="service-item__read">
+                                        <a href="#">Read more <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                    </div> -->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="service-col">
+                            <div class="service-item">
+                                <a href="#">
+                                    <div class="service-item__image">
+                                        <img src="{% static 'site/images/Отправка.svg' %}" alt="">
+                                    </div>
+                                    <div class="service-item__content">
+                                        <h2>Отправка</h2>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and type settngdtry.</p>
+                                    </div>
+                                    <div class="service-counter">
+                                        06
+                                    </div>
+                                    <!-- <div class="service-item__read">
+                                        <a href="#">Read more <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                    </div> -->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="service-col">
+                            <div class="service-item">
+                                <a href="#">
+                                    <div class="service-item__image">
+                                        <img src="{% static 'site/images/Услуги после факта трудоустройства.svg' %}" alt="">
+                                    </div>
+                                    <div class="service-item__content">
+                                        <h2>Услуги после факта трудоустройства</h2>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and type settngdtry.</p>
+                                    </div>
+                                    <div class="service-counter">
+                                        07
+                                    </div>
+                                    <!-- <div class="service-item__read">
+                                        <a href="#">Read more <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                    </div> -->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="service-col">
+                            <div class="service-item">
+                                <a href="#">
+                                    <div class="service-item__image">
+                                        <img src="{% static 'site/images/Предоставление обучения.svg' %}" alt="">
+                                    </div>
+                                    <div class="service-item__content">
+                                        <h2>Предоставление обучения</h2>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and type settngdtry.</p>
+                                    </div>
+                                    <div class="service-counter">
+                                        08
+                                    </div>
+                                    <!-- <div class="service-item__read">
+                                        <a href="#">Read more <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                                    </div> -->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="counters-main">
+        <div class="container">
+            <div class="row">
+                <div class="content-title">
+                    <h2>WE HAVE GREAT SKILLS</h2>
+                </div>
+                <div id="counter">
+                    <div class="counter-item">
+                        <div class="counter-value" data-count="300">25</div>
+                        <div class="counter-item__title">PARTNERS</div>
+                    </div>
+                    <div class="counter-item">
+                        <div class="counter-value" data-count="500">150</div>
+                        <div class="counter-item__title">SUPPLIERS</div>
+                    </div>
+                    <div class="counter-item">
+                        <div class="counter-value" data-count="10">0</div>
+                        <div class="counter-item__title">YEARS OF EXPERIENCE</div>
+                    </div>
+                    <div class="counter-item">
+                        <div class="counter-value" data-count="1500">600</div>
+                        <div class="counter-item__title">CLIENTS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="">
+        <div id="owl-example" class="owl-carousel">
+            <div> Your Content </div>
+            <div> Your Content </div>
+            <div> Your Content </div>
+            <div> Your Content </div>
+            <div> Your Content </div>
+            <div> Your Content </div>
+            <div> Your Content </div>
+        </div>
+    </section>
+
+    <section class="about-main">
+        <div class="container">
+            <div class="row">
+                <div class="about">
+                    <div class="about-title">
+                        <h2>О компании</h2>
+                    </div>
+                    <div class="about-content">
+                        <div class="about-bg"></div>
+                        <div class="about-content__title">
+                            <h2>Наша миссия</h2>
+                        </div>
+                        <div class="about-content__main">
+                            <p>Exerci tation ullamcorper suscipit lob
+                                ortis nisl aliquip ex ea commodo non habent
+                                claritatem insitamconse quat duis autem Exerci tation.</p>
+                            <p>Exerci tation ullamcorper suscipit lobortis nis
+                                l aliquip ex ea commodo non habent claritatem insitamconse quat
+                                duis autem Exerci tation. habent claritatem in
+                                sitamconse quat duis autem Exerci tation</p>
+                            <p>Exerci tation ullamcorper suscipit lobortis nis
+                                l aliquip ex ea commodo non habent claritatem insitamconse quat
+                                    duis autem Exerci tation. habent claritatem in
+                                    sitamconse quat duis autem Exerci tationnis
+                                    l aliquip ex ea commodo non habent claritatem insitamconse quat
+                                        duis autem Exerci tation. habent clarit</p>
+                        </div>
+                        <div class="about-content__read">
+                            <a href="#">Read more</a>
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <article>
+                            <img src="{% static 'site/images/about.jpg' %}" alt="">
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- <section class="partners-main">
+        <div class="container">
+            <div class="row">
+                <div class="partners-about">
+                    <div class="partners-about__content">
+                        <h1>PRAESENT ORNARE DUI <span>SED
+                                <br/>ERAT CONSEQUAT</span></h1>
+                        <p>Exerci tation ullamcorper suscipitorens lobortis nisl ut aliquip ex ea commodo. Exerci tation ullamcorper suscipitorens. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+                    </div>
+                    <div class="partners-statics">
+                        <div id="skills">
+                            <div class="skillbar clearfix " data-percent="95%">
+                                <div class="skillbar-title" style="background: #131313;"></div>
+                                <span>Photography</span>
+                                <div class="skill-bar-percent">95%</div>
+                                <div class="skillbar-bar" style="background: #131313;"></div>
+                            </div>
+
+                            <div class="skillbar clearfix " data-percent="85%">
+                                <div class="skillbar-title" style="background: #131313;"></div>
+                                <span>Videography</span>
+                                <div class="skillbar-bar" style="background: #131313;"></div>
+                                <div class="skill-bar-percent">85%</div>
+                            </div>
+
+                            <div class="skillbar clearfix" data-percent="75%">
+                                <div class="skillbar-title" style="background: #131313;"></div>
+                                <span>Illustrator</span>
+                                <div class="skillbar-bar" style="background: #131313;"></div>
+                                <div class="skill-bar-percent">75%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="partners">
+                    <div class="partners-item">
+                        <a href="#">
+                            <img src="site/images/1.png" alt="">
+                        </a>
+                    </div>
+                    <div class="partners-item">
+                        <a href="#">
+                            <img src="site/images/2.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="partners-item">
+                        <a href="#">
+                            <img src="site/images/3.png" alt="">
+                        </a>
+                    </div>
+                    <div class="partners-item">
+                        <a href="#">
+                            <img src="site/images/4.png" alt="">
+                        </a>
+                    </div>
+                    <div class="partners-item">
+                        <a href="#">
+                            <img src="site/images/5.png" alt="">
+                        </a>
+                    </div>
+                    <div class="partners-item">
+                        <a href="#">
+                            <img src="site/images/6.png" alt="">
+                        </a>
+                    </div>
+                    <div class="partners-item">
+                        <a href="#">
+                            <img src="site/images/7.png" alt="">
+                        </a>
+                    </div>
+                    <div class="partners-item">
+                        <a href="#">
+                            <img src="site/images/8.png" alt="">
+                        </a>
+                    </div>
+                    <div class="partners-item">
+                        <a href="#">
+                            <img src="site/images/9.png" alt="">
+                        </a>
+                    </div>
+                    <div class="partners-item">
+                        <a href="#">
+                            <img src="site/images/10.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="partners-item">
+                        <a href="#">
+                            <img src="site/images/11.png" alt="">
+                        </a>
+                    </div>
+                    <div class="partners-item">
+                        <a href="#">
+                            <img src="site/images/12.png" alt="">
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <section class="reviews-main">
+        <div class="container">
+            <div class="row">
+                <div class="content-title">
+                    <h2>Отзывы</h2>
+                </div>
+                <div class="reviews">
+                    <div id="reviewsCarousel" class="owl-carousel owl-theme staff-list">
+                        <div class="single-staff-item">
+                            <img src="{% static 'site/images/avatar.jpg' %}" alt="">
+
+                            <div class="staff-meta">
+                                <h3>Владимир Беляев</h3>
+                                <p>Директор компании</p>
+                            </div>
+                            <p class="staff-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                    commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                    </p>
+                        </div>
+
+                        <div class="single-staff-item">
+                            <img src="{% static 'site/images/avatar.jpg' %}" alt="">
+
+                            <div class="staff-meta">
+                                <h3>John Doe</h3>
+                                <p>Директор компании</p>
+                            </div>
+                            <p class="staff-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                    commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                    </p>
+                        </div>
+
+                        <div class="single-staff-item">
+                            <img src="{% static 'site/images/avatar.jpg' %}" alt="">
+
+                            <div class="staff-meta">
+                                <h3>John Doe</h3>
+                                <p>Директор компании</p>
+                            </div>
+                            <p class="staff-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                    commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                    </p>
+                        </div>
+
+                        <div class="single-staff-item">
+                            <img src="{% static 'site/images/avatar.jpg' %}" alt="">
+
+                            <div class="staff-meta">
+                                <h3>John Doe</h3>
+                                <p>Директор компании</p>
+                            </div>
+                            <p class="staff-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                                    commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                    </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="partners-main">
+        <div class="container">
+            <div class="row">
+                <div class="content-title">
+                    <h2>Наши партнеры</h2>
+                </div>
+                <div class="partners">
+                    <div id="partnersCarousel" class="owl-carousel owl-theme">
+                        <div class="item">
+                            <div class="partners-item">
+                                <a href="#">
+                                    <img src="{% static 'site/images/1.png' %}"/>
+                                    <span>Aeroflot</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="partners-item">
+                                <a href="#">
+                                    <img src="{% static 'site/images/2.jpg' %}"/>
+                                    <span>Ripple</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="partners-item">
+                                <a href="#">
+                                    <img src="{% static 'site/images/3.png' %}"/>
+                                    <span>FedEx</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="partners-item">
+                                <a href="#">
+                                    <img src="{% static 'site/images/4.png' %}"/>
+                                    <span>Knauf</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="partners-item">
+                                <a href="#">
+                                    <img src="{% static 'site/images/5.png' %}"/>
+                                    <span>LG</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="our-co-worker__main">
+        <div class="ts-co-worker"></div>
+        <div class="container">
+            <div class="row">
+                <div class="content-title">
+                    <h2>Наши сотрудники</h2>
+                </div>
+                <div class="our-co-worker">
+                    <div class="row-co-worker">
+                        <div class="col-co-worker">
+                            <div class="co-worker-item">
+                                <div class="co-worker-item__image">
+                                    <img src="{% static 'site/images/emp1.jpg' %}" alt="">
+                                </div>
+                                <div class="co-worker-item__title">
+                                    <a href="#">
+                                        Владимир Беляев
+                                    </a>
+                                    <span>Директор компании</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-co-worker">
+                            <div class="co-worker-item">
+                                <div class="co-worker-item__image">
+                                    <img src="{% static 'site/images/emp2.jpg' %}" alt="">
+                                </div>
+                                <div class="co-worker-item__title">
+                                    <a href="#">
+                                        Екатерина Громова
+                                    </a>
+                                    <span>Директор компании</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-co-worker">
+                            <div class="co-worker-item">
+                                <div class="co-worker-item__image">
+                                    <img src="{% static 'site/images/emp3.jpg' %}" alt="">
+                                </div>
+                                <div class="co-worker-item__title">
+                                    <a href="#">
+                                        Владимир Беляев
+                                    </a>
+                                    <span>Директор компании</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-co-worker">
+                            <div class="co-worker-item">
+                                <div class="co-worker-item__image">
+                                    <img src="{% static 'site/images/emp4.jpg' %}" alt="">
+                                </div>
+                                <div class="co-worker-item__title">
+                                    <a href="#">
+                                        Екатерина Громова
+                                    </a>
+                                    <span>Директор компании</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+
+    <script>
+
+        var a = 0;
+        $(window).scroll(function() {
+
+          var oTop = $('#counter').offset().top - window.innerHeight;
+          if (a == 0 && $(window).scrollTop() > oTop) {
+            $('.counter-value').each(function() {
+              var $this = $(this),
+                countTo = $this.attr('data-count');
+              $({
+                countNum: $this.text()
+              }).animate({
+                  countNum: countTo
+                },
+
+                {
+
+                  duration: 2000,
+                  easing: 'swing',
+                  step: function() {
+                    $this.text(Math.floor(this.countNum));
+                  },
+                  complete: function() {
+                    $this.text(this.countNum);
+                    //alert('finished');
+                  }
+
+                });
+            });
+            a = 1;
+          }
+
+        });
+        $(document).ready(function() {
+            $('#slider').sliderPro({
+                width: '100%',
+                height: 540,
+                arrows: true,
+                buttons: true,
+                autoplay: true,
+                autoScaleLayers: true,
+                breakpoints: {
+                    1540: {
+                        height: 480
+                    },
+                    1400: {
+                        height: 440
+                    }
+                }
+            });
+            $("#partnersCarousel").owlCarousel({
+                items: 4,
+                autoplay: false,
+                margin: 5,
+                loop: true,
+                nav: true,
+                dots: false,
+                autoplay: true,
+                pagination: true,
+                navText: ["<img src='images/pleft.png' alt=''>", "<img src='images/pright.png' alt=''>"]
+            });
+            $("#reviewsCarousel").owlCarousel({
+                items: 1,
+                autoplay: false,
+                margin: 30,
+                loop: true,
+                nav: true,
+                dots: true,
+                autoplay: true,
+                pagination: true,
+                navText: ["<img src='images/left.png' alt=''>", "<img src='images/right.png' alt=''>"]
+            });
+        });
+    </script>
+
+
+{% endblock %}

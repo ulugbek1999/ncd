@@ -1,0 +1,137 @@
+{% extends 'site/_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load thumbnail %}
+{% load partner_employees %}
+
+{% block css %}
+
+{% endblock %}
+{% block content %}
+    <section class="profile">
+        <div class="container">
+            <div class="row">
+                <div class="profile-main">
+                    <div class="content-title">
+                        <h2>Мой список</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="profile-side">
+                                <div class="profile-side__title">
+                                    <h2>Личный кабинет</h2>
+                                </div>
+                                <nav class="nav_personal d-lnk-txt">
+                                    <ul>
+                                        <li class="">
+                                            <a href="#"><i class="fa fa-user"></i> Мой профиль</a>
+                                        </li>
+                                        <li  class="">
+                                            <a href="{% url 'site:partner.employees' %}"><i class="fa fa-list"></i> Список апликантов</a>
+                                        </li>
+                                        <li class="current">
+                                        <a href="{% url 'site:partner.bookmarks' %}"><i class="fa fa-list"></i> Мой список <span id="bookmarkCount">{{ request.user.partner.partneremployee_set.count }}</span></a></li>
+                                        <li class="">
+
+                                    </ul>
+                                    <div class="nav_personal__footer">
+                                        <a href="#"> Выйти</a>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="profile-content">
+                                <div class="row">
+                                    {% for pe in employees %}
+                                        {% is_in_bookmark pe.employee.id as bookmark %}
+                                        <div class="employee-col" data-id="{{ pe.employee.id }}">
+                                            <div class="employee-item">
+                                                <div class="employee-avatar">
+                                                    {% thumbnail pe.employee.photo_1 "120x140" crop="center" as im %}
+                                                        <img src="{{ im.url }}" alt="">
+                                                    {% endthumbnail %}
+                                                </div>
+                                                <div class="employee-item__content">
+                                                    <div class="employee-item__data">
+                                                        <div class="employee-item__data-row">
+                                                            <span>{{ pe.employee.full_name_ru }}</span>
+                                                        </div>
+                                                        <div class="employee-item__data-row">
+                                                            <span>Возрост: </span> 28 лет
+                                                        </div>
+                                                        <div class="employee-item__data-row">
+                                                            <span>Рост: </span> 178 cм
+                                                        </div>
+                                                        <div class="employee-item__data-row">
+                                                            <span>Рейтинг: </span> 78.0 (A)
+                                                        </div>
+                                                    </div>
+                                                    <div class="employee-item__footer">
+                                                        <a href="{% url 'site:employee.detail' pe.employee.id %}">Подробнее</a>
+                                                    </div>
+                                                    <div class="checkbox-favorite">
+                                                        <input
+                                                                id="fav{{ pe.employee.id }}"
+                                                                class="favorite hide"
+                                                                data-url="{% url 'api:partner.bookmark' pe.employee.id %}"
+                                                                type="checkbox"
+                                                                data-id="{{ pe.employee.id }}"
+                                                                {% if bookmark %}
+                                                                    checked
+                                                                {% else %}
+
+                                                                {% endif %}
+                                                        />
+                                                        <label aria-hidden="true" data-icon="&#9733;" for="fav{{ pe.employee.id }}">
+                                                            <span class="hide"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+
+
+    <script>
+        $(function () {
+            $(".favorite").click(function (event) {
+                event.preventDefault();
+                result = window.confirm('Вы действительно хотите удалит аппликанта из списка избранных?');
+
+                let employee_id = $(this).data('id');
+                if(result){
+                    $.ajax({
+                        url: $(this).data('url'),
+                        processData: false,
+                        contentType: false,
+                        method: 'GET',
+                        success: function (data) {
+                            var obj = jQuery.parseJSON(data);
+                            $('#bookmarkCount').text(obj.count);
+                            $(`.employee-col[data-id = "${employee_id}"]`).remove();
+                        },
+                        error: function (data) {
+                            var obj = jQuery.parseJSON(data);
+                            $('#bookmarkCount').text(obj.count);
+                        }
+                    });
+                }else{
+
+                }
+
+            });
+        })
+    </script>
+{% endblock %}

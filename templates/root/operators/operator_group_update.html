@@ -1,0 +1,142 @@
+{% extends 'root/_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% trans 'Operator groups' %}</h2>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{{ group.group_name }}</h2>
+        </div>
+        <div class="card-main__content">
+            <form>
+                <div class="col-md-4">
+                    <div class="operators-group__form">
+                        <div class="form-group">
+                            <label for="">{% trans 'Group name' %}</label>
+                            <input name="group_name" type="text" class="form-control" id="" value="{{ group.group_name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="city">{% trans 'Region' %}</label>
+                            <select class="form-control show-tick" name="city" id="city">
+                                <option value="0">{% trans 'Select' %}</option>
+                                {% for city in cities %}
+                                    <option value="{{ city.id }}" {% if city.id == group.district.city.id %}selected{% endif %}>{{ city.name_ru }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="district">{% trans 'District' %}</label>
+                            <select class="form-control show-tick" name="district" id="district">
+                                <option value="" data-city="0">{% trans 'Select' %}</option>
+                                {% for district in districts %}
+                                    <option value="{{ district.id }}" data-city="{{ district.city.id }}" {% if district.id == group.district.id %}selected{% endif %}>{{ district.name_ru }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'Operator' %} 1</label>
+                            <select class="form-control show-tick" name="operator1" id="">
+                                <option value="">{% trans 'Select' %}</option>
+                                {% for operator in operators %}
+                                    <option value="{{ operator.id }}" {% if group.operator1.id == operator.id %}selected{% endif %}>{{ operator.fullname }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'Operator' %} 2</label>
+                            <select class="form-control show-tick" name="operator2" id="">
+                                <option value="">{% trans 'Select' %}</option>
+                                {% for operator in operators %}
+                                    <option value="{{ operator.id }}" {% if group.operator2.id == operator.id %}selected{% endif %}>{{ operator.fullname }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'Operator' %} 3</label>
+                            <select class="form-control show-tick" name="operator3" id="">
+                                <option value="">{% trans 'Select' %}</option>
+                                {% for operator in operators %}
+                                    <option value="{{ operator.id }}" {% if group.operator3.id == operator.id %}selected{% endif %}>{{ operator.fullname }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'Operator' %} 4</label>
+                            <select class="form-control show-tick" name="operator4" id="">
+                                <option value="">{% trans 'Select' %}</option>
+                                {% for operator in operators %}
+                                    <option value="{{ operator.id }}" {% if group.operator4.id == operator.id %}selected{% endif %}>{{ operator.fullname }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="operators-button form-send__buttons">
+                        <div class="form-send__button" id="formSendButton">
+                            <button type="submit" id="group-update" data-url="{% url 'root.api.group.update' group.id %}">{% trans 'Save' %}</button>
+                        </div>
+                        <div class="form-reset__buttton">
+                            <button type="reset">{% trans 'Clear' %}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $('#phone').inputmask({ mask: "+[d]{15}", greedy: false});
+
+        $(function () {
+            $("#district option").hide();
+            $(`#district option[data-city="${$('#city').val()}"]`).show();
+
+            $('#city').change(function () {
+                var cityID = $(this).val();
+                $("#district option").hide();
+                $(`#district option[data-city="${cityID}"]`).show();
+                if(cityID){
+                    $('#district').val("");
+                }
+            });
+            $("#group-update").click(function (e) {
+                e.preventDefault();
+                let $formData = new FormData();
+                $formData.append("group_name", $("input[name='group_name']").val());
+                $formData.append("district", $("select[name='district']").val());
+                $formData.append("operator1", $("select[name='operator1']").val());
+                $formData.append("operator2", $("select[name='operator2']").val());
+                $formData.append("operator3", $("select[name='operator3']").val());
+                $formData.append("operator4", $("select[name='operator4']").val());
+
+                $.ajax({
+                    url: $(this).data("url"),
+                    type: "PUT",
+                    data: $formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        var x = document.getElementById("mainSuccess");
+                        x.className = "show";
+                        setTimeout(function(){
+                            x.className = x.className.replace("show", "");
+                            window.location.href = '/root/operators/groups';
+                        }, 1500);
+                    },
+                    error: function (data) {
+                        var x = document.getElementById("mainError");
+
+                        x.className = "show";
+                        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                    }
+                })
+            })
+        })
+    </script>
+
+{% endblock %}

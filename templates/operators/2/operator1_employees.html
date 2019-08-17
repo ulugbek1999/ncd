@@ -1,0 +1,164 @@
+{% extends 'operators/_base.html' %}
+{% load static i18n dict %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% trans 'Register employee' %}</h2>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{% trans 'Filter' %}</h2>
+        </div>
+        <div class="card-main__content">
+            <form method="GET">
+                <div class="search-form__app">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">{% trans 'Fullname' %}</label>
+                            <input name="fullname" type="text" class="form-control" id="" value="{{ params|dict_key:'fullname' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">{% trans 'Phone' %}</label>
+                            <input name="phone" type="text" class="form-control" id="" value="{{ params|dict_key:'phone' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">{% trans 'Gender' %}</label>
+                            <select class="form-control selectpicker show-tick" name="gender" id="">
+                                <option value="">{% trans 'Select' %}</option>
+                                <option value="m" {% if params|dict_key:'gender' == 'm' %}selected{% endif %}>{% trans 'Male' %}</option>
+                                <option value="f" {% if params|dict_key:'gender' == 'f' %}selected{% endif %}>{% trans 'Female' %}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="search-buttons">
+                            <div class="form-search__button" id="">
+                                <button id="" type="submit">{% trans 'Search' %}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </form>
+
+            <div class="search-results__main">
+                <div class="table-main">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr class="table-row" data-href="#">
+                            <th class="td-id">№</th>
+                            <th class="td-fio">{% trans 'Fullname' %}</th>
+                            <th class="td-reg">{% trans 'Register number' %}</th>
+                            <th class="td-phone">{% trans 'Phone' %}</th>
+                            <th class="td-date">{% trans 'Created' %}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for emp in employees %}
+                            <tr class="table-row" data-href="{% url 'operator:2' %}?id={{ emp.id }}">
+                                <td class="td-id">{{ emp.id }}</td>
+                                <td class="td-fio">{{ emp.full_name_ru }}</td>
+                                <td class="td-reg">{{ emp.register_number }}</td>
+                                <td class="td-phone">{{ emp.phone }}</td>
+                                <td class="td-date">{{ emp.created|date:"H:i d.m.Y" }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% if is_paginated %}
+                        <div class="pagination-main">
+                            <ul class="pagination">
+                                {% if page_obj.has_previous %}
+                                    <li><a href="?{{ page_obj.previous_page_number.querystring }}" class="prev">&lsaquo;&lsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled prev">&lsaquo;&lsaquo;</span></li>
+                                {% endif %}
+                                {% for page in page_obj.pages %}
+                                    {% if page %}
+                                        {% ifequal page page_obj.number %}
+                                            <li><span class="current page">{{ page }}</span></li>
+                                        {% else %}
+                                            <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                        {% endifequal %}
+                                    {% else %}
+                                        ...
+                                    {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                    <li><a href="?{{ page_obj.next_page_number.querystring }}" class="next">&rsaquo;&rsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled next">&rsaquo;&rsaquo;</span></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block sideRight %}
+    <div class="sideRight">
+        <div class="help-block">
+            <div class="help-block__icon">
+                <a href="#">
+                    <i class="fa fa-book" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <div class="bx-informer">
+            <div class="bx-im-informer-icon">
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right animated flipInY">
+                        <ul class="dropdown-not">
+                            <li>
+                                <a href="{% url 'operator:2.employees' %}">{% trans 'List of employees' %}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="operator2Notification">
+                    <span id="notification-counter">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="bx-informer">
+            <div class="bx-im-informer-icon" style="background: #05b5ab;">
+                <a href="{% url 'operator:2.employees' %}" title="{% trans 'List of employees' %}">
+                    <i class="fa fa-list-alt" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <div class="bx-search">
+            <div class="bx-im-search-icon">
+                <a href="#">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'operator/js/custom.js' %}"></script>
+    {% include 'operators/2/operator2_websocket.html' %}
+    <script src="{% static 'operator/js/root/search.js' %}"></script>
+    <script>
+        $(function(){
+           $('.selectpicker').selectpicker();
+
+           $(".table-row").click(function() {
+               window.document.location = $(this).data("href");
+           });
+
+        });
+    </script>
+{% endblock %}

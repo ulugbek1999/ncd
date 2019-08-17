@@ -1,0 +1,227 @@
+﻿{% extends 'operators/_base.html' %}
+{% load static i18n %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'operator/fancybox/jquery.fancybox.min.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% trans 'Register employee' %}</h2>
+        <span>№: {{ register_number }}</span>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{% trans "Employee's personal card" %}</h2>
+        </div>
+        <div class="card-main__content">
+            <form>
+                <input id="group-id" type="hidden" value="{{ request.user.operator.group_operator1.id }}">
+                <div class="col-md-4">
+                    <div class="stol1-col-form">
+                        <div class="form-group">
+                            <label for="fullNameEn">{% trans 'Fullname en' %}</label>
+                            <input name="full_name_en" type="text" class="form-control" id="fullNameEn">
+                        </div>
+                        <div class="form-group">
+                            <label for="passportSerial">{% trans 'Passport serial' %}</label>
+                            <input name="passport_serial" type="text" class="form-control" id="passportSerial">
+                        </div>
+                        <div class="form-group">
+                            <label for="birthDate">{% trans 'Birth date' %}</label>
+                            <input name="birth_date" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" autocomplete="off" id="birthDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="passportExpires">{% trans 'Passport expires' %}</label>
+                            <input name="passport_expires" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" autocomplete="off" id="passportExpires">
+                        </div>
+                        <div class="form-group">
+                            <label for="">{% trans 'Gender' %}</label>
+                            <div class="radio-group">
+                                <input type="radio" id="gender_male" name="gender" value="m" checked>
+                                <label for="gender_male">
+                                    <img src="/static/operator/images/man.svg" alt="">
+                                </label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="gender_female" name="gender" value="f">
+                                <label for="gender_female">
+                                    <img src="/static/operator/images/woman.svg" alt="">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" style="overflow: hidden; width: 100%; padding-top: 25px;">
+                            <label for="login">{% trans 'Login' %} ({% trans 'wishes' %})</label>
+                            <input name="login" type="text" class="form-control" id="login">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stol1-col-form">
+                        <div class="form-group">
+                            <label for="fullNameRu">{% trans 'Fullname ru' %}</label>
+                            <input name="full_name_ru" type="text" class="form-control" id="fullNameRu">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">{% trans 'Phone' %}</label>
+                            <input name="phone" type="text" class="form-control" id="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">{% trans 'Email' %}</label>
+                            <input name="email" type="text" class="form-control" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="passportGivendate">{% trans 'Passport given date' %}</label>
+                            <input name="passport_given_date" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" autocomplete="off" id="passportGivendate">
+                        </div>
+                        <div class="form-group">
+                            <label for="inn">{% trans 'Inn' %}</label>
+                            <input name="inn" type="text" class="form-control" id="inn">
+                        </div>
+                        <div class="form-group">
+                            <label for="birthPlace">{% trans 'Birth place' %}</label>
+                            <input name="birth_place" list="birthPlace_list" type="text" class="form-control" id="birthPlace" autocomplete="off">
+                            <datalist id="birthPlace_list">
+                            </datalist>
+                        </div>
+                        <div class="form-group">
+                            <label for="livesAt">{% trans 'Living addresss' %}</label>
+                            <input name="lives_at" list="livesAt_list" type="text" class="form-control" id="livesAt" autocomplete="off">
+                            <datalist id="livesAt_list">
+                            </datalist>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerNumber">{% trans 'Register number' %}</label>
+                            <input name="register_number" type="text" class="form-control" id="registerNumber" value="{{ register_number }}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="photos-upload__main">
+                        <div class="avatar-upload">
+                            <div class="avatar-edit">
+                                <input type='file' name="passport_file" id="passportUpload" accept=".png, .jpg, .jpeg" />
+                                <label for="passportUpload"></label>
+                            </div>
+                            <a data-fancybox href="#">
+                                <div class="avatar-preview">
+                                    <div id="passportPreview">
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="avatar-upload__button">
+                                <div class="pasport-icon">
+                                    <img src="/static/operator/images/passport.svg" style="width: 75px">
+                                </div>
+                                <label> {% trans 'Passport copy' %}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="send-message">
+                        <div class="form-title">
+                            <h2>{% trans 'Send username and password to user' %}</h2>
+                        </div>
+                        <div class="send-message__main">
+                            <div class="form-group checkbox-form">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="sendSMS" name="send_sms" checked>
+                                    <label for="sendSMS">
+                                        <span>SMS</span>
+                                    </label>
+                                </div>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="sendEmail" name="send_email">
+                                    <label for="sendEmail">
+                                        <span>E-mail</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-send__buttons">
+                    <div class="form-send__button" id="formSendButton" data-url="{% url 'api:operator1:employee.create' %}">
+                        <button type="submit">{% trans 'Save' %}</button>
+                    </div>
+                    <div class="form-reset__buttton">
+                        <button type="reset">{% trans 'Clear' %}</button>
+                    </div>
+                </div>
+            </form>
+            <!--<div class="holder">
+                <div class="preloader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>-->
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div id="wsSuccess">{% blocktrans %}Passport scanner found{% endblocktrans %}</div>
+    <div id="wsError">{% blocktrans %}Passport scanner not found{% endblocktrans %}</div>
+{% endblock %}
+
+{% block sideRight %}
+    <div class="sideRight">
+        <div class="help-block">
+            <div class="help-block__icon">
+                <a href="#">
+                    <i class="fa fa-book" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <div class="bx-informer">
+            <div class="bx-im-informer-icon">
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell" aria-hidden="true"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right animated flipInY">
+                        <ul class="dropdown-not">
+                        </ul>
+                    </div>
+                </div>
+                <div class="operator2Notification">
+                    <span id="notification-counter">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="bx-informer">
+            <div class="bx-im-informer-icon" style="background: #05b5ab;">
+                <a href="#" title="Список аппликантов">
+                    <i class="fa fa-list-alt" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+        <div class="bx-search">
+            <div class="bx-im-search-icon">
+                <a href="#">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'operator/fancybox/jquery.fancybox.min.js' %}"></script>
+
+    <script src="{% static 'operator/js/stol/operator1.js' %}"></script>
+    <script>
+    // TODO cities list
+        $(function () {
+            var regions = "";
+            $.ajax({
+                url: "{% url 'api:directory:city:list' %}",
+                type: 'GET',
+                success: function (data) {
+                    for (var i=0; i<data.length; i++) {
+                        for (var j = 0; j < data[i].district.length; j++) {
+                            regions += `<option value="${data[i].name_ru}, ${data[i].district[j].name_ru}" />`;
+                        }
+                    }
+                    $("#birthPlace_list").append(regions);
+                    $("#livesAt_list").html(regions);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        })
+    </script>
+{% endblock %}

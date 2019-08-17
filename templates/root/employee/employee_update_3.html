@@ -1,0 +1,1661 @@
+{% extends 'root/_base.html' %}
+{% load static i18n %}
+
+{% block content %}
+    <input type="hidden" name="edu_count" value="{{ employee.education_set.count }}">
+    <input type="hidden" name="army_count" value="{{ employee.army_set.count }}">
+    <input type="hidden" name="fam_count" value="{{ employee.family_set.count }}">
+    <input type="hidden" name="reward_count" value="{{ employee.reward_set.count }}">
+    <input type="hidden" name="rel_count" value="{{ employee.relative_set.count }}">
+    <input type="hidden" name="exp_cout" value="{{ employee.experience_set.count }}">
+    <input type="hidden" name="lang_count" value="{{ employee.language_set.count }}">
+    <div class="content-title">
+        <h2>{% trans 'Change employee' %}</h2>
+        <span>№: {{ employee.register_number }}</span>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{% blocktrans %}Employee's personal card{% endblocktrans %}</h2>
+        </div>
+        <div class="operator3-tab__main card-main__content">
+            <form>
+                <ul class="nav nav-tabs nav-stacked">
+                    <li class="active"><a href="#tab1" data-toggle="tab"><img src="{% static 'operator/images/graduation-hat-and-diploma.svg' %}"> <span>Образование</span></a></li>
+                    <li><a href="#tab2" data-toggle="tab"><img src="{% static 'operator/images/language.svg' %}"> <span>Знание языков</span></a></li>
+                    <li><a href="#tab3" data-toggle="tab"><img src="{% static 'operator/images/military.svg' %}"> <span>Служба в армии</span></a></li>
+                    <li><a href="#tab4" data-toggle="tab"><img src="{% static 'operator/images/first-prize-trophy.svg' %}"> <span>Полученные награды</span></a></li>
+                    <li><a href="#tab5" data-toggle="tab"><img src="{% static 'operator/images/family-group.svg' %}"> <span>Семейное положение</span></a></li>
+                    <li><a href="#tab7" data-toggle="tab"><img src="{% static 'operator/images/achievement.svg' %}"> <span>Трудовой опыт</span></a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade active in" id="tab1">
+                        <div class="tab-form__main">
+                            <div class="form-title">
+                                <h2>{% trans 'Education' %}</h2>
+                            </div>
+                            <div class="education form-main" data-api="{% url 'api:directory:education-type:list' %}" data-form-url="{% url 'root.api.employee.update.3.education' employee.id %}">
+                                <input type="hidden" id="educationCount" name="education_count" value="{{ employee.education_set.count }}">
+                                {% for edu in employee.education_set.all %}
+                                    <div class="education-item education-item__{{ forloop.counter }}" data-files-count="{{ edu.file.count }}">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="eduType{{ forloop.counter }}">{% trans 'Education type' %}</label>
+                                                    <select class="form-control selectpicker show-tick" name="edu_type_{{ forloop.counter }}" id="eduType{{ forloop.counter }}">
+                                                        <option value="">{% trans 'Select' %}</option>
+                                                        {% for education in educations %}
+                                                            <option value="{{ education.id }}" {% if education.id == edu.type.id %}selected{% endif %}>{{ education.name_ru }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="eduName{{ forloop.counter }}">{% trans 'Education name' %}</label>
+                                                    <input name="edu_name_{{ forloop.counter }}" type="text" class="form-control" id="eduName{{ forloop.counter }}" value="{{ edu.name_ru }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="eduAddress{{ forloop.counter }}">{% trans 'Education address' %}</label> <!-- TODO city list -->
+                                                    <input name="edu_address_{{ forloop.counter }}" list="eduRegion_list{{ forloop.counter }}" type="text" class="form-control" id="eduAddress{{ forloop.counter }}" value="{{ edu.address_ru }}" autocomplete="off">
+                                                    <datalist class="region-list" id="eduRegion_list{{ forloop.counter }}">
+                                                    </datalist>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="eduSpec{{ forloop.counter }}">{% trans 'Specialization' %}</label>
+                                                    <input name="edu_spec_{{ forloop.counter }}" type="text" class="form-control" id="eduSpec{{ forloop.counter }}" value="{{ edu.additional_ru }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="eduStartDate{{ forloop.counter }}">{% trans 'Education date start' %}</label>
+                                                    <input name="edu_start_date_{{ forloop.counter }}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="eduStartDate{{ forloop.counter }}" value="{{ edu.date_started|date:'d.m.Y' }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="eduGradDate{{ forloop.counter }}">{% trans 'Education date end' %}</label>
+                                                    <input name="edu_grad_date_{{ forloop.counter }}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="eduGradDate1" value="{{ edu.date_finished|date:'d.m.Y' }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="eduAddit{{ forloop.counter }}">{% trans 'Another info' %}</label>
+                                                    <input name="edu_addit_{{ forloop.counter }}" type="text" class="form-control" id="eduAddit{{ forloop.counter }}" value="{{ edu.additional_ru }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                    <div class="education-file__upload op3-file__upload form-group">
+                                                        <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                                        <input type="file"
+                                                               class="filepondEducation{{ forloop.counter }}"
+                                                               name="filepond_education_{{ forloop.counter }}"
+                                                               label-idle="{% trans 'Upload file' %}"
+                                                               multiple
+                                                               data-max-file-size="3MB"
+                                                               data-max-files="4"
+                                                               {% for file in edu.file.all %}
+                                                                   data-file-url-{{ forloop.counter }}="{{ file.file.url }}"
+                                                                   data-file-name-{{ forloop.counter }}="{{ file.file.name }}"
+                                                                   data-file-size-{{ forloop.counter }}="{{ file.file.size }}"
+                                                               {% endfor %}
+                                                        >
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <div class="delete-button">
+                                            <a href="javascript:void(null)" data-model-name="education" data-model-id="{{ edu.id }}" data-url="{% url 'api:admin:employee:operator_3_delete' %}" class="deleteButton">{% trans 'Delete' %}</a>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                {% endfor %}
+                                <div id="education_fields">
+
+                                </div>
+                                <div class="add-button">
+                                    <a href="#" class="add-education">{% trans 'Add' %}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab2">
+                        <div class="tab-form__main">
+                            <div class="form-title">
+                                <h2>{% trans 'Knowlegde languages' %}</h2>
+                            </div>
+                            <div class="language form-main" data-api="{% url 'api:directory:language:list' %}" data-form-url="{% url 'root.api.employee.update.3.language' employee.id %}">
+                                <input type="hidden" id="languageCount" name="language_count" value="{{ employee.language_set.count }}">
+                                {% for lang in employee.language_set.all %}
+                                    <div class="language-item language-item__{{ forloop.counter }}" data-files-count="{{ lang.file.count }}">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="langName{{ forloop.counter }}">{% trans 'Language name' %}</label>
+                                                    <select id="langName{{ forloop.counter }}" class="form-control selectpicker show-tick" name="lang_name_{{ forloop.counter }}" >
+                                                        <option value="">{% trans 'Select' %}</option>
+                                                        {% for language in languages %}
+                                                            <option value="{{ language.id }}" {% if language.id == lang.language.id %}selected{% endif %}>{{ language.name_ru }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="langLevel{{ forloop.counter }}">{% trans 'Language knowing level' %}</label>
+                                                    <select id="langLevel{{ forloop.counter }}" class="form-control selectpicker show-tick" name="lang_level_{{ forloop.counter }}">
+                                                        <option value="">{% trans 'Select' %}</option>
+                                                        <option value="1" {% if lang.level == 1 %}selected{% endif %}>{% trans 'Best' %}</option>
+                                                        <option value="2" {% if lang.level == 2 %}selected{% endif %}>{% trans 'Good' %}</option>
+                                                        <option value="3" {% if lang.level == 3 %}selected{% endif %}>{% trans 'Not bad' %}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input name="lang_required_{{ forloop.counter }}" type="checkbox" class="form-control" id="langRequired{{ forloop.counter }}" {% if lang.is_required_to_check %}checked{% endif %}>
+                                                    <label for="langRequired{{ forloop.counter }}">{% trans 'Must be checked' %}</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="language-file__upload op3-file__upload form-group">
+                                                    <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                                    <input type="file"
+                                                           class="filepondLanguage{{ forloop.counter }}"
+                                                           name="filepond_language_{{ forloop.counter }}"
+                                                           label-idle="{% trans 'Upload file' %}"
+                                                           multiple
+                                                           data-max-file-size="3MB"
+                                                           data-max-files="4"
+                                                           {% for file in lang.file.all %}
+                                                               data-file-url-{{ forloop.counter }}="{{ file.file.url }}"
+                                                               data-file-name-{{ forloop.counter }}="{{ file.file.name }}"
+                                                               data-file-size-{{ forloop.counter }}="{{ file.file.size }}"
+                                                           {% endfor %}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="delete-button">
+                                            <a href="javascript:void(null)" data-model-name="language" data-model-id="{{ lang.id }}" data-url="{% url 'api:admin:employee:operator_3_delete' %}" class="deleteButton">{% trans 'Delete' %}</a>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                {% endfor %}
+                                <div id="language_fields">
+                                </div>
+                                <div class="add-button">
+                                    <a href="#" class="add-language">{% trans 'Add' %}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab3">
+                        <div class="tab-form__main">
+                            <div class="form-title">
+                                <h2>{% trans 'Military service' %}</h2>
+                            </div>
+                                <div class="military form-main" data-api="{% url 'api:directory:city:list' %}" data-form-url="{% url 'root.api.employee.update.3.army' employee.id %}">
+                                    <input type="hidden" id="armyCount" name="military_count" value="{{ employee.army_set.count }}">
+                                    {% for army in employee.army_set.all %}
+                                    <div class="military-item military-item__{{ forloop.counter }}" data-files-count="{{ army.file.count }}">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>{% trans 'Military duty' %}</label>
+                                                            <div class="form-group radio-form">
+                                                                <div class="radio-group">
+                                                                    <input type="radio" id="military_duty_1" name="military_duty" value="true" {% if employee.military_duty %}checked{% endif %}>
+                                                                    <label for="military_duty_1">
+                                                                        <span>{% trans 'Yes' %}</span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio-group">
+                                                                    <input type="radio" id="military_duty_2" name="military_duty" value="false" {% if not employee.military_duty %}checked{% endif %}>
+                                                                    <label for="military_duty_2">
+                                                                        <span>{% trans 'No' %}</span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-8">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="milName{{ forloop.counter }}">{% trans 'Name of the military unit' %}</label>
+                                                                            <input name="mil_name_{{ forloop.counter }}" type="text" class="form-control" id="milName{{ forloop.counter }}" value="{{ army.name_ru }}">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="milRegion{{ forloop.counter }}">{% trans 'Region' %}</label>
+                                                                            <input name="mil_region_{{ forloop.counter }}" list="milRegion_list{{ forloop.counter }}" type="text" class="form-control" id="milRegion{{ forloop.counter }}" value="{{ army.region_ru }}" autocomplete="off">
+                                                                            <datalist class="region-list" id="milRegion_list{{ forloop.counter }}">
+                                                                            </datalist>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="milSpecialization{{ forloop.counter }}">{% trans 'Specialty' %}</label>
+                                                                            <input name="mil_specialization_{{ forloop.counter }}" type="text" class="form-control" id="milSpecialization{{ forloop.counter }}" value="{{ army.specialization_ru }}">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="milDateStarted{{ forloop.counter }}">{% trans 'Start date of service' %}</label>
+                                                                            <input value="{{ army.date_started|date:'d.m.Y' }}" name="mil_date_started_{{ forloop.counter }}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="milDateStarted{{ forloop.counter }}">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="milDateGraduated{{ forloop.counter }}">{% trans 'End date' %}</label>
+                                                                            <input value="{{ army.date_finished|date:'d.m.Y' }}" name="mil_date_graduated_{{ forloop.counter }}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="milDateGraduated{{ forloop.counter }}">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="milRank{{ forloop.counter }}">{% trans 'Rank' %}</label>
+                                                                            <input name="mil_rank_{{ forloop.counter }}" type="text" class="form-control" id="milRank{{ forloop.counter }}" value="{{ army.rank_ru }}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="military-file__upload op3-file__upload form-group">
+                                                                    <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                                                    <input type="file"
+                                                                           class="filepondMilitary{{ forloop.counter }}"
+                                                                           name="filepond_military_{{ forloop.counter }}"
+                                                                           label-idle="{% trans 'Upload file' %}"
+                                                                           multiple
+                                                                           data-max-file-size="3MB"
+                                                                           data-max-files="4"
+                                                                           {% for file in army.file.all %}
+                                                                               data-file-url-{{ forloop.counter }}="{{ file.file.url }}"
+                                                                               data-file-name-{{ forloop.counter }}="{{ file.file.name }}"
+                                                                               data-file-size-{{ forloop.counter }}="{{ file.file.size }}"
+                                                                           {% endfor %}
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="delete-button">
+                                            <a href="javascript:void(null)" data-model-name="army" data-model-id="{{ army.id }}" data-url="{% url 'api:admin:employee:operator_3_delete' %}" class="deleteButton">{% trans 'Delete' %}</a>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    <div id="military_fields">
+                                    </div>
+                                    <div class="add-button">
+                                        <a href="#" class="add-military">{% trans 'Add' %}</a>
+                                    </div>
+
+                                </div>
+                                <hr>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab4">
+                        <div class="tab-form__main">
+                            <div class="form-title">
+                                <h2>{% trans 'Rewards' %}</h2>
+                            </div>
+                            <div class="received form-main" data-form-url="{% url 'root.api.employee.update.3.reward' employee.id %}">
+                                <input type="hidden" id="receivedCount" name="received_count" value="{{ employee.reward_set.count }}">
+                                {% for reward in employee.reward_set.all %}
+                                    <div class="received-item received-item__{{ forloop.counter }}" data-files-count="{{ reward.file.count }}">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label for="recName{{ forloop.counter }}">{% trans 'Reward' %}</label>
+                                                    <input name="rec_name_{{ forloop.counter }}" type="text" class="form-control" id="recName{{ forloop.counter }}" value="{{ reward.name_ru }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="recComment{{ forloop.counter }}">{% trans 'Comment' %}</label>
+                                                    <textarea name="rec_comment_{{ forloop.counter }}" rows="4" class="form-control" id="recComment{{ forloop.counter }}">{{ reward.description_ru }}</textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="received-file__upload op3-file__upload form-group">
+                                                    <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                                    <input type="file"
+                                                           class="filepondReceived{{ forloop.counter }}"
+                                                           name="filepond_receiveds_{{ forloop.counter }}"
+                                                           label-idle="{% trans 'Upload file' %}"
+                                                           multiple
+                                                           data-max-file-size="3MB"
+                                                           data-max-files="4"
+                                                           {% for file in reward.file.all %}
+                                                               data-file-url-{{ forloop.counter }}="{{ file.file.url }}"
+                                                               data-file-name-{{ forloop.counter }}="{{ file.file.name }}"
+                                                               data-file-size-{{ forloop.counter }}="{{ file.file.size }}"
+                                                           {% endfor %}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="delete-button">
+                                            <a href="javascript:void(null)" data-model-name="reward" data-model-id="{{ reward.id }}" data-url="{% url 'api:admin:employee:operator_3_delete' %}" class="deleteButton">{% trans 'Delete' %}</a>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                {% endfor %}
+
+                                <div id="received_fields">
+
+                                </div>
+                                <div class="add-button">
+                                    <a href="#" class="add-received">{% trans 'Add' %}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab5">
+                        <div class="tab-form__main">
+                            <div class="marital-status form-main" data-form-url="{% url 'root.api.employee.update.3.family' employee.id %}">
+                                <input type="hidden" id="maritalCount" name="marital_count" value="1">
+                                <div class="form-title">
+                                    <h2>{% trans 'Family status' %}</h2>
+                                </div>
+                            {% if employee.family %}
+                                <div class="marital-status-item marital-status-item__1" data-files-count="{{ employee.family.file.count }}">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="marStatus1">{% trans 'Family status' %}</label>
+                                                <select class="form-control selectpicker show-tick" name="mar_status_1" id="marStatus1">
+                                                    <option value="">{% trans 'Select' %}</option>
+                                                    <option value="1" {% if employee.family.status == 1 %}selected{% endif %}>{% trans 'Not married' %}</option>
+                                                    <option value="2" {% if employee.family.status == 2 %}selected{% endif %}>{% trans 'Married' %}</option>
+                                                    <option value="3" {% if employee.family.status == 3 %}selected{% endif %}>{% trans 'Divorce' %}</option>
+                                                    <option value="4" {% if employee.family.status == 4 %}selected{% endif %}>{% trans 'Widow' %}</option>
+                                                    <option value="5" {% if employee.family.status == 5 %}selected{% endif %}>{% trans 'Second marriage' %}</option>
+                                                    <option value="6" {% if employee.family.status == 6 %}selected{% endif %}>{% trans 'Civil marriage' %}</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="childrenAmount1">{% trans 'Children amount' %}</label>
+                                                <select class="form-control selectpicker show-tick" name="children_amount_1" id="childrenAmount1">
+                                                    <option value="">{% trans 'Select' %}</option>
+                                                    <option value="0" {% if employee.family.children_amount == 0 %}selected{% endif %}>{% trans 'No' %}</option>
+                                                    <option value="1" {% if employee.family.children_amount == 1 %}selected{% endif %}>1</option>
+                                                    <option value="2" {% if employee.family.children_amount == 2 %}selected{% endif %}>2</option>
+                                                    <option value="3" {% if employee.family.children_amount == 3 %}selected{% endif %}>3</option>
+                                                    <option value="4" {% if employee.family.children_amount == 4 %}selected{% endif %}>4</option>
+                                                    <option value="5" {% if employee.family.children_amount >= 4 %}selected{% endif %}>{% trans 'More than 4' %}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="marital-file__upload op3-file__upload form-group">
+                                                <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                                <input type="file"
+                                                       class="filepondMarital1"
+                                                       name="filepond_marital_1"
+                                                       label-idle="{% trans 'Upload file' %}"
+                                                       multiple
+                                                       data-max-file-size="3MB"
+                                                       data-max-files="4"
+                                                        {% for file in employee.family.file.all %}
+                                                       data-file-url-1="{{ file.file.url }}"
+                                                       data-file-name-1="{{ file.file.name }}"
+                                                       data-file-size-1="{{ file.file.size }}"
+                                                        {% endfor %}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                                    <hr>
+                                <!--<div id="marital_fields">
+
+                                </div>
+                                <div class="add-button">
+                                    <a href="#" class="add-marital">{% trans 'Add' %}</a>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab6">
+                        <div class="tab-form__main">
+                            <div class="relatives form-main" data-api="{% url 'api:directory:city:list' %}" data-form-url="{% url 'root.api.employee.update.3.relative' employee.id %}">
+                                <input type="hidden" id="relativeCount" name="relative_count" value="{{ employee.relative_set.count }}">
+                                <div class="form-title">
+                                    <h2>{% trans 'Relatives' %}</h2>
+                                </div>
+                                {% for rel in employee.relative_set.all %}
+                                    <div class="relatives-item relatives-item__{{ forloop.counter }}" data-files-count="{{ rel.file.count }}">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="relLevel{{ forloop.counter }}">{% trans 'Relative level' %}</label>
+                                                            <select class="form-control selectpicker show-tick" name="rel_level_{{ forloop.counter }}" id="relLevel{{ forloop.counter }}">
+                                                                <option value="">{% trans 'Select' %}</option>
+                                                                {# TODO translate #}
+                                                                <option value="1" {% if rel.level == 1 %}selected{% endif %}>{% trans 'Wife' %}</option>
+                                                                <option value="2" {% if rel.level == 2 %}selected{% endif %}>{% trans 'Husband' %}</option>
+                                                                <option value="3" {% if rel.level == 3 %}selected{% endif %}>{% trans 'Mother' %}</option>
+                                                                <option value="4" {% if rel.level == 4 %}selected{% endif %}>{% trans 'Father' %}</option>
+                                                                <option value="5" {% if rel.level == 5 %}selected{% endif %}>{% trans 'Son' %}</option>
+                                                                <option value="6" {% if rel.level == 6 %}selected{% endif %}>{% trans 'Daughter' %}</option>
+                                                                <option value="7" {% if rel.level == 7 %}selected{% endif %}>{% trans 'Grandmother' %}</option>
+                                                                <option value="8" {% if rel.level == 8 %}selected{% endif %}>{% trans 'Grandfather' %}</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="relName{{ forloop.counter }}">{% trans 'Relative full name' %}</label>
+                                                            <input name="rel_name_{{ forloop.counter }}" type="text" class="form-control" id="relName{{ forloop.counter }}" value="{{ rel.fullname_ru }}">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="relBirthDate{{ forloop.counter }}">{% trans 'Relative birth date' %}</label>
+                                                            <input name="rel_birth_date_{{ forloop.counter }}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="relBirthDate{{ forloop.counter }}" value="{{ rel.birth_date|date:'d.m.Y' }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="relStudyWorkPlace{{ forloop.counter }}">{% trans 'Relative work/study place' %}</label>
+
+                                                            <input name="rel_study_work_place_{{ forloop.counter }}" list="relStudyRegion_list{{ forloop.counter }}" type="text" class="form-control" id="relStudyWorkPlace{{ forloop.counter }}" value="{{ rel.study_work_place_ru }}" autocomplete="off">
+                                                            <datalist class="region-list" id="relStudyRegion_list{{ forloop.counter }}">
+                                                            </datalist>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="relPosition{{ forloop.counter }}">{% trans 'Relative position' %}</label>
+                                                            <input name="rel_position_{{ forloop.counter }}" type="text" class="form-control" id="relPosition{{ forloop.counter }}" value="{{ rel.position_ru }}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="relAddress{{ forloop.counter }}">{% trans 'Relative living address' %}</label>
+
+                                                            <input name="rel_address_{{ forloop.counter }}" list="relAddressRegion_list{{ forloop.counter }}" type="text" class="form-control" id="relAddress{{ forloop.counter }}" value="{{ rel.living_address_ru }}" autocomplete="off">
+                                                            <datalist class="region-list" id="relAddressRegion_list{{ forloop.counter }}">
+                                                            </datalist>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="relatives-file__upload op3-file__upload form-group">
+                                                    <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                                    <input type="file"
+                                                           class="filepondRelatives{{ forloop.counter }}"
+                                                           name="filepond_relatives_{{ forloop.counter }}"
+                                                           label-idle="{% trans 'Upload file' %}"
+                                                           multiple
+                                                           data-max-file-size="3MB"
+                                                           data-max-files="4"
+                                                           {% for file in rel.file.all %}
+                                                               data-file-url-{{ forloop.counter }}="{{ file.file.url }}"
+                                                               data-file-name-{{ forloop.counter }}="{{ file.file.name }}"
+                                                               data-file-size-{{ forloop.counter }}="{{ file.file.size }}"
+                                                           {% endfor %}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="delete-button">
+                                            <a href="javascript:void(null)" data-model-name="relative" data-model-id="{{ rel.id }}" data-url="{% url 'api:admin:employee:operator_3_delete' %}" class="deleteButton">{% trans 'Delete' %}</a>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                {% endfor %}
+                                <div id="relatives_fields">
+                                </div>
+                                <div class="add-button">
+                                    <a href="#" class="add-relatives">{% trans 'Add' %}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tab7">
+                        <div class="tab-form__main">
+                            <input type="hidden" id="experienceCount" name="experience_count" value="{{ employee.experience_set.count }}">
+                            <div class="form-title">
+                                <h2>{% trans 'Experience' %}</h2>
+                            </div>
+                            <div class="experience form-main" data-api="{% url 'api:directory:city:list' %}" data-form-url="{% url 'root.api.employee.update.3.experience' employee.id %}">
+                                {% for exp in employee.experience_set.all %}
+                                    <div class="experience-item experience-item__{{ forloop.counter }}" data-files-count="{{ exp.file.count }}">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="expOrg{{ forloop.counter }}">{% trans 'Organization' %}</label>
+                                                            <input name="exp_org_{{ forloop.counter }}" type="text" class="form-control" id="expOrg{{ forloop.counter }}" value="{{ exp.organization_ru }}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="expDateStarted{{ forloop.counter }}">{% trans 'Start date' %}</label>
+                                                            <input name="exp_date_started_{{ forloop.counter }}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="expDateStarted{{ forloop.counter }}" value="{{ exp.date_started|date:'d.m.Y' }}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="expDateFinished{{ forloop.counter }}">{% trans 'End date' %}</label>
+                                                            <input name="exp_date_finished_{{ forloop.counter }}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="expDateFinished{{ forloop.counter }}" value="{{ exp.date_finished|date:'d.m.Y' }}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="expPosition{{ forloop.counter }}">{% trans 'Position' %}</label>
+                                                            <input name="exp_position_{{ forloop.counter }}" type="text" class="form-control" id="expPosition{{ forloop.counter }}" value="{{ exp.position_ru }}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="expSubDivision{{ forloop.counter }}">{% trans 'Subdivision' %}</label>
+                                                            <input name="exp_sub_division_{{ forloop.counter }}" type="text" class="form-control" id="expSubDivision{{ forloop.counter }}" value="{{ exp.sub_division_ru }}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="expAddress{{ forloop.counter }}">{% trans 'Address' %}</label>
+                                                            <input name="exp_address_{{ forloop.counter }}" list="expAddressRegion_list{{ forloop.counter }}" type="text" class="form-control" id="expAddress{{ forloop.counter }}" value="{{ exp.address_ru }}" autocomplete="off">
+                                                            <datalist class="region-list" id="expAddressRegion_list{{ forloop.counter }}">
+                                                            </datalist>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="experience-file__upload op3-file__upload form-group">
+                                                    <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                                    <input type="file"
+                                                           class="filepondExperience{{ forloop.counter }}"
+                                                           name="filepond_experience_{{ forloop.counter }}"
+                                                           label-idle="{% trans 'Upload file' %}"
+                                                           multiple
+                                                           data-max-file-size="3MB"
+                                                           data-max-files="4"
+                                                           {% for file in exp.file.all %}
+                                                               data-file-url-{{ forloop.counter }}="{{ file.file.url }}"
+                                                               data-file-name-{{ forloop.counter }}="{{ file.file.name }}"
+                                                               data-file-size-{{ forloop.counter }}="{{ file.file.size }}"
+                                                           {% endfor %}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="delete-button">
+                                            <a href="javascript:void(null)" data-model-name="experience" data-model-id="{{ exp.id }}" data-url="{% url 'api:admin:employee:operator_3_delete' %}" class="deleteButton">{% trans 'Delete' %}</a>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                {% endfor %}
+                                <div id="experience_fields">
+                                </div>
+                                <div class="add-button">
+                                    <a href="#" class="add-experience">{% trans 'Add' %}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-send__buttons">
+                            <div class="form-send__button">
+                                <button id="root-employee-update3-button" type="submit">{% trans 'Save' %}</button>
+                            </div>
+                            <div class="form-reset__buttton">
+                                <button type="reset">{% trans 'Clear' %}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        function dateMyFormat(date) {
+            var elem = date.split('.');
+            var newMyDate = elem[2] + '-' + elem[1] + '-' + elem[0];
+            //console.log(newMyDate);
+            if(date){
+                return newMyDate;
+            }else{
+                return '';
+            }
+        }
+        $(function () {
+                $.fn.datepicker.dates['ru'] = {
+                    days: ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"],
+                    daysShort: ["Вск", "Пнд", "Втр", "Срд", "Чтв", "Птн", "Суб"],
+                    daysMin: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+                    months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+                    monthsShort: ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
+                    today: "Сегодня",
+                    clear: "Очистить",
+                    format: "dd.mm.yyyy",
+                    weekStart: 1,
+                    monthsTitle: 'Месяцы'
+                };
+            }(jQuery));
+            (function($){
+                $.fn.datepicker.dates['uz-latn'] = {
+                    days: ["Yakshanba", "Dushanba", "Seshanba", "Chorshanba", "Payshanba", "Juma", "Shanba"],
+                    daysShort: ["Yak", "Du", "Se", "Chor", "Pay", "Ju", "Sha"],
+                    daysMin: ["Ya", "Du", "Se", "Cho", "Pa", "Ju", "Sha"],
+                    months: ["Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun", "Iyul", "Avgust", "Sentabr", "Oktabr", "Noyabr", "Dekabr"],
+                    monthsShort: ["Yan", "Fev", "Mar", "Apr", "May", "Iyn", "Iyl", "Avg", "Sen", "Okt", "Noy", "Dek"],
+                    today: "Bugun",
+                    clear: "O'chirish",
+                    format: "dd.mm.yyyy",
+                    weekStart: 1,
+                    monthsTitle: 'Oylar'
+                };
+            }(jQuery));
+            $(function () {
+              $(".datepickerFrom").datepicker({
+                  autoclose: true,
+                  language: 'ru',
+                  todayHighlight: true
+              });
+            });
+
+        FilePond.registerPlugin(
+
+            // encodes the file as base64 data
+          FilePondPluginFileEncode,
+
+            // validates the size of the file
+            FilePondPluginFileValidateSize,
+
+            // corrects mobile image orientation
+            FilePondPluginImageExifOrientation,
+
+            // previews dropped images
+          FilePondPluginImagePreview
+        );
+        FilePond.setOptions({
+            instantUpload: false
+        });
+         fEdu = new Array();
+         fLang = new Array();
+         fMil = new Array();
+         fRec = new Array();
+         fMar = new Array();
+         fRel = new Array();
+         fExp = new Array();
+
+        var edu_count = parseInt($("input[name='edu_count']").val());
+        var army_count = parseInt($("input[name='army_count']").val());
+        // var fam_count = parseInt($("input[name='fam_count']").val());
+        var reward_count = parseInt($("input[name='reward_count']").val());
+        var rel_count = parseInt($("input[name='rel_count']").val());
+        var exp_count = parseInt($("input[name='exp_cout']").val());
+        var lang_count = parseInt($("input[name='lang_count']").val());
+
+        // Edu files
+        for (let i = 1; i < edu_count + 1; i++){
+            let edu_file_count = parseInt($(`.education-item__${i}`).data('files-count'));
+            let file_url = new Array();
+            for (let j = 1; j < edu_file_count + 1; j++) {
+                file_url[j] = $(`input.filepondEducation${i}`).data(`file-url-${j}`);
+            }
+            fEdu[i] = FilePond.create(document.querySelector(`input.filepondEducation${i}`));
+            for (let j = 1; j < edu_file_count + 1; j++) {
+                console.log(file_url[j]);
+                fEdu[i].addFile(decodeURI(file_url[j]));
+            }
+        }
+        // Lang files
+        for (let i = 1; i < lang_count + 1; i++){
+            let lang_file_count = parseInt($(`.language-item__${i}`).data('files-count'));
+            let file_url = new Array();
+            for (let j = 1; j < lang_file_count + 1; j++) {
+                file_url[j] = $(`input.filepondLanguage${i}`).data(`file-url-${j}`);
+            }
+            fLang[i] = FilePond.create(document.querySelector(`input.filepondLanguage${i}`));
+            for (let j = 1; j < lang_file_count + 1; j++) {
+                console.log(file_url[j]);
+                fLang[i].addFile(decodeURI(file_url[j]));
+            }
+        }
+        // Army files
+        for (let i = 1; i < army_count + 1; i++){
+            let army_file_count = parseInt($(`.military-item__${i}`).data('files-count'));
+            let file_url = new Array();
+            for (let j = 1; j < army_file_count + 1; j++) {
+                file_url[j] = $(`input.filepondMilitary${i}`).data(`file-url-${j}`);
+            }
+            fMil[i] = FilePond.create(document.querySelector(`input.filepondMilitary${i}`));
+            for (let j = 1; j < army_file_count + 1; j++) {
+                console.log(file_url[j]);
+                fMil[i].addFile(decodeURI(file_url[j]));
+            }
+        }
+
+        // // Rec files
+        // for (let i = 1; i < army_count + 1; i++){
+        //     let army_file_count = parseInt($(`.military-item__${i}`).data('files-count'));
+        //     let file_url = new Array();
+        //     for (let j = 1; j < army_file_count + 1; j++) {
+        //         file_url[j] = "http://127.0.0.1:8000" + $(`input.filepondMilitary${i}`).data(`file-url-${j}`);
+        //     }
+        //     fMil[i] = FilePond.create(document.querySelector(`input.filepondMilitary${i}`));
+        //     for (let j = 1; j < army_file_count + 1; j++) {
+        //         console.log(file_url[j]);
+        //         fMil[i].addFile(file_url[j]);
+        //     }
+        // }
+
+        // Reward files
+        for (let i = 1; i < reward_count + 1; i++){
+            let reward_file_count = parseInt($(`.received-item__${i}`).data('files-count'));
+            let file_url = new Array();
+            for (let j = 1; j < reward_file_count + 1; j++) {
+                file_url[j] = $(`input.filepondReceived${i}`).data(`file-url-${j}`);
+            }
+            fRec[i] = FilePond.create(document.querySelector(`input.filepondReceived${i}`));
+            for (let j = 1; j < reward_file_count + 1; j++) {
+                console.log(file_url[j]);
+                fRec[i].addFile(decodeURI(file_url[j]));
+            }
+        }
+        // Family files
+
+            let fam_file_count = parseInt($(`.marital-status-item__1`).data('files-count'));
+            let file_url = new Array();
+            for (let j = 1; j < fam_file_count + 1; j++) {
+                file_url[j] = $(`input.filepondMarital1`).data(`file-url-${j}`);
+            }
+            fMar[1] = FilePond.create(document.querySelector(`input.filepondMarital1`));
+            for (let j = 1; j < fam_file_count + 1; j++) {
+                console.log(file_url[j]);
+                fMar[1].addFile(decodeURI(file_url[j]));
+            }
+
+
+        // Relatives files
+        for (let i = 1; i < rel_count + 1; i++){
+            let rel_file_count = parseInt($(`.relatives-item__${i}`).data('files-count'));
+            let file_url = new Array();
+            for (let j = 1; j < rel_file_count + 1; j++) {
+                file_url[j] = $(`input.filepondRelatives${i}`).data(`file-url-${j}`);
+            }
+            fRel[i] = FilePond.create(document.querySelector(`input.filepondRelatives${i}`));
+            for (let j = 1; j < rel_file_count + 1; j++) {
+                console.log(file_url[j]);
+                fRel[i].addFile(decodeURI(file_url[j]));
+            }
+        }
+
+        // Experience files
+        for (let i = 1; i < exp_count + 1; i++){
+            let exp_file_count = parseInt($(`.experience-item__${i}`).data('files-count'));
+            let file_url = new Array();
+            for (let j = 1; j < exp_file_count + 1; j++) {
+                file_url[j] = $(`input.filepondExperience${i}`).data(`file-url-${j}`);
+            }
+            fExp[i] = FilePond.create(document.querySelector(`input.filepondExperience${i}`));
+            for (let j = 1; j < exp_file_count + 1; j++) {
+                console.log(file_url[j]);
+                fExp[i].addFile(decodeURI(file_url[j]));
+            }
+        }
+
+        /* Materials */
+        var eduTypes = ``;
+        var LangTypes = ``;
+        var regionTypes = `123`;
+
+        $(function(){
+
+            var getEduTypeUrl = $('.education').data('api');
+
+
+            $.getJSON(getEduTypeUrl, function(result){
+               for (let i = 0; i < result.length; i++){
+                   eduTypes += `<option value="${result[i].id}">${result[i].name_ru}</option>`;
+               }
+            });
+
+            var getLangTypeUrl = $('.language').data('api');
+
+            $.getJSON(getLangTypeUrl, function(result){
+               for (let i = 0; i < result.length; i++){
+                   LangTypes += `<option value="${result[i].id}">${result[i].name_ru}</option>`;
+               }
+            });
+
+            var getRegionTypeUrl = $('.military').data('api');
+
+
+            $.getJSON(getRegionTypeUrl, function(result){
+               for (var i=0; i<result.length; i++) {
+                    for (var j = 0; j < result[i].district.length; j++) {
+                        regionTypes += `<option value="${result[i].name_ru}, ${result[i].district[j].name_ru}">`;
+                    }
+                }
+
+               $(".region-list").append(regionTypes);
+            });
+        });
+
+        /* Educations */
+        var edu = edu_count;
+
+        $('body').on('click', '.add-education', function(event){
+
+            event.preventDefault();
+            edu++;
+            var objTo = document.getElementById('education_fields')
+            var divtest = document.createElement("div");
+            divtest.setAttribute("class", "removeEduClass"+edu);
+            var rdiv = 'removeEduClass'+edu;
+            divtest.innerHTML = `
+                                  <div class="education-item">
+                                    <div class="row">
+                                      <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="eduType${edu}">{% trans 'Education type' %}</label>
+                                            <select class="form-control selectpicker show-tick" name="edu_type_${edu}" id="eduType${edu}">
+                                                <option value="">{% trans 'Select' %}</option>
+                                                ` + eduTypes + `
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="eduName${edu}">{% trans 'Education name' %}</label>
+                                            <input name="edu_name_${edu}" type="text" class="form-control" id="eduName${edu}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="eduAddress${edu}">{% trans 'Education address' %}</label>
+                                            <input name="edu_address_${edu}" list="eduRegion_list${edu}" type="text" class="form-control" id="eduAddress${edu}" autocomplete="off">
+                                            <datalist class="region-list" id="eduRegion_list${edu}">
+                                                ` + regionTypes + `
+                                            </datalist>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="eduSpec${edu}">{% trans 'Specialization' %}</label>
+                                            <input name="edu_spec_${edu}" type="text" class="form-control" id="eduSpec${edu}">
+                                        </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                              <div class="form-group">
+                                            <label for="eduStartDate${edu}">{% trans 'Education date start' %}</label>
+                                            <input name="edu_start_date_${edu}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="eduStartDate${edu}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="eduGradDate${edu}">{% trans 'Education date end' %}</label>
+                                            <input name="edu_grad_date_${edu}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="eduGradDate${edu}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="eduAddit${edu}">{% trans 'Another info' %}</label>
+                                            <input name="edu_addit_${edu}" type="text" class="form-control" id="eduAddit${edu}">
+                                        </div>
+                                      </div>
+                                      <div class="col-md-4">
+                                        <div class="education-file__upload op3-file__upload form-group">
+                                            <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                            <input type="file"
+                                               class="filepondEducation_${edu}"
+                                               name="filepond_education_${edu}"
+                                               label-idle="{% trans 'Upload file' %}"
+                                               multiple
+                                               data-max-file-size="3MB"
+                                               data-max-files="4" />
+                                        </div>
+                                      </div>
+                                    </div>
+                                     <div class="remove-button">
+                                          <a href="javascript:void(null)"  class="remove-education" onclick="remove_education_fields(`+ edu +`);">{% trans 'Delete' %}</a>
+                                    </div>
+                                  </div>
+                                 `;
+
+
+            objTo.appendChild(divtest);
+            $('.selectpicker').selectpicker();
+            fEdu[edu] = FilePond.create(document.querySelector(`input.filepondEducation_${edu}`));
+            $('#educationCount').val(`${edu}`);
+            $(".datepickerFrom").datepicker({
+                  autoclose: true,
+                  language: 'ru',
+                  todayHighlight: true
+            });
+        });
+        function remove_education_fields(rid) {
+          $('.removeEduClass'+rid).remove();
+          edu--;
+          $('#educationCount').val(`${edu}`);
+        }
+
+        /* Languages */
+        var lang = lang_count;
+        $('body').on('click', '.add-language', function(event){
+
+            event.preventDefault();
+            lang++;
+            var objTo = document.getElementById('language_fields');
+            var divtest = document.createElement("div");
+            divtest.setAttribute("class", "removeLangClass"+lang);
+            var rdiv = 'removeLangClass'+lang;
+            divtest.innerHTML = `
+                                <div class="language-item">
+                                  <div class="row">
+                                    <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label for="langName${lang}">{% trans 'Language name' %}</label>
+                                          <select class="form-control selectpicker show-tick" name="lang_name_${lang}" id="langName${lang}">
+                                            <option value="">{% trans 'Select' %}</option>
+                                            ` + LangTypes + `
+                                          </select>
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="langLevel${lang}">{% trans 'Language knowing level' %}</label>
+                                          <select class="form-control selectpicker show-tick" name="lang_level_${lang}" id="langLevel${lang}">
+                                            <option value="">{% trans 'Select' %}</option>
+                                            <option value="1">{% trans 'Best' %}</option>
+                                            <option value="2">{% trans 'Good' %}</option>
+                                            <option value="3">{% trans 'Not bad' %}</option>
+                                          </select>
+                                      </div>
+                                      <div class="form-group">
+                                        <input name="lang_required_${lang}" type="checkbox" class="form-control" id="langRequired${lang}">
+                                        <label for="langRequired${lang}">{% trans 'Must be checked' %}</label>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <div class="language-file__upload op3-file__upload form-group">
+                                        <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                        <input type="file"
+                                           class="filepondLanguage_${lang}"
+                                           name="filepond_language_${lang}"
+                                           label-idle="{% trans 'Upload file' %}"
+                                           multiple
+                                           data-max-file-size="3MB"
+                                           data-max-files="4" />
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="remove-button">
+                                          <a href="javascript:void(null)" class="remove-education" onclick="remove_language_fields(`+ lang +`);">{% trans 'Delete' %}</a>
+                                  </div>
+                                </div>
+                                 `;
+
+
+            objTo.appendChild(divtest);
+            $('.selectpicker').selectpicker();
+            fLang[lang] = FilePond.create(document.querySelector(`input.filepondLanguage_${lang}`));
+            $('#languageCount').val(`${lang}`);
+        });
+        function remove_language_fields(rid) {
+          $('.removeLangClass'+rid).remove();
+          lang--;
+          $('#languageCount').val(`${lang}`);
+        }
+
+        /* Military */
+        var mil = army_count;
+        $('body').on('click', '.add-military', function(event){
+
+            event.preventDefault();
+            mil++;
+            var objTo = document.getElementById('military_fields')
+            var divtest = document.createElement("div");
+            divtest.setAttribute("class", "removeMilClass"+mil);
+            var rdiv = 'removeMilClass'+mil;
+            divtest.innerHTML = `
+                                <div class="military-item">
+                                  <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="milName${mil}">{% trans 'Name of the military unit' %}</label>
+                                                            <input name="mil_name_${mil}" type="text" class="form-control" id="milName${mil}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="milRegion${mil}">{% trans 'Region' %}</label>
+                                                            <input name="mil_region_${mil}" list="milRegion_list${mil}" type="text" class="form-control" id="milRegion${mil}" autocomplete="off">
+                                                            <datalist class="region-list" id="milRegion_list${mil}">
+                                                                ` + regionTypes + `
+                                                            </datalist>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="milSpecialization${mil}">{% trans 'Specialty' %}</label>
+                                                            <input name="mil_specialization_${mil}" type="text" class="form-control" id="milSpecialization${mil}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="milDateStarted${mil}">{% trans 'Start date of service' %}</label>
+                                                            <input name="mil_date_started_${mil}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="milDateStarted${mil}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="milDateGraduated${mil}">{% trans 'End date' %}</label>
+                                                            <input name="mil_date_graduated_${mil}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="milDateGraduated${mil}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="milRank${mil}">{% trans 'Rank' %}</label>
+                                                            <input name="mil_rank_${mil}" type="text" class="form-control" id="milRank${mil}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="military-file__upload op3-file__upload form-group">
+                                                    <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                                    <input type="file"
+                                                       class="filepondMilitary_${mil}"
+                                                       name="filepond_military_${mil}"
+                                                       label-idle="{% trans 'Upload file' %}"
+                                                       multiple
+                                                       data-max-file-size="3MB"
+                                                       data-max-files="4" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                  <div class="remove-button">
+                                    <a href="javascript:void(null)" class="remove-education" onclick="remove_military_fields(`+ mil +`);">{% trans 'Delete' %}</a>
+                                  </div>
+                                </div>
+                                `;
+
+
+            objTo.appendChild(divtest);
+            $('.selectpicker').selectpicker();
+            fMil[mil] = FilePond.create(document.querySelector(`input.filepondMilitary_${mil}`));
+            $('#armyCount').val(`${mil}`);
+            $(".datepickerFrom").datepicker({
+                  autoclose: true,
+                  language: 'ru',
+                  todayHighlight: true
+            });
+        });
+        function remove_military_fields(rid) {
+          $('.removeMilClass'+rid).remove();
+          mil--;
+          $('#armyCount').val(`${mil}`);
+        }
+
+        /* Reward  */
+        var rec = reward_count;
+        $('body').on('click', '.add-received', function(event){
+
+            event.preventDefault();
+            rec++;
+            var objTo = document.getElementById('received_fields');
+            var divtest = document.createElement("div");
+            divtest.setAttribute("class", "removeRecClass"+rec);
+            var rdiv = 'removeRecClass'+rec;
+            divtest.innerHTML = `
+                                <div class="received-item">
+                                  <div class="row">
+                                    <div class="col-md-8">
+                                      <div class="form-group">
+                                          <label for="recName${rec}">{% trans 'Reward' %}</label>
+                                          <input name="rec_name_${rec}" type="text" class="form-control" id="recName${rec}">
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="recComment${rec}">{% trans 'Comment' %}</label>
+                                          <textarea name="rec_comment_${rec}" rows="8" class="form-control" id="recComment${rec}"></textarea>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="received-file__upload op3-file__upload form-group">
+                                            <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                            <input type="file"
+                                               class="filepondReceived_${rec}"
+                                               name="filepond_receiveds_${rec}"
+                                               label-idle="{% trans 'Upload file' %}"
+                                               multiple
+                                               data-max-file-size="3MB"
+                                               data-max-files="4" />
+                                        </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="remove-button">
+                                          <a href="javascript:void(null)" class="remove-education" onclick="remove_received_fields(`+ rec +`);">{% trans 'Delete' %}</a>
+                                  </div>
+                                </div>
+                                 `;
+
+
+            objTo.appendChild(divtest);
+            $('.selectpicker').selectpicker();
+            fRec[rec] = FilePond.create(document.querySelector(`input.filepondReceived_${rec}`));
+            $('#rewardCount').val(`${rec}`);
+        });
+        function remove_received_fields(rid) {
+          $('.removeRecClass'+rid).remove();
+          rec--;
+          $('#rewardCount').val(`${rec}`);
+        }
+
+        /* Relatives Status */
+        var rel = rel_count;
+        $('body').on('click', '.add-relatives', function(event){
+
+            event.preventDefault();
+            rel++;
+            var objTo = document.getElementById('relatives_fields');
+            var divtest = document.createElement("div");
+            divtest.setAttribute("class", "removeRelClass"+rel);
+            var rdiv = 'removeRelClass'+rel;
+            divtest.innerHTML = `
+                                <div class="relatives-item">
+                                  <div class="row">
+                                    <div class="col-md-8">
+                                      <div class="row">
+                                        <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label for="relLevel${rel}">{% trans 'Relative level' %}</label>
+                                              <select class="form-control selectpicker show-tick" name="rel_level_${rel}" id="relLevel${rel}">
+                                                <option value="">{% trans 'Select' %}</option>
+                                                <option value="1">{% trans 'Wife' %}</option>
+                                                <option value="2">{% trans 'Husband' %}</option>
+                                                <option value="3">{% trans 'Mother' %}</option>
+                                                <option value="4">{% trans 'Father' %}</option>
+                                                <option value="5">{% trans 'Son' %}</option>
+                                                <option value="6">{% trans 'Daughter' %}</option>
+                                                <option value="7">{% trans 'Grandmother' %}</option>
+                                                <option value="8">{% trans 'Grandfather' %}</option>
+                                              </select>
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="relName${rel}">{% trans 'Relative fullname' %}</label>
+                                              <input name="rel_name_${rel}" type="text" class="form-control" id="relName${rel}">
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="relBirthDate${rel}">{% trans 'Relative birth date' %}</label>
+                                              <input name="rel_birth_date_${rel}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="relBirthDate${rel}">
+                                          </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label for="relStudyWorkPlace${rel}">{% trans 'Relative work/education address' %}</label>
+                                              <input name="rel_study_work_place_${rel}" list="relStudyRegion_list${rel}" type="text" class="form-control" id="relStudyWorkPlace${rel}" autocomplete="off">
+                                              <datalist class="region-list" id="relStudyRegion_list${rel}">
+                                                ` + regionTypes + `
+                                              </datalist>
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="relPosition${rel}">{% trans 'Relative position' %}</label>
+                                              <input name="rel_position_${rel}" type="text" class="form-control" id="relPosition${rel}">
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="relAddress${rel}">{% trans 'Relative living address' %}</label>
+                                              <input name="rel_address_${rel}" list="relAddressRegion_list${rel}" type="text" class="form-control" id="relAddress${rel}" autocomplete="off">
+                                              <datalist class="region-list" id="relAddressRegion_list${rel}">
+                                                ` + regionTypes + `
+                                              </datalist>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="relatives-file__upload op3-file__upload form-group">
+                                            <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                            <input type="file"
+                                               class="filepondRelatives_${rel}"
+                                               name="filepond_relatives_${rel}"
+                                               label-idle="{% trans 'Upload file' %}"
+                                               multiple
+                                               data-max-file-size="3MB"
+                                               data-max-files="4" />
+                                        </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="remove-button">
+                                          <a href="javascript:void(null)" class="remove-education" onclick="remove_relatives_fields(`+ rel +`);">{% trans 'Delete' %}</a>
+                                  </div>
+                                </div>
+                                 `;
+
+
+            objTo.appendChild(divtest);
+            $('.selectpicker').selectpicker();
+            fRel[rel] = FilePond.create(document.querySelector(`input.filepondRelatives_${rel}`));
+            $('#relativeCount').val(`${rel}`);
+
+            $(".datepickerFrom").datepicker({
+                  autoclose: true,
+                  language: 'ru',
+                  todayHighlight: true
+            });
+        });
+        function remove_relatives_fields(rid) {
+          $('.removeRelClass'+rid).remove();
+          rel--;
+          $('#relativeCount').val(`${rel}`);
+        }
+        /* Experience */
+        var exp = exp_count;
+        $('body').on('click', '.add-experience', function(event){
+
+            event.preventDefault();
+            exp++;
+            var objTo = document.getElementById('experience_fields');
+            var divtest = document.createElement("div");
+            divtest.setAttribute("class", "removeExpClass"+exp);
+            var rdiv = 'removeExpClass'+exp;
+            divtest.innerHTML = `
+                                <div class="experience-item">
+                                  <div class="row">
+                                    <div class="col-md-8">
+                                      <div class="row">
+                                        <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label for="expOrg${exp}">{% trans 'Organization' %}</label>
+                                              <input name="exp_org_${exp}" type="text" class="form-control" id="expOrg${exp}">
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="expDateStarted${exp}">{% trans 'Start date' %}</label>
+                                              <input name="exp_date_started_${exp}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="expDateStarted${exp}">
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="expDateFinished${exp}">{% trans 'End date' %}</label>
+                                              <input name="exp_date_finished_${exp}" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="expDateFinished${exp}">
+                                          </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label for="expPosition${exp}">{% trans 'Position' %}</label>
+                                              <input name="exp_position_${exp}" type="text" class="form-control" id="expPosition${exp}">
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="expSubDivision${exp}">{% trans 'Subdivision' %}</label>
+                                              <input name="exp_sub_division_${exp}" type="text" class="form-control" id="expSubDivision${exp}">
+                                          </div>
+
+                                          <div class="form-group">
+                                              <label for="expAddress${exp}">{% trans 'Address' %}</label>
+                                              <input name="exp_address_${exp}" list="expAddressRegion_list${exp}" type="text" class="form-control" id="expAddress${exp}" autocomplete="off">
+                                              <datalist class="region-list" id="expAddressRegion_list${exp}">
+                                                ` + regionTypes + `
+                                              </datalist>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="experience-file__upload op3-file__upload form-group">
+                                            <label for="">{% trans 'Files' %} <i>({% trans 'Not required' %})</i></label>
+                                            <input type="file"
+                                               class="filepondExperience_${exp}"
+                                               name="filepond_experience_${exp}"
+                                               label-idle="{% trans 'Upload file' %}"
+                                               multiple
+                                               data-max-file-size="3MB"
+                                               data-max-files="4" />
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <div class="remove-button">
+                                          <a href="javascript:void(null)" class="remove-education" onclick="remove_experience_fields(`+ exp +`);">{% trans 'Delete' %}</a>
+                                  </div>
+                                </div>
+                                 `;
+
+
+            objTo.appendChild(divtest);
+            $('.selectpicker').selectpicker();
+            fExp[exp] = FilePond.create(document.querySelector(`input.filepondExperience_${exp}`));
+            $('#experienceCount').val(`${exp}`);
+
+            $(".datepickerFrom").datepicker({
+                  autoclose: true,
+                  language: 'ru',
+                  todayHighlight: true
+            });
+        });
+        function remove_experience_fields(rid) {
+          $('.removeExpClass'+rid).remove();
+          exp--;
+          $('#experienceCount').val(`${exp}`);
+        }
+
+        $(function () {
+            $("#root-employee-update3-button").click(function (event) {
+
+                event.preventDefault();
+                /* Education */
+                let educationFormData = new FormData();
+                var educationCount = parseInt($("input[name='education_count']").val());
+
+                // educationFormData.append("type", 'education');
+                educationFormData.append("count", $("input[name='education_count']").val());
+
+                for (let i = 1; i <= educationCount; i++){
+
+                   educationFormData.append(`type_${i}`, $(`select[name='edu_type_${i}']`).val());
+                   educationFormData.append(`name_${i}`, $(`input[name='edu_name_${i}']`).val());
+                   educationFormData.append(`address_${i}`, $(`input[name='edu_address_${i}']`).val());
+                   educationFormData.append(`specialization_${i}`, $(`input[name='edu_spec_${i}']`).val());
+                   educationFormData.append(`date_started_${i}`, dateMyFormat($(`input[name='edu_start_date_${i}']`).val()));
+                   educationFormData.append(`date_finished_${i}`, dateMyFormat($(`input[name='edu_grad_date_${i}']`).val()));
+                   educationFormData.append(`additional_${i}`, $(`input[name='edu_addit_${i}']`).val());
+                   var educationCountFile = fEdu[i].getFiles().length;
+                   for (var j = 0; j < educationCountFile; j++) {
+                       let f = fEdu[i].getFiles()[j].file;
+                       let fImage = new File([f], f.name, {type: f.type});
+                       educationFormData.append(`file_${i}`, fImage);
+                   }
+                }
+                let eduUrl = $('.education').data('form-url');
+
+                $.ajax({
+                   url: eduUrl,
+                   data: educationFormData,
+                   type: "POST",
+                   contentType: false,
+                   processData: false,
+                   success: function (data) {
+                       //console.log(data);
+                   },
+                   error: function (data) {
+                       //console.log(data);
+                   }
+                });
+
+                /* Language */
+               let languageFormData = new FormData();
+               var languageCount = parseInt($("input[name='language_count']").val());
+
+               languageFormData.append("count", $("input[name='language_count']").val());
+
+               for (let i = 1; i <= languageCount; i++){
+                   let is_check = 'off';
+                   if($(`input[name='lang_required_${i}']:checked`).val() == 'on'){
+                       is_check = 'on';
+                   }
+
+                   languageFormData.append(`name_${i}`, $(`select[name='lang_name_${i}']`).val());
+                   languageFormData.append(`level_${i}`, $(`select[name='lang_level_${i}']`).val());
+                   languageFormData.append(`is_required_to_check_${i}`, is_check);
+
+                   var languageCountFile = fLang[i].getFiles().length;
+                   for (var j = 0; j < languageCountFile; j++) {
+                       //languageFormData.append(`file_${i}`, fLang[i].getFiles()[j].file);
+                       let f = fLang[i].getFiles()[j].file;
+                       let fImage = new File([f], f.name, {type: f.type});
+                       languageFormData.append(`file_${i}`, fImage);
+                   }
+               }
+               let langUrl = $('.language').data('form-url');
+               $.ajax({
+                   url: langUrl,
+                   data: languageFormData,
+                   type: "POST",
+                   contentType: false,
+                   processData: false,
+                   success: function (data) {
+                       //console.log(data);
+                   },
+                   error: function (data) {
+                       //console.log(data);
+                   }
+               });
+
+               /* Military */
+               let militaryFormData = new FormData();
+               var militaryCount = parseInt($("input[name='military_count']").val());
+
+               militaryFormData.append("military_duty", ($("input[name='military_duty']").val() === 'true'));
+               militaryFormData.append("count", $("input[name='military_count']").val());
+
+               for (let i = 1; i <= militaryCount; i++){
+
+                   militaryFormData.append(`name_${i}`, $(`input[name='mil_name_${i}']`).val());
+                   militaryFormData.append(`region_${i}`, $(`input[name='mil_region_${i}']`).val());
+                   militaryFormData.append(`specialization_${i}`, $(`input[name='mil_specialization_${i}']`).val());
+                   militaryFormData.append(`date_started_${i}`, dateMyFormat($(`input[name='mil_date_started_${i}']`).val()));
+                   militaryFormData.append(`date_finished_${i}`, dateMyFormat($(`input[name='mil_date_graduated_${i}']`).val()));
+                   militaryFormData.append(`rank_${i}`, $(`input[name='mil_rank_${i}']`).val());
+
+
+                   var militaryCountFile = fMil[i].getFiles().length;
+                   for (let j = 0; j < militaryCountFile; j++) {
+                       //militaryFormData.append(`file_${i}`, fMil[i].getFiles()[j].file);
+                       let f = fMil[i].getFiles()[j].file;
+                       let fImage = new File([f], f.name, {type: f.type});
+                       militaryFormData.append(`file_${i}`, fImage);
+                   }
+               }
+               let milUrl = $('.military').data('form-url');
+               $.ajax({
+                   url: milUrl,
+                   data: militaryFormData,
+                   type: "POST",
+                   contentType: false,
+                   processData: false,
+                   success: function (data) {
+                       //console.log(data);
+                   },
+                   error: function (data) {
+                       //console.log(data);
+                   }
+               });
+
+               /* Received  */
+               let receivedFormData = new FormData();
+               var receivedCount = parseInt($("input[name='received_count']").val());
+
+               receivedFormData.append("count", $("input[name='received_count']").val());
+
+               for (let i = 1; i <= receivedCount; i++){
+                   receivedFormData.append(`name_${i}`, $(`input[name='rec_name_${i}']`).val());
+                   receivedFormData.append(`description_${i}`, $(`textarea[name='rec_comment_${i}']`).val());
+                   var receivedCountFile = fRec[i].getFiles().length;
+                   for (var j = 0; j < receivedCountFile; j++) {
+                       //receivedFormData.append(`file_${i}`, fRec[i].getFiles()[j].file);
+                       let f = fRec[i].getFiles()[j].file;
+                       let fImage = new File([f], f.name, {type: f.type});
+                       receivedFormData.append(`file_${i}`, fImage);
+                   }
+               }
+               let recUrl = $('.received').data('form-url');
+               $.ajax({
+                   url: recUrl,
+                   data: receivedFormData,
+                   type: "POST",
+                   contentType: false,
+                   processData: false,
+                   success: function (data) {
+                       //console.log(data);
+                   },
+                   error: function (data) {
+                       //console.log(data);
+                   }
+               });
+
+               /* Marital */
+               let maritalFormData = new FormData();
+               var maritalCount = parseInt($("input[name='marital_count']").val());
+
+               maritalFormData.append("count", $("input[name='marital_count']").val());
+
+               for (let i = 1; i <= maritalCount; i++){
+
+                   maritalFormData.append(`status_${i}`, $(`select[name='mar_status_${i}']`).val());
+                   maritalFormData.append(`children_amount_${i}`, $(`select[name='children_amount_${i}']`).val());
+
+
+                   var maritalCountFile = fMar[i].getFiles().length;
+                   for (let j = 0; j < maritalCountFile; j++) {
+                       //maritalFormData.append(`file_${i}`, fMar[i].getFiles()[j].file);
+                       let f = fMar[i].getFiles()[j].file;
+                       let fImage = new File([f], f.name, {type: f.type});
+                       maritalFormData.append(`file_${i}`, fImage);
+                   }
+               }
+               let marUrl = $('.marital-status').data('form-url');
+               $.ajax({
+                   url: marUrl,
+                   data: maritalFormData,
+                   type: "POST",
+                   contentType: false,
+                   processData: false,
+                   success: function (data) {
+                       //console.log(data);
+                   },
+                   error: function (data) {
+                       //console.log(data);
+                   }
+               });
+
+               /* Relative */
+               let relativeFormData = new FormData();
+               var relativeCount = parseInt($("input[name='relative_count']").val());
+
+               relativeFormData.append("count", $("input[name='relative_count']").val());
+
+               for (let i = 1; i <= relativeCount; i++){
+
+                   relativeFormData.append(`level_${i}`, $(`select[name='rel_level_${i}']`).val());
+                   relativeFormData.append(`fullname_${i}`, $(`input[name='rel_name_${i}']`).val());
+                   relativeFormData.append(`birth_date_${i}`, dateMyFormat($(`input[name='rel_birth_date_${i}']`).val()));
+                   relativeFormData.append(`study_work_place_${i}`, $(`input[name='rel_study_work_place_${i}']`).val());
+                   relativeFormData.append(`position_${i}`, $(`input[name='rel_position_${i}']`).val());
+                   relativeFormData.append(`living_address_${i}`, $(`input[name='rel_address_${i}']`).val());
+
+
+                   var relativeCountFile = fRel[i].getFiles().length;
+                   for (let j = 0; j < relativeCountFile; j++) {
+                       //relativeFormData.append(`file_${i}`, fRel[i].getFiles()[j].file);
+                       let f = fRel[i].getFiles()[j].file;
+                       let fImage = new File([f], f.name, {type: f.type});
+                       relativeFormData.append(`file_${i}`, fImage);
+                   }
+               }
+               let relUrl = $('.relatives').data('form-url');
+               $.ajax({
+                   url: relUrl,
+                   data: relativeFormData,
+                   type: "POST",
+                   contentType: false,
+                   processData: false,
+                   success: function (data) {
+                       //console.log(data);
+                   },
+                   error: function (data) {
+                       //console.log(data);
+                   }
+               });
+
+               /* Experience */
+               let experienceFormData = new FormData();
+               var experienceCount = parseInt($("input[name='experience_count']").val());
+
+               experienceFormData.append("count", $("input[name='experience_count']").val());
+
+               for (let i = 1; i <= experienceCount; i++){
+
+                   experienceFormData.append(`organization_${i}`, $(`input[name='exp_org_${i}']`).val());
+                   experienceFormData.append(`date_started_${i}`, dateMyFormat($(`input[name='exp_date_started_${i}']`).val()));
+                   experienceFormData.append(`date_finished_${i}`, dateMyFormat($(`input[name='exp_date_finished_${i}']`).val()));
+                   experienceFormData.append(`position_${i}`, $(`input[name='exp_position_${i}']`).val());
+                   experienceFormData.append(`sub_division_${i}`, $(`input[name='exp_sub_division_${i}']`).val());
+                   experienceFormData.append(`address_${i}`, $(`input[name='exp_address_${i}']`).val());
+
+
+                   var experienceCountFile = fExp[i].getFiles().length;
+                   for (let j = 0; j < experienceCountFile; j++) {
+                       //experienceFormData.append(`file_${i}`, fExp[i].getFiles()[j].file);
+                       let f = fExp[i].getFiles()[j].file;
+                       let fImage = new File([f], f.name, {type: f.type});
+                       experienceFormData.append(`file_${i}`, fImage);
+                   }
+               }
+               let expUrl = $('.experience').data('form-url');
+               $.ajax({
+                   url: expUrl,
+                   data: experienceFormData,
+                   type: "POST",
+                   contentType: false,
+                   processData: false,
+                   success: function (data) {
+                       console.log(data);
+                       var x = document.getElementById("mainSuccess");
+                       x.className = "show";
+                       setTimeout(function(){
+                           x.className = x.className.replace("show", "");
+                       //     location.reload();
+                        }, 3000);
+                   },
+                   error: function (data) {
+                        var x = document.getElementById("mainError");
+
+                        x.className = "show";
+                        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                   }
+               });
+            });
+        });
+
+
+        /*
+        $(function () {
+            var edu_count = parseInt($("input[name='edu_count']").val());
+            var army_count = parseInt($("input[name='army_count']").val());
+            var fam_count = parseInt($("input[name='fam_count']").val());
+            var reward_count = parseInt($("input[name='reward_count']").val());
+            var rel_count = parseInt($("input[name='rel_count']").val());
+            var exp_cout = parseInt($("input[name='exp_cout']").val());
+            var lang_count = parseInt($("input[name='lang_count']").val());
+
+            edu_files = {};
+            var army_files = {};
+            var fam_files = {} ;
+            var reward_files = {};
+            var rel_files = {} ;
+            var exp_files = {} ;
+            var lang_files  = {};
+
+            for (let i = 1; i < edu_count+1; i++) {
+                let file_url = $(`input.filepondEducation_${i}`).data("file-url");
+                edu_files[`${i}`] = FilePond.create(document.querySelector(`input.filepondEducation_${i}`));
+                console.log(file_url);
+                edu_files[`${i}`].addFile(file_url);
+            }
+            edu_files["1"].beforeRemoveFile = function(e){
+                console.log(e)
+            };
+            for (let i = 1; i < army_files+1; i++) {
+                army_files[`${i}`] = FilePond.create(document.querySelector(`input.filepondMilitary_${i}`));
+            }
+            for (let i = 1; i < fam_files+1; i++) {
+                fam_files[`${i}`] = FilePond.create(document.querySelector(`input.filepondMarital_${i}`));
+            }
+            for (let i = 1; i < reward_files+1; i++) {
+                reward_files[`${i}`] = FilePond.create(document.querySelector(`input.filepondReceived_${i}`));
+            }
+            for (let i = 1; i < rel_files+1; i++) {
+                rel_files[`${i}`] = FilePond.create(document.querySelector(`input.filepondRelatives_${i}`));
+            }
+            for (let i = 1; i < exp_files+1; i++) {
+                exp_files[`${i}`] = FilePond.create(document.querySelector(`input.filepondExperience_${i}`));
+            }
+            for (let i = 1; i < lang_files+1; i++) {
+                lang_files[`${i}`] = FilePond.create(document.querySelector(`input.filepondLanguage_${i}`));
+            }
+
+            $("#root-employee-update3-button").click(function (e) {
+               e.preventDefault();
+               let $formData = new FormData();
+               let url = $(this).data("url");
+
+               $.ajax({
+                   url: url,
+                   data: $formData,
+                   processData: false,
+                   contentType: false,
+                   type: "POST",
+                   success: function (data) {
+                       alert("success");
+                   },
+                   error: function (data) {
+                       alert("error");
+                   }
+               });
+           });
+        });
+        */
+    </script>
+{% endblock %}

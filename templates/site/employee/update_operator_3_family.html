@@ -1,0 +1,187 @@
+{% extends 'site/_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load thumbnail %}
+{% load get_json_value %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" />
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css">
+{% endblock %}
+{% block content %}
+    <section class="profile">
+        <div class="container">
+            <div class="row">
+                <div class="profile-main">
+                    <div class="content-title">
+                        <h2>Биометрические данные</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="profile-side">
+                                <div class="profile-side__title">
+                                    <h2>Личный кабинет</h2>
+                                </div>
+                                <nav class="nav_personal d-lnk-txt">
+                                    <ul>
+                                        <li class="">
+                                            <a href="#"><i class="fa fa-user"></i> Мой профиль</a>
+                                        </li>
+
+                                        <li class="">
+                                            <a href=""><i class="fa fa-book"></i> Курсы </a></li>
+                                        <li class="">
+
+                                    </ul>
+                                    <div class="nav_personal__footer">
+                                        <a href="#"> Выйти</a>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+
+                            <div class="profile-content">
+                                <div class="employee-detail">
+                                    <div class="row">
+                                        <form name="employee_update" style="padding: 0 15px;">
+                                            <div class="marital-status-item marital-status-item" data-files-count="">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="marStatus">Семейное положение</label>
+                                                            {% json_value family 'children_amount' 'current' as status %}
+                                                            <select class="form-control selectpicker show-tick" name="mar_status" id="marStatus">
+                                                                <option value="">Выберите</option>
+                                                                <option value="1" {% if status == "1" %}selected{% endif %}>не женат / не замужем</option>
+                                                                <option value="2" {% if status == "2" %}selected{% endif %}>женат / замужем</option>
+                                                                <option value="3" {% if status == "3" %}selected{% endif %}>в разводе</option>
+                                                                <option value="4" {% if status == "4" %}selected{% endif %}>вдовец / вдова</option>
+                                                                <option value="5" {% if status == "5" %}selected{% endif %}>второй брак</option>
+                                                                <option value="6" {% if status == "6" %}selected{% endif %}>гражданский брак</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="childrenAmount">Количество детей</label>
+                                                            {% json_value family 'children_amount' 'current' as amount %}
+                                                            <select class="form-control selectpicker show-tick" name="children_amount" id="childrenAmount">
+                                                                <option value="">Выберите</option>
+                                                                <option value="0" {% if amount == "0" %}selected{% endif %}>Нет</option>
+                                                                <option value="1" {% if amount == "1" %}selected{% endif %}>1</option>
+                                                                <option value="2" {% if amount == "2" %}selected{% endif %}>2</option>
+                                                                <option value="3" {% if amount == "3" %}selected{% endif %}>3</option>
+                                                                <option value="4" {% if amount == "4" %}selected{% endif %}>4</option>
+                                                                <option value="5" {% if amount == "5" %}selected{% endif %}>Более 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="marital-file__upload op3-file__upload hidden">
+                                                            <input type="file"
+                                                                   class="filepondMarital"
+                                                                   name="filepond_marital"
+                                                                   label-idle="Загрузить файл"
+                                                                   multiple
+                                                                   data-max-file-size="3MB"
+                                                                   data-max-files="4"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12" style="text-align: center;">
+                                                <button id="employeeEditButton" class="loginButton" data-api="{% url 'api:employee.update.3-employee.family' family.id %}" type="submit">
+                                                    Отправить
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+
+    <script>
+        $(function () {
+            $.fn.datepicker.dates['ru'] = {
+                days: ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"],
+                daysShort: ["Вск", "Пнд", "Втр", "Срд", "Чтв", "Птн", "Суб"],
+                daysMin: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+                months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+                monthsShort: ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
+                today: "Сегодня",
+                clear: "Очистить",
+                format: "dd.mm.yyyy",
+                weekStart: 1,
+                monthsTitle: 'Месяцы'
+            };
+        }(jQuery));
+        (function($){
+            $.fn.datepicker.dates['uz-latn'] = {
+                days: ["Yakshanba", "Dushanba", "Seshanba", "Chorshanba", "Payshanba", "Juma", "Shanba"],
+                daysShort: ["Yak", "Du", "Se", "Chor", "Pay", "Ju", "Sha"],
+                daysMin: ["Ya", "Du", "Se", "Cho", "Pa", "Ju", "Sha"],
+                months: ["Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun", "Iyul", "Avgust", "Sentabr", "Oktabr", "Noyabr", "Dekabr"],
+                monthsShort: ["Yan", "Fev", "Mar", "Apr", "May", "Iyn", "Iyl", "Avg", "Sen", "Okt", "Noy", "Dek"],
+                today: "Bugun",
+                clear: "O'chirish",
+                format: "dd.mm.yyyy",
+                weekStart: 1,
+                monthsTitle: 'Oylar'
+            };
+        }(jQuery));
+        $(function () {
+          $(".datepickerFrom").datepicker({
+              autoclose: true,
+              language: 'ru',
+              todayHighlight: true
+          });
+        });
+
+        $("#employeeEditButton").click(function(event){
+            event.preventDefault();
+
+            let formData = new FormData();
+
+            formData.append(`status_ru`, $(`select[name='mar_status']`).val());
+            formData.append(`children_amount`, $(`select[name='children_amount']`).val());
+
+            /*var object = {};
+            formData.forEach((value, key) => {object[key] = value});
+            var jsonData = JSON.stringify(object);
+
+            console.log(jsonData);*/
+
+            $.ajax({
+                url: $(this).data('api'),
+                data: formData,
+                processData: false,
+                contentType: false,
+                type: "PUT",
+                success: function (data) {
+                    alert('Success');
+                },
+                error: function (data) {
+                    alert('error');
+                },
+            });
+        });
+    </script>
+{% endblock %}

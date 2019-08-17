@@ -1,0 +1,101 @@
+{% extends 'root/_base.html' %}
+{% load static root i18n %}
+
+{% block content %}
+    <div class="content-title">
+        <h2>{% trans 'List of employees' %}</h2>
+    </div>
+    <div class="card-main">
+        <div class="card-main__header">
+            <h2>{% trans 'List' %}</h2>
+        </div>
+        <div class="card-main__content">
+            <div class="search-results__main" style="padding-top: 30px;">
+                <div class="table-main">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="table-row" data-href="#">
+                                <th class="td-id">№</th>
+                                <th class="td-fio">{% trans 'Fullname' %}</th>
+                                <th class="td-reg">{% trans 'Register number' %}</th>
+                                <th class="td-phone">{% trans 'phone' %}</th>
+                                <th class="td-date">{% trans 'Created' %}</th>
+                                <th class="td-cat">{% trans 'Category' %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for partner_request in partner_requests %}
+                                {% for employee in partner_request.employees.all %}
+                                    <tr class="table-row" data-href="{% url 'root.partner.bookmark' employee.id %}">
+                                        <td class="td-id">{{ employee.id }}</td>
+                                        <td class="td-fio">{{ employee.full_name_ru }}</td>
+                                        <td class="td-reg">{{ employee.register_number }}</td>
+                                        <td class="td-phone">{{ employee.phone }}</td>
+                                        <td class="td-date">{{ employee.created|date:"H:i d.m.Y" }}</td>
+                                        {% if employee.score %}
+                                            {% if employee.score.category == "A" %}
+                                                <td class="td-cat scoreA">{{ employee.score.summa }} ({{ employee.score.category }})</td>
+                                            {% elif employee.score.category == "B" %}
+                                                <td class="td-cat scoreB">{{ employee.score.summa }} ({{ employee.score.category }})</td>
+                                            {% elif employee.score.category == "C" %}
+                                                <td class="td-cat scoreC">{{ employee.score.summa }} ({{ employee.score.category }})</td>
+                                            {% elif employee.score.category == "D" %}
+                                                <td class="td-cat scoreD">{{ employee.score.summa }} ({{ employee.score.category }})</td>
+                                            {% else %}
+                                                <td class="td-cat">{% trans 'Has no score' %}</td>
+                                            {% endif %}
+                                        {% else %}
+                                            <td class="td-cat">{% trans 'Has no score' %}</td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% if is_paginated %}
+                        <div class="pagination-main">
+                            <ul class="pagination">
+                                {% if page_obj.has_previous %}
+                                    <li><a href="?{{ page_obj.previous_page_number.querystring }}" class="prev">&lsaquo;&lsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled prev">&lsaquo;&lsaquo;</span></li>
+                                {% endif %}
+                                {% for page in page_obj.pages %}
+                                    {% if page %}
+                                        {% ifequal page page_obj.number %}
+                                            <li><span class="current page">{{ page }}</span></li>
+                                        {% else %}
+                                            <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                        {% endifequal %}
+                                    {% else %}
+                                        ...
+                                    {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                    <li><a href="?{{ page_obj.next_page_number.querystring }}" class="next">&rsaquo;&rsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled next">&rsaquo;&rsaquo;</span></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'operator/js/root/search.js' %}"></script>
+    <script>
+        $(function(){
+            $('.selectpicker').selectpicker();
+
+            $(".table-row").click(function() {
+                window.document.location = $(this).data("href");
+            });
+
+        });
+    </script>
+{% endblock %}

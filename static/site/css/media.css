@@ -1,0 +1,25 @@
+@media screen and (max-width: 1660px){
+	.container-slider {
+	    width: 1480px;
+	}
+} 
+@media screen and (max-width: 1540px){
+	.container-slider {
+	    width: 1320px;
+	}
+	.container{
+		width: 1200px;
+	}
+	.ts-home {
+	    border-top: 720px solid #3368c6;
+	    border-right: 600px solid transparent;
+	}
+} 
+@media screen and (max-width: 1400px){
+	.container-slider {
+	    width: 1240px;
+	}
+	.container{
+		width: 1170px;
+	}
+}
