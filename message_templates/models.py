@@ -29,6 +29,9 @@ class TemplateHistory(models.Model):
     message_type = models.CharField(max_length=10, blank=True)
     ispartner = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ('-id', )
+
     def __str__(self):
         return self.text[:50]
 
