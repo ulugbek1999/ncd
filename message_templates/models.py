@@ -25,11 +25,23 @@ class Template(models.Model):
 class TemplateHistory(models.Model):
     title = models.TextField(blank=True, default='')
     text = models.TextField(blank=True)
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="employee_template_history")
-    partner = models.ForeignKey(Partner, on_delete=models.CASCADE, related_name="partner_template_history")
     sent_date = models.DateTimeField(default=datetime.now())
     message_type = models.CharField(max_length=10, blank=True)
     ispartner = models.BooleanField(default=False)
 
     def __str__(self):
         return self.text[:50]
+
+class EmployeeTemplateHistory(models.Model):
+    template_history = models.ForeignKey(TemplateHistory, on_delete=models.CASCADE, related_name="template_history")
+
+    class Meta:
+        db_table = "employee_template_history"
+        ordering = ('-id')
+
+class PartnerTemplateHistory(models.Model):
+    template_history = models.ForeignKey(Template, on_delete=models.CASCADE, related_name="template_history")
+
+    class Meta:
+        db_table = "partner_template_history"
+        ordering = ('-id')
