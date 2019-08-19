@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 
 from api.admin.message_template.serializers import MessageTemplateSerializer
 from employee.model.employee import Employee
-from message_templates.models import Template, TemplateHistory
+from message_templates.models import Template, TemplateHistory, EmployeeTemplateHistory, PartnerTemplateHistory
 from partner.models import Partner
 from bs4 import BeautifulSoup
 
@@ -29,18 +29,22 @@ class EmployeeSendMessage(APIView):
         soup = BeautifulSoup(text, 'lxml')
         if action == 'sms':
             Employee.send_sms_message(ids, title, text)
+            history = TemplateHistory.objects.create(title=title, text=soup.text, message_type="SMS")
             for i in ids:
-                TemplateHistory.objects.create(title=title, text=soup.text, employee=Employee.objects.get(id=i), message_type="SMS")
+                employee = EmployeeTemplateHistory.objects.create(template_history=history, employee=Employee.objects.get(id=i))
         elif action == 'email':
             Employee.send_email_message(ids, title, text)
+            history = TemplateHistory.objects.create(title=title, text=soup.text, employee=Employee.objects.get(id=i), message_type="Email")
             for i in ids:
-                TemplateHistory.objects.create(title=title, text=soup.text, employee=Employee.objects.get(id=i), message_type="Email")
+                employee = EmployeeTemplateHistory.objects.create(template_history=history, employee=Employee.objects.get(id=i))
         elif action == 'sms&email':
             Employee.send_sms_message(ids, title, text)
             Employee.send_email_message(ids, title, text)
+            history_sms = TemplateHistory.objects.create(title=title, text=soup.text, employee=Employee.objects.get(id=i), message_type="SMS")
+            history_email = TemplateHistory.objects.create(title=title, text=soup.text, employee=Employee.objects.get(id=i), message_type="Email")
             for i in ids:
-                TemplateHistory.objects.create(title=title, text=soup.text, employee=Employee.objects.get(id=i), message_type="SMS")
-                TemplateHistory.objects.create(title=title, text=soup.text, employee=Employee.objects.get(id=i), message_type="Email")
+                employee_sms = EmployeeTemplateHistory.objects.create(template_history=history_sms, employee=Employee.objects.get(id=i))
+                employee_email = EmployeeTemplateHistory.objects.create(template_history=history_email, employee=Employee.objects.get(id=i))
         return Response()
 
 
@@ -52,6 +56,7 @@ class PartnerSendMessage(APIView):
         text = request.POST.get('text')
         if action == 'email':
             Partner.send_email_message(ids, title, text)
+            history = TemplateHistory.objects.create(title=title, text=text, message_type="Email", ispartner=True)
             for i in ids:
-                TemplateHistory.objects.create(title=title, text=text, partner=Partner.objects.get(id=i), message_type="Email", ispartner=True)
+                partner = PartnerTemplateHistory.objects.create(template_history=history, partner=Partner.objects.get(id=i))
         return Response()

@@ -34,14 +34,16 @@ class TemplateHistory(models.Model):
 
 class EmployeeTemplateHistory(models.Model):
     template_history = models.ForeignKey(TemplateHistory, on_delete=models.CASCADE, related_name="template_history")
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="employee")
 
     class Meta:
         db_table = "employee_template_history"
-        ordering = ('-id')
+        ordering = ('-id', )
 
 class PartnerTemplateHistory(models.Model):
     template_history = models.ForeignKey(Template, on_delete=models.CASCADE, related_name="template_history")
+    partner = models.ForeignKey(Partner, on_delete=models.CASCADE, related_name="partner")
 
     class Meta:
         db_table = "partner_template_history"
-        ordering = ('-id')
+        ordering = ('-id', )
