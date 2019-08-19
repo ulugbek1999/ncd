@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 
 from api.admin.message_template.serializers import MessageTemplateSerializer
 from employee.model.employee import Employee
-from message_templates.models import Template
+from message_templates.models import Template, TemplateHistory
 from partner.models import Partner
 
 
@@ -27,11 +27,18 @@ class EmployeeSendMessage(APIView):
         text = request.POST.get('text')
         if action == 'sms':
             Employee.send_sms_message(ids, title, text)
+            for i in ids:
+                TemplateHistory.objects.create(title=title, text=text, employee=Employee.objects.get(id=i), message_type="SMS")
         elif action == 'email':
             Employee.send_email_message(ids, title, text)
+            for i in ids:
+                TemplateHistory.objects.create(title=title, text=text, employee=Employee.objects.get(id=i), message_type="Email")
         elif action == 'sms&email':
             Employee.send_sms_message(ids, title, text)
             Employee.send_email_message(ids, title, text)
+            for i in ids:
+                TemplateHistory.objects.create(title=title, text=text, employee=Employee.objects.get(id=i), message_type="SMS")
+                TemplateHistory.objects.create(title=title, text=text, employee=Employee.objects.get(id=i), message_type="Email")
         return Response()
 
 
@@ -43,4 +50,6 @@ class PartnerSendMessage(APIView):
         text = request.POST.get('text')
         if action == 'email':
             Partner.send_email_message(ids, title, text)
+            for i in ids:
+                TemplateHistory.objects.create(title=title, text=text, partner=Partner.objects.get(id=i), message_type="Email", ispartner=True)
         return Response()

@@ -71,6 +71,18 @@ msgstr "Название (русс)"
 msgid "Name en"
 msgstr "Название (англ)"
 
+msgid "Title"
+msgstr "Заголовок сообщения"
+
+msgid "Message text"
+msgstr "Содержание сообщения"
+
+msgid "Sent date"
+msgstr "Дата отправки"
+
+msgid "Type"
+msgstr "Тип сообщения"
+
 #: employee/model/army.py:12 employee/model/army.py:84
 msgid "Region ru"
 msgstr "Регион (русс)"

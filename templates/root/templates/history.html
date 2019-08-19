@@ -21,39 +21,29 @@
                         <tr class="table-row" data-href="#">
                             <th class="td-check"></th>
                             <th class="td-id">№</th>
-                            <th class="td-fio">{% trans 'Fullname' %}</th>
-                            <th class="td-reg">{% trans 'Register number' %}</th>
-                            <th class="td-phone">{% trans 'Phone' %}</th>
-                            <th class="td-date">{% trans 'Created' %}</th>
-                            <th class="td-cat">{% trans 'Category' %}</th>
+                            <th class="td-title">{% trans 'Title' %}</th>
+                            <th class="td-message-text">{% trans 'Message text' %}</th>
+                            <th class="td-sent-date">{% trans 'Sent date' %}</th>
+                            <th class="td-group">{% trans 'Group' %}</th>
+                            <th class="td-type">{% trans 'Type' %}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for emp in employees %}
-                            <tr class="table-row" data-id="{{ emp.id }}" data-href="{% url 'root.employee.detail' emp.id %}">
+                        {% for history in histories %}
+                            <tr class="table-row" data-id="{{ history.id }}">
                                 <td class="td-checkbox td-check" >
-                                    <input class="deleteCheck" type="checkbox" data-id="{{emp.id}}" name="ids" >
+                                    <input class="deleteCheck" type="checkbox" data-id="{{history.id}}" name="ids" >
                                 </td>
-                                <td class="td-id">{{ emp.id }}</td>
-                                <td class="td-fio">{{ emp.full_name }}</td>
-                                <td class="td-reg">{{ emp.register_number }}</td>
-                                <td class="td-phone">{{ emp.phone }}</td>
-                                <td class="td-date">{{ emp.created|date:"H:i d.m.Y" }}</td>
-                                {% if emp.score %}
-                                    {% if emp.score.category == "A" %}
-                                        <td class="td-cat scoreA">{{ emp.score.summa }} ({{ emp.score.category }})</td>
-                                    {% elif emp.score.category == "B" %}
-                                        <td class="td-cat scoreB">{{ emp.score.summa }} ({{ emp.score.category }})</td>
-                                    {% elif emp.score.category == "C" %}
-                                        <td class="td-cat scoreC">{{ emp.score.summa }} ({{ emp.score.category }})</td>
-                                    {% elif emp.score.category == "D" %}
-                                        <td class="td-cat scoreD">{{ emp.score.summa }} ({{ emp.score.category }})</td>
-                                    {% else %}
-                                        <td class="td-cat">{% trans 'Has no score' %}</td>
-                                    {% endif %}
+                                <td class="td-id">{{ history.id }}</td>
+                                <td class="td-title">{{ history.title }}</td>
+                                <td class="td-message-text">{{ history.text }}</td>
+                                <td class="td-sent-date">{{ history.sent_date|date:"H:i d.m.Y" }}</td>
+                                {% if history.ispartner %}
+                                    <td class="td-group">Partner</td>
                                 {% else %}
-                                    <td class="td-cat">{% trans 'Has no score' %}</td>
+                                    <td class="td-group">Employee</td>
                                 {% endif %}
+                                <td class="td-type">{{ history.message_type }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

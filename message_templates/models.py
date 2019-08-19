@@ -2,8 +2,9 @@ from django.db import models
 from django.utils.translation import gettext as _
 from employee.model.employee import Employee
 from partner.models import Partner
+from datetime import datetime
 
-MESSAGE_TYPE = (
+TYPE = (
     (1, _('Employee')),
     (2, _('Partner')),
 )
@@ -12,7 +13,7 @@ MESSAGE_TYPE = (
 class Template(models.Model):
     title = models.TextField(blank=True, default='')
     text = models.TextField(blank=True, default='')
-    type = models.IntegerField(default=1, choices=MESSAGE_TYPE, blank=True)
+    type = models.IntegerField(default=1, choices=TYPE, blank=True)
 
     class Meta:
         db_table = 'templates'
@@ -26,8 +27,9 @@ class TemplateHistory(models.Model):
     text = models.TextField(blank=True)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="employee_template_history")
     partner = models.ForeignKey(Partner, on_delete=models.CASCADE, related_name="partner_template_history")
-    type = models.IntegerField(default=1, choices=MESSAGE_TYPE, blank=True)
-    message_type = models.CharField(max_length=20)
+    sent_date = models.DateTimeField(default=datetime.now())
+    message_type = models.CharField(max_length=10, blank=True)
+    ispartner = models.BooleanField(default=False)
 
     def __str__(self):
         return self.text[:50]

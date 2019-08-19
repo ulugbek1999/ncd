@@ -21,7 +21,7 @@ class TemplateHistoryList(IsSuperUserMixin, PaginationMixin, ListView):
     paginate_by = 12
     model = TemplateHistory
     template_name = 'root/templates/history.html'
-    context_object_name = 'history'
+    context_object_name = 'histories'
 
 
 class TemplateDetailView(IsSuperUserMixin, DetailView):
