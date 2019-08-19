@@ -54,9 +54,10 @@ class PartnerSendMessage(APIView):
         ids = [int(i) for i in request.POST.getlist('ids')[0].split(',')]
         title = request.POST.get('title')
         text = request.POST.get('text')
+        soup = BeautifulSoup(text, 'lxml')
         if action == 'email':
             Partner.send_email_message(ids, title, text)
-            history = TemplateHistory.objects.create(title=title, text=text, message_type="Email", ispartner=True)
+            history = TemplateHistory.objects.create(title=title, text=soup.text, message_type="Email", ispartner=True)
             for i in ids:
                 partner = PartnerTemplateHistory.objects.create(template_history=history, partner=Partner.objects.get(id=i))
         return Response()

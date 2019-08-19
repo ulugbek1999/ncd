@@ -36,7 +36,7 @@ class TemplateHistory(models.Model):
         return self.text[:50]
 
 class EmployeeTemplateHistory(models.Model):
-    template_history = models.ForeignKey(TemplateHistory, on_delete=models.CASCADE, related_name="template_history")
+    template_history = models.ForeignKey(TemplateHistory, on_delete=models.CASCADE, related_name="template_history_employee")
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="employee")
 
     class Meta:
@@ -44,7 +44,7 @@ class EmployeeTemplateHistory(models.Model):
         ordering = ('-id', )
 
 class PartnerTemplateHistory(models.Model):
-    template_history = models.ForeignKey(Template, on_delete=models.CASCADE, related_name="template_history")
+    template_history = models.ForeignKey(TemplateHistory, on_delete=models.CASCADE, related_name="template_history_partner")
     partner = models.ForeignKey(Partner, on_delete=models.CASCADE, related_name="partner")
 
     class Meta:
