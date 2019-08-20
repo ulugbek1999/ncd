@@ -6,9 +6,10 @@ from pure_pagination.mixins import PaginationMixin
 
 from directory.models import City
 from employee.model.employee import Employee
-from message_templates.models import Template, TemplateHistory
+from message_templates.models import Template, TemplateHistory, PartnerTemplateHistory, EmployeeTemplateHistory
 from partner.models import Partner
 from root.mixins import IsSuperUserMixin
+from django.template.defaulttags import register
 
 
 class TemplateList(IsSuperUserMixin, PaginationMixin, ListView):
@@ -23,6 +24,37 @@ class TemplateHistoryList(IsSuperUserMixin, PaginationMixin, ListView):
     template_name = 'root/templates/history.html'
     context_object_name = 'histories'
 
+class TemplateHistoryDetailView(IsSuperUserMixin, DetailView):
+    template_name = 'root/templates/history_detail.html'
+    context_object_name = 'template_history'
+    pk_url_kwarg = 'id'
+    model = TemplateHistory
+
+    @register.filter
+    def get_item(dictionary, key):
+        return dictionary.get(key)
+
+    def get_context_data(self, *args, **kwargs):
+        history_template_id = self.kwargs["id"]
+        data = {}
+        context = super().get_context_data(**kwargs)
+        ids = []
+        if self.object.ispartner == False:
+            qs = EmployeeTemplateHistory.objects.filter(template_history_id__exact=history_template_id)
+            for q in qs:
+                ids.append(q.employee_id)
+            employees = Employee.objects.filter(id__in=ids)
+            context["employees"] = employees    
+                # context["employees"] = employee
+        else:
+            qs = PartnerTemplateHistory.objects.filter(template_history_id__exact=history_template_id)
+            for q in qs:
+                ids.append(q.partner_id)
+            partner = Partner.objects.filter(id__in=ids)
+            context["partners"] = partner
+        return context
+
+
 
 class TemplateDetailView(IsSuperUserMixin, DetailView):
     template_name = 'root/templates/detail.html'
@@ -32,6 +64,7 @@ class TemplateDetailView(IsSuperUserMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        print(self.request)
         if self.object.type == 1:
             self.template_name = 'root/templates/employees.html'
             qs = Employee.objects.all()

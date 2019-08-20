@@ -13,6 +13,7 @@ template_patterns = [
     path('list/', template_views.TemplateList.as_view(), name='root.template.list'),
     # path('send-message/', template_views.SendSMSEmail.as_view(), name='root.template.send_message'),
     path('history/', template_views.TemplateHistoryList.as_view(), name='root.template.history'),
+    path('history-detail/<int:id>/', template_views.TemplateHistoryDetailView.as_view(), name='root.template.history-detail'),
     path('detail/<int:id>/', template_views.TemplateDetailView.as_view(), name='root.template.detail'),
 ]
 

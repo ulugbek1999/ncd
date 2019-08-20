@@ -31,7 +31,7 @@
                         </thead>
                         <tbody>
                             {% for history in histories %}
-                                <tr class="table-row" data-id="{{ history.id }}">
+                                <tr class="table-row redirect" data-id="{{ history.id }}" data-href="{% url 'root.template.history-detail' history.id %}">
                                     <td class="td-checkbox td-check" >
                                         <input class="deleteCheck" type="checkbox" data-id="{{history.id}}" name="ids" >
                                     </td>
@@ -40,9 +40,9 @@
                                     <td class="td-message-text">{{ history.text }}</td>
                                     <td class="td-sent-date">{{ history.sent_date|date:"H:i d.m.Y" }}</td>
                                     {% if history.ispartner %}
-                                        <td class="td-group">Partner</td>
+                                        <td class="td-group">{% trans 'Partner' %}</td>
                                     {% else %}
-                                        <td class="td-group">Employee</td>
+                                        <td class="td-group">{% trans 'Employee' %}</td>
                                     {% endif %}
                                     <td class="td-type">{{ history.message_type }}</td>
                                 </tr>
@@ -88,7 +88,7 @@
 {% endblock %}
 
 {% block js %}
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="{% static 'operator/magnific-popup/jquery.magnific-popup.js' %}"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -115,7 +115,7 @@
                             location.reload()
                         },
                         error: function (data) {
-
+                            alert("{% trans 'Cannot delete data!' %}")
                         }
                     });
                 }
@@ -123,4 +123,5 @@
             })
         })
     </script>
+    <script src="{% static 'operator/js/root/search.js' %}"></script>
 {% endblock %}

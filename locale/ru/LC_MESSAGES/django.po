@@ -71,6 +71,9 @@ msgstr "Название (русс)"
 msgid "Name en"
 msgstr "Название (англ)"
 
+msgid "Cannot delete data!"
+msgstr "Невозможно удалить информацию!"
+
 msgid "Title"
 msgstr "Заголовок сообщения"
 
