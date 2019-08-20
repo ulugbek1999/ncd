@@ -1,6 +1,8 @@
 from rest_framework.generics import CreateAPIView, UpdateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAdminUser
+from rest_framework import status
 
 from api.admin.message_template.serializers import MessageTemplateSerializer
 from employee.model.employee import Employee
@@ -18,6 +20,15 @@ class MessageTemplateUpdateAPIView(UpdateAPIView):
     queryset = Template.objects.all()
     serializer_class = MessageTemplateSerializer
     lookup_url_kwarg = 'id'
+
+class MessageTemplateHistoryDeleteApiView(APIView):
+    permission_classes = (IsAdminUser, )
+
+    def delete(self, request):
+        ids = request.data.get('ids').split(',')
+        for i in ids:
+            TemplateHistory.objects.get(id=i).delete()
+        return Response("Successfully deleted data!", status=status.HTTP_200_OK)
 
 
 class EmployeeSendMessage(APIView):

@@ -15,254 +15,112 @@
     </div>
     <div class="card-main__content">
         <div class="search-results__main">
-            <div class="table-main" style="padding-top: 50px;">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr class="table-row" data-href="#">
-                            <th class="td-check"></th>
-                            <th class="td-id">№</th>
-                            <th class="td-title">{% trans 'Title' %}</th>
-                            <th class="td-message-text">{% trans 'Message text' %}</th>
-                            <th class="td-sent-date">{% trans 'Sent date' %}</th>
-                            <th class="td-group">{% trans 'Group' %}</th>
-                            <th class="td-type">{% trans 'Type' %}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for history in histories %}
-                            <tr class="table-row" data-id="{{ history.id }}">
-                                <td class="td-checkbox td-check" >
-                                    <input class="deleteCheck" type="checkbox" data-id="{{history.id}}" name="ids" >
-                                </td>
-                                <td class="td-id">{{ history.id }}</td>
-                                <td class="td-title">{{ history.title }}</td>
-                                <td class="td-message-text">{{ history.text }}</td>
-                                <td class="td-sent-date">{{ history.sent_date|date:"H:i d.m.Y" }}</td>
-                                {% if history.ispartner %}
-                                    <td class="td-group">Partner</td>
-                                {% else %}
-                                    <td class="td-group">Employee</td>
-                                {% endif %}
-                                <td class="td-type">{{ history.message_type }}</td>
+            <form>
+                <div class="table-main" style="padding-top: 50px;"> 
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="table-row" data-href="#">
+                                <th class="td-check"></th>
+                                <th class="td-id">№</th>
+                                <th class="td-title">{% trans 'Title' %}</th>
+                                <th class="td-message-text">{% trans 'Message text' %}</th>
+                                <th class="td-sent-date">{% trans 'Sent date' %}</th>
+                                <th class="td-group">{% trans 'Group' %}</th>
+                                <th class="td-type">{% trans 'Type' %}</th>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                {% if is_paginated %}
-                    <div class="pagination-main">
-                        <ul class="pagination">
-                            {% if page_obj.has_previous %}
-                                <li><a href="?{{ page_obj.previous_page_number.querystring }}" class="prev">&lsaquo;&lsaquo;</a></li>
-                            {% else %}
-                                <li><span class="disabled prev">&lsaquo;&lsaquo;</span></li>
-                            {% endif %}
-                            {% for page in page_obj.pages %}
-                                {% if page %}
-                                    {% ifequal page page_obj.number %}
-                                        <li><span class="current page">{{ page }}</span></li>
+                        </thead>
+                        <tbody>
+                            {% for history in histories %}
+                                <tr class="table-row" data-id="{{ history.id }}">
+                                    <td class="td-checkbox td-check" >
+                                        <input class="deleteCheck" type="checkbox" data-id="{{history.id}}" name="ids" >
+                                    </td>
+                                    <td class="td-id">{{ history.id }}</td>
+                                    <td class="td-title">{{ history.title }}</td>
+                                    <td class="td-message-text">{{ history.text }}</td>
+                                    <td class="td-sent-date">{{ history.sent_date|date:"H:i d.m.Y" }}</td>
+                                    {% if history.ispartner %}
+                                        <td class="td-group">Partner</td>
                                     {% else %}
-                                        <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
-                                    {% endifequal %}
-                                {% else %}
-                                    ...
-                                {% endif %}
+                                        <td class="td-group">Employee</td>
+                                    {% endif %}
+                                    <td class="td-type">{{ history.message_type }}</td>
+                                </tr>
                             {% endfor %}
-                            {% if page_obj.has_next %}
-                                <li><a href="?{{ page_obj.next_page_number.querystring }}" class="next">&rsaquo;&rsaquo;</a></li>
-                            {% else %}
-                                <li><span class="disabled next">&rsaquo;&rsaquo;</span></li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                {% endif %}
-            </div>
+                        </tbody>
+                    </table>
+                    {% if is_paginated %}
+                        <div class="pagination-main">
+                            <ul class="pagination">
+                                {% if page_obj.has_previous %}
+                                    <li><a href="?{{ page_obj.previous_page_number.querystring }}" class="prev">&lsaquo;&lsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled prev">&lsaquo;&lsaquo;</span></li>
+                                {% endif %}
+                                {% for page in page_obj.pages %}
+                                    {% if page %}
+                                        {% ifequal page page_obj.number %}
+                                            <li><span class="current page">{{ page }}</span></li>
+                                        {% else %}
+                                            <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                        {% endifequal %}
+                                    {% else %}
+                                        ...
+                                    {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                    <li><a href="?{{ page_obj.next_page_number.querystring }}" class="next">&rsaquo;&rsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled next">&rsaquo;&rsaquo;</span></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="delete-buttons">
+                    <button id="deleteEmpButton" data-url="{% url 'api:admin:template:template_history.delete' %}">{% trans 'Delete' %}</button>
+                </div>
+            </form>
         </div>
         <div class="clearfix"></div>
     </div>
-    <div id="searchPopup" class="white-popup mfp-hide">
-        <form class="login">
-            <fieldset>
-                <legend class="legend">{% trans 'Search' %}</legend>
-                <div class="searchPopupMain">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="">{% trans 'Register number' %}</label>
-                                <input name="register_number" type="text" class="form-control" id="" value="{{ register_number }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="">{% trans 'Passport serial' %}</label>
-                                <input type="text" name="passport_serial" id="" class="form-control" value="{{ passport_serial }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="">{% trans 'Age' %}</label>
-                                <input type="text" name="age" id="" class="form-control" value="{{ age }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="">{% trans 'Fatness' %} (%)</label>
-                                <input type="text" name="fatness" id="" class="form-control" value="{{ fatness }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="edu">{% trans 'Education' %}</label>
-                                <select class="form-control selectpicker show-tick" name="education" id="edu">
-                                    <option value="">{% trans 'Select' %}</option>
-                                    {% for edu in educations %}
-                                        <option value="{{ edu.id }}" {% if edu.id == education %}selected{% endif %}>{{ edu.name_ru }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="">{% trans 'Criminal issues' %}</label>
-                                <select class="form-control selectpicker show-tick" name="criminal" id="">
-                                    <option value="">{% trans 'Select' %}</option>
-                                    <option value="0">{% trans 'No' %}</option>
-                                    <option value="1">{% trans 'Yes' %}</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="">{% trans 'Military duty' %}</label>
-                                <select class="form-control selectpicker show-tick" name="military_duty" id="">
-                                    <option value="">{% trans 'Select' %}</option>
-                                    <option value="0" {% if military_duty == '0' %}selected{% endif %}>{% trans 'No' %}</option>
-                                    <option value="1" {% if military_duty == '1' %}selected{% endif %}>{% trans 'Yes' %}</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="">{% trans 'Family status' %}</label>
-                                <select class="form-control selectpicker show-tick" name="family_status" id="">
-                                    <option value="">{% trans 'Select' %}</option>
-                                    <option value="1" {% if employee.family.status == 1 %}selected{% endif %}>не женат / не замужем</option>
-                                    <option value="2" {% if employee.family.status == 2 %}selected{% endif %}>женат / замужем</option>
-                                    <option value="3" {% if employee.family.status == 3 %}selected{% endif %}>в разводе</option>
-                                    <option value="4" {% if employee.family.status == 4 %}selected{% endif %}>вдовец / вдова</option>
-                                    <option value="5" {% if employee.family.status == 5 %}selected{% endif %}>второй брак</option>
-                                    <option value="6" {% if employee.family.status == 6 %}selected{% endif %}>гражданский брак</option>
-                                </select>
-                            </div>
-
-
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="">{% trans 'Fullname' %}</label>
-                                <input name="fullname" type="text" class="form-control" id="" value="{{ fullname }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="">{% trans 'Inn' %}</label>
-                                <input type="text" name="inn" id="" class="form-control" value="{{ inn }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="">{% trans 'Height' %} ({% trans 'sm' %})</label>
-                                <input type="text" name="height" id="" class="form-control" value="{{ height }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="">{% trans 'Vision left' %}</label>
-                                <input type="text" name="vision_l" id="" class="form-control" value="{{ vision_l }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="">{% trans 'Language' %}</label>
-                                <select class="form-control selectpicker show-tick" name="language" id="">
-                                    <option value="">{% trans 'Select' %}</option>
-                                    {% for lang in languages %}
-                                        <option value="{{ lang.id }}" {% if lang.id == language %}selected{% endif %}>{{ lang.name_ru }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="">{% trans 'Rewards' %}</label>
-                                <select class="form-control selectpicker show-tick" name="reward" id="">
-                                    <option value="">{% trans 'Select' %}</option>
-                                    <option value="0">{% trans 'No' %}</option>
-                                    <option value="1">{% trans 'Yes' %}</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="">{% trans 'Countries' %}</label>
-                                <select class="form-control selectpicker show-tick" name="countries" id="">
-                                    <option value="">{% trans 'Select' %}</option>
-                                    {% for country in countries %}
-                                        <option value="{{ country.id }}" {% if country.id in emp_countries %}selected{% endif %}>{{ country.name_ru }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="">{% trans 'Level' %}</label>
-                                <select class="form-control selectpicker show-tick" name="level" id="">
-                                    <option value="">{% trans 'Select' %}</option>
-                                    <option value="is_student">{% trans 'Student' %}</option>
-                                    <option value="is_youth_talent">{% trans 'Young talent' %}</option>
-                                    <option value="is_employee">{% trans 'Employee' %}</option>
-                                </select>
-                            </div>
-
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="">{% trans 'Gender' %}</label>
-                                <select class="form-control selectpicker show-tick" name="gender" id="">
-                                    <option value="">{% trans 'Select' %}</option>
-                                    <option value="m" {% if gender == 'm' %}selected{% endif %}>{% trans 'Male' %}</option>
-                                    <option value="f" {% if gender == 'f' %}selected{% endif %}>{% trans 'Female' %}</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="">{% trans 'Phone' %}</label>
-                                <input type="text" name="phone" id="" class="form-control" value="{{ phone }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="">{% trans 'Weight' %} ({% trans 'kg' %})</label>
-                                <input type="text" name="weight" id="" class="form-control" value="{{ weight }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="">{% trans 'Vision right' %}</label>
-                                <input type="text" name="vision_r" id="" class="form-control" value="{{ vision_r }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="">{% trans 'Language knowing level' %}</label>
-                                <select id="" class="form-control selectpicker show-tick" name="lang_level">
-                                    <option value="">{% trans 'Select' %}</option>
-                                    <option value="1" {% if lang.level == 1 %}selected{% endif %}>{% trans 'Best' %}</option>
-                                    <option value="2" {% if lang.level == 2 %}selected{% endif %}>{% trans 'Good' %}</option>
-                                    <option value="3" {% if lang.level == 3 %}selected{% endif %}>{% trans 'Not bad' %}</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="">{% trans 'Experiences' %}</label>
-                                <input type="text" name="experience" id="" class="form-control" value="{{ experience }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="">{% trans 'Wages' %}</label>
-                                <select class="form-control selectpicker show-tick" name="wages" id="">
-                                    <option value="">{% trans 'Select' %}</option>
-                                    <option value="500">{% trans 'Less than 500$' %}</option>
-                                    <option value="500-1000">{% trans '500$-1000$' %}</option>
-                                    <option value="1000-1500">{% trans '1000$-1500$' %}</option>
-                                    <option value="1500-2000">{% trans '1500$-2000$' %}</option>
-                                    <option value="2500">{% trans '2500$ more' %}</option>
-                                </select>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label for="">{% trans 'Category' %}</label>
-                                <select class="form-control selectpicker show-tick" name="category" id="">
-                                    <option value="">{% trans 'Select' %}</option>
-                                    <option value="A" {% if category == "A" %}selected{% endif %}>A</option>
-                                    <option value="B" {% if category == "B" %}selected{% endif %}>B</option>
-                                    <option value="C" {% if category == "C" %}selected{% endif %}>C</option>
-                                    <option value="D" {% if category == "D" %}selected{% endif %}>D</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <button type="submit" class="popup-search__button">
-                        {% trans 'Search' %}
-                    </button>
-                </div>
-            </fieldset>
-        </form>
-    </div>
 </div>
+{% endblock %}
+
+{% block js %}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            var deleteButton = document.querySelector("#deleteEmpButton")
+            deleteButton.addEventListener('click', (event) => {
+                event.preventDefault()
+                
+                var formData = new FormData()
+
+                var delData = jQuery(".table tr:not(.header) td input:checked").map(function() {
+                    return jQuery(this).closest("tr").data("id")
+                }).get()
+
+                result = window.confirm("{% trans 'Do you really want to delete?' %}")
+                if (result) {
+                    formData.append("ids", delData)
+                    $.ajax({
+                        url: deleteButton.dataset.url,
+                        method: 'DELETE',
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        success: function (data) {
+                            location.reload()
+                        },
+                        error: function (data) {
+
+                        }
+                    });
+                }
+                
+            })
+        })
+    </script>
 {% endblock %}

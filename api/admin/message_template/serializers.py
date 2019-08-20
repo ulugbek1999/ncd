@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from message_templates.models import Template
+from message_templates.models import Template, TemplateHistory
 
 
 class MessageTemplateSerializer(ModelSerializer):
@@ -10,4 +10,15 @@ class MessageTemplateSerializer(ModelSerializer):
             'type',
             'text',
             'title',
+        )
+
+class TemplateHistorySerializer(ModelSerializer):
+    class Meta:
+        model = TemplateHistory
+        fields = (
+            'title',
+            'text',
+            'sent_date',
+            'message_type',
+            'ispartner'
         )
