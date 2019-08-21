@@ -26,8 +26,8 @@ class TemplateHistoryList(IsSuperUserMixin, PaginationMixin, ListView):
 
     @register.filter
     def shortify_text_length(value):
-        if len(value) > 110:
-            return value[:110] + "..."
+        if len(value) > 80:
+            return value[:80] + "..."
         return value
     
     @register.filter
