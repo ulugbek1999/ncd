@@ -24,6 +24,18 @@ class TemplateHistoryList(IsSuperUserMixin, PaginationMixin, ListView):
     template_name = 'root/templates/history.html'
     context_object_name = 'histories'
 
+    @register.filter
+    def shortify_text_length(value):
+        if len(value) > 110:
+            return value[:110] + "..."
+        return value
+    
+    @register.filter
+    def shortify_title_length(value):
+        if len(value) > 15:
+            return value[:15] + "..."
+        return value
+
 class TemplateHistoryDetailView(IsSuperUserMixin, DetailView):
     template_name = 'root/templates/history_detail.html'
     context_object_name = 'template_history'

@@ -36,8 +36,8 @@
                                         <input class="deleteCheck" type="checkbox" data-id="{{history.id}}" name="ids" >
                                     </td>
                                     <td class="td-id">{{ history.id }}</td>
-                                    <td class="td-title">{{ history.title }}</td>
-                                    <td class="td-message-text">{{ history.text }}</td>
+                                    <td class="td-title">{{ history.title | shortify_title_length }}</td>
+                                    <td class="td-message-text">{{ history.text | shortify_text_length }}</td>
                                     <td class="td-sent-date">{{ history.sent_date|date:"H:i d.m.Y" }}</td>
                                     {% if history.ispartner %}
                                         <td class="td-group">{% trans 'Partner' %}</td>
