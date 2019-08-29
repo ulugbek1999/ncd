@@ -20,6 +20,8 @@ from utils.sms import send_sms
 class UserCreateAPIView(APIView):
     def post(self, request):
         emp_id = request.POST.get("emp_id")
+        phone = request.POST.get("phone")
+        email = request.POST.get("email")
         try:
             emp = Employee.objects.get(id=emp_id)
             user = User()
@@ -34,12 +36,19 @@ class UserCreateAPIView(APIView):
             emp.save()
             if emp.send_sms:
                 send_sms(emp.phone, f"Ваш логин на uzncd.com: {emp.user.username}\nВаш пароль: {passwd}\nПодпишитесь на наш телеграм канал https://t.me/ncdxba, чтобы следить за новостями.\nOOO \"Taraqqiyot Milliy Markazi Xususiy Bandlik Agentligi\"")
+            if phone:
+                send_sms(phone, f"Ваш логин на uzncd.com: {emp.user.username}\nВаш пароль: {passwd}\nПодпишитесь на наш телеграм канал https://t.me/ncdxba, чтобы следить за новостями.\nOOO \"Taraqqiyot Milliy Markazi Xususiy Bandlik Agentligi\"")
             if emp.send_email and emp.email:
-                print(emp.email)
                 send_email(
                     title='uzncd.com',
                     text=f"<b>Ваш логин на uzncd.com</b>: {emp.user.username}\n<b>Ваш пароль</b>: {passwd}\nПодпишитесь на наш телеграм канал https://t.me/ncdxba, чтобы следить за новостями.\nOOO \"Taraqqiyot Milliy Markazi Xususiy Bandlik Agentligi\"",
                     emails=[emp.email]
+                )
+            if phone and email:
+                send_email(
+                    title='uzncd.com',
+                    text=f"<b>Ваш логин на uzncd.com</b>: {emp.user.username}\n<b>Ваш пароль</b>: {passwd}\nПодпишитесь на наш телеграм канал https://t.me/ncdxba, чтобы следить за новостями.\nOOO \"Taraqqiyot Milliy Markazi Xususiy Bandlik Agentligi\"",
+                    emails=[email]
                 )
         except Employee.DoesNotExist:
             print("pass")
