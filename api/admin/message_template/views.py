@@ -45,14 +45,14 @@ class EmployeeSendMessage(APIView):
                 employee = EmployeeTemplateHistory.objects.create(template_history=history, employee=Employee.objects.get(id=i))
         elif action == 'email':
             Employee.send_email_message(ids, title, text)
-            history = TemplateHistory.objects.create(title=title, text=soup.text, employee=Employee.objects.get(id=i), message_type="Email")
+            history = TemplateHistory.objects.create(title=title, text=soup.text, message_type="Email")
             for i in ids:
                 employee = EmployeeTemplateHistory.objects.create(template_history=history, employee=Employee.objects.get(id=i))
         elif action == 'sms&email':
             Employee.send_sms_message(ids, title, text)
             Employee.send_email_message(ids, title, text)
-            history_sms = TemplateHistory.objects.create(title=title, text=soup.text, employee=Employee.objects.get(id=i), message_type="SMS")
-            history_email = TemplateHistory.objects.create(title=title, text=soup.text, employee=Employee.objects.get(id=i), message_type="Email")
+            history_sms = TemplateHistory.objects.create(title=title, text=soup.text, message_type="SMS")
+            history_email = TemplateHistory.objects.create(title=title, text=soup.text, message_type="Email")
             for i in ids:
                 employee_sms = EmployeeTemplateHistory.objects.create(template_history=history_sms, employee=Employee.objects.get(id=i))
                 employee_email = EmployeeTemplateHistory.objects.create(template_history=history_email, employee=Employee.objects.get(id=i))
