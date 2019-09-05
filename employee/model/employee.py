@@ -62,7 +62,7 @@ class Employee(models.Model):
     passport_serial = models.CharField(max_length=255, default='', blank=True, null=True, verbose_name=_('Passport serial'))
     passport_given_date = models.DateField(null=True, blank=True,  verbose_name=_('Passport given date'))
     passport_expires = models.DateField(null=True, blank=True,  verbose_name=_('Passport expires'))
-    passport_image = models.ImageField(null=True, blank=True,  upload_to=passport_copy, verbose_name=_('Passport image'))
+    passport_image = models.ImageField(default="default/default.jpg",  upload_to=passport_copy, verbose_name=_('Passport image'))
     birth_date = models.DateField(blank=True,  null=True, verbose_name=_('Birth date'))
     birth_place_ru = models.CharField(max_length=255, default='', blank=True, null=True, verbose_name=_('Birth place ru'))
     birth_place_en = models.CharField(max_length=255, default='', blank=True, null=True, verbose_name=_('Birth place en'))

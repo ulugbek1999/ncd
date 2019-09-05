@@ -37,6 +37,8 @@ class UserCreateAPIView(APIView):
             if emp.send_sms:
                 send_sms(emp.phone, f"Ваш логин на uzncd.com: {emp.user.username}\nВаш пароль: {passwd}\nПодпишитесь на наш телеграм канал https://t.me/ncdxba, чтобы следить за новостями.\nOOO \"Taraqqiyot Milliy Markazi Xususiy Bandlik Agentligi\"")
             if phone:
+                emp.send_sms = True
+                emp.save()
                 send_sms(phone, f"Ваш логин на uzncd.com: {emp.user.username}\nВаш пароль: {passwd}\nПодпишитесь на наш телеграм канал https://t.me/ncdxba, чтобы следить за новостями.\nOOO \"Taraqqiyot Milliy Markazi Xususiy Bandlik Agentligi\"")
             if emp.send_email and emp.email:
                 send_email(
@@ -45,6 +47,9 @@ class UserCreateAPIView(APIView):
                     emails=[emp.email]
                 )
             if phone and email:
+                emp.send_sms = True
+                emp.send_email = True
+                emp.save()
                 send_email(
                     title='uzncd.com',
                     text=f"<b>Ваш логин на uzncd.com</b>: {emp.user.username}\n<b>Ваш пароль</b>: {passwd}\nПодпишитесь на наш телеграм канал https://t.me/ncdxba, чтобы следить за новостями.\nOOO \"Taraqqiyot Milliy Markazi Xususiy Bandlik Agentligi\"",
