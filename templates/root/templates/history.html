@@ -40,7 +40,7 @@
                                     <td class="td-message-text">{{ history.text | shortify_text_length }}</td>
                                     <td class="td-sent-date">{{ history.sent_date|date:"H:i d.m.Y" }}</td>
                                     {% if history.ispartner %}
-                                        <td class="td-group">{% trans 'Partner' %}</td>
+                                        <td class="td-group">{% trans 'Employer' %}</td>
                                     {% else %}
                                         <td class="td-group">{% trans 'Employee' %}</td>
                                     {% endif %}

@@ -2584,13 +2584,13 @@ msgid "List of operators"
 msgstr "Список операторов"
 
 #: templates/root/_base.html:69
-msgid "Partner Accounts"
-msgstr "Учетные записи партнеров"
+msgid "Employer Accounts"
+msgstr "Учетные записи работодателей"
 
 #: templates/root/_base.html:70
 #: templates/root/partners/partners_bookmark.html:6
-msgid "Requests for candidates from partners"
-msgstr "Запросы по кандидатам от партнеров"
+msgid "Requests for candidates from employers"
+msgstr "Запросы по кандидатам от работодателей"
 
 #: templates/root/_base.html:71
 #: templates/root/employee/changed_employees.html:6
@@ -3374,3 +3374,7 @@ msgstr "Ф.И.О"
 #~| msgid "Employee"
 #~ msgid "Employee register"
 #~ msgstr "Аппликант"
+
+
+msgid "Employer"
+msgstr "Работодатель"
