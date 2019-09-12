@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'partner',
     'root',
     'message_templates',
+    'vacancy'
 ]
 
 CRON_CLASSES = [

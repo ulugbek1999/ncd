@@ -1,0 +1,148 @@
+{% extends 'root/_base.html' %}
+{% load static i18n %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'operator/magnific-popup/magnific-popup.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="content-title">
+    <h2>{% trans 'Vacancy requests' %}</h2>
+</div>
+<div class="card-main">
+    <div class="card-main__header">
+        <h2>{% blocktrans %}List of vacancy requests from employees{% endblocktrans %}</h2>
+    </div>
+    <div class="card-main__content">
+            <div class="search-form__app">
+                <form action="">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">{% trans 'Vacancy name' %}</label>
+                            <input type="text" name='vacancy_name' class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="">{% trans 'Fullname' %}</label>
+                            <input type="text" name='fullname' class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="display: flex">
+                        <div class="search-buttons">
+                            <div class="form-search__button">
+                                <button type="submit">{% trans 'Search' %}</button>
+                            </div>
+                        </div>
+                        <div class="delete-buttons" style="padding-top: 28px !important">
+                            <button id="deleteEmpButton" data-api="{% url 'vacancy_request.delete' %}">{% trans 'Delete' %}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="search-results__main">
+                <div class="table-main">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="table-row header">
+                                <th class="td-check"></th>
+                                <th class="td-id">№</th>
+                                <th class="td-vacancy">{% trans 'Vacancy name' %}</th>
+                                <th class="td-fullname">{% trans 'Employee fullname' %}</th>
+                                <th class="td-applied-date">{% trans 'Applied date' %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for v in vr %}
+                                <tr class="table-row" data-id="{{ v.id }}" data-href="{% url 'vacancy.detail' v.id %}">
+                                    <td class="td-checkbox td-check">
+                                        <input type="checkbox" class="deleteCheck" name="ids" data-id="{{ v.id }}">
+                                    </td>
+                                    <td class="td-id">
+                                        {{ v.id }}
+                                    </td>
+                                    <td class="td-vacancy">
+                                        {{ v.vacancy.title }}
+                                    </td>
+                                    <td class="fullname">
+                                        {{ v.employee.full_name }}
+                                    </td>
+                                    <td class="td-applied-date">
+                                        {{ v.requested_date }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% if is_paginated %}
+                        <div class="pagination-main">
+                            <ul class="pagination">
+                                {% if page_obj.has_previous %}
+                                    <li><a href="?{{ page_obj.previous_page_number.querystring }}" class="prev">&lsaquo;&lsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled prev">&lsaquo;&lsaquo;</span></li>
+                                {% endif %}
+                                {% for page in page_obj.pages %}
+                                    {% if page %}
+                                        {% ifequal page page_obj.number %}
+                                            <li><span class="current page">{{ page }}</span></li>
+                                        {% else %}
+                                            <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                        {% endifequal %}
+                                    {% else %}
+                                        ...
+                                    {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                    <li><a href="?{{ page_obj.next_page_number.querystring }}" class="next">&rsaquo;&rsaquo;</a></li>
+                                {% else %}
+                                    <li><span class="disabled next">&rsaquo;&rsaquo;</span></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+</div>
+{% endblock content %}
+
+
+{% block js %}
+    <script src="{% static 'operator/magnific-popup/jquery.magnific-popup.js' %}"></script>
+    <script src="{% static 'operator/js/root/search.js' %}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            var del = document.querySelector("#deleteEmpButton")
+            var checkboxex = document.querySelectorAll(".td-checkbox input")
+            var delList = []
+            del.addEventListener('click', (event) => {
+                event.preventDefault()
+                Array.from(checkboxex).forEach(checkbox => {
+                    if (checkbox.checked == true) {
+                        delList.push(checkbox.dataset.id)
+                    }
+                })
+                var json = JSON.stringify({
+                    delete_list: delList
+                })
+                var confirm = window.confirm("{% trans 'Do you really want to delete?' %}")
+
+                if (confirm) {
+                    $.ajax({
+                        url: event.target.dataset.api,
+                        method: "DELETE",
+                        contentType: 'application/json',
+                        data: json,
+                        success () {
+                            location.reload()
+                        },
+                        failure () {
+                            alert("error")
+                        }
+                    })
+                }                
+            })
+        })
+    </script>
+{% endblock js %}

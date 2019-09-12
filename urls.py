@@ -10,7 +10,8 @@ schema_view = get_swagger_view(title='uzncd API')
 
 api_patterns = [
     path('employee/', include('employee.api.urls')),
-    path('root/', include('root.api.urls'))
+    path('root/', include('root.api.urls')),
+    path('vacancy/', include('vacancy.api.urls')),
 ]
 
 urlpatterns = [
@@ -24,6 +25,7 @@ urlpatterns = [
     path('api/v2/', include('api.urls')),
     path('logs/', include('log.urls')),
     path('directory/', include('directory.urls')),
+    path('vacancy/', include('vacancy.urls'))
 ]
 
 urlpatterns += i18n_patterns(

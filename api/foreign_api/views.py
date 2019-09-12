@@ -21,6 +21,7 @@ class UserCreateAPIView(APIView):
     def post(self, request):
         emp_id = request.POST.get("emp_id")
         phone = request.POST.get("phone")
+
         email = request.POST.get("email")
         try:
             emp = Employee.objects.get(id=emp_id)
@@ -57,4 +58,5 @@ class UserCreateAPIView(APIView):
                 )
         except Employee.DoesNotExist:
             print("pass")
+        print(phone)
         return Response()
