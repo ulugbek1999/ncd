@@ -57,6 +57,5 @@ class UserCreateAPIView(APIView):
                     emails=[email]
                 )
         except Employee.DoesNotExist:
-            print("pass")
-        print(phone)
+            pass
         return Response()

@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'sorl.thumbnail',
     'django_cron',
-
+    'django_cleanup',
     'directory',
     'employee',
     'operators',
@@ -166,14 +166,14 @@ LOGIN_URL = reverse_lazy('auth.signin')
 
 # channels
 ASGI_APPLICATION = 'routing.application'
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
-    },
-}
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [('127.0.0.1', 6379)],
+#         },
+#     },
+# }
 
 # django-pure-pagination
 PAGINATION_SETTINGS = {
