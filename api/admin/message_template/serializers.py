@@ -20,5 +20,5 @@ class TemplateHistorySerializer(ModelSerializer):
             'text',
             'sent_date',
             'message_type',
-            'ispartner'
+            'isemployer'
         )

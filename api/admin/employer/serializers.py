@@ -3,14 +3,14 @@ from django.utils.translation import gettext as _
 from rest_framework.exceptions import ValidationError
 from rest_framework.serializers import ModelSerializer
 
-from partner.models import Partner
+from employer.models import Employer
 from utils.mail import send_email
 from utils.sms import send_sms
 
 
-class PartnerCreateSerializer(ModelSerializer):
+class EmployerCreateSerializer(ModelSerializer):
     class Meta:
-        model = Partner
+        model = Employer
         fields = (
             'company_name',
             'phone',
@@ -23,7 +23,7 @@ class PartnerCreateSerializer(ModelSerializer):
         )
 
     def create(self, validated_data):
-        instance = Partner(**validated_data)
+        instance = Employer(**validated_data)
         data = self.context['request'].POST
         if not data.get('username'):
             raise ValidationError({'username': _('Username is missing')})

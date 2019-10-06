@@ -8,7 +8,7 @@ from utils.mail import send_email
 from utils.sms import send_sms
 
 
-class PartnerManager(models.Manager):
+class EmployerManager(models.Manager):
     def search_filter(self, qs, request):
         """
         :param qs: Employee objects
@@ -24,10 +24,10 @@ class PartnerManager(models.Manager):
         return qs
 
 
-class Partner(models.Model):
+class Employer(models.Model):
     """email field in django user model"""
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True,
-                                related_name='partner')
+                                related_name='employer')
     company_name = models.TextField(blank=True, default="")
     phone = models.CharField(max_length=255, blank=True, default="",
                              verbose_name='Телефон')
@@ -42,10 +42,10 @@ class Partner(models.Model):
                                      verbose_name='Юридический адрес')
     workers_amount = models.IntegerField(default=0, blank=True,
                                          verbose_name='Количество работников организации')
-    objects = PartnerManager()
+    objects = EmployerManager()
 
     class Meta:
-        db_table = "partner"
+        db_table = "employer"
         ordering = ['-id', ]
 
     def __str__(self):
@@ -53,32 +53,32 @@ class Partner(models.Model):
 
     @staticmethod
     def send_email_message(ids, title, text):
-        employees = Partner.objects.filter(id__in=ids)
+        employees = Employer.objects.filter(id__in=ids)
         for e in employees:
             if e.email:
                 send_email(title, text, [e.email])
         return
 
 
-class PartnerFile(models.Model):
-    partner = models.ForeignKey(Partner, on_delete=models.CASCADE)
-    file = models.FileField(upload_to='partner_files/')
+class EmployerFile(models.Model):
+    employer = models.ForeignKey(Employer, on_delete=models.CASCADE)
+    file = models.FileField(upload_to='employer_files/')
 
     class Meta:
-        db_table = 'partner_file'
+        db_table = 'employer_file'
         ordering = ['-id', ]
 
 
-class PartnerEmployee(models.Model):
-    partner = models.ForeignKey(Partner, on_delete=models.CASCADE)
+class EmployerEmployee(models.Model):
+    employer = models.ForeignKey(Employer, on_delete=models.CASCADE)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
     class Meta:
-        db_table = 'partner_employee'
+        db_table = 'employer_employee'
         ordering = ['-id', ]
 
     def __str__(self):
-        return str(self.partner.id)
+        return str(self.employer.id)
 
 
 CONTRACT_TYPE = (
@@ -87,16 +87,16 @@ CONTRACT_TYPE = (
 )
 
 
-class PartnerEmployeeRequest(models.Model):
-    partner = models.OneToOneField(Partner, on_delete=models.CASCADE)
+class EmployerEmployeeRequest(models.Model):
+    employer = models.OneToOneField(Employer, on_delete=models.CASCADE)
     employees = models.ManyToManyField(Employee, blank=True)
     contract_type = models.IntegerField(choices=CONTRACT_TYPE, null=True)
 
     class Meta:
-        db_table = 'partner_employee_request'
+        db_table = 'employer_employee_request'
         ordering = ['-id', ]
-        verbose_name = _('Partner employee request')
-        verbose_name_plural = _('Partner employee requests')
+        verbose_name = _('Employer request for employees')
+        verbose_name_plural = _('Employer requests for employee')
 
     def __str__(self):
-        return str(self.partner.id)
+        return str(self.employer.id)

@@ -6,8 +6,8 @@ from rest_framework import status
 
 from api.admin.message_template.serializers import MessageTemplateSerializer
 from employee.model.employee import Employee
-from message_templates.models import Template, TemplateHistory, EmployeeTemplateHistory, PartnerTemplateHistory
-from partner.models import Partner
+from message_templates.models import Template, TemplateHistory, EmployeeTemplateHistory, EmployerTemplateHistory
+from employer.models import Employer
 from bs4 import BeautifulSoup
 
 
@@ -59,7 +59,7 @@ class EmployeeSendMessage(APIView):
         return Response()
 
 
-class PartnerSendMessage(APIView):
+class EmployerSendMessage(APIView):
     def post(self, request):
         action = request.POST.get('action')
         ids = [int(i) for i in request.POST.getlist('ids')[0].split(',')]
@@ -67,8 +67,8 @@ class PartnerSendMessage(APIView):
         text = request.POST.get('text')
         soup = BeautifulSoup(text, 'lxml')
         if action == 'email':
-            Partner.send_email_message(ids, title, text)
-            history = TemplateHistory.objects.create(title=title, text=soup.text, message_type="Email", ispartner=True)
+            Employer.send_email_message(ids, title, text)
+            history = TemplateHistory.objects.create(title=title, text=soup.text, message_type="Email", isemployer=True)
             for i in ids:
-                partner = PartnerTemplateHistory.objects.create(template_history=history, partner=Partner.objects.get(id=i))
+                employer = EmployerTemplateHistory.objects.create(template_history=history, employer=Employer.objects.get(id=i))
         return Response()

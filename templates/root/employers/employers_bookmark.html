@@ -3,52 +3,45 @@
 
 {% block content %}
     <div class="content-title">
-        <h2>{% trans 'List of employees' %}</h2>
+        <h2>{% trans 'Requests for candidates from employers' %}</h2>
     </div>
     <div class="card-main">
         <div class="card-main__header">
             <h2>{% trans 'List' %}</h2>
         </div>
         <div class="card-main__content">
+            <div class="col-md-12" style="float: right;text-align: right">
+                <div class="add-buttons">
+                    <div class="deleteBook-buttons">
+                        <button id="deletePGroupButton" data-url="{% url 'api:admin:employer:request-delete' %}">{% trans 'Delete' %}</button>
+                    </div>
+                </div>
+            </div>
             <div class="search-results__main" style="padding-top: 30px;">
                 <div class="table-main">
                     <table class="table table-bordered">
                         <thead>
                             <tr class="table-row" data-href="#">
+                                <th class="td-check"></th>
                                 <th class="td-id">№</th>
                                 <th class="td-fio">{% trans 'Fullname' %}</th>
-                                <th class="td-reg">{% trans 'Register number' %}</th>
-                                <th class="td-phone">{% trans 'phone' %}</th>
-                                <th class="td-date">{% trans 'Created' %}</th>
-                                <th class="td-cat">{% trans 'Category' %}</th>
+                                <th class="td-company">{% trans 'Subject name' %}</th>
+                                <th class="td-reg">{% trans 'Reg.number' %}</th>
+                                <td class="td-empCount">{% trans 'Count' %}</td>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for partner_request in partner_requests %}
-                                {% for employee in partner_request.employees.all %}
-                                    <tr class="table-row" data-href="{% url 'root.partner.bookmark' employee.id %}">
-                                        <td class="td-id">{{ employee.id }}</td>
-                                        <td class="td-fio">{{ employee.full_name_ru }}</td>
-                                        <td class="td-reg">{{ employee.register_number }}</td>
-                                        <td class="td-phone">{{ employee.phone }}</td>
-                                        <td class="td-date">{{ employee.created|date:"H:i d.m.Y" }}</td>
-                                        {% if employee.score %}
-                                            {% if employee.score.category == "A" %}
-                                                <td class="td-cat scoreA">{{ employee.score.summa }} ({{ employee.score.category }})</td>
-                                            {% elif employee.score.category == "B" %}
-                                                <td class="td-cat scoreB">{{ employee.score.summa }} ({{ employee.score.category }})</td>
-                                            {% elif employee.score.category == "C" %}
-                                                <td class="td-cat scoreC">{{ employee.score.summa }} ({{ employee.score.category }})</td>
-                                            {% elif employee.score.category == "D" %}
-                                                <td class="td-cat scoreD">{{ employee.score.summa }} ({{ employee.score.category }})</td>
-                                            {% else %}
-                                                <td class="td-cat">{% trans 'Has no score' %}</td>
-                                            {% endif %}
-                                        {% else %}
-                                            <td class="td-cat">{% trans 'Has no score' %}</td>
-                                        {% endif %}
-                                    </tr>
-                                {% endfor %}
+                            {% for p in employer_requests %}
+                                <tr class="table-row" data-id="{{ p.employer.id }}" data-href="{% url 'root.employer.bookmark' p.id %}">
+                                    <td class="td-checkbox td-check" >
+                                        <input class="deleteCheck" type="checkbox" data-id="{{ p.id }}" name="ids" >
+                                    </td>
+                                    <td class="td-id">{{ p.employer.id }}</td>
+                                    <td class="td-fio">{{ p.employer.boss_fullname }}</td>
+                                    <td class="td-company">{{ p.employer.company_name }}</td>
+                                    <td class="td-reg">{{ p.employer.register_number }}</td>
+                                    <td class="td-empCount">{{ p.employees.count }}</td>
+                                </tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -87,12 +80,51 @@
 {% endblock %}
 
 {% block js %}
+
+    <script>
+        $(function () {
+
+            $("#deletePGroupButton").click(function (e) {
+                e.preventDefault();
+
+                let formData = new FormData();
+                let url = $(this).data("url");
+
+                var myDeldata = jQuery(".table tr:not(.header) td input:checked").map(function() {
+                    return jQuery(this).closest("tr").data("id");
+                        }).get();
+
+                result = window.confirm("{% trans 'Do you really want to delete?' %}");
+
+                if(result){
+                    console.log(myDeldata);
+                    formData.append("ids", myDeldata);
+                    $.ajax({
+                        url: url,
+                        processData: false,
+                        contentType: false,
+                        data: formData,
+                        method: 'POST',
+                        success: function (data) {
+                            location.reload();
+                        },
+                        error: function (data) {
+
+                        }
+                    });
+                }else{
+
+                }
+
+            });
+
+        });
+    </script>
     <script src="{% static 'operator/js/root/search.js' %}"></script>
     <script>
         $(function(){
-            $('.selectpicker').selectpicker();
-
-            $(".table-row").click(function() {
+            $(".table-row").click(function(e) {
+                e.stopPropagation();
                 window.document.location = $(this).data("href");
             });
 

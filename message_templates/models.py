@@ -1,12 +1,12 @@
 from django.db import models
 from django.utils.translation import gettext as _
 from employee.model.employee import Employee
-from partner.models import Partner
+from employer.models import Employer
 from datetime import datetime
 
 TYPE = (
     (1, _('Employee')),
-    (2, _('Partner')),
+    (2, _('Employer')),
 )
 
 
@@ -27,7 +27,7 @@ class TemplateHistory(models.Model):
     text = models.TextField(blank=True)
     sent_date = models.DateTimeField(default=datetime.now())
     message_type = models.CharField(max_length=10, blank=True)
-    ispartner = models.BooleanField(default=False)
+    isemployer = models.BooleanField(default=False)
 
     class Meta:
         ordering = ('-id', )
@@ -43,10 +43,10 @@ class EmployeeTemplateHistory(models.Model):
         db_table = "employee_template_history"
         ordering = ('-id', )
 
-class PartnerTemplateHistory(models.Model):
-    template_history = models.ForeignKey(TemplateHistory, on_delete=models.CASCADE, related_name="template_history_partner")
-    partner = models.ForeignKey(Partner, on_delete=models.CASCADE, related_name="partner")
+class EmployerTemplateHistory(models.Model):
+    template_history = models.ForeignKey(TemplateHistory, on_delete=models.CASCADE, related_name="template_history_employer")
+    employer = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name="employer")
 
     class Meta:
-        db_table = "partner_template_history"
+        db_table = "employer_template_history"
         ordering = ('-id', )

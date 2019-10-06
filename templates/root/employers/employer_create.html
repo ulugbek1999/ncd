@@ -3,16 +3,16 @@
 
 {% block content %}
     <div class="content-title">
-        <h2>{% trans 'Partners' %}</h2>
+        <h2>{% trans 'Employers' %}</h2>
     </div>
     <div class="card-main">
         <div class="card-main__header">
-            <h2>{{ partner.company_name }}</h2>
+            <h2>{{ employer.company_name }}</h2>
         </div>
         <div class="card-main__content">
-            <form class="partners-add__form">
+            <form class="employers-add__form">
                 <div class="col-md-4">
-                    <div class="partners-form__item">
+                    <div class="employers-form__item">
                         <div class="form-title">
                             <h2>{% trans 'Account' %}</h2>
                         </div>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <div class="partners-form__item">
+                    <div class="employers-form__item">
                         <div class="form-title">
                             <h2>{% trans 'Additional information' %}</h2>
                         </div>
@@ -74,9 +74,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="partners-button form-send__buttons">
+                    <div class="employers-button form-send__buttons">
                         <div class="form-send__button" id="formSendButton">
-                            <button type="submit" id="partners-create-button" data-url="{% url 'api:admin:partner:create' %}">{% trans 'Save' %}</button>
+                            <button type="submit" id="employers-create-button" data-url="{% url 'api:admin:employer:create' %}">{% trans 'Save' %}</button>
                         </div>
                         <div class="form-reset__buttton">
                             <button type="reset">{% trans 'Clear' %}</button>
@@ -96,7 +96,7 @@
         $(function () {
 
 
-            $("#partners-create-button").click(function (e) {
+            $("#employers-create-button").click(function (e) {
                 e.preventDefault();
                 let $formData = new FormData();
                 $formData.append("username", $("input[name='username']").val());
@@ -124,7 +124,7 @@
                         x.className = "show";
                         setTimeout(function(){
                             x.className = x.className.replace("show", "");
-                            window.location.href = '/root/partners/';
+                            window.location.href = '/root/employers/';
                         }, 1500);
                     },
                     error: function (data) {

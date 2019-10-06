@@ -4,8 +4,8 @@ from . import views
 from .employee import views as emp_views
 
 
-partner_patterns = [
-    path("update/<int:id>/", views.PartnerUpdate.as_view(), name="admin.api.partner.update")
+employer_patterns = [
+    path("update/<int:id>/", views.EmployerUpdate.as_view(), name="admin.api.employer.update")
 ]
 
 # good
@@ -41,5 +41,5 @@ urlpatterns = [
     path('operator/create/', views.OperatorCreate.as_view(), name="root.api.operator.create"),
     path('group/create/', views.GroupCreate.as_view(), name="root.api.group.create"),
     path('group/update/<int:id>/', views.GroupUpdate.as_view(), name="root.api.group.update"),
-    path("parnters/", include(partner_patterns)),
+    path("parnters/", include(employer_patterns)),
 ]

@@ -4,7 +4,7 @@ from .views import directory as directory_views
 from .views import employee as employee_views
 from .views import operator as operator_views
 from .views import rating as rating_views
-from .views import partner as partner_views
+from .views import employer as employer_views
 from .views import templates as template_views
 from .views import settings as settings_views
 
@@ -77,27 +77,27 @@ operator_patterns = [
     path('', operator_views.Operators.as_view(), name='root.operator.list'),
 ]
 
-partner_patterns = [
-    path('<int:id>/', partner_views.PartnerDetail.as_view(), name='root.partner.detail'),
-    path('create/', partner_views.PartnerCreate.as_view(), name='root.partner.create'),
-    path('', partner_views.Partners.as_view(), name='root.partner.list'),
+employer_patterns = [
+    path('<int:id>/', employer_views.EmployerDetail.as_view(), name='root.employer.detail'),
+    path('create/', employer_views.EmployerCreate.as_view(), name='root.employer.create'),
+    path('', employer_views.Employers.as_view(), name='root.employer.list'),
 ]
 
-partner_bookmarks = [
-    path('partner/<int:id>/bookmarks/', partner_views.PartnerBookmarks.as_view(), name='root.partner.bookmarks'),
-    path('partner/bookmarks/<int:id>/', partner_views.PartnerBookmark.as_view(), name='root.partner.bookmark'),
-    path('partners/', partner_views.PartnersBookmark.as_view(), name='root.partners.bookmark'),
+employer_bookmarks = [
+    path('employer/<int:id>/bookmarks/', employer_views.EmployerBookmarks.as_view(), name='root.employer.bookmarks'),
+    path('employer/bookmarks/<int:id>/', employer_views.EmployerBookmark.as_view(), name='root.employer.bookmark'),
+    path('employers/', employer_views.EmployersBookmark.as_view(), name='root.employers.bookmark'),
 ]
 
 core_patterns = [
-    path('partner/<int:id>/bookmarks/', partner_views.PartnerBookmarks.as_view(), name='root.partner.bookmarks'),
+    path('employer/<int:id>/bookmarks/', employer_views.EmployerBookmarks.as_view(), name='root.employer.bookmarks'),
 ]
 
 urlpatterns = [
     path('employees/', include(employee_patterns)),
     path('operators/', include(operator_patterns)),
-    path('partners/', include(partner_patterns)),
-    path('partner-bookmark/', include(partner_bookmarks)),
+    path('employers/', include(employer_patterns)),
+    path('employer-bookmark/', include(employer_bookmarks)),
     path('ratings/', include(rating_patterns)),
     path('directory/', include(directory_patterns)),
     path('templates/', include(template_patterns)),

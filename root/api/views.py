@@ -17,12 +17,12 @@ from directory.models import City, District, Country
 
 from log.models import Log
 from operators.models import OperatorGroup, Operator
-from partner.models import Partner
+from employer.models import Employer
 from .serializers import (
     AdminEmployeeUpdate1Serializer, AdminEmployeeUpdate2Serializer,
     AdminEmployeeUpdate4Serializer,
     GroupSerializer,
-    OperatorSerializer, PartnerUpdateSerializer, EmployeeTranslationSerializer)
+    OperatorSerializer, EmployerUpdateSerializer, EmployeeTranslationSerializer)
 
 
 class AdminEmployeeUpdate1(UpdateAPIView):
@@ -343,10 +343,10 @@ class OperatorUpdate(UpdateAPIView):
         instance.save()
 
 
-# Partners
-class PartnerUpdate(UpdateAPIView):
-    serializer_class = PartnerUpdateSerializer
-    queryset = Partner.objects.all()
+# Employers
+class EmployerUpdate(UpdateAPIView):
+    serializer_class = EmployerUpdateSerializer
+    queryset = Employer.objects.all()
     lookup_url_kwarg = "id"
 
     def perform_update(self, serializer):

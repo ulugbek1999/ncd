@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'employee',
     'operators',
     'log',
-    'partner',
+    'employer',
     'root',
     'message_templates',
     'vacancy'

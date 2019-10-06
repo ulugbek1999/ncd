@@ -3,14 +3,14 @@
 
 {% block content %}
     <div class="content-title">
-        <h2>{% trans 'Partners' %}</h2>
+        <h2>{% trans 'Employers' %}</h2>
     </div>
     <div class="card-main">
         <div class="card-main__header">
-            <h2>{{ partner.company_name }}</h2>
+            <h2>{{ employer.company_name }}</h2>
         </div>
         <div class="card-main__content">
-            <div id="exTabPartners" class="partner-profile">
+            <div id="exTabEmployers" class="employer-profile">
                 <ul  class="nav nav-pills">
                     <li class="active">
                         <a  href="#1a" data-toggle="tab">{% trans 'Additional information' %}</a>
@@ -25,9 +25,9 @@
 
                 <div class="tab-content clearfix">
                     <div class="tab-pane active" id="1a">
-                        <form class="partners-add__form">
+                        <form class="employers-add__form">
                             <div class="col-md-8">
-                                <div class="partners-form__item">
+                                <div class="employers-form__item">
                                     <div class="form-title">
                                         <h2>{% trans 'Additional information' %}</h2>
                                     </div>
@@ -35,44 +35,44 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="companyName">{% trans 'Company name' %}</label>
-                                                <input name="company_name" type="text" class="form-control" id="companyName" value="{{ partner.company_name }}">
+                                                <input name="company_name" type="text" class="form-control" id="companyName" value="{{ employer.company_name }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="regNumber">{% trans 'Reg.number' %}</label>
-                                                <input name="reg_number" type="text" class="form-control" id="regNumber" value="{{ partner.register_number }}">
+                                                <input name="reg_number" type="text" class="form-control" id="regNumber" value="{{ employer.register_number }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="nameBoss">{% trans 'Fullname' %} ({% trans 'first head' %})</label>
-                                                <input name="name_boss" type="text" class="form-control" id="nameBoss" value="{{ partner.boss_fullname }}">
+                                                <input name="name_boss" type="text" class="form-control" id="nameBoss" value="{{ employer.boss_fullname }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="nameLast">{% trans 'Fullname' %} ({% trans 'responsible person' %})</label>
-                                                <input name="name_last" type="text" class="form-control" id="nameLast" value="{{ partner.person_fullname_for_hiring }}">
+                                                <input name="name_last" type="text" class="form-control" id="nameLast" value="{{ employer.person_fullname_for_hiring }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="email">{% trans 'Email' %}</label>
-                                                <input name="email" type="text" class="form-control" id="email" value="{{ partner.email }}">
+                                                <input name="email" type="text" class="form-control" id="email" value="{{ employer.email }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="phone">{% trans 'Phone' %}</label>
-                                                <input name="phone" type="text" class="form-control" id="phone" value="{{ partner.phone }}">
+                                                <input name="phone" type="text" class="form-control" id="phone" value="{{ employer.phone }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="address">{% trans 'Legal address' %}</label>
-                                                <input name="address" type="text" class="form-control" id="address" value="{{ partner.legal_address }}">
+                                                <input name="address" type="text" class="form-control" id="address" value="{{ employer.legal_address }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="count">{% trans 'Workers amount' %}</label>
-                                                <input name="count" type="number" class="form-control" id="count" value="{{ partner.workers_amount }}">
+                                                <input name="count" type="number" class="form-control" id="count" value="{{ employer.workers_amount }}">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="partners-button form-send__buttons">
+                                <div class="employers-button form-send__buttons">
                                     <div class="form-send__button" id="formSendButton">
-                                        <button type="submit" id="partners-update-button" data-url="{% url 'admin.api.partner.update' partner.id %}">{% trans 'Save' %}</button>
+                                        <button type="submit" id="employers-update-button" data-url="{% url 'admin.api.employer.update' employer.id %}">{% trans 'Save' %}</button>
                                     </div>
                                     <div class="form-reset__buttton">
                                         <button type="reset">{% trans 'Clear' %}</button>
@@ -82,15 +82,15 @@
                         </form>
                     </div>
                     <div class="tab-pane" id="2a">
-                        <form class="partners-account__form">
+                        <form class="employers-account__form">
                             <div class="col-md-4">
-                                <div class="partners-form__item">
+                                <div class="employers-form__item">
                                     <div class="form-title">
                                         <h2>{% trans 'Account' %}</h2>
                                     </div>
                                     <div class="form-group">
                                         <label for="username">{% trans 'Username' %}</label>
-                                        <input name="username" type="text" class="form-control" id="username" value="{{ partner.user.username }}">
+                                        <input name="username" type="text" class="form-control" id="username" value="{{ employer.user.username }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="password">{% trans 'Password' %}</label>
@@ -101,9 +101,9 @@
                                         <input name="password_confirm" type="password" class="form-control" id="password_confirm">
                                     </div>
                                 </div>
-                                <div class="partners-button form-send__buttons">
+                                <div class="employers-button form-send__buttons">
                                     <div class="form-send__button" id="formSendButton">
-                                        <button type="submit" id="partners-account-button" data-url="{% url 'api:admin:partner:change-account' partner.id %}">{% trans 'Save' %}</button>
+                                        <button type="submit" id="employers-account-button" data-url="{% url 'api:admin:employer:change-account' employer.id %}">{% trans 'Save' %}</button>
                                     </div>
                                     <div class="form-reset__buttton">
                                         <button type="reset">{% trans 'Clear' %}</button>
@@ -113,14 +113,14 @@
                         </form>
                     </div>
                     <div class="tab-pane" id="3a">
-                        <div class="partners-docs">
+                        <div class="employers-docs">
                             <div class="form-title">
                                 <h2>{% trans 'Documents' %}</h2>
                             </div>
-                            <div class="partners-docs__main">
+                            <div class="employers-docs__main">
                                 <div class="files-view">
                                     <ul class="files-view__main">
-                                        {% for file in partner.partnerfile_set.all %}
+                                        {% for file in employer.employerfile_set.all %}
                                             <li>
                                                 <a data-fancybox href="{{ file.file.url }}"><i class="fa fa-file" aria-hidden="true"></i>{{ file.file.name }}</a>
                                                 <span>{{ file.file.size|filesizeformat }} KB</span>
@@ -142,7 +142,7 @@
     <script>
         $('#phone').inputmask({ mask: "+[d]{15}", greedy: false});
         $(function () {
-            $("#partners-update-button").click(function (e) {
+            $("#employers-update-button").click(function (e) {
                 e.preventDefault();
                 let $formData = new FormData();
 
@@ -167,7 +167,7 @@
                         x.className = "show";
                         setTimeout(function(){
                             x.className = x.className.replace("show", "");
-                            window.location.href = '/root/partners/';
+                            window.location.href = '/root/employers/';
                         }, 1500);
                     },
                     error: function (data) {
@@ -198,7 +198,7 @@
                 });
             });
 
-            $("#partners-account-button").click(function (e) {
+            $("#employers-account-button").click(function (e) {
                 e.preventDefault();
 
                 let $formData = new FormData();
@@ -217,7 +217,7 @@
                         x.className = "show";
                         setTimeout(function(){
                             x.className = x.className.replace("show", "");
-                            window.location.href = '/root/partners/';
+                            window.location.href = '/root/employers/';
                         }, 1500);
                     },
                     error: function (data) {

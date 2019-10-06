@@ -6,17 +6,17 @@ from pure_pagination.mixins import PaginationMixin
 
 from employee.model.employee import Employee
 
-from partner.models import Partner, PartnerEmployee, PartnerEmployeeRequest
+from employer.models import Employer, EmployerEmployee, EmployerEmployeeRequest
 from root.mixins import IsSuperUserMixin
 
 
-class Partners(IsSuperUserMixin, PaginationMixin, ListView):
-    model = Partner
-    template_name = "root/partners/partners.html"
-    context_object_name = "partners"
+class Employers(IsSuperUserMixin, PaginationMixin, ListView):
+    model = Employer
+    template_name = "root/employers/employers.html"
+    context_object_name = "employers"
 
     def get_queryset(self):
-        qs = Partner.objects.all()
+        qs = Employer.objects.all()
         username = self.request.GET.get('username')
         if username:
             qs = qs.filter(user__username__icontains=username)
@@ -45,41 +45,41 @@ class Partners(IsSuperUserMixin, PaginationMixin, ListView):
         return context
 
 
-class PartnerCreate(IsSuperUserMixin, View):
-    template_name = "root/partners/partner_create.html"
+class EmployerCreate(IsSuperUserMixin, View):
+    template_name = "root/employers/employer_create.html"
 
     def get(self, request):
         return render(request, self.template_name, {})
 
 
-class PartnerDetail(IsSuperUserMixin, DetailView):
-    context_object_name = 'partner'
-    template_name = 'root/partners/partner_update.html'
+class EmployerDetail(IsSuperUserMixin, DetailView):
+    context_object_name = 'employer'
+    template_name = 'root/employers/employer_update.html'
     pk_url_kwarg = 'id'
 
     def get_queryset(self):
-        qs = Partner.objects.all()
+        qs = Employer.objects.all()
         return qs
 
 
-class PartnersBookmark(IsSuperUserMixin, ListView):
-    template_name = 'root/partners/partners_bookmark.html'
-    context_object_name = 'partner_requests'
+class EmployersBookmark(IsSuperUserMixin, ListView):
+    template_name = 'root/employers/employers_bookmark.html'
+    context_object_name = 'employer_requests'
 
     def get_queryset(self):
-        return PartnerEmployeeRequest.objects.all()
+        return EmployerEmployeeRequest.objects.all()
 
 
-class PartnerBookmarks(IsSuperUserMixin, ListView):
-    template_name = 'root/partners/partner_bookmarks.html'
-    context_object_name = 'partner_requests'
+class EmployerBookmarks(IsSuperUserMixin, ListView):
+    template_name = 'root/employers/employer_bookmarks.html'
+    context_object_name = 'employer_requests'
 
     def get_queryset(self):
-        return PartnerEmployeeRequest.objects.filter(id=self.kwargs.get('id'))
+        return EmployerEmployeeRequest.objects.filter(id=self.kwargs.get('id'))
 
 
-class PartnerBookmark(IsSuperUserMixin, DetailView):
-    template_name = 'root/partners/partner_bookmark.html'
+class EmployerBookmark(IsSuperUserMixin, DetailView):
+    template_name = 'root/employers/employer_bookmark.html'
     context_object_name = 'employee'
     model = Employee
     pk_url_kwarg = 'id'

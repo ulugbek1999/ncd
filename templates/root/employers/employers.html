@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="content-title">
-        <h2>{% trans 'Partners' %}</h2>
+        <h2>{% trans 'Employers' %}</h2>
     </div>
     <div class="card-main">
         <div class="card-main__header">
@@ -40,10 +40,10 @@
                     <div class="col-md-3" style="float: right;text-align: right">
                         <div class="add-buttons">
                             <div class="deletePart-buttons">
-                                <button id="deletePGroupButton" data-url="{% url 'api:admin:partner:delete' %}">{% trans 'Delete' %}</button>
+                                <button id="deletePGroupButton" data-url="{% url 'api:admin:employer:delete' %}">{% trans 'Delete' %}</button>
                             </div>
                             <div class="form-add__button" id="">
-                                <a href="{% url 'root.partner.create' %}">{% trans 'Add' %}</a>
+                                <a href="{% url 'root.employer.create' %}">{% trans 'Add' %}</a>
                             </div>
                         </div>
                     </div>
@@ -65,16 +65,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for partner in partners %}
-                            <tr class="table-row" data-id="{{partner.id}}" data-href="{% url 'root.partner.detail' partner.id %}">
+                        {% for employer in employers %}
+                            <tr class="table-row" data-id="{{employer.id}}" data-href="{% url 'root.employer.detail' employer.id %}">
                                 <td class="td-checkbox td-check" >
-                                    <input class="deleteCheck" type="checkbox" data-id="{{partner.id}}" name="ids" >
+                                    <input class="deleteCheck" type="checkbox" data-id="{{employer.id}}" name="ids" >
                                 </td>
-                                <td class="td-id">{{ partner.id }}</td>
-                                <td class="td-comp">{{ partner.company_name }}</td>
-                                <td class="td-reg">{{ partner.register_number }}</td>
-                                <td class="td-phone">{{ partner.phone }}</td>
-                                {% if partner.user is None %}
+                                <td class="td-id">{{ employer.id }}</td>
+                                <td class="td-comp">{{ employer.company_name }}</td>
+                                <td class="td-reg">{{ employer.register_number }}</td>
+                                <td class="td-phone">{{ employer.phone }}</td>
+                                {% if employer.user is None %}
                                     <td class="td-status">{% trans 'Not accepted' %}</td>
                                 {% else %}
                                     <td class="td-status">{% trans 'Accepted' %}</td>

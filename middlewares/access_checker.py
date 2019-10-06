@@ -29,9 +29,9 @@
 #             if superuser:
 #                 pass
 #                 # return HttpResponseRedirect(reverse("root.employee.list"))
-#             partner = is_user_partner(request.user)
-#             if partner:
-#                 pass  # user is partner
+#             employer = is_user_employer(request.user)
+#             if employer:
+#                 pass  # user is employer
 #             employee = is_user_employee(request.user)
 #             if employee:
 #                 pass  # user is employee
@@ -53,8 +53,8 @@
 #     return False
 #
 #
-# def is_user_partner(user):
-#     if hasattr(user, "partner"):
+# def is_user_employer(user):
+#     if hasattr(user, "employer"):
 #         return True
 #     return False
 #

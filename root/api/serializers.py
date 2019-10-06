@@ -3,7 +3,7 @@ from rest_framework.fields import CharField
 
 from employee.model.employee import Employee
 from operators.models import OperatorGroup, Operator
-from partner.models import Partner
+from employer.models import Employer
 
 
 class AdminEmployeeUpdate1Serializer(ModelSerializer):
@@ -65,10 +65,10 @@ class OperatorSerializer(ModelSerializer):
         ]
 
 
-# Partner
-class PartnerUpdateSerializer(ModelSerializer):
+# Employer
+class EmployerUpdateSerializer(ModelSerializer):
     class Meta:
-        model = Partner
+        model = Employer
         fields = [
             'company_name',
             'phone',

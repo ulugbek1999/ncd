@@ -65,9 +65,8 @@
                             <li id="operator_list"><a href="{% url 'root.operator.list' %}">{% trans 'List of operators' %}</a></li>
                         </ul>
                     </li>
-                    <li class="current"><a href="{% url 'root.partner.list' %}"> <span>{% trans 'Employer accounts' %}</span></a></li>
-                    <li class="current"><a href="{% url 'root.partners.bookmark' %}"><span>{% trans 'Requests for candidates from employers' %}</span></a></li>
-                    <li class="current"><a href="{% url 'root.employee.changed' %}"><span>{% trans 'Requests to change Personal Cards' %}</span></a></li>
+                    <li class="current"><a href="{% url 'root.employer.list' %}"> <span>{% trans 'Employer accounts' %}</span></a></li>
+                    <li class="current"><a href="{% url 'root.employers.bookmark' %}"><span>{% trans 'Requests for candidates from employer' %}</span></a></li>
                     <li class="current"><a href="{% url 'root.template.list' %}"><span>{% trans 'SMS, E-mail' %}</span></a></li>
                     <li class="current"><a href="{% url 'root.template.history' %}"><span>{% trans 'History of sent SMS/Email messages' %}</span></a></li>
                     <li class="current"><a href="{% url 'root.vacancy.list' %}"><span>{% trans 'Employee requests for vacancies' %}</span></a></li>

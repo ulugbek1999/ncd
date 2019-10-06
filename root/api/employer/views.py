@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from django.contrib.auth.models import User
-from partner.models import Partner
+from employer.models import Employer
 
 
 class Create(APIView):

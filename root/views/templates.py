@@ -6,8 +6,8 @@ from pure_pagination.mixins import PaginationMixin
 
 from directory.models import City
 from employee.model.employee import Employee
-from message_templates.models import Template, TemplateHistory, PartnerTemplateHistory, EmployeeTemplateHistory
-from partner.models import Partner
+from message_templates.models import Template, TemplateHistory, EmployerTemplateHistory, EmployeeTemplateHistory
+from employer.models import Employer
 from root.mixins import IsSuperUserMixin
 from django.template.defaulttags import register
 
@@ -51,7 +51,7 @@ class TemplateHistoryDetailView(IsSuperUserMixin, DetailView):
         data = {}
         context = super().get_context_data(**kwargs)
         ids = []
-        if self.object.ispartner == False:
+        if self.object.isemployer == False:
             qs = EmployeeTemplateHistory.objects.filter(template_history_id__exact=history_template_id)
             for q in qs:
                 ids.append(q.employee_id)
@@ -59,11 +59,11 @@ class TemplateHistoryDetailView(IsSuperUserMixin, DetailView):
             context["employees"] = employees    
                 # context["employees"] = employee
         else:
-            qs = PartnerTemplateHistory.objects.filter(template_history_id__exact=history_template_id)
+            qs = EmployerTemplateHistory.objects.filter(template_history_id__exact=history_template_id)
             for q in qs:
-                ids.append(q.partner_id)
-            partner = Partner.objects.filter(id__in=ids)
-            context["partners"] = partner
+                ids.append(q.employer_id)
+            employer = Employer.objects.filter(id__in=ids)
+            context["employers"] = employer
         return context
 
 
@@ -82,9 +82,9 @@ class TemplateDetailView(IsSuperUserMixin, DetailView):
             qs = Employee.objects.all()
             context['employees'] = Employee.objects.search_filter(qs, self.request)
         elif self.object.type == 2:
-            self.template_name = 'root/templates/partners.html'
-            qs = Partner.objects.filter(user__isnull=False)
-            context['partners'] = Partner.objects.search_filter(qs, self.request)
+            self.template_name = 'root/templates/employers.html'
+            qs = Employer.objects.filter(user__isnull=False)
+            context['employers'] = Employer.objects.search_filter(qs, self.request)
         context['cities'] = City.objects.all()
         for k, v in self.request.GET.items():
             context[k] = v
