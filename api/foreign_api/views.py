@@ -104,6 +104,6 @@ class VisitorsMailingList(APIView):
         try:
             MailingList.objects.create(email = email, country_code = country_code)
         except IntegrityError:
-            return Response("This email was already subscribed!", status=HTTP_400_BAD_REQUEST)
+            return Response("This email has already been added to the list!", status=HTTP_400_BAD_REQUEST)
         
         return Response("Congratulations! You have successfully subscribed.", status=HTTP_200_OK)

@@ -137,7 +137,7 @@ class Employees(IsSuperUserMixin, PaginationMixin, ListView):
         category = data.get('category')
         if category:
             qs = qs.filter(score__category=category)
-        return qs.order_by('-register_number')
+        return qs.order_by('-id')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
