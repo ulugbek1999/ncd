@@ -55,7 +55,11 @@ INSTALLED_APPS = [
     'employer',
     'root',
     'message_templates',
-    'vacancy'
+    'vacancy',
+    'corsheaders',
+    "oauth2client",
+    "gspread",
+    "mail"
 ]
 
 CRON_CLASSES = [
@@ -71,6 +75,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'urls'
@@ -131,13 +136,13 @@ DATABASES = {
 
 LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'Asia/Tashkent'
+TIME_ZONE = 'Asia/Almaty'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 LANGUAGES = (
     ('ru', _('Russian')),
@@ -197,3 +202,7 @@ if not DEBUG:
         from .prod import *
     except ImportError:
         pass
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+SCOPE = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]

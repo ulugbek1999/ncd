@@ -4,8 +4,13 @@ from django.contrib.auth.models import User
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
+from rest_framework.permissions import AllowAny
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR, HTTP_400_BAD_REQUEST
+from django.utils import timezone
+from psycopg2.errorcodes import UNIQUE_VIOLATION
+from mail.models import MailingList
 from api.foreign_api.serializers import UserSerializer
+from django.db.utils import IntegrityError
 
 #
 # class UserCreateAPIView(CreateAPIView):
@@ -15,6 +20,7 @@ from api.foreign_api.serializers import UserSerializer
 from employee.model.employee import Employee
 from utils.mail import send_email
 from utils.sms import send_sms
+from utils.gspread import send_gspread
 
 
 class UserCreateAPIView(APIView):
@@ -59,3 +65,45 @@ class UserCreateAPIView(APIView):
         except Employee.DoesNotExist:
             pass
         return Response()
+
+
+class VisitorsGsheet(APIView):
+    permission_classes = (AllowAny,)
+
+    def post(self, request):
+        name, email = request.data.get("name"), request.data.get("email")
+        subject, message = request.data.get("subject"), request.data.get("message")
+        location = request.data.get("location")
+        if not name:
+            return Response("Name cannot be empty!", status=HTTP_400_BAD_REQUEST)
+        if not email:
+            return Response("Email cannot be empty!", status=HTTP_400_BAD_REQUEST)
+        if not subject:
+            return Response("Subject cannot be empty!", status=HTTP_400_BAD_REQUEST)
+        if not message:
+            return Response("Message cannot be empty!", status=HTTP_400_BAD_REQUEST)
+        if not location:
+            return Response("Location cannot be empty!", status=HTTP_400_BAD_REQUEST)
+        date = timezone.now()
+        date_str = date.strftime("%H:%M:%S %d.%m.%Y")
+        send_gspread([
+            name,
+            email,
+            subject,
+            message,
+            location,
+            date_str
+        ])
+        return Response("Thank you for your request! We will contact you soon.", status=HTTP_200_OK)
+
+class VisitorsMailingList(APIView):
+    permission_classes = (AllowAny, )
+
+    def post(self, request):
+        email, country_code = request.data.get("email"), request.data.get("country_code")
+        try:
+            MailingList.objects.create(email = email, country_code = country_code)
+        except IntegrityError:
+            return Response("This email was already subscribed!", status=HTTP_400_BAD_REQUEST)
+        
+        return Response("Congratulations! You have successfully subscribed.", status=HTTP_200_OK)
