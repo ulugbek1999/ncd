@@ -777,7 +777,9 @@ $(function () {
                languageFormData.append(`file_${i}`, fImage);
            }
        }
-       let langUrl = $('.language').data('form-url');
+       let langUrl = document.querySelector(".language").dataset.formUrl;
+       console.log(langUrl)
+       console.log("Hello")
        $.ajax({
            url: langUrl,
            data: languageFormData,

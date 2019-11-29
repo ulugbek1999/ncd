@@ -3,6 +3,7 @@ from rest_framework.generics import UpdateAPIView
 from employee.model.employee import Employee
 from log.models import Log
 from .serializers import EmployeeSerializer
+from rest_framework.response import Response
 
 
 class EmployeeCreate(UpdateAPIView):

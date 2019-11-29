@@ -597,14 +597,19 @@
 {% block js %}
     <script>
         function dateMyFormat(date) {
-            var elem = date.split('.');
-            var newMyDate = elem[2] + '-' + elem[1] + '-' + elem[0];
-            //console.log(newMyDate);
-            if(date){
-                return newMyDate;
-            }else{
-                return '';
+            try {
+                var elem = date.split('.');
+                var newMyDate = elem[2] + '-' + elem[1] + '-' + elem[0];
+                //console.log(newMyDate);
+                if(date){
+                    return newMyDate;
+                }else{
+                    return '';
+                }
+            } catch {
+
             }
+            
         }
         $(function () {
                 $.fn.datepicker.dates['ru'] = {
@@ -675,7 +680,8 @@
         var exp_count = parseInt($("input[name='exp_cout']").val());
         var lang_count = parseInt($("input[name='lang_count']").val());
 
-        // Edu files
+        try {
+            // Edu files
         for (let i = 1; i < edu_count + 1; i++){
             let edu_file_count = parseInt($(`.education-item__${i}`).data('files-count'));
             let file_url = new Array();
@@ -783,6 +789,11 @@
                 fExp[i].addFile(decodeURI(file_url[j]));
             }
         }
+        }
+        catch {
+
+        }
+        
 
         /* Materials */
         var eduTypes = ``;
@@ -1369,7 +1380,7 @@
                    languageFormData.append(`name_${i}`, $(`select[name='lang_name_${i}']`).val());
                    languageFormData.append(`level_${i}`, $(`select[name='lang_level_${i}']`).val());
                    languageFormData.append(`is_required_to_check_${i}`, is_check);
-
+                try {
                    var languageCountFile = fLang[i].getFiles().length;
                    for (var j = 0; j < languageCountFile; j++) {
                        //languageFormData.append(`file_${i}`, fLang[i].getFiles()[j].file);
@@ -1377,8 +1388,13 @@
                        let fImage = new File([f], f.name, {type: f.type});
                        languageFormData.append(`file_${i}`, fImage);
                    }
+                } catch {
+
+                }
+                   
                }
                let langUrl = $('.language').data('form-url');
+               console.log(langUrl)
                $.ajax({
                    url: langUrl,
                    data: languageFormData,

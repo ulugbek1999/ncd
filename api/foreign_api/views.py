@@ -11,6 +11,8 @@ from psycopg2.errorcodes import UNIQUE_VIOLATION
 from mail.models import MailingList
 from api.foreign_api.serializers import UserSerializer
 from django.db.utils import IntegrityError
+import json
+# from serializers import EmployerRequestCreateSerializer
 
 #
 # class UserCreateAPIView(CreateAPIView):
@@ -107,3 +109,11 @@ class VisitorsMailingList(APIView):
             return Response("This email has already been added to the list!", status=HTTP_400_BAD_REQUEST)
         
         return Response("Congratulations! You have successfully subscribed.", status=HTTP_200_OK)
+    
+
+class RegisterEmployee(APIView):
+    permission_classes = (AllowAny, )
+
+    def post(self, request):
+        print(request.data)
+        return Response("Hello, world")

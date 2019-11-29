@@ -13,6 +13,7 @@ from employee.model.experience import ExperienceFile
 from employee.model.language import LanguageFile
 from employee.model.relative import RelativeFile
 from employee.model.reward import RewardFile
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 
 class Employee1Update(UpdateAPIView):
@@ -23,8 +24,13 @@ class Employee1Update(UpdateAPIView):
 
 class Employee2Update(UpdateAPIView):
     queryset = Employee.objects.all()
-    serializer_class = Employee2Serializer
     lookup_url_kwarg = 'id'
+
+    def put(self, request, id):
+        employee = Employee.objects.get(pk=id)
+        validated_save_data(request, employee, Employee2Serializer)
+        return Response(status=200)
+    
 
 
 class Employee4Update(UpdateAPIView):
@@ -32,6 +38,30 @@ class Employee4Update(UpdateAPIView):
     serializer_class = Employee4Serializer
     lookup_url_kwarg = 'id'
 
+    def put(self, request, id):
+        employee = Employee.objects.get(pk=id)
+        saved = validated_save_data(request, employee, Employee4Serializer)
+        print(request.data)
+        if saved:
+            return Response(status=200)
+        return Response(status=400)
+
+
+def validated_save_data(request, model, serializer_class):
+    new_data = {}
+    for key in request.data:
+        if request.data.get(key) == "null":
+            new_data[key] = None
+        elif isinstance(request.data.get(key), InMemoryUploadedFile):
+            new_data[key] = request.FILES.get(key)
+        else:
+            new_data[key] = request.data.get(key)
+    serializer = serializer_class(model, data=new_data)
+    if serializer.is_valid():
+        serializer.save()
+        return True
+    else:
+        return False
 
 class EmployeeDeleteView(APIView):
     def post(self, request):

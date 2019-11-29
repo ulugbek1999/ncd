@@ -45,22 +45,13 @@ class Employee2Serializer(ModelSerializer):
             'blood_resus',
             'vision_l',
             'vision_r',
+            'photo_1',
+            'photo_2',
+            'photo_3',
+            'photo_4'
         )
 
     def update(self, instance, validated_data):
-        request = self.context['request']
-        photo_1 = request.FILES.get('photo_1')
-        if photo_1:
-            validated_data['photo_1'] = photo_1
-        photo_2 = request.FILES.get('photo_2')
-        if photo_2:
-            validated_data['photo_2'] = photo_2
-        photo_3 = request.FILES.get('photo_3')
-        if photo_3:
-            validated_data['photo_3'] = photo_3
-        photo_4 = request.FILES.get('photo_4')
-        if photo_4:
-            validated_data['photo_4'] = photo_4
         return super().update(instance, validated_data)
 
 
@@ -70,28 +61,17 @@ class Employee4Serializer(ModelSerializer):
         fields = (
             'wages',
             'is_ready_for_university',
-            'criminal_number',
-            'criminal_issue',
-            'criminal_comment_ru',
-            'add_spec_signs_ru',
             'hobby_ru',
             'other_ru',
-            'psycholog',
             'vision_r',
+            'is_employee',
+            'is_young_talent',
+            'is_student',
+            'fingerprint'
         )
 
     def update(self, instance, validated_data):
-        request = self.context['request']
-        if request.POST.get('level'):
-            if request.POST.get('level') == 'is_employee':
-                validated_data['is_employee'] = True
-            elif request.POST.get('level') == 'is_youth_talent':
-                validated_data['is_youth_talent'] = True
-            elif request.POST.get('level') == 'is_student':
-                validated_data['is_student'] = True
-        fingerprint = request.FILES.get('fingerprint')
-        if fingerprint:
-            validated_data['fingerprint'] = fingerprint
+        print(validated_data)
         return super().update(instance, validated_data)
 
 

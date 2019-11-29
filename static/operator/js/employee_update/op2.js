@@ -30,20 +30,37 @@ $(function () {
        let $formData = new FormData();
        let url = $(this).data("url");
 
-       $formData.append("appearance", $("input[name='appearance']:checked").val());
-       $formData.append("neatness", $("input[name='neatness']:checked").val());
-       $formData.append("skin", $("input[name='skin']:checked").val());
-       $formData.append("height", $("input[name='height']").val());
-       $formData.append("weight", $("input[name='weight']").val());
-       $formData.append("fatness", $("input[name='fatness']").val());
-       $formData.append("blood_group", $("input[name='blood_group']:checked").val());
-       $formData.append("blood_resus", $("input[name='blood_resus']:checked").val());
-       $formData.append("vision_l", $("input[name='vision_l']").val().replace(',', '.'));
-       $formData.append("vision_r", $("input[name='vision_r']").val().replace(',', '.'));
-       $formData.append("photo_1", $("input[name='photo_1']")[0].files[0]);
-       $formData.append("photo_2", $("input[name='photo_2']")[0].files[0]);
-       $formData.append("photo_3", $("input[name='photo_3']")[0].files[0]);
-       $formData.append("photo_4", $("input[name='photo_4']")[0].files[0]);
+       var appearance = $("input[name='appearance']:checked").val() || null
+       var neatness = $("input[name='neatness']:checked").val() || null
+       var skin = $("input[name='skin']:checked").val() || null
+       var height = $("input[name='height']").val() || null
+       var weight = $("input[name='weight']").val() || null
+       var fatness = $("input[name='fatness']").val() || null
+       var blood_group = $("input[name='blood_group']:checked").val() || null
+       var blood_resus = $("input[name='blood_resus']:checked").val() || null
+       var vision_l = $("input[name='vision_l']").val().replace(',', '.') || null
+       var vision_r = $("input[name='vision_r']").val().replace(',', '.') || null
+       var photo_1 = $("input[name='photo_1']")[0].files[0] || null
+       var photo_2 = $("input[name='photo_2']")[0].files[0] || null
+       var photo_3 = $("input[name='photo_3']")[0].files[0] || null
+       var photo_4 = $("input[name='photo_4']")[0].files[0] || null
+
+
+       $formData.append("appearance", appearance);
+       
+       $formData.append("neatness", neatness);
+       $formData.append("skin", skin);
+       $formData.append("height", height);
+       $formData.append("weight", weight);
+       $formData.append("fatness", fatness);
+       $formData.append("blood_group", blood_group);
+       $formData.append("blood_resus", blood_resus);
+       $formData.append("vision_l", vision_l);
+       $formData.append("vision_r", vision_r);
+       $formData.append("photo_1", photo_1);
+       $formData.append("photo_2", photo_2);
+       $formData.append("photo_3", photo_3);
+       $formData.append("photo_4", photo_4);
 
        $.ajax({
            url: url,

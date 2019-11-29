@@ -36,43 +36,6 @@
                 <div class="col-md-3">
                     <div class="operator4-col">
                         <div class="form-title">
-                            <h2>{% trans 'Wages' %}</h2>
-                        </div>
-                        <div class="operator4-item">
-                            <div class="form-group radio-form">
-                                <div class="radio-group">
-                                    <input type="radio" id="wages0" name="wages" value="500" {% if employee.wages == "500" %}checked{% endif %}>
-                                    <label for="wages0">
-                                        <span>{% trans 'Less than 500$' %}</span>
-                                    </label>
-                                </div>
-                                <div class="radio-group">
-                                    <input type="radio" id="wages1" name="wages" value="500-1000" {% if employee.wages == "500-1000" %}checked{% endif %}>
-                                    <label for="wages1">
-                                        <span>{% trans '500$-1000$' %}</span>
-                                    </label>
-                                </div>
-                                <div class="radio-group">
-                                    <input type="radio" id="wages2" name="wages" value="1000-1500" {% if employee.wages == "1000-1500" %}checked{% endif %}>
-                                    <label for="wages2">
-                                        <span>{% trans '1000$-1500$' %}</span>
-                                    </label>
-                                </div>
-                                <div class="radio-group">
-                                    <input type="radio" id="wages3" name="wages" value="1500-2000" {% if employee.wages == "1500-2000" %}checked{% endif %}>
-                                    <label for="wages3">
-                                        <span>{% trans '1500$-2000$' %}</span>
-                                    </label>
-                                </div>
-                                <div class="radio-group">
-                                    <input type="radio" id="wages4" name="wages" value="2500" {% if employee.wages == "2500" %}checked{% endif %}>
-                                    <label for="wages4">
-                                        <span>{% trans '2500$ more' %}</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-title">
                             <h2>{% trans 'Ready for university' %}</h2>
                         </div>
                         <div class="operator4-item">
@@ -93,28 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="operator4-col">
-                        <div class="form-title">
-                            <h2>{% trans 'Criminal issues' %}</h2>
-                        </div>
-                        <div class="operator4-item">
-                            <div class="form-group">
-                                <label for="criminalNumber">{% trans 'Criminal number' %}</label>
-                                <input name="criminal_number" type="text" class="form-control" id="criminalNumber" required  value="{{ employee.criminal_number }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="criminalIssue">{% trans 'Criminal date' %}</label>
-                                <input name="criminal_issue" autocomplete="off" type="text" class="datepickerFrom form-control" data-date-format="dd.mm.yyyy" id="criminalIssue" required value="{{ employee.criminal_issue|date:'d.m.Y' }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="criminalComment">{% trans 'Comment' %} <i>({% trans 'not required' %})</i></label>
-                                    <textarea name="criminal_comment" rows="5" class="form-control" id="criminalComment">{{ employee.criminal_comment_ru }}</textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                 <div class="col-md-3">
+                 <div class="col-md-4">
                     <div class="operator4-col">
                         <div class="form-title">
                             <h2>{% trans 'Additional info' %}</h2>
@@ -137,51 +79,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="operator4-col__psixolog">
-                        <div class="form-title">
-                            <h2>{% trans 'Psycholog score' %}</h2>
-                        </div>
-                        <div class="form-group radio-form">
-                            <div class="radio-group">
-                                <input type="radio" id="psixolog5" name="psixolog" value="5" {% if employee.psycholog == 5 %}checked{% endif %}>
-                                <label for="psixolog5">
-                                    <span>5</span>
-                                </label>
-                            </div>
-                            <div class="radio-group">
-                                <input type="radio" id="psixolog6" name="psixolog" value="6" {% if employee.psycholog == 6 %}checked{% endif %}>
-                                <label for="psixolog6">
-                                    <span>6</span>
-                                </label>
-                            </div>
-                            <div class="radio-group">
-                                <input type="radio" id="psixolog7" name="psixolog" value="7" {% if employee.psycholog == 7 %}checked{% endif %}>
-                                <label for="psixolog7">
-                                    <span>7</span>
-                                </label>
-                            </div>
-                            <div class="radio-group">
-                                <input type="radio" id="psixolog8" name="psixolog" value="8" {% if employee.psycholog == 8 %}checked{% endif %}>
-                                <label for="psixolog8">
-                                    <span>8</span>
-                                </label>
-                            </div>
-                            <div class="radio-group">
-                                <input type="radio" id="psixolog9" name="psixolog" value="9" {% if employee.psycholog == 9 %}checked{% endif %}>
-                                <label for="psixolog9">
-                                    <span>9</span>
-                                </label>
-                            </div>
-                            <div class="radio-group">
-                                <input type="radio" id="psixolog10" name="psixolog" value="10" {% if employee.psycholog == 10 %}checked{% endif %}>
-                                <label for="psixolog10">
-                                    <span>10</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="operator4-col__psixolog">
+                        <div class="operator4-col__psixolog">
                         <div class="form-title">
                             <h2>{% trans 'Level' %}</h2>
                         </div>
@@ -193,7 +91,7 @@
                                 </label>
                             </div>
                             <div class="radio-group">
-                                <input type="radio" id="youthTalent" name="level" value="is_youth_talent" {% if employee.is_youth_talent %}checked{% endif %}>
+                                <input type="radio" id="youthTalent" name="level" value="is_young_talent" {% if employee.is_young_talent %}checked{% endif %}>
                                 <label for="youthTalent">
                                     <span>{% trans 'Young talent' %}</span>
                                 </label>
@@ -206,6 +104,10 @@
                             </div>
                         </div>
                     </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    
                 </div>
                 <div class="col-md-12">
                     <div class="form-title">

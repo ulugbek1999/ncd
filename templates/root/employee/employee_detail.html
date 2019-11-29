@@ -453,15 +453,15 @@
                                         <strong>{% trans 'Desired countries' %}:</strong>
                                         <span>{{ employee.get_countries_list }}</span>
                                     </li>
-                                    <li>
+                                    {% comment %} <li>
                                         <strong>{% trans 'Wages' %}:</strong>
                                         <span>{{ employee.wages }}</span>
-                                    </li>
-                                    <li>
+                                    </li> {% endcomment %}
+                                    <li>    
                                         <strong>{% trans 'Ready for university' %}:</strong>
                                         <span>{{ employee.get_is_ready_for_universitet_display }}</span>
                                     </li>
-                                    <li>
+                                    {% comment %} <li>
                                         <strong>{% trans 'Criminal number' %}:</strong>
                                         <span>{{ employee.criminal_number }}</span>
                                     </li>
@@ -472,11 +472,11 @@
                                     <li>
                                         <strong>{% trans 'Criminal comment' %}:</strong>
                                         <span>{{ employee.criminal_comment }}</span>
-                                    </li>
-                                    <li>
+                                    </li> {% endcomment %}
+                                    {% comment %} <li>
                                         <strong>{% trans 'Spec. signs' %}:</strong>
                                         <span>{{ employee.add_spec_signs }}</span>
-                                    </li>
+                                    </li> {% endcomment %}
                                     <li>
                                         <strong>{% trans 'Hobby' %}:</strong>
                                         <span>{{ employee.hobby }}</span>

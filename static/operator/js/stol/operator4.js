@@ -76,16 +76,10 @@ $(function () {
        }
 
        let formData = new FormData();
-       formData.append("wages", $("input[name='wages']:checked").val());
-       formData.append("is_ready_for_universitet", $("input[name='to_university']:checked").val());
-       formData.append("criminal_number", $("input[name='criminal_number']").val());
-       formData.append("criminal_issue", dateMyFormat($("input[name='criminal_issue']").val()));
-       formData.append("criminal_comment_ru", $("textarea[name='criminal_comment']").val());
-       formData.append("add_spec_signs_ru", $("input[name='add_spec_signs']").val());
+       formData.append("is_ready_for_university", $("input[name='to_university']:checked").val());
        formData.append("hobby_ru", $("input[name='hobby']").val());
        formData.append("other_ru", $("textarea[name='other']").val());
        formData.append("country", $("select[name='des_countries']").val());
-       formData.append("psycholog", $("input[name='psixolog']:checked").val());
        formData.append("level", $("input[name='level']:checked").val());
 
 
