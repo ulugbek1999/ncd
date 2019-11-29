@@ -1,12 +1,17 @@
 function dateMyFormat(date) {
-    var elem = date.split('.');
-    var newMyDate = elem[2] + '-' + elem[1] + '-' + elem[0];
-    //console.log(newMyDate);
-    if(date){
-        return newMyDate;
-    }else{
-        return '';
+    try {
+        var elem = date.split('.');
+        var newMyDate = elem[2] + '-' + elem[1] + '-' + elem[0];
+        //console.log(newMyDate);
+        if(date){
+            return newMyDate;
+        }else{
+            return '';
+        }
+    } catch (error) {
+        
     }
+    
 }
 $(function () {
 
