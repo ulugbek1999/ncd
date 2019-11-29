@@ -8,10 +8,11 @@ from rest_framework.views import APIView
 from api.admin.employee.serializers import Employee1Serializer, Employee2Serializer, Employee4Serializer
 from employee.model.army import ArmyFile
 from employee.model.education import EducationFile
-from employee.model.employee import Employee
+from employee.model.employee import Employee, EmployeeCountry
 from employee.model.experience import ExperienceFile
 from employee.model.language import LanguageFile
 from employee.model.relative import RelativeFile
+from directory.models import Country
 from employee.model.reward import RewardFile
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
@@ -43,6 +44,12 @@ class Employee4Update(UpdateAPIView):
         saved = validated_save_data(request, employee, Employee4Serializer)
         print(request.data)
         if saved:
+            country = request.data.get("country")
+            if country != "null":
+                for i in country:
+                    if i != ",":
+                        c = Country.objects.get(pk=int(i))
+                        EmployeeCountry.objects.create(employee=employee, country=c)
             return Response(status=200)
         return Response(status=400)
 
