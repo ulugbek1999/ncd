@@ -1,18 +1,22 @@
 import datetime
 
 from django.contrib.auth.models import User
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, RetrieveAPIView
 from rest_framework.response import Response
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR, HTTP_400_BAD_REQUEST
 from django.utils import timezone
 from psycopg2.errorcodes import UNIQUE_VIOLATION
 from mail.models import MailingList
-from api.foreign_api.serializers import UserSerializer
+from api.foreign_api.serializers import UserSerializer, EmployerRequestCreateSerializer
 from django.db.utils import IntegrityError
 import json
-# from serializers import EmployerRequestCreateSerializer
+from employer.models import Employer
+from rest_framework_jwt.settings import api_settings
+from rest_framework.permissions import IsAuthenticated
+from utils.permissions import IsOwner
 
 #
 # class UserCreateAPIView(CreateAPIView):
@@ -111,9 +115,62 @@ class VisitorsMailingList(APIView):
         return Response("Congratulations! You have successfully subscribed.", status=HTTP_200_OK)
     
 
-class RegisterEmployee(APIView):
+class RegisterEmployer(CreateAPIView):
+    permission_classes = (AllowAny, )
+    queryset = Employee.objects.all()
+    serializer_class = EmployerRequestCreateSerializer
+
+
+class Authenticate(APIView):
     permission_classes = (AllowAny, )
 
     def post(self, request):
-        print(request.data)
-        return Response("Hello, world")
+        data = request.data
+
+        # Checking whether the user exists
+        try:
+            user = User.objects.get(username=data.get("username"))
+        except User.DoesNotExist:
+            return Response("Bad credentials!", status=status.HTTP_406_NOT_ACCEPTABLE)
+        password_matches = user.check_password(data.get("password"))
+        is_employer = hasattr(user, "employer")
+        if password_matches:
+                # Generating JSON web token
+            jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+            jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+            payload = jwt_payload_handler(user)
+            token = jwt_encode_handler(payload)
+            response = {
+                "token": token,
+            }
+            return Response(response, status=status.HTTP_200_OK)
+        return Response("Bad credentials!", status=status.HTTP_406_NOT_ACCEPTABLE)
+
+class GetUser(APIView):
+    permission_classes = (IsAuthenticated, )
+    
+    def get(self, request):
+        is_employer = hasattr(request.user, "employer")
+        role = ""
+        id = 0
+        if not is_employer:
+            id = request.user.employee.id
+            role = "employee"
+        else:
+            id = request.user.employer.id
+            role = "employer"
+        response = {
+            "user": {
+                "id": id,
+                "username": request.user.username,
+                "role": role
+            }
+        }
+        return Response(response, status=status.HTTP_200_OK)
+
+
+class GetUserInformation(RetrieveAPIView):
+    queryset = Employer.objects.all()
+    permission_classes = (IsOwner, )
+    lookup_url_kwarg = "id"
+    serializer_class = EmployerRequestCreateSerializer

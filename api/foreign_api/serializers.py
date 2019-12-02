@@ -1,10 +1,10 @@
 import datetime
 from django.contrib.auth.models import User
-from rest_framework.serializers import Serializer, ModelSerializer
+from rest_framework.serializers import Serializer, ModelSerializer, ReadOnlyField
 from rest_framework.fields import IntegerField
 
 from employee.model.employee import Employee
-from employer.models import Employer
+from employer.models import Employer, EmployerFile
 from utils.mail import send_email
 from utils.sms import send_sms
 
@@ -31,6 +31,8 @@ class UserSerializer(Serializer):
 
 
 class EmployerRequestCreateSerializer(ModelSerializer):
+    owner = ReadOnlyField(source="owner.username")
+
     class Meta:
         model = Employer
         fields = (
@@ -42,13 +44,14 @@ class EmployerRequestCreateSerializer(ModelSerializer):
             'legal_address',
             'workers_amount',
             'email',
+            "owner"
         )
 
     def create(self, validated_data):
         request = self.context['request']
         instance = Employer(**validated_data)
         instance.save()
-        for i in request.FILES.getlist('file'):
+        for i in request.FILES.getlist('files'):
             f = EmployerFile(employer=instance, file=i)
             f.save()
         return instance

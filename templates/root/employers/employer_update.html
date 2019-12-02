@@ -114,7 +114,7 @@
                     </div>
                     <div class="tab-pane" id="3a">
                         <div class="employers-docs">
-                            <div class="form-title">
+                            <div class="form-title" style="margin-left: 24px">
                                 <h2>{% trans 'Documents' %}</h2>
                             </div>
                             <div class="employers-docs__main">
@@ -140,7 +140,6 @@
 
 {% block js %}
     <script>
-        $('#phone').inputmask({ mask: "+[d]{15}", greedy: false});
         $(function () {
             $("#employers-update-button").click(function (e) {
                 e.preventDefault();
