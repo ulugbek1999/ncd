@@ -6,7 +6,7 @@ from employee.model.employee import Employee
 
 
 class Experience(models.Model):
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, verbose_name=_('Employee'))
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="experience", verbose_name=_('Employee'))
     organization_ru = models.CharField(max_length=255, default='', blank=True, null=True, verbose_name=_('Organization name ru'))
     organization_en = models.CharField(max_length=255, blank=True, null=True, default='', verbose_name=_('Organization name en'))
     date_started = models.DateField(null=True, verbose_name=_('Date started'))
@@ -66,7 +66,7 @@ class Experience(models.Model):
 
 
 class ExperienceFile(models.Model):
-    experience = models.ForeignKey(Experience, on_delete=models.CASCADE, related_name="file", verbose_name=_('Experience'))
+    experience = models.ForeignKey(Experience, on_delete=models.CASCADE, related_name="exp_file", verbose_name=_('Experience'))
     file = models.FileField(upload_to=experience_file_uploader, verbose_name=_('File'))
 
     class Meta:

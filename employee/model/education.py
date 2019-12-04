@@ -8,7 +8,7 @@ from employee.model.employee import Employee
 
 class Education(models.Model):
 
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, verbose_name=_('Employee'))
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, verbose_name=_('Employee'), related_name="education")
     type = models.ForeignKey(EducationType, on_delete=models.CASCADE, verbose_name=_('Education type'))
     name_ru = models.CharField(max_length=255, default='', blank=True, null=True, verbose_name=_('Name ru'))
     name_en = models.CharField(max_length=255, default='', blank=True, null=True, verbose_name=_('Name en'))
@@ -69,7 +69,7 @@ class Education(models.Model):
 
 
 class EducationFile(models.Model):
-    education = models.ForeignKey(Education, on_delete=models.CASCADE, related_name="file", verbose_name=_('Employee'))
+    education = models.ForeignKey(Education, on_delete=models.CASCADE, related_name="edu_file", verbose_name=_('Employee'))
     file = models.FileField(upload_to=education_file_uploader, verbose_name=_('File'))
 
     class Meta:

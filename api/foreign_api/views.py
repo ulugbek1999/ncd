@@ -171,6 +171,6 @@ class GetUser(APIView):
 
 class GetUserInformation(RetrieveAPIView):
     queryset = Employer.objects.all()
-    permission_classes = (IsOwner, )
+    permission_classes = (IsAuthenticated, IsOwner, )
     lookup_url_kwarg = "id"
     serializer_class = EmployerRequestCreateSerializer

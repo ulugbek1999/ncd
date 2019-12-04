@@ -15,7 +15,7 @@ LEVEL = (
 
 class Language(models.Model):
 
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, verbose_name=_('Employee'))
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="language", verbose_name=_('Employee'))
     language = models.ForeignKey(Lang, on_delete=models.CASCADE, verbose_name=_('Language'))
     level = models.IntegerField(default=0, blank=True, choices=LEVEL, verbose_name=_('Level'))
     is_required_to_check = models.BooleanField(blank=True, default=False, verbose_name=_('Must be checked'))
@@ -32,7 +32,7 @@ class Language(models.Model):
 
 
 class LanguageFile(models.Model):
-    language = models.ForeignKey(Language, on_delete=models.CASCADE, related_name="file", verbose_name=_('Language'))
+    language = models.ForeignKey(Language, on_delete=models.CASCADE, related_name="lang_file", verbose_name=_('Language'))
     file = models.FileField(upload_to=language_file_uploader, verbose_name=_('File'))
 
     class Meta:

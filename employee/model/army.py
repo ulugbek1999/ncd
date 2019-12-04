@@ -6,7 +6,7 @@ from employee.model.employee import Employee
 
 
 class Army(models.Model):
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, verbose_name=_('Employee'))
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, verbose_name=_('Employee'), related_name="army")
     name_ru = models.CharField(max_length=255, default='', blank=True, null=True, verbose_name=_('Name ru'))
     name_en = models.CharField(max_length=255, default='', blank=True, null=True, verbose_name=_('Name en'))
     region_ru = models.CharField(max_length=255, default='', blank=True, null=True, verbose_name=_('Region ru'))
@@ -62,7 +62,7 @@ class Army(models.Model):
 
 
 class ArmyFile(models.Model):
-    army = models.ForeignKey(Army, on_delete=models.CASCADE, related_name="file", verbose_name=_('Military'))
+    army = models.ForeignKey(Army, on_delete=models.CASCADE, related_name="army_file", verbose_name=_('Military'))
     file = models.FileField(upload_to=army_file_uploader, verbose_name=_('File'))
 
     class Meta:

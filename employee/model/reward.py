@@ -6,7 +6,7 @@ from .employee import Employee
 
 
 class Reward(models.Model):
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, verbose_name=_('Employee'))
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, verbose_name=_('Employee'), related_name="reward")
     name_ru = models.CharField(max_length=255, blank=True, null=True, default='', verbose_name=_('Name ru'))
     name_en = models.CharField(max_length=255, blank=True, null=True, default='', verbose_name=_('Name en'))
     description_ru = models.TextField(blank=True, null=True, default='', verbose_name=_('Description ru'))
@@ -39,7 +39,7 @@ class Reward(models.Model):
 
 
 class RewardFile(models.Model):
-    reward = models.ForeignKey(Reward, on_delete=models.CASCADE, related_name="file", verbose_name=_('Reward'))
+    reward = models.ForeignKey(Reward, on_delete=models.CASCADE, related_name="rew_file", verbose_name=_('Reward'))
     file = models.FileField(upload_to=reward_file_uploader, verbose_name=_('File'))
 
     class Meta:

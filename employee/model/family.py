@@ -18,7 +18,7 @@ TYPE = (
 
 class Family(models.Model):
 
-    employee = models.OneToOneField(Employee, on_delete=models.CASCADE, verbose_name=_('Employee'))
+    employee = models.OneToOneField(Employee, on_delete=models.CASCADE, related_name="family", verbose_name=_('Employee'))
     status = models.IntegerField(default=0, choices=TYPE, blank=True, verbose_name=_('Family status'))
     children_amount = models.IntegerField(default=0, blank=True, verbose_name=_('Children amount'))
     is_new = models.BooleanField(default=False, blank=True)
@@ -33,7 +33,7 @@ class Family(models.Model):
 
 
 class FamilyFile(models.Model):
-    family = models.ForeignKey(Family, on_delete=models.CASCADE, related_name="file", verbose_name=_('Family'))
+    family = models.ForeignKey(Family, on_delete=models.CASCADE, related_name="fam_file", verbose_name=_('Family'))
     file = models.FileField(upload_to=family_file_uploader, verbose_name=_('File'))
 
     class Meta:
