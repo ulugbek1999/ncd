@@ -1,11 +1,13 @@
 from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
 from rest_framework.exceptions import ValidationError
-from rest_framework.generics import CreateAPIView, DestroyAPIView
+from rest_framework.generics import CreateAPIView, DestroyAPIView, UpdateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from utils.permissions import IsOwner
 
-from api.admin.employer.serializers import EmployerCreateSerializer
+from api.admin.employer.serializers import EmployerSerializer
 from employee.model.employee import Employee
 from employer.models import Employer, EmployerEmployeeRequest
 from utils.mail import send_email
@@ -14,7 +16,7 @@ from utils.sms import send_sms
 
 class EmployerCreateAPIView(CreateAPIView):
     queryset = Employer.objects.all()
-    serializer_class = EmployerCreateSerializer
+    serializer_class = EmployerSerializer
 
 
 class EmployerDeleteAPIView(APIView):
@@ -89,3 +91,11 @@ class EmployersRequestDeleteAPIView(APIView):
                 p_ids.append(int(i))
         EmployerEmployeeRequest.objects.filter(employer_id__in=p_ids).delete()
         return Response()
+
+class EmployerUpdateAPIView(UpdateAPIView):
+    permission_classes = (IsAuthenticated, IsOwner, )
+    serializer_class = EmployerSerializer
+    lookup_url_kwarg = "id"
+
+    def get_queryset(self):
+        return Employer.objects.all()

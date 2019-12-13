@@ -2,7 +2,7 @@ from django.urls import path
 
 from api.admin.employer.views import EmployerCreateAPIView, EmployerDeleteAPIView, \
     EmployerCreateAccountAPIView, EmployerEmployeeMakeBusy, EmployerRequestDeleteAPIView,\
-    EmployersRequestDeleteAPIView
+    EmployersRequestDeleteAPIView, EmployerUpdateAPIView
 
 app_name = 'employer'
 
@@ -13,4 +13,5 @@ urlpatterns = [
     path('employer-employee-request/delete/', EmployerRequestDeleteAPIView.as_view(), name='employer-employee-request-delete'),
     path('employee/make-busy/', EmployerEmployeeMakeBusy.as_view(), name='employee-make-busy'),
     path('request/delete/', EmployersRequestDeleteAPIView.as_view(), name='request-delete'),
+    path('update/<int:id>', EmployerUpdateAPIView.as_view(), name="employer-update")
 ]

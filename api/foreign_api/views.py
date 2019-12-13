@@ -1,6 +1,7 @@
 import datetime
 
 from django.contrib.auth.models import User
+from django.contrib.auth.hashers import check_password
 from rest_framework.generics import CreateAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -111,9 +112,9 @@ class VisitorsMailingList(APIView):
             MailingList.objects.create(email = email, country_code = country_code)
         except IntegrityError:
             return Response("This email has already been added to the list!", status=HTTP_400_BAD_REQUEST)
-        
+
         return Response("Congratulations! You have successfully subscribed.", status=HTTP_200_OK)
-    
+
 
 class RegisterEmployer(CreateAPIView):
     permission_classes = (AllowAny, )
@@ -148,7 +149,7 @@ class Authenticate(APIView):
 
 class GetUser(APIView):
     permission_classes = (IsAuthenticated, )
-    
+
     def get(self, request):
         is_employer = hasattr(request.user, "employer")
         role = ""
@@ -174,3 +175,34 @@ class GetUserInformation(RetrieveAPIView):
     permission_classes = (IsAuthenticated, IsOwner, )
     lookup_url_kwarg = "id"
     serializer_class = EmployerRequestCreateSerializer
+
+class ChangeUserPassword(APIView):
+    permission_classes = (IsAuthenticated, )
+
+    def put(self, request, id):
+        print(request.headers)
+        request_user = request.user
+        if hasattr(request_user, "employer"):
+            employer = Employer.objects.get(pk=id)
+            if employer.user != request_user:
+                return Response("You have not enough privileges to change this data!", status=status.HTTP_403_FORBIDDEN)
+            else:
+                if employer.user.check_password(request.data.get("old_password")):
+                    employer.user.set_password(request.data.get("new_password"))
+                    employer.user.save()
+                    return Response("Successfully changed!", status=status.HTTP_200_OK)
+                else:
+                    return Response("Old password is wrong!", status=status.HTTP_406_NOT_ACCEPTABLE)
+        elif hasattr(request_user, "employee"):
+            employee = Employee.objects.get(pk=id)
+            if employee.user != request_user:
+                return Response("You have not enough privileges to change this data!", status=status.HTTP_403_FORBIDDEN)
+            else:
+                if employee.user.check_password(request.data.get("old_password")):
+                    employee.user.set_password(request.data.get("new_password"))
+                    employee.user.save()
+                    return Response("Successfully changed!", status=status.HTTP_200_OK)
+                else:
+                    return Response("Old password is wrong!", status=status.HTTP_406_NOT_ACCEPTABLE)
+        else:
+            return Response("Something went wrong!", status=status.HTTP_400_BAD_REQUEST)

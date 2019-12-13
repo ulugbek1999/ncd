@@ -417,7 +417,7 @@ class EmployeeChanges(models.Model):
 
 class EmployeeCountry(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='countries')
-    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    country = models.ForeignKey(Country, related_name="countries_dir", on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'employee__countries'

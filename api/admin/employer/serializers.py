@@ -8,7 +8,7 @@ from utils.mail import send_email
 from utils.sms import send_sms
 
 
-class EmployerCreateSerializer(ModelSerializer):
+class EmployerSerializer(ModelSerializer):
     class Meta:
         model = Employer
         fields = (

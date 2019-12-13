@@ -1,5 +1,5 @@
-from rest_framework.serializers import ModelSerializer
-from employee.model.employee import Employee
+from rest_framework.serializers import ModelSerializer, StringRelatedField
+from employee.model.employee import Employee, EmployeeCountry
 from employee.model.army import Army, ArmyFile
 from employee.model.education import Education, EducationFile
 from directory.models import EducationType
@@ -7,6 +7,7 @@ from employee.model.experience import Experience, ExperienceFile
 from employee.model.family import Family, FamilyFile
 from employee.model.language import Language, LanguageFile
 from employee.model.reward import Reward, RewardFile
+from directory.models import Country
 
 
 class RewardFileSerializer(ModelSerializer):
@@ -131,8 +132,17 @@ class EducationSerializer(ModelSerializer):
             "specialization_en",
             "date_started",
             "date_finished",
+            "additional_ru",
+            "additional_en",
             "edu_file",
         )
+
+
+
+class EmployeeCountriesSerializer(ModelSerializer):
+    class Meta:
+        model = EmployeeCountry
+        fields = ("country_id", )
 
 class EmployeeSerializer(ModelSerializer):
     army = ArmySerializer(many=True, read_only=True)
@@ -141,10 +151,12 @@ class EmployeeSerializer(ModelSerializer):
     family = FamilySerializer(many=False, read_only=True)
     reward = RewardSerializer(many=True, read_only=True)
     language = LanguageSerializer(many=True, read_only=True)
+    countries = EmployeeCountriesSerializer(many=True, read_only=True)
 
     class Meta:
         model = Employee
         fields = (
+            "id",
             "full_name_ru",
             "full_name_en",
             "passport_serial",
@@ -187,5 +199,6 @@ class EmployeeSerializer(ModelSerializer):
             "family",
             "experience",
             "reward",
-            "language"
+            "language",
+            "countries",
         )
