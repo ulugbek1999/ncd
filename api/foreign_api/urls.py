@@ -2,6 +2,7 @@ from django.urls import path
 
 from api.foreign_api.views import UserCreateAPIView, VisitorsGsheet, VisitorsMailingList, RegisterEmployer
 from api.foreign_api.views import Authenticate, GetUserInformation, GetUser, ChangeUserPassword
+from api.foreign_api.views import EmployAPIView, EmployeeRequestDeleteAPIView
 
 urlpatterns = [
     path('user/create/', UserCreateAPIView.as_view()),
@@ -12,4 +13,6 @@ urlpatterns = [
     path('get/user/', GetUser.as_view()),
     path('get/user/information/<int:id>', GetUserInformation.as_view()),
     path('change/password/<int:id>', ChangeUserPassword.as_view()),
+    path('employer/request/employee', EmployAPIView.as_view()),
+    path('employer/request/employee/delete/<int:id>', EmployeeRequestDeleteAPIView.as_view()),
 ]

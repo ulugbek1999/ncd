@@ -25,7 +25,7 @@ class Template(models.Model):
 class TemplateHistory(models.Model):
     title = models.TextField(blank=True, default='')
     text = models.TextField(blank=True)
-    sent_date = models.DateTimeField(default=datetime.now())
+    sent_date = models.DateTimeField()
     message_type = models.CharField(max_length=10, blank=True)
     isemployer = models.BooleanField(default=False)
 

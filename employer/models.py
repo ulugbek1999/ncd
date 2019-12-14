@@ -86,7 +86,6 @@ CONTRACT_TYPE = (
     (2, 'Online'),
 )
 
-
 class EmployerEmployeeRequest(models.Model):
     employer = models.OneToOneField(Employer, on_delete=models.CASCADE)
     employees = models.ManyToManyField(Employee, blank=True)

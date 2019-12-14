@@ -7,17 +7,18 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
-from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR, HTTP_400_BAD_REQUEST
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR, HTTP_404_NOT_FOUND
 from django.utils import timezone
 from psycopg2.errorcodes import UNIQUE_VIOLATION
 from mail.models import MailingList
 from api.foreign_api.serializers import UserSerializer, EmployerRequestCreateSerializer
 from django.db.utils import IntegrityError
 import json
-from employer.models import Employer
+from employer.models import Employer, EmployerEmployeeRequest
+from employee.model.employee import Employee
 from rest_framework_jwt.settings import api_settings
 from rest_framework.permissions import IsAuthenticated
-from utils.permissions import IsOwner
+from utils.permissions import IsOwner, IsEmployer
 
 #
 # class UserCreateAPIView(CreateAPIView):
@@ -206,3 +207,48 @@ class ChangeUserPassword(APIView):
                     return Response("Old password is wrong!", status=status.HTTP_406_NOT_ACCEPTABLE)
         else:
             return Response("Something went wrong!", status=status.HTTP_400_BAD_REQUEST)
+
+class EmployAPIView(APIView):
+    permission_classes = (IsAuthenticated, IsEmployer, )
+
+    def post(self, request):
+        employee_id = request.data.get("employee_id")
+        try:
+            employee = Employee.objects.get(pk=employee_id)
+        except Employee.DoesNotExist:
+            return Response("Oops... Employee does not exist!", status=HTTP_400_BAD_REQUEST)
+        try:
+            employer = Employer.objects.get(user=request.user)
+        except expression as identifier:
+            return Response("Oops... Something went wrong!", status=HTTP_400_BAD_REQUEST)
+        p, _ = EmployerEmployeeRequest.objects.get_or_create(employer=employer, contract_type=2)
+        p.employees.add(employee.id)
+        try:
+            p.save()
+        except expression as identifier:
+            return Response(expression, status=HTTP_400_BAD_REQUEST)
+        return Response("Successfully added!", status=HTTP_200_OK)
+
+class EmployeeRequestDeleteAPIView(APIView):
+    permission_classes = (IsAuthenticated, IsEmployer, )
+
+    def delete(self, request, id):
+        try:
+            employee = Employee.objects.get(pk=id)
+        except Employee.DoesNotExist:
+            return Response("Employee not found!", status=HTTP_404_NOT_FOUND)
+        employer_request = EmployerEmployeeRequest.objects.filter(employer=request.user.employer)
+        if employer_request.count() == 1:
+            try:
+                p = employer_request[0]
+                e = p.employees.get(pk=id)
+                p.employees.remove(e)
+                p.save()
+            except Employee.DoesNotExist:
+                return Response("Employee has already been deleted!", status=HTTP_400_BAD_REQUEST)
+            except:
+                print(True)
+                return Response("Something went wrong!", status=HTTP_400_BAD_REQUEST)
+        else:
+            return Response("Something went wrong!", status=HTTP_400_BAD_REQUEST)
+        return Response("Successfully deleted!", status=HTTP_200_OK)
