@@ -32,7 +32,7 @@
                         </thead>
                         <tbody>
                             {% for p in employer_requests %}
-                                <tr class="table-row" data-id="{{ p.employer.id }}" data-href="{% url 'root.employer.bookmark' p.id %}">
+                                <tr class="table-row" data-id="{{ p.employer.id }}" data-href="{% url 'root.employer.bookmarks' p.id %}">
                                     <td class="td-checkbox td-check" >
                                         <input class="deleteCheck" type="checkbox" data-id="{{ p.id }}" name="ids" >
                                     </td>
