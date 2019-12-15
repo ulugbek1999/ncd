@@ -46,7 +46,7 @@ GENDER = (
 
 
 class Employee(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('User'))
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('User'), related_name="employee")
     step_finished = models.IntegerField(default=0, blank=True, null=True, verbose_name=_('Step finished'))
     group = models.ForeignKey(OperatorGroup, on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('Group'))
     created = models.DateTimeField(default=timezone.now, blank=True, null=True, verbose_name=_('Created'))

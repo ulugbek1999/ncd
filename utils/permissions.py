@@ -10,3 +10,7 @@ class IsOwner(BasePermission):
 class IsEmployer(BasePermission):
     def has_permission(self, request, view):
         return hasattr(request.user, "employer")
+
+class IsEmployee(BasePermission):
+    def has_permission(self, request, view):
+        return hasattr(request.user, "employee")

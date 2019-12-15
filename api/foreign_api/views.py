@@ -1,5 +1,5 @@
 import datetime
-
+from django.db import transaction
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
 from rest_framework.generics import CreateAPIView, RetrieveAPIView
@@ -14,11 +14,12 @@ from mail.models import MailingList
 from api.foreign_api.serializers import UserSerializer, EmployerRequestCreateSerializer
 from django.db.utils import IntegrityError
 import json
-from employer.models import Employer, EmployerEmployeeRequest
+from employer.models import Employer, EmployerEmployeeRequest, EmployerFile
 from employee.model.employee import Employee
 from rest_framework_jwt.settings import api_settings
 from rest_framework.permissions import IsAuthenticated
-from utils.permissions import IsOwner, IsEmployer
+from utils.permissions import IsOwner, IsEmployer, IsEmployee
+import os
 
 #
 # class UserCreateAPIView(CreateAPIView):
@@ -135,7 +136,6 @@ class Authenticate(APIView):
         except User.DoesNotExist:
             return Response("Bad credentials!", status=status.HTTP_406_NOT_ACCEPTABLE)
         password_matches = user.check_password(data.get("password"))
-        is_employer = hasattr(user, "employer")
         if password_matches:
                 # Generating JSON web token
             jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
@@ -156,7 +156,8 @@ class GetUser(APIView):
         role = ""
         id = 0
         if not is_employer:
-            id = request.user.employee.id
+            employee = Employee.objects.get(user=request.user)
+            id = employee.id
             role = "employee"
         else:
             id = request.user.employer.id
@@ -252,3 +253,128 @@ class EmployeeRequestDeleteAPIView(APIView):
         else:
             return Response("Something went wrong!", status=HTTP_400_BAD_REQUEST)
         return Response("Successfully deleted!", status=HTTP_200_OK)
+
+class EmployeeRegisterAPIView(APIView):
+    permission_classes = (AllowAny, )
+
+    @transaction.atomic
+    def post(self, request):
+        username, password = request.data.get("username"), request.data.get("password")
+        fullname, email = request.data.get("fullname"), request.data.get("email")
+        passport_serial, gender = request.data.get("passport_serial"), request.data.get("gender")
+        date_of_issue, expiry_date = request.data.get("date_of_issue"), request.data.get("expiry_date")
+        phone, tin = request.data.get("phone"), request.data.get("tin")
+        place_of_recidence = request.data.get("place_of_recidence")
+        date_of_birth, place_of_birth = request.data.get("date_of_birth"), request.data.get("place_of_birth")
+        # print(date_of_birth)
+        try:
+            user = User(username=username)
+            user.set_password(password)
+        except Exception as e:
+            return Response("Something went wrong!", status=HTTP_400_BAD_REQUEST)
+        try:
+
+            employee = Employee(
+                full_name_en=fullname,
+                email=email,
+                passport_serial=passport_serial,
+                gender=gender,
+                passport_given_date=date_of_issue,
+                passport_expires=expiry_date,
+                phone=phone,
+                inn=tin,
+                birth_date=date_of_birth,
+                living_address_ru=place_of_recidence,
+                birth_place_ru=place_of_birth
+            )
+            if request.FILES.getlist('file'):
+                print(True)
+                for i in request.FILES.getlist('file'):
+                    employee.photo_1 = i
+            user.save()
+            employee.user = user
+            employee.save()
+        except Exception as e:
+            if "username" in str(e):
+                return Response("Username already exists!", status=HTTP_400_BAD_REQUEST)
+            elif "email" in str(e):
+                return Response("Email already exists!", status=HTTP_400_BAD_REQUEST)
+            elif "passport_serial" in str(e):
+                return Response("Passport serial already exists!", status=HTTP_400_BAD_REQUEST)
+            else:
+                print(e)
+                return Response("Something went wrong!", status=HTTP_400_BAD_REQUEST)
+        return Response("Successfully registered!", status=HTTP_200_OK)
+
+class EmployeeDeletePhotoAPIView(APIView):
+    permission_classes = (IsAuthenticated, IsEmployee, )
+
+    def delete(self, request, photo):
+        employee = request.user.employee
+        if photo == "photo_1":
+            deleteFile(employee.photo_1)
+            employee.photo_1 = None
+        elif photo == "photo_2":
+            deleteFile(employee.photo_2)
+            employee.photo_2 = None
+        elif photo == "photo_3":
+            deleteFile(employee.photo_3)
+            employee.photo_3 = None
+        elif photo == "photo_4":
+            deleteFile(employee.photo_4)
+            employee.photo_4 = None
+        else:
+            return Response("Something went wrong!", status=HTTP_400_BAD_REQUEST)
+        try:
+            employee.save()
+        except:
+            return Response("Something went wrong!", status=HTTP_400_BAD_REQUEST)
+        return Response("Successfully deleted!", status=HTTP_200_OK)
+
+class EmployeeUpdatePhotoAPIView(APIView):
+    permission_classes = (IsOwner, IsEmployee, )
+
+    def put(self, request):
+        employee = request.user.employee
+        try:
+            if request.data.get("photo_1"):
+                print(True)
+                if employee.photo_1:
+                    deleteFile(employee.photo_1)
+                    employee.photo_1 = None
+                employee.photo_1 = request.data.get("photo_1")
+                employee.save()
+                return Response(employee.photo_1.url, status=HTTP_200_OK)
+            elif request.data.get("photo_2"):
+                if employee.photo_2:
+                    deleteFile(employee.photo_2)
+                    employee.photo_2 = None
+                employee.photo_2 = request.data.get("photo_2")
+                employee.save()
+                return Response(employee.photo_2.url, status=HTTP_200_OK)
+            elif request.data.get("photo_3"):
+                if employee.photo_3:
+                    deleteFile(employee.photo_3)
+                    employee.photo_3 = None
+                employee.photo_3 = request.data.get("photo_3")
+                employee.save()
+                return Response(employee.photo_3.url, status=HTTP_200_OK)
+            elif request.data.get("photo_4"):
+                if employee.photo_4:
+                    deleteFile(employee.photo_4)
+                    employee.photo_4 = None
+                employee.photo_4 = request.data.get("photo_4")
+                employee.save()
+                return Response(employee.photo_4.url, status=HTTP_200_OK)
+            else:
+                return Response("Something went wrong!", status=HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            print(e)
+            return Response("Something went wrong!", status=HTTP_400_BAD_REQUEST)
+        return Response("Something went wrong!", status=HTTP_400_BAD_REQUEST)
+
+
+def deleteFile(photo):
+    if photo:
+        if os.path.isfile(photo.path):
+            os.remove(photo.path)
