@@ -273,7 +273,7 @@ class EmployeeRegisterAPIView(APIView):
         except Exception as e:
             return Response("Something went wrong!", status=HTTP_400_BAD_REQUEST)
         try:
-
+            reg_num = RegisterNumberGenerator("OW").generate()
             employee = Employee(
                 full_name_en=fullname,
                 email=email,
@@ -285,7 +285,8 @@ class EmployeeRegisterAPIView(APIView):
                 inn=tin,
                 birth_date=date_of_birth,
                 living_address_ru=place_of_recidence,
-                birth_place_ru=place_of_birth
+                birth_place_ru=place_of_birth,
+                register_numver=reg_num,
             )
             if request.FILES.getlist('file'):
                 print(True)
@@ -378,3 +379,33 @@ def deleteFile(photo):
     if photo:
         if os.path.isfile(photo.path):
             os.remove(photo.path)
+
+
+class RegisterNumberGenerator:
+    def __init__(self, city_code):
+        self.city_code = city_code
+
+    day_list = ["A", "B", "C", "D", "E", "F", "G"]
+
+    def generate(self):
+        now = timezone.now()
+        year = now.year
+        month = now.month
+        month_str = str(month)
+        if len(month_str) is 1:
+            month_str = "0" + month_str
+        weekday = now.weekday()
+        day = now.day
+        day_str = str(day)
+        if len(day_str) is 1:
+            day_str = "0" + day_str
+        register_number_single = RegisterNumber.objects.first()
+        op_reg = str(register_number_single)
+        register_number_single.number += 1
+        register_number_single.save()
+        if len(op_reg) is 1:
+            op_reg = "00" + op_reg
+        elif len(op_reg) is 2:
+            op_reg = "0" + op_reg
+        reg_num = str(year)[3] + month_str + str(self.day_list[weekday]) + "-" + day_str + op_reg + self.city_code
+        return reg_num
