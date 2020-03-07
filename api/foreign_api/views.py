@@ -20,6 +20,7 @@ from rest_framework_jwt.settings import api_settings
 from rest_framework.permissions import IsAuthenticated
 from utils.permissions import IsOwner, IsEmployer, IsEmployee
 import os
+from operators.models import RegisterNumber
 
 #
 # class UserCreateAPIView(CreateAPIView):
@@ -220,14 +221,14 @@ class EmployAPIView(APIView):
             return Response("Oops... Employee does not exist!", status=HTTP_400_BAD_REQUEST)
         try:
             employer = Employer.objects.get(user=request.user)
-        except expression as identifier:
+        except Exception as identifier:
             return Response("Oops... Something went wrong!", status=HTTP_400_BAD_REQUEST)
         p, _ = EmployerEmployeeRequest.objects.get_or_create(employer=employer, contract_type=2)
         p.employees.add(employee.id)
         try:
             p.save()
-        except expression as identifier:
-            return Response(expression, status=HTTP_400_BAD_REQUEST)
+        except Exception as identifier:
+            return Response("Oops... Something went wrong!", status=HTTP_400_BAD_REQUEST)
         return Response("Successfully added!", status=HTTP_200_OK)
 
 class EmployeeRequestDeleteAPIView(APIView):
@@ -271,6 +272,7 @@ class EmployeeRegisterAPIView(APIView):
             user = User(username=username)
             user.set_password(password)
         except Exception as e:
+            print(e)
             return Response("Something went wrong!", status=HTTP_400_BAD_REQUEST)
         try:
             reg_num = RegisterNumberGenerator("OW").generate()
@@ -286,7 +288,7 @@ class EmployeeRegisterAPIView(APIView):
                 birth_date=date_of_birth,
                 living_address_ru=place_of_recidence,
                 birth_place_ru=place_of_birth,
-                register_numver=reg_num,
+                register_number=reg_num,
             )
             if request.FILES.getlist('file'):
                 print(True)
@@ -296,6 +298,7 @@ class EmployeeRegisterAPIView(APIView):
             employee.user = user
             employee.save()
         except Exception as e:
+            print(e)
             if "username" in str(e):
                 return Response("Username already exists!", status=HTTP_400_BAD_REQUEST)
             elif "email" in str(e):
